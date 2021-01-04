@@ -1,0 +1,207 @@
+<!doctype html>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../../static/style.css">
+<title>demo22 — I❤LA</title>
+<body>
+  <header>
+    <link href="../../static/prism.css" rel="stylesheet" />
+    <h1> demo22 </h1>
+  </header>
+  <script src="../../static/prism.js"></script>
+  <div class="page">
+    
+  
+
+  
+    <div class="gallery_post">
+
+    <p>This page shows demo22 implementation.</p>
+
+
+    
+     It comes from  <a href="https://pressureless.github.io/resource/Siggraph2019/12.%20Deformation%20and%20FEM/Analytic%20Eigensystems%20for%20Isotropic%20Distortion%20Energies/Analytic%20Eigensystems%20for%20Isotropic%20Distortion%20Energies.pdf"> Analytic Eigensystems for Isotropic Distortion Energies </a><br><br>
+    
+    
+    
+    Here is the description: <br>
+      <img src=../../static/gallery_res/demo22/demo22.png alt="placeholder" width="700" style='object-fit: scale-down;'><br>
+    
+
+    
+      <br> Here is the LA input: <br>
+      <div class="code_block"><pre ><code class="language-cpsp">`T_1` = 1/sqrt(2)U V^T
+c = [0 0 0
+                   0 0 -1
+                   0 1 0]
+
+where
+
+U: ℝ^(3×3) 
+V: ℝ^(3×3)</code></pre></div>
+    
+
+    
+      <br> Here is the Eigen output: <br>
+      <div class="code_block"><pre ><code class="language-cpp">/*
+`T_1` = 1/sqrt(2)U V^T
+c = [0 0 0
+                   0 0 -1
+                   0 1 0]
+
+where
+
+U: ℝ^(3×3) 
+V: ℝ^(3×3)
+*/
+#include &lt;Eigen/Core&gt;
+#include &lt;Eigen/Dense&gt;
+#include &lt;Eigen/Sparse&gt;
+#include &lt;iostream&gt;
+#include &lt;set&gt;
+
+/**
+ * demo22
+ *
+ * @param U  ℝ^(3×3)
+ * @param V  ℝ^(3×3)
+ * @return c
+ */
+Eigen::Matrix&lt;double, 3, 3&gt; demo22(
+    const Eigen::Matrix&lt;double, 3, 3&gt; &amp; U,
+    const Eigen::Matrix&lt;double, 3, 3&gt; &amp; V)
+{
+    Eigen::Matrix&lt;double, 3, 3&gt; T_1 = 1 / sqrt(2) * U * V.transpose();
+
+    Eigen::Matrix&lt;double, 3, 3&gt; _c_0;
+    _c_0 &lt;&lt; 0, 0, 0,
+    0, 0, -1,
+    0, 1, 0;
+    Eigen::Matrix&lt;double, 3, 3&gt; c = _c_0;
+
+    return c;
+}
+
+
+void generateRandomData(Eigen::Matrix&lt;double, 3, 3&gt; &amp; U,
+    Eigen::Matrix&lt;double, 3, 3&gt; &amp; V)
+{
+    U = Eigen::MatrixXd::Random(3, 3);
+    V = Eigen::MatrixXd::Random(3, 3);
+}
+
+
+int main(int argc, char *argv[])
+{
+    Eigen::Matrix&lt;double, 3, 3&gt; U;
+    Eigen::Matrix&lt;double, 3, 3&gt; V;
+    generateRandomData(U, V);
+    Eigen::Matrix&lt;double, 3, 3&gt; func_value = demo22(U, V);
+    std::cout&lt;&lt;&#34;func_value:\n&#34;&lt;&lt;func_value&lt;&lt;std::endl;
+    return 0;
+}</code></pre></div>
+    
+
+    
+      <br> Here is the Python output: <br>
+      <div class="code_block"><pre ><code class="language-python">&#34;&#34;&#34;
+`T_1` = 1/sqrt(2)U V^T
+c = [0 0 0
+                   0 0 -1
+                   0 1 0]
+
+where
+
+U: ℝ^(3×3) 
+V: ℝ^(3×3)
+&#34;&#34;&#34;
+import numpy as np
+import scipy
+import scipy.linalg
+from scipy import sparse
+from scipy.integrate import quad
+from scipy.optimize import minimize
+
+
+def demo22(U, V):
+    &#34;&#34;&#34;
+    :param :U : ℝ^(3×3)
+    :param :V : ℝ^(3×3)
+    &#34;&#34;&#34;
+    U = np.asarray(U, dtype=np.float64)
+    V = np.asarray(V, dtype=np.float64)
+
+    assert U.shape == (3, 3)
+    assert V.shape == (3, 3)
+
+    T_1 = 1 / np.sqrt(2) * U @ V.T
+
+    _c_0 = np.zeros((3, 3))
+    _c_0[0] = [0, 0, 0]
+    _c_0[1] = [0, 0, -1]
+    _c_0[2] = [0, 1, 0]
+    c = _c_0
+
+    return c
+
+
+def generateRandomData():
+    U = np.random.randn(3, 3)
+    V = np.random.randn(3, 3)
+    return U, V
+
+
+if __name__ == &#39;__main__&#39;:
+    U, V = generateRandomData()
+    print(&#34;U:&#34;, U)
+    print(&#34;V:&#34;, V)
+    func_value = demo22(U, V)
+    print(&#34;func_value: &#34;, func_value)</code></pre></div>
+    
+
+    
+      <br> Here is the Tex output: <br>
+      <div class="code_block"><pre ><code class="language-tex">\documentclass[12pt]{article}
+\usepackage{mathdots}
+\usepackage[bb=boondox]{mathalfa}
+\usepackage{mathtools}
+\usepackage{amssymb}
+\usepackage{ctex}
+\setmainfont{Linux Libertine O}
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\begin{document}
+\[
+\textit{T\_1} = \frac{1}{ \sqrt{2}}\textit{U}\textit{V}^T
+\]
+\[
+\textit{c} = \begin{bmatrix}
+0 &amp; 0 &amp; 0\\
+0 &amp; 0 &amp; -1\\
+0 &amp; 1 &amp; 0\\
+\end{bmatrix}
+\]
+
+where
+\begin{itemize}
+\item $\textit{U} \in \mathbb{R}^{ 3 \times 3 }$
+\item $\textit{V} \in \mathbb{R}^{ 3 \times 3 }$
+\end{itemize}
+
+
+\end{document}</code></pre></div>
+    
+
+    
+      <br> Below is the pdf: <br>
+      <img src=../../static/gallery_res/demo22/demo22.pdf alt="placeholder" width="700" style='object-fit: scale-down;'><br>
+    
+    </div>
+  
+
+
+ 
+
+
+
+  </div>
+</body>

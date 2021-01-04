@@ -1,0 +1,242 @@
+<!doctype html>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../../static/style.css">
+<title>demo4 — I❤LA</title>
+<body>
+  <header>
+    <link href="../../static/prism.css" rel="stylesheet" />
+    <h1> demo4 </h1>
+  </header>
+  <script src="../../static/prism.js"></script>
+  <div class="page">
+    
+  
+
+  
+    <div class="gallery_post">
+
+    <p>This page shows demo4 implementation.</p>
+
+
+    
+     It comes from  <a href=""> Polygon mesh processing </a><br><br>
+    
+    
+    
+    Here is the description: <br>
+      <img src=../../static/gallery_res/demo4/demo4.png alt="placeholder" width="700" style='object-fit: scale-down;'><br>
+    
+
+    
+      <br> Here is the LA input: <br>
+      <div class="code_block"><pre ><code class="language-cpsp">n = ∑_T A_T||M_T v_T - [0 -1
+                        1  0] M_T u_T||²
+where
+ 
+v_i: ℝ^3
+u_i: ℝ^3
+M_i: ℝ^(2×3)
+A_i: ℝ</code></pre></div>
+    
+
+    
+      <br> Here is the Eigen output: <br>
+      <div class="code_block"><pre ><code class="language-cpp">/*
+n = ∑_T A_T||M_T v_T - [0 -1
+                        1  0] M_T u_T||²
+where
+ 
+v_i: ℝ^3
+u_i: ℝ^3
+M_i: ℝ^(2×3)
+A_i: ℝ
+*/
+#include &lt;Eigen/Core&gt;
+#include &lt;Eigen/Dense&gt;
+#include &lt;Eigen/Sparse&gt;
+#include &lt;iostream&gt;
+#include &lt;set&gt;
+
+/**
+ * demo4
+ *
+ * @param v  ℝ^3
+ * @param u  ℝ^3
+ * @param M  ℝ^(2×3)
+ * @param A  ℝ
+ * @return n
+ */
+double demo4(
+    const std::vector&lt;Eigen::Matrix&lt;double, 3, 1&gt;&gt; &amp; v,
+    const std::vector&lt;Eigen::Matrix&lt;double, 3, 1&gt;&gt; &amp; u,
+    const std::vector&lt;Eigen::Matrix&lt;double, 2, 3&gt;&gt; &amp; M,
+    const std::vector&lt;double&gt; &amp; A)
+{
+    const long _dim_0 = A.size();
+    assert( M.size() == _dim_0 );
+    assert( A.size() == _dim_0 );
+
+    double _sum_0 = 0;
+    for(int T=1; T&lt;=v.size(); T++){
+        Eigen::Matrix&lt;double, 2, 2&gt; _n_0;
+        _n_0 &lt;&lt; 0, -1,
+        1, 0;
+        _sum_0 += A.at(T-1) * pow((M.at(T-1) * v.at(T-1) - _n_0 * M.at(T-1) * u.at(T-1)).lpNorm&lt;2&gt;(), 2);
+    }
+    double n = _sum_0;
+
+    return n;
+}
+
+
+void generateRandomData(std::vector&lt;Eigen::Matrix&lt;double, 3, 1&gt;&gt; &amp; v,
+    std::vector&lt;Eigen::Matrix&lt;double, 3, 1&gt;&gt; &amp; u,
+    std::vector&lt;Eigen::Matrix&lt;double, 2, 3&gt;&gt; &amp; M,
+    std::vector&lt;double&gt; &amp; A)
+{
+    const int _dim_0 = rand()%10;
+    v.resize(_dim_0);
+    for(int i=0; i&lt;_dim_0; i++){
+        v[i] = Eigen::VectorXd::Random(3);
+    }
+    u.resize(_dim_0);
+    for(int i=0; i&lt;_dim_0; i++){
+        u[i] = Eigen::VectorXd::Random(3);
+    }
+    M.resize(_dim_0);
+    for(int i=0; i&lt;_dim_0; i++){
+        M[i] = Eigen::MatrixXd::Random(2, 3);
+    }
+    A.resize(_dim_0);
+    for(int i=0; i&lt;_dim_0; i++){
+        A[i] = rand() % 10;
+    }
+}
+
+
+int main(int argc, char *argv[])
+{
+    std::vector&lt;Eigen::Matrix&lt;double, 3, 1&gt;&gt; v;
+    std::vector&lt;Eigen::Matrix&lt;double, 3, 1&gt;&gt; u;
+    std::vector&lt;Eigen::Matrix&lt;double, 2, 3&gt;&gt; M;
+    std::vector&lt;double&gt; A;
+    generateRandomData(v, u, M, A);
+    double func_value = demo4(v, u, M, A);
+    std::cout&lt;&lt;&#34;func_value:\n&#34;&lt;&lt;func_value&lt;&lt;std::endl;
+    return 0;
+}</code></pre></div>
+    
+
+    
+      <br> Here is the Python output: <br>
+      <div class="code_block"><pre ><code class="language-python">&#34;&#34;&#34;
+n = ∑_T A_T||M_T v_T - [0 -1
+                        1  0] M_T u_T||²
+where
+ 
+v_i: ℝ^3
+u_i: ℝ^3
+M_i: ℝ^(2×3)
+A_i: ℝ
+&#34;&#34;&#34;
+import numpy as np
+import scipy
+import scipy.linalg
+from scipy import sparse
+from scipy.integrate import quad
+from scipy.optimize import minimize
+
+
+def demo4(v, u, M, A):
+    &#34;&#34;&#34;
+    :param :v : ℝ^3
+    :param :u : ℝ^3
+    :param :M : ℝ^(2×3)
+    :param :A : ℝ
+    &#34;&#34;&#34;
+    v = np.asarray(v, dtype=np.float64)
+    u = np.asarray(u, dtype=np.float64)
+    M = np.asarray(M, dtype=np.float64)
+    A = np.asarray(A)
+
+    _dim_0 = A.shape[0]
+    assert v.shape == (_dim_0, 3, )
+    assert u.shape == (_dim_0, 3, )
+    assert M.shape == (_dim_0, 2, 3)
+    assert A.shape == (_dim_0,)
+
+    _sum_0 = 0
+    for T in range(1, len(v)+1):
+        _n_0 = np.zeros((2, 2))
+        _n_0[0] = [0, -1]
+        _n_0[1] = [1, 0]
+        _sum_0 += A[T-1] * np.power(np.linalg.norm(M[T-1] @ v[T-1] - _n_0 @ M[T-1] @ u[T-1], 2), 2)
+    n = _sum_0
+
+    return n
+
+
+def generateRandomData():
+    _dim_0 = np.random.randint(10)
+    v = np.random.randn(_dim_0, 3, )
+    u = np.random.randn(_dim_0, 3, )
+    M = np.random.randn(_dim_0, 2, 3)
+    A = np.random.randn(_dim_0)
+    return v, u, M, A
+
+
+if __name__ == &#39;__main__&#39;:
+    v, u, M, A = generateRandomData()
+    print(&#34;v:&#34;, v)
+    print(&#34;u:&#34;, u)
+    print(&#34;M:&#34;, M)
+    print(&#34;A:&#34;, A)
+    func_value = demo4(v, u, M, A)
+    print(&#34;func_value: &#34;, func_value)</code></pre></div>
+    
+
+    
+      <br> Here is the Tex output: <br>
+      <div class="code_block"><pre ><code class="language-tex">\documentclass[12pt]{article}
+\usepackage{mathdots}
+\usepackage[bb=boondox]{mathalfa}
+\usepackage{mathtools}
+\usepackage{amssymb}
+\usepackage{ctex}
+\setmainfont{Linux Libertine O}
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\begin{document}
+\[
+\textit{n} = \sum_\textit{T} \textit{A}_{ \textit{T} }\|\textit{M}_{ \textit{T} }\textit{v}_{ \textit{T} } - \begin{bmatrix}
+0 &amp; -1\\
+1 &amp; 0\\
+\end{bmatrix}\textit{M}_{ \textit{T} }\textit{u}_{ \textit{T} }\|_2^{2}
+\]
+
+where
+\begin{itemize}
+\item $\textit{v}_{\textit{i}} \in \mathbb{R}^{ 3}$
+\item $\textit{u}_{\textit{i}} \in \mathbb{R}^{ 3}$
+\item $\textit{M}_{\textit{i}} \in \mathbb{R}^{ 2 \times 3 }$
+\item $\textit{A}_{\textit{i}} \in \mathbb{{R}}$
+\end{itemize}
+
+
+\end{document}</code></pre></div>
+    
+
+    
+      <br> Below is the pdf: <br>
+      <img src=../../static/gallery_res/demo4/demo4.pdf alt="placeholder" width="700" style='object-fit: scale-down;'><br>
+    
+    </div>
+  
+
+
+ 
+
+
+
+  </div>
+</body>

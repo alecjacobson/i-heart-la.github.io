@@ -1,0 +1,33 @@
+\documentclass[12pt]{article}
+\usepackage{mathdots}
+\usepackage[bb=boondox]{mathalfa}
+\usepackage{mathtools}
+\usepackage{amssymb}
+\usepackage{ctex}
+\setmainfont{Linux Libertine O}
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\begin{document}
+\[
+\textit{x(θ,v)} = \frac{(\textit{r bar} \cdot \textit{D\_A}(\textit{θ},\textit{v}) + \textit{k\_r}\textit{δ}(\textit{θ},\textit{v}))}{(\textit{n bar} \cdot \textit{D\_A}(\textit{θ},\textit{v}) + \textit{k\_n}\textit{δ}(\textit{θ},\textit{v}))}
+\]
+\[
+\textit{y(θ,v)} = \frac{(\textit{s bar} \cdot \textit{D\_A}(\textit{θ},\textit{v}) + \textit{k\_s}\textit{δ}(\textit{θ},\textit{v}))}{(\textit{n bar} \cdot \textit{D\_A}(\textit{θ},\textit{v}) + \textit{k\_n}\textit{δ}(\textit{θ},\textit{v}))}
+\]
+
+where
+\begin{itemize}
+\item $\textit{r bar} \in \mathbb{R}^{ 3}$
+\item $\textit{s bar} \in \mathbb{R}^{ 3}$
+\item $\textit{n bar} \in \mathbb{R}^{ 3}$
+\item $\textit{θ} \in \mathbb{{R}}$
+\item $\textit{v} \in \mathbb{{R}}$
+\item $\textit{k\_r} \in \mathbb{{R}}$
+\item $\textit{k\_s} \in \mathbb{{R}}$
+\item $\textit{k\_n} \in \mathbb{{R}}$
+\item $\textit{D\_A} \in \mathbb{{R}},\mathbb{{R}}\rightarrow \mathbb{R}^{ 3}$
+\item $\textit{δ} \in \mathbb{{R}},\mathbb{{R}}\rightarrow \mathbb{{R}}$
+\end{itemize}
+
+
+\end{document}

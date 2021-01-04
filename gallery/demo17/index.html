@@ -1,0 +1,179 @@
+<!doctype html>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../../static/style.css">
+<title>demo17 — I❤LA</title>
+<body>
+  <header>
+    <link href="../../static/prism.css" rel="stylesheet" />
+    <h1> demo17 </h1>
+  </header>
+  <script src="../../static/prism.js"></script>
+  <div class="page">
+    
+  
+
+  
+    <div class="gallery_post">
+
+    <p>This page shows demo17 implementation.</p>
+
+
+    
+     It comes from  <a href="https://pressureless.github.io/resource/Siggraph2019/12.%20Deformation%20and%20FEM/Anisotropic%20Elasticity%20for%20Inversion-Safety%20and%20Element%20Rehabilitation/Anisotropic%20Elasticity%20for%20Inversion-Safety%20and%20Element%20Rehabilitation.pdf"> Anisotropic Elasticity for Inversion-Safety and Element Rehabilitation </a><br><br>
+    
+    
+    
+    Here is the description: <br>
+      <img src=../../static/gallery_res/demo17/demo17.png alt="placeholder" width="700" style='object-fit: scale-down;'><br>
+    
+
+    
+      <br> Here is the LA input: <br>
+      <div class="code_block"><pre ><code class="language-cpsp">`∂^2I_5/∂f^2` = 2[(A_1,1)I_3  (A_1,2)I_3  (A_1,3)I_3
+                  (A_2,1)I_3  (A_2,2)I_3  (A_2,3)I_3
+                  (A_3,1)I_3  (A_3,2)I_3  (A_3,3)I_3] 
+
+where
+
+A: ℝ^(3×3) </code></pre></div>
+    
+
+    
+      <br> Here is the Eigen output: <br>
+      <div class="code_block"><pre ><code class="language-cpp">/*
+`∂^2I_5/∂f^2` = 2[(A_1,1)I_3  (A_1,2)I_3  (A_1,3)I_3
+                  (A_2,1)I_3  (A_2,2)I_3  (A_2,3)I_3
+                  (A_3,1)I_3  (A_3,2)I_3  (A_3,3)I_3] 
+
+where
+
+A: ℝ^(3×3) 
+*/
+#include &lt;Eigen/Core&gt;
+#include &lt;Eigen/Dense&gt;
+#include &lt;Eigen/Sparse&gt;
+#include &lt;iostream&gt;
+#include &lt;set&gt;
+
+/**
+ * demo17
+ *
+ * @param A  ℝ^(3×3)
+ * @return _partial_differentialcircumflex_accent_2I_5_soliduspartial_differential_f_circumflex_accent_2
+ */
+Eigen::Matrix&lt;double, 9, 9&gt; demo17(const Eigen::Matrix&lt;double, 3, 3&gt; &amp; A)
+{
+    Eigen::Matrix&lt;double, 9, 9&gt; __partial_differentialcircumflex_accent_2I_5_soliduspartial_differential_f_circumflex_accent_2_0;
+    __partial_differentialcircumflex_accent_2I_5_soliduspartial_differential_f_circumflex_accent_2_0 &lt;&lt; (A(1-1, 1-1)) * Eigen::MatrixXd::Identity(3, 3), (A(1-1, 2-1)) * Eigen::MatrixXd::Identity(3, 3), (A(1-1, 3-1)) * Eigen::MatrixXd::Identity(3, 3),
+    (A(2-1, 1-1)) * Eigen::MatrixXd::Identity(3, 3), (A(2-1, 2-1)) * Eigen::MatrixXd::Identity(3, 3), (A(2-1, 3-1)) * Eigen::MatrixXd::Identity(3, 3),
+    (A(3-1, 1-1)) * Eigen::MatrixXd::Identity(3, 3), (A(3-1, 2-1)) * Eigen::MatrixXd::Identity(3, 3), (A(3-1, 3-1)) * Eigen::MatrixXd::Identity(3, 3);
+    Eigen::Matrix&lt;double, 9, 9&gt; _partial_differentialcircumflex_accent_2I_5_soliduspartial_differential_f_circumflex_accent_2 = 2 * __partial_differentialcircumflex_accent_2I_5_soliduspartial_differential_f_circumflex_accent_2_0;
+
+    return _partial_differentialcircumflex_accent_2I_5_soliduspartial_differential_f_circumflex_accent_2;
+}
+
+
+void generateRandomData(Eigen::Matrix&lt;double, 3, 3&gt; &amp; A)
+{
+    A = Eigen::MatrixXd::Random(3, 3);
+}
+
+
+int main(int argc, char *argv[])
+{
+    Eigen::Matrix&lt;double, 3, 3&gt; A;
+    generateRandomData(A);
+    Eigen::Matrix&lt;double, 9, 9&gt; func_value = demo17(A);
+    std::cout&lt;&lt;&#34;func_value:\n&#34;&lt;&lt;func_value&lt;&lt;std::endl;
+    return 0;
+}</code></pre></div>
+    
+
+    
+      <br> Here is the Python output: <br>
+      <div class="code_block"><pre ><code class="language-python">&#34;&#34;&#34;
+`∂^2I_5/∂f^2` = 2[(A_1,1)I_3  (A_1,2)I_3  (A_1,3)I_3
+                  (A_2,1)I_3  (A_2,2)I_3  (A_2,3)I_3
+                  (A_3,1)I_3  (A_3,2)I_3  (A_3,3)I_3] 
+
+where
+
+A: ℝ^(3×3) 
+&#34;&#34;&#34;
+import numpy as np
+import scipy
+import scipy.linalg
+from scipy import sparse
+from scipy.integrate import quad
+from scipy.optimize import minimize
+
+
+def demo17(A):
+    &#34;&#34;&#34;
+    :param :A : ℝ^(3×3)
+    &#34;&#34;&#34;
+    A = np.asarray(A, dtype=np.float64)
+
+    assert A.shape == (3, 3)
+
+    __partial_differentialcircumflex_accent_2I_5_soliduspartial_differential_f_circumflex_accent_2_0 = np.block([[(A[1-1, 1-1]) * np.identity(3), (A[1-1, 2-1]) * np.identity(3), (A[1-1, 3-1]) * np.identity(3)], [(A[2-1, 1-1]) * np.identity(3), (A[2-1, 2-1]) * np.identity(3), (A[2-1, 3-1]) * np.identity(3)], [(A[3-1, 1-1]) * np.identity(3), (A[3-1, 2-1]) * np.identity(3), (A[3-1, 3-1]) * np.identity(3)]])
+    _partial_differentialcircumflex_accent_2I_5_soliduspartial_differential_f_circumflex_accent_2 = 2 * __partial_differentialcircumflex_accent_2I_5_soliduspartial_differential_f_circumflex_accent_2_0
+
+    return _partial_differentialcircumflex_accent_2I_5_soliduspartial_differential_f_circumflex_accent_2
+
+
+def generateRandomData():
+    A = np.random.randn(3, 3)
+    return A
+
+
+if __name__ == &#39;__main__&#39;:
+    A = generateRandomData()
+    print(&#34;A:&#34;, A)
+    func_value = demo17(A)
+    print(&#34;func_value: &#34;, func_value)</code></pre></div>
+    
+
+    
+      <br> Here is the Tex output: <br>
+      <div class="code_block"><pre ><code class="language-tex">\documentclass[12pt]{article}
+\usepackage{mathdots}
+\usepackage[bb=boondox]{mathalfa}
+\usepackage{mathtools}
+\usepackage{amssymb}
+\usepackage{ctex}
+\setmainfont{Linux Libertine O}
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\begin{document}
+\[
+\textit{∂\^2I\_5/∂f\^2} = 2\begin{bmatrix}
+(\textit{A}_{1, 1})I_{ 3 } &amp; (\textit{A}_{1, 2})I_{ 3 } &amp; (\textit{A}_{1, 3})I_{ 3 }\\
+(\textit{A}_{2, 1})I_{ 3 } &amp; (\textit{A}_{2, 2})I_{ 3 } &amp; (\textit{A}_{2, 3})I_{ 3 }\\
+(\textit{A}_{3, 1})I_{ 3 } &amp; (\textit{A}_{3, 2})I_{ 3 } &amp; (\textit{A}_{3, 3})I_{ 3 }\\
+\end{bmatrix}
+\]
+
+where
+\begin{itemize}
+\item $\textit{A} \in \mathbb{R}^{ 3 \times 3 }$
+\end{itemize}
+
+
+\end{document}</code></pre></div>
+    
+
+    
+      <br> Below is the pdf: <br>
+      <img src=../../static/gallery_res/demo17/demo17.pdf alt="placeholder" width="700" style='object-fit: scale-down;'><br>
+    
+    </div>
+  
+
+
+ 
+
+
+
+  </div>
+</body>

@@ -1,0 +1,204 @@
+<!doctype html>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../../static/style.css">
+<title>demo6 — I❤LA</title>
+<body>
+  <header>
+    <link href="../../static/prism.css" rel="stylesheet" />
+    <h1> demo6 </h1>
+  </header>
+  <script src="../../static/prism.js"></script>
+  <div class="page">
+    
+  
+
+  
+    <div class="gallery_post">
+
+    <p>This page shows demo6 implementation.</p>
+
+
+    
+     It comes from  <a href="https://web.stanford.edu/~boyd/cvxbook/bv_cvxbook.pdf"> Convex Optimization </a><br><br>
+    
+    
+    
+    Here is the description: <br>
+      <img src=../../static/gallery_res/demo6/demo6.png alt="placeholder" width="700" style='object-fit: scale-down;'><br>
+    
+
+    
+      <br> Here is the LA input: <br>
+      <div class="code_block"><pre ><code class="language-cpsp">sum_i f_i²p_i - (sum_i f_i p_i)²
+
+where
+
+f_i: ℝ  
+p_i: ℝ  </code></pre></div>
+    
+
+    
+      <br> Here is the Eigen output: <br>
+      <div class="code_block"><pre ><code class="language-cpp">/*
+sum_i f_i²p_i - (sum_i f_i p_i)²
+
+where
+
+f_i: ℝ  
+p_i: ℝ  
+*/
+#include &lt;Eigen/Core&gt;
+#include &lt;Eigen/Dense&gt;
+#include &lt;Eigen/Sparse&gt;
+#include &lt;iostream&gt;
+#include &lt;set&gt;
+
+/**
+ * demo6
+ *
+ * @param f  ℝ
+ * @param p  ℝ
+ * @return ret
+ */
+double demo6(
+    const std::vector&lt;double&gt; &amp; f,
+    const std::vector&lt;double&gt; &amp; p)
+{
+    const long _dim_0 = f.size();
+    assert( f.size() == _dim_0 );
+    assert( p.size() == _dim_0 );
+
+    double _sum_0 = 0;
+    for(int i=1; i&lt;=f.size(); i++){
+        _sum_0 += pow(f.at(i-1), 2) * p.at(i-1);
+    }
+    double _sum_1 = 0;
+    for(int i=1; i&lt;=f.size(); i++){
+        _sum_1 += f.at(i-1) * p.at(i-1);
+    }
+    double ret = _sum_0 - pow((_sum_1), 2);
+    return ret;
+}
+
+
+void generateRandomData(std::vector&lt;double&gt; &amp; f,
+    std::vector&lt;double&gt; &amp; p)
+{
+    const int _dim_0 = rand()%10;
+    f.resize(_dim_0);
+    for(int i=0; i&lt;_dim_0; i++){
+        f[i] = rand() % 10;
+    }
+    p.resize(_dim_0);
+    for(int i=0; i&lt;_dim_0; i++){
+        p[i] = rand() % 10;
+    }
+}
+
+
+int main(int argc, char *argv[])
+{
+    std::vector&lt;double&gt; f;
+    std::vector&lt;double&gt; p;
+    generateRandomData(f, p);
+    double func_value = demo6(f, p);
+    std::cout&lt;&lt;&#34;func_value:\n&#34;&lt;&lt;func_value&lt;&lt;std::endl;
+    return 0;
+}</code></pre></div>
+    
+
+    
+      <br> Here is the Python output: <br>
+      <div class="code_block"><pre ><code class="language-python">&#34;&#34;&#34;
+sum_i f_i²p_i - (sum_i f_i p_i)²
+
+where
+
+f_i: ℝ  
+p_i: ℝ  
+&#34;&#34;&#34;
+import numpy as np
+import scipy
+import scipy.linalg
+from scipy import sparse
+from scipy.integrate import quad
+from scipy.optimize import minimize
+
+
+def demo6(f, p):
+    &#34;&#34;&#34;
+    :param :f : ℝ
+    :param :p : ℝ
+    &#34;&#34;&#34;
+    f = np.asarray(f)
+    p = np.asarray(p)
+
+    _dim_0 = f.shape[0]
+    assert f.shape == (_dim_0,)
+    assert p.shape == (_dim_0,)
+
+    _sum_0 = 0
+    for i in range(1, len(f)+1):
+        _sum_0 += np.power(f[i-1], 2) * p[i-1]
+    _sum_1 = 0
+    for i in range(1, len(f)+1):
+        _sum_1 += f[i-1] * p[i-1]
+    ret = _sum_0 - np.power((_sum_1), 2)
+    return ret
+
+
+def generateRandomData():
+    _dim_0 = np.random.randint(10)
+    f = np.random.randn(_dim_0)
+    p = np.random.randn(_dim_0)
+    return f, p
+
+
+if __name__ == &#39;__main__&#39;:
+    f, p = generateRandomData()
+    print(&#34;f:&#34;, f)
+    print(&#34;p:&#34;, p)
+    func_value = demo6(f, p)
+    print(&#34;func_value: &#34;, func_value)</code></pre></div>
+    
+
+    
+      <br> Here is the Tex output: <br>
+      <div class="code_block"><pre ><code class="language-tex">\documentclass[12pt]{article}
+\usepackage{mathdots}
+\usepackage[bb=boondox]{mathalfa}
+\usepackage{mathtools}
+\usepackage{amssymb}
+\usepackage{ctex}
+\setmainfont{Linux Libertine O}
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\begin{document}
+\[
+\sum_\textit{i} \textit{f}_{ \textit{i} }^{2}\textit{p}_{ \textit{i} } - (\sum_\textit{i} \textit{f}_{ \textit{i} }\textit{p}_{ \textit{i} })^{2}
+\]
+
+where
+\begin{itemize}
+\item $\textit{f}_{\textit{i}} \in \mathbb{{R}}$
+\item $\textit{p}_{\textit{i}} \in \mathbb{{R}}$
+\end{itemize}
+
+
+\end{document}</code></pre></div>
+    
+
+    
+      <br> Below is the pdf: <br>
+      <img src=../../static/gallery_res/demo6/demo6.pdf alt="placeholder" width="700" style='object-fit: scale-down;'><br>
+    
+    </div>
+  
+
+
+ 
+
+
+
+  </div>
+</body>

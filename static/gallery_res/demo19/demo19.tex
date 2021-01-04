@@ -1,0 +1,25 @@
+\documentclass[12pt]{article}
+\usepackage{mathdots}
+\usepackage[bb=boondox]{mathalfa}
+\usepackage{mathtools}
+\usepackage{amssymb}
+\usepackage{ctex}
+\setmainfont{Linux Libertine O}
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\begin{document}
+from linearalgebra import tr
+
+\[
+\textit{k\_angle(D\_m)} = 3( \sqrt{2}\textit{v})^{(\frac{2}{3})}(\frac{7}{4}\|\textit{D\_m}\|_F^{2} - \frac{1}{4}tr(\textit{J}_{ 3 }\textit{D\_m}^T\textit{D\_m}))^{-1}
+\]
+
+where
+\begin{itemize}
+\item $\textit{D\_m} \in \mathbb{R}^{ \textit{n} \times \textit{n} }$
+\item $\textit{J}_{\textit{i}} \in \mathbb{R}^{ \textit{n} \times \textit{n} }$
+\item $\textit{v} \in \mathbb{{R}}$
+\end{itemize}
+
+
+\end{document}

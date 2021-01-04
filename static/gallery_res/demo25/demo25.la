@@ -1,0 +1,7 @@
+min_(u ∈ ℝ^6) uᵀ(sum_i [x_i×n_i; n_i][(x_i×n_i)ᵀ n_iᵀ])u - 2uᵀ(sum_i [x_i×n_i; n_i]n_iᵀ(p_i-x_i)) + sum_i(p_i-x_i)ᵀn_i n_iᵀ(p_i-x_i)
+
+where
+
+x_i: ℝ^3 
+n_i: ℝ^3  
+p_i: ℝ^3  

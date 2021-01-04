@@ -1,0 +1,227 @@
+<!doctype html>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../../static/style.css">
+<title>demo25 — I❤LA</title>
+<body>
+  <header>
+    <link href="../../static/prism.css" rel="stylesheet" />
+    <h1> demo25 </h1>
+  </header>
+  <script src="../../static/prism.js"></script>
+  <div class="page">
+    
+  
+
+  
+    <div class="gallery_post">
+
+    <p>This page shows demo25 implementation.</p>
+
+
+    
+     It comes from  <a href="https://github.com/alecjacobson/geometry-processing-registration"> geometry-processing-registration </a><br><br>
+    
+    
+    
+    Here is the description: <br>
+      <img src=../../static/gallery_res/demo25/demo25.png alt="placeholder" width="700" style='object-fit: scale-down;'><br>
+    
+
+    
+      <br> Here is the LA input: <br>
+      <div class="code_block"><pre ><code class="language-cpsp">min_(u ∈ ℝ^6) uᵀ(sum_i [x_i×n_i; n_i][(x_i×n_i)ᵀ n_iᵀ])u - 2uᵀ(sum_i [x_i×n_i; n_i]n_iᵀ(p_i-x_i)) + sum_i(p_i-x_i)ᵀn_i n_iᵀ(p_i-x_i)
+
+where
+
+x_i: ℝ^3 
+n_i: ℝ^3  
+p_i: ℝ^3  </code></pre></div>
+    
+
+    
+      <br> Here is the Eigen output: <br>
+      <div class="code_block"><pre ><code class="language-cpp">/*
+min_(u ∈ ℝ^6) uᵀ(sum_i [x_i×n_i; n_i][(x_i×n_i)ᵀ n_iᵀ])u - 2uᵀ(sum_i [x_i×n_i; n_i]n_iᵀ(p_i-x_i)) + sum_i(p_i-x_i)ᵀn_i n_iᵀ(p_i-x_i)
+
+where
+
+x_i: ℝ^3 
+n_i: ℝ^3  
+p_i: ℝ^3  
+*/
+#include &lt;Eigen/Core&gt;
+#include &lt;Eigen/Dense&gt;
+#include &lt;Eigen/Sparse&gt;
+#include &lt;iostream&gt;
+#include &lt;set&gt;
+
+/**
+ * demo25
+ *
+ * @param x  ℝ^3
+ * @param n  ℝ^3
+ * @param p  ℝ^3
+ * @return ret
+ */
+double demo25(
+    const std::vector&lt;Eigen::Matrix&lt;double, 3, 1&gt;&gt; &amp; x,
+    const std::vector&lt;Eigen::Matrix&lt;double, 3, 1&gt;&gt; &amp; n,
+    const std::vector&lt;Eigen::Matrix&lt;double, 3, 1&gt;&gt; &amp; p)
+{
+    const long _dim_0 = x.size();
+    double ret = ;
+    return ret;
+}
+
+
+void generateRandomData(std::vector&lt;Eigen::Matrix&lt;double, 3, 1&gt;&gt; &amp; x,
+    std::vector&lt;Eigen::Matrix&lt;double, 3, 1&gt;&gt; &amp; n,
+    std::vector&lt;Eigen::Matrix&lt;double, 3, 1&gt;&gt; &amp; p)
+{
+    const int _dim_0 = rand()%10;
+    x.resize(_dim_0);
+    for(int i=0; i&lt;_dim_0; i++){
+        x[i] = Eigen::VectorXd::Random(3);
+    }
+    n.resize(_dim_0);
+    for(int i=0; i&lt;_dim_0; i++){
+        n[i] = Eigen::VectorXd::Random(3);
+    }
+    p.resize(_dim_0);
+    for(int i=0; i&lt;_dim_0; i++){
+        p[i] = Eigen::VectorXd::Random(3);
+    }
+}
+
+
+int main(int argc, char *argv[])
+{
+    std::vector&lt;Eigen::Matrix&lt;double, 3, 1&gt;&gt; x;
+    std::vector&lt;Eigen::Matrix&lt;double, 3, 1&gt;&gt; n;
+    std::vector&lt;Eigen::Matrix&lt;double, 3, 1&gt;&gt; p;
+    generateRandomData(x, n, p);
+    double func_value = demo25(x, n, p);
+    std::cout&lt;&lt;&#34;func_value:\n&#34;&lt;&lt;func_value&lt;&lt;std::endl;
+    return 0;
+}</code></pre></div>
+    
+
+    
+      <br> Here is the Python output: <br>
+      <div class="code_block"><pre ><code class="language-python">&#34;&#34;&#34;
+min_(u ∈ ℝ^6) uᵀ(sum_i [x_i×n_i; n_i][(x_i×n_i)ᵀ n_iᵀ])u - 2uᵀ(sum_i [x_i×n_i; n_i]n_iᵀ(p_i-x_i)) + sum_i(p_i-x_i)ᵀn_i n_iᵀ(p_i-x_i)
+
+where
+
+x_i: ℝ^3 
+n_i: ℝ^3  
+p_i: ℝ^3  
+&#34;&#34;&#34;
+import numpy as np
+import scipy
+import scipy.linalg
+from scipy import sparse
+from scipy.integrate import quad
+from scipy.optimize import minimize
+
+
+def demo25(x, n, p):
+    &#34;&#34;&#34;
+    :param :x : ℝ^3
+    :param :n : ℝ^3
+    :param :p : ℝ^3
+    &#34;&#34;&#34;
+    x = np.asarray(x, dtype=np.float64)
+    n = np.asarray(n, dtype=np.float64)
+    p = np.asarray(p, dtype=np.float64)
+
+    _dim_0 = x.shape[0]
+    assert x.shape == (_dim_0, 3, )
+    assert n.shape == (_dim_0, 3, )
+    assert p.shape == (_dim_0, 3, )
+
+    def _target_0(u):
+        _sum_0 = np.zeros((6, 6))
+        for i in range(1, len(x)+1):
+            _ret_0 = np.vstack((np.cross(x[i-1], n[i-1]), n[i-1]))
+            _ret_1 = np.hstack(((np.cross(x[i-1], n[i-1])).T, n[i-1].T))
+            _sum_0 += _ret_0 @ _ret_1
+        _sum_1 = np.zeros((6, ))
+        for i in range(1, len(p)+1):
+            _ret_2 = np.vstack((np.cross(x[i-1], n[i-1]), n[i-1]))
+            _sum_1 += _ret_2 @ n[i-1].T @ (p[i-1] - x[i-1])
+        _sum_2 = 0
+        for i in range(1, len(p)+1):
+            _sum_2 += (p[i-1] - x[i-1]).T @ n[i-1] * n[i-1].T @ (p[i-1] - x[i-1])
+        return u.T @ (_sum_0) @ u - 2 * u.T @ (_sum_1) + _sum_2
+    ret = minimize(_target_0, np.zeros(6)).fun
+    return ret
+
+
+def generateRandomData():
+    _dim_0 = np.random.randint(10)
+    x = np.random.randn(_dim_0, 3, )
+    n = np.random.randn(_dim_0, 3, )
+    p = np.random.randn(_dim_0, 3, )
+    return x, n, p
+
+
+if __name__ == &#39;__main__&#39;:
+    x, n, p = generateRandomData()
+    print(&#34;x:&#34;, x)
+    print(&#34;n:&#34;, n)
+    print(&#34;p:&#34;, p)
+    func_value = demo25(x, n, p)
+    print(&#34;func_value: &#34;, func_value)</code></pre></div>
+    
+
+    
+      <br> Here is the Tex output: <br>
+      <div class="code_block"><pre ><code class="language-tex">\documentclass[12pt]{article}
+\usepackage{mathdots}
+\usepackage[bb=boondox]{mathalfa}
+\usepackage{mathtools}
+\usepackage{amssymb}
+\usepackage{ctex}
+\setmainfont{Linux Libertine O}
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\begin{document}
+\[
+\begin{aligned} \min_{\textit{u} \in \mathbb{R}^{ 6}} \quad &amp; \textit{u}^T(\sum_\textit{i} \begin{bmatrix}
+\textit{x}_{ \textit{i} } × \textit{n}_{ \textit{i} }\\
+\textit{n}_{ \textit{i} }\\
+\end{bmatrix}\begin{bmatrix}
+(\textit{x}_{ \textit{i} } × \textit{n}_{ \textit{i} })^T &amp; \textit{n}_{ \textit{i} }^T\\
+\end{bmatrix})\textit{u} - 2\textit{u}^T(\sum_\textit{i} \begin{bmatrix}
+\textit{x}_{ \textit{i} } × \textit{n}_{ \textit{i} }\\
+\textit{n}_{ \textit{i} }\\
+\end{bmatrix}\textit{n}_{ \textit{i} }^T(\textit{p}_{ \textit{i} } - \textit{x}_{ \textit{i} })) + \sum_\textit{i} (\textit{p}_{ \textit{i} } - \textit{x}_{ \textit{i} })^T\textit{n}_{ \textit{i} }\textit{n}_{ \textit{i} }^T(\textit{p}_{ \textit{i} } - \textit{x}_{ \textit{i} }) \\
+\end{aligned}
+\]
+
+where
+\begin{itemize}
+\item $\textit{x}_{\textit{i}} \in \mathbb{R}^{ 3}$
+\item $\textit{n}_{\textit{i}} \in \mathbb{R}^{ 3}$
+\item $\textit{p}_{\textit{i}} \in \mathbb{R}^{ 3}$
+\end{itemize}
+
+
+\end{document}</code></pre></div>
+    
+
+    
+      <br> Below is the pdf: <br>
+      <img src=../../static/gallery_res/demo25/demo25.pdf alt="placeholder" width="700" style='object-fit: scale-down;'><br>
+    
+    </div>
+  
+
+
+ 
+
+
+
+  </div>
+</body>

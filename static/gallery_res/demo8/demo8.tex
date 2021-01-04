@@ -1,0 +1,22 @@
+\documentclass[12pt]{article}
+\usepackage{mathdots}
+\usepackage[bb=boondox]{mathalfa}
+\usepackage{mathtools}
+\usepackage{amssymb}
+\usepackage{ctex}
+\setmainfont{Linux Libertine O}
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\begin{document}
+\[
+\textit{I(X;Y)} = \sum_\textit{i} \sum_\textit{j} \textit{x}_{ \textit{j} }\textit{p}_{\textit{i}, \textit{j}} \log{(\frac{\textit{p}_{\textit{i}, \textit{j}}}{\sum_\textit{k} \textit{x}_{ \textit{k} }\textit{p}_{\textit{i}, \textit{k}}})}
+\]
+
+where
+\begin{itemize}
+\item $\textit{x} \in \mathbb{R}^{ \textit{n}}$
+\item $\textit{p} \in \mathbb{R}^{ \textit{n} \times \textit{m} }$
+\end{itemize}
+
+
+\end{document}

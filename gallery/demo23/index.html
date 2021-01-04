@@ -1,0 +1,298 @@
+<!doctype html>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../../static/style.css">
+<title>demo23 — I❤LA</title>
+<body>
+  <header>
+    <link href="../../static/prism.css" rel="stylesheet" />
+    <h1> demo23 </h1>
+  </header>
+  <script src="../../static/prism.js"></script>
+  <div class="page">
+    
+  
+
+  
+    <div class="gallery_post">
+
+    <p>This page shows demo23 implementation.</p>
+
+
+    
+     It comes from  <a href="https://pressureless.github.io/resource/Classic_papers/Plenoptic%20Modeling.%20An%20Image-Based%20Rendering%20System/Plenoptic%20Modeling.%20An%20Image-Based%20Rendering%20System.pdf"> Plenoptic Modeling:An Image-Based Rendering System </a><br><br>
+    
+    
+    
+    Here is the description: <br>
+      <img src=../../static/gallery_res/demo23/demo23.png alt="placeholder" width="700" style='object-fit: scale-down;'><br>
+    
+
+    
+      <br> Here is the LA input: <br>
+      <div class="code_block"><pre ><code class="language-cpsp">`x(θ,v)` =  (`r bar`⋅`D_A`(`θ`, v)+`k_r``δ`(`θ`, v))/(`n bar`⋅`D_A`(`θ`, v)+`k_n``δ`(`θ`, v))
+`y(θ,v)` =  (`s bar`⋅`D_A`(`θ`, v)+`k_s``δ`(`θ`, v))/(`n bar`⋅`D_A`(`θ`, v)+`k_n``δ`(`θ`, v))
+
+where
+
+`r bar`: ℝ^3
+`s bar`: ℝ^3
+`n bar`: ℝ^3
+`θ`: ℝ 
+v: ℝ 
+`k_r`: ℝ 
+`k_s`: ℝ 
+`k_n`: ℝ 
+`D_A`: ℝ,ℝ-&gt;ℝ^3
+`δ`: ℝ,ℝ-&gt;ℝ  </code></pre></div>
+    
+
+    
+      <br> Here is the Eigen output: <br>
+      <div class="code_block"><pre ><code class="language-cpp">/*
+`x(θ,v)` =  (`r bar`⋅`D_A`(`θ`, v)+`k_r``δ`(`θ`, v))/(`n bar`⋅`D_A`(`θ`, v)+`k_n``δ`(`θ`, v))
+`y(θ,v)` =  (`s bar`⋅`D_A`(`θ`, v)+`k_s``δ`(`θ`, v))/(`n bar`⋅`D_A`(`θ`, v)+`k_n``δ`(`θ`, v))
+
+where
+
+`r bar`: ℝ^3
+`s bar`: ℝ^3
+`n bar`: ℝ^3
+`θ`: ℝ 
+v: ℝ 
+`k_r`: ℝ 
+`k_s`: ℝ 
+`k_n`: ℝ 
+`D_A`: ℝ,ℝ-&gt;ℝ^3
+`δ`: ℝ,ℝ-&gt;ℝ  
+*/
+#include &lt;Eigen/Core&gt;
+#include &lt;Eigen/Dense&gt;
+#include &lt;Eigen/Sparse&gt;
+#include &lt;iostream&gt;
+#include &lt;set&gt;
+
+/**
+ * demo23
+ *
+ * @param r_bar  ℝ^3
+ * @param s_bar  ℝ^3
+ * @param n_bar  ℝ^3
+ * @param θ  ℝ
+ * @param v  ℝ
+ * @param k_r  ℝ
+ * @param k_s  ℝ
+ * @param k_n  ℝ
+ * @param D_A  ℝ,ℝ-&gt;ℝ^3
+ * @param δ  ℝ,ℝ-&gt;ℝ
+ * @return y_left_parenthesis_θ_comma_v_right_parenthesis
+ */
+double demo23(
+    const Eigen::Matrix&lt;double, 3, 1&gt; &amp; r_bar,
+    const Eigen::Matrix&lt;double, 3, 1&gt; &amp; s_bar,
+    const Eigen::Matrix&lt;double, 3, 1&gt; &amp; n_bar,
+    const double &amp; θ,
+    const double &amp; v,
+    const double &amp; k_r,
+    const double &amp; k_s,
+    const double &amp; k_n,
+    const std::function&lt;Eigen::Matrix&lt;double, 3, 1&gt;(double, double)&gt; &amp; D_A,
+    const std::function&lt;double(double, double)&gt; &amp; δ)
+{
+    double x_left_parenthesis_θ_comma_v_right_parenthesis = ((r_bar).dot(D_A(θ, v)) + k_r * δ(θ, v)) / ((n_bar).dot(D_A(θ, v)) + k_n * δ(θ, v));
+
+    double y_left_parenthesis_θ_comma_v_right_parenthesis = ((s_bar).dot(D_A(θ, v)) + k_s * δ(θ, v)) / ((n_bar).dot(D_A(θ, v)) + k_n * δ(θ, v));
+
+    return y_left_parenthesis_θ_comma_v_right_parenthesis;
+}
+
+
+void generateRandomData(Eigen::Matrix&lt;double, 3, 1&gt; &amp; r_bar,
+    Eigen::Matrix&lt;double, 3, 1&gt; &amp; s_bar,
+    Eigen::Matrix&lt;double, 3, 1&gt; &amp; n_bar,
+    double &amp; θ,
+    double &amp; v,
+    double &amp; k_r,
+    double &amp; k_s,
+    double &amp; k_n,
+    std::function&lt;Eigen::Matrix&lt;double, 3, 1&gt;(double, double)&gt; &amp; D_A,
+    std::function&lt;double(double, double)&gt; &amp; δ)
+{
+    θ = rand() % 10;
+    v = rand() % 10;
+    k_r = rand() % 10;
+    k_s = rand() % 10;
+    k_n = rand() % 10;
+    r_bar = Eigen::VectorXd::Random(3);
+    s_bar = Eigen::VectorXd::Random(3);
+    n_bar = Eigen::VectorXd::Random(3);
+    D_A = [](double, double)-&gt;Eigen::Matrix&lt;double, 3, 1&gt;{
+        return Eigen::VectorXd::Random(3);
+    };
+    δ = [](double, double)-&gt;double{
+        return rand() % 10;
+    };
+}
+
+
+int main(int argc, char *argv[])
+{
+    Eigen::Matrix&lt;double, 3, 1&gt; r_bar;
+    Eigen::Matrix&lt;double, 3, 1&gt; s_bar;
+    Eigen::Matrix&lt;double, 3, 1&gt; n_bar;
+    double θ;
+    double v;
+    double k_r;
+    double k_s;
+    double k_n;
+    std::function&lt;Eigen::Matrix&lt;double, 3, 1&gt;(double, double)&gt; D_A;
+    std::function&lt;double(double, double)&gt; δ;
+    generateRandomData(r_bar, s_bar, n_bar, θ, v, k_r, k_s, k_n, D_A, δ);
+    double func_value = demo23(r_bar, s_bar, n_bar, θ, v, k_r, k_s, k_n, D_A, δ);
+    std::cout&lt;&lt;&#34;func_value:\n&#34;&lt;&lt;func_value&lt;&lt;std::endl;
+    return 0;
+}</code></pre></div>
+    
+
+    
+      <br> Here is the Python output: <br>
+      <div class="code_block"><pre ><code class="language-python">&#34;&#34;&#34;
+`x(θ,v)` =  (`r bar`⋅`D_A`(`θ`, v)+`k_r``δ`(`θ`, v))/(`n bar`⋅`D_A`(`θ`, v)+`k_n``δ`(`θ`, v))
+`y(θ,v)` =  (`s bar`⋅`D_A`(`θ`, v)+`k_s``δ`(`θ`, v))/(`n bar`⋅`D_A`(`θ`, v)+`k_n``δ`(`θ`, v))
+
+where
+
+`r bar`: ℝ^3
+`s bar`: ℝ^3
+`n bar`: ℝ^3
+`θ`: ℝ 
+v: ℝ 
+`k_r`: ℝ 
+`k_s`: ℝ 
+`k_n`: ℝ 
+`D_A`: ℝ,ℝ-&gt;ℝ^3
+`δ`: ℝ,ℝ-&gt;ℝ  
+&#34;&#34;&#34;
+import numpy as np
+import scipy
+import scipy.linalg
+from scipy import sparse
+from scipy.integrate import quad
+from scipy.optimize import minimize
+
+
+def demo23(r_bar, s_bar, n_bar, θ, v, k_r, k_s, k_n, D_A, δ):
+    &#34;&#34;&#34;
+    :param :r_bar : ℝ^3
+    :param :s_bar : ℝ^3
+    :param :n_bar : ℝ^3
+    :param :θ : ℝ
+    :param :v : ℝ
+    :param :k_r : ℝ
+    :param :k_s : ℝ
+    :param :k_n : ℝ
+    :param :D_A : ℝ,ℝ-&gt;ℝ^3
+    :param :δ : ℝ,ℝ-&gt;ℝ
+    &#34;&#34;&#34;
+    r_bar = np.asarray(r_bar, dtype=np.float64)
+    s_bar = np.asarray(s_bar, dtype=np.float64)
+    n_bar = np.asarray(n_bar, dtype=np.float64)
+
+    assert r_bar.shape == (3,)
+    assert s_bar.shape == (3,)
+    assert n_bar.shape == (3,)
+    assert np.ndim(θ) == 0
+    assert np.ndim(v) == 0
+    assert np.ndim(k_r) == 0
+    assert np.ndim(k_s) == 0
+    assert np.ndim(k_n) == 0
+
+    x_left_parenthesis_θ_comma_v_right_parenthesis = (np.dot((r_bar).ravel(), (D_A(θ, v)).ravel()) + k_r * δ(θ, v)) / (np.dot((n_bar).ravel(), (D_A(θ, v)).ravel()) + k_n * δ(θ, v))
+
+    y_left_parenthesis_θ_comma_v_right_parenthesis = (np.dot((s_bar).ravel(), (D_A(θ, v)).ravel()) + k_s * δ(θ, v)) / (np.dot((n_bar).ravel(), (D_A(θ, v)).ravel()) + k_n * δ(θ, v))
+
+    return y_left_parenthesis_θ_comma_v_right_parenthesis
+
+
+def generateRandomData():
+    θ = np.random.randn()
+    v = np.random.randn()
+    k_r = np.random.randn()
+    k_s = np.random.randn()
+    k_n = np.random.randn()
+    r_bar = np.random.randn(3)
+    s_bar = np.random.randn(3)
+    n_bar = np.random.randn(3)
+    def D_A(p0, p1):
+        return np.random.randn(3)
+    def δ(p0, p1):
+        return np.random.randn()
+    return r_bar, s_bar, n_bar, θ, v, k_r, k_s, k_n, D_A, δ
+
+
+if __name__ == &#39;__main__&#39;:
+    r_bar, s_bar, n_bar, θ, v, k_r, k_s, k_n, D_A, δ = generateRandomData()
+    print(&#34;r_bar:&#34;, r_bar)
+    print(&#34;s_bar:&#34;, s_bar)
+    print(&#34;n_bar:&#34;, n_bar)
+    print(&#34;θ:&#34;, θ)
+    print(&#34;v:&#34;, v)
+    print(&#34;k_r:&#34;, k_r)
+    print(&#34;k_s:&#34;, k_s)
+    print(&#34;k_n:&#34;, k_n)
+    print(&#34;D_A:&#34;, D_A)
+    print(&#34;δ:&#34;, δ)
+    func_value = demo23(r_bar, s_bar, n_bar, θ, v, k_r, k_s, k_n, D_A, δ)
+    print(&#34;func_value: &#34;, func_value)</code></pre></div>
+    
+
+    
+      <br> Here is the Tex output: <br>
+      <div class="code_block"><pre ><code class="language-tex">\documentclass[12pt]{article}
+\usepackage{mathdots}
+\usepackage[bb=boondox]{mathalfa}
+\usepackage{mathtools}
+\usepackage{amssymb}
+\usepackage{ctex}
+\setmainfont{Linux Libertine O}
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\begin{document}
+\[
+\textit{x(θ,v)} = \frac{(\textit{r bar} \cdot \textit{D\_A}(\textit{θ},\textit{v}) + \textit{k\_r}\textit{δ}(\textit{θ},\textit{v}))}{(\textit{n bar} \cdot \textit{D\_A}(\textit{θ},\textit{v}) + \textit{k\_n}\textit{δ}(\textit{θ},\textit{v}))}
+\]
+\[
+\textit{y(θ,v)} = \frac{(\textit{s bar} \cdot \textit{D\_A}(\textit{θ},\textit{v}) + \textit{k\_s}\textit{δ}(\textit{θ},\textit{v}))}{(\textit{n bar} \cdot \textit{D\_A}(\textit{θ},\textit{v}) + \textit{k\_n}\textit{δ}(\textit{θ},\textit{v}))}
+\]
+
+where
+\begin{itemize}
+\item $\textit{r bar} \in \mathbb{R}^{ 3}$
+\item $\textit{s bar} \in \mathbb{R}^{ 3}$
+\item $\textit{n bar} \in \mathbb{R}^{ 3}$
+\item $\textit{θ} \in \mathbb{{R}}$
+\item $\textit{v} \in \mathbb{{R}}$
+\item $\textit{k\_r} \in \mathbb{{R}}$
+\item $\textit{k\_s} \in \mathbb{{R}}$
+\item $\textit{k\_n} \in \mathbb{{R}}$
+\item $\textit{D\_A} \in \mathbb{{R}},\mathbb{{R}}\rightarrow \mathbb{R}^{ 3}$
+\item $\textit{δ} \in \mathbb{{R}},\mathbb{{R}}\rightarrow \mathbb{{R}}$
+\end{itemize}
+
+
+\end{document}</code></pre></div>
+    
+
+    
+      <br> Below is the pdf: <br>
+      <img src=../../static/gallery_res/demo23/demo23.pdf alt="placeholder" width="700" style='object-fit: scale-down;'><br>
+    
+    </div>
+  
+
+
+ 
+
+
+
+  </div>
+</body>

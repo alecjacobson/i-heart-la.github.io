@@ -1,0 +1,27 @@
+\documentclass[12pt]{article}
+\usepackage{mathdots}
+\usepackage[bb=boondox]{mathalfa}
+\usepackage{mathtools}
+\usepackage{amssymb}
+\usepackage{ctex}
+\setmainfont{Linux Libertine O}
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\begin{document}
+\[
+\textit{n} = \sum_\textit{T} \textit{A}_{ \textit{T} }\|\textit{M}_{ \textit{T} }\textit{v}_{ \textit{T} } - \begin{bmatrix}
+0 & -1\\
+1 & 0\\
+\end{bmatrix}\textit{M}_{ \textit{T} }\textit{u}_{ \textit{T} }\|_2^{2}
+\]
+
+where
+\begin{itemize}
+\item $\textit{v}_{\textit{i}} \in \mathbb{R}^{ 3}$
+\item $\textit{u}_{\textit{i}} \in \mathbb{R}^{ 3}$
+\item $\textit{M}_{\textit{i}} \in \mathbb{R}^{ 2 \times 3 }$
+\item $\textit{A}_{\textit{i}} \in \mathbb{{R}}$
+\end{itemize}
+
+
+\end{document}

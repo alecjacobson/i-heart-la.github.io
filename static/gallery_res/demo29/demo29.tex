@@ -1,0 +1,26 @@
+\documentclass[12pt]{article}
+\usepackage{mathdots}
+\usepackage[bb=boondox]{mathalfa}
+\usepackage{mathtools}
+\usepackage{amssymb}
+\usepackage{ctex}
+\setmainfont{Linux Libertine O}
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\begin{document}
+\[
+\sum_\textit{i} \textit{α}_{ \textit{i} } + \frac{1}{\textit{M}}\sum_\textit{i} \sum_\textit{j} (\frac{\textit{f}(\textit{X}_{\textit{i}, \textit{j}})}{\textit{p\_c}(\textit{X}_{\textit{i}, \textit{j}})} - \frac{(\sum_\textit{k} \textit{α}_{ \textit{k} }\textit{p}_{ \textit{k} }\textit{X}_{\textit{i}, \textit{j}})}{\textit{p\_c}(\textit{X}_{\textit{i}, \textit{j}})})
+\]
+
+where
+\begin{itemize}
+\item $\textit{α} \in \mathbb{R}^{ \textit{m}}$
+\item $\textit{p} \in \mathbb{R}^{ \textit{m}}$
+\item $\textit{X} \in \mathbb{R}^{ \textit{m} \times \textit{n} }$
+\item $\textit{M} \in \mathbb{{R}}$
+\item $\textit{f} \in \mathbb{{R}}\rightarrow \mathbb{{R}}$
+\item $\textit{p\_c} \in \mathbb{{R}}\rightarrow \mathbb{{R}}$
+\end{itemize}
+
+
+\end{document}

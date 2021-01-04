@@ -1,0 +1,9 @@
+from linearalgebra: tr
+
+`k_angle(D_m)` = 3(sqrt(2)v)^(2/3)(7/4||`D_m`||_F^2 -1/4tr(J_3 `D_m`^T`D_m`))^(-1)
+
+where
+
+`D_m`: ℝ^(n×n) 
+J_i: ℝ^(n×n) 
+v: ℝ

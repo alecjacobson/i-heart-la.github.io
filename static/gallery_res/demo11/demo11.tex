@@ -1,0 +1,26 @@
+\documentclass[12pt]{article}
+\usepackage{mathdots}
+\usepackage[bb=boondox]{mathalfa}
+\usepackage{mathtools}
+\usepackage{amssymb}
+\usepackage{ctex}
+\setmainfont{Linux Libertine O}
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\begin{document}
+\[
+\textit{y}_{ \textit{i} } = (\textit{a}_{ \textit{i} })^T\textit{x} + \textit{w}_{ \textit{i} }
+\]
+\[
+\textit{x\_bar} = (\sum_\textit{i} \textit{a}_{ \textit{i} }(\textit{a}_{ \textit{i} })^T)^{-1}\sum_\textit{i} \textit{y}_{ \textit{i} }\textit{a}_{ \textit{i} }
+\]
+
+where
+\begin{itemize}
+\item $\textit{a}_{\textit{i}} \in \mathbb{R}^{ \textit{n}}:$the measurement vectors  
+\item $\textit{w}_{\textit{i}} \in \mathbb{{R}}:$measurement noise 
+\item $\textit{x} \in \mathbb{R}^{ \textit{n}}:$measurement noise 
+\end{itemize}
+
+
+\end{document}

@@ -1,0 +1,26 @@
+\documentclass[12pt]{article}
+\usepackage{mathdots}
+\usepackage[bb=boondox]{mathalfa}
+\usepackage{mathtools}
+\usepackage{amssymb}
+\usepackage{ctex}
+\setmainfont{Linux Libertine O}
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\begin{document}
+\[
+\begin{bmatrix}
+\textit{A}^{-1} + \textit{A}^{-1}\textit{B}\textit{S}^{-1}\textit{B}^T\textit{A}^{-1} & -\textit{A}^{-1}\textit{B}\textit{S}^{-1}\\
+-\textit{S}^{-1}\textit{B}^T\textit{A}^{-1} & \textit{S}^{-1}\\
+\end{bmatrix}
+\]
+
+where
+\begin{itemize}
+\item $\textit{A} \in \mathbb{R}^{ 4 \times 4 }$
+\item $\textit{B} \in \mathbb{R}^{ 4 \times 4 }$
+\item $\textit{S} \in \mathbb{R}^{ 4 \times 4 }$
+\end{itemize}
+
+
+\end{document}

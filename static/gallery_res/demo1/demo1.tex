@@ -1,0 +1,29 @@
+\documentclass[12pt]{article}
+\usepackage{mathdots}
+\usepackage[bb=boondox]{mathalfa}
+\usepackage{mathtools}
+\usepackage{amssymb}
+\usepackage{ctex}
+\setmainfont{Linux Libertine O}
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\begin{document}
+from trigonometry import sin, cos
+
+\[
+\textit{x(θ, ϕ)} = \begin{bmatrix}
+\textit{R}cos(\textit{θ})cos(\textit{ϕ})\\
+\textit{R}sin(\textit{θ})cos(\textit{ϕ})\\
+\textit{R}sin(\textit{ϕ})\\
+\end{bmatrix}
+\]
+
+where
+\begin{itemize}
+\item $\textit{ϕ} \in \mathbb{{R}}:$angle between 0 and 2π
+\item $\textit{θ} \in \mathbb{{R}}:$angle between -π/2 and π/2
+\item $\textit{R} \in \mathbb{{R}}:$the radius of the sphere
+\end{itemize}
+
+
+\end{document}

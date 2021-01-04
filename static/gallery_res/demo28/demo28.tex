@@ -1,0 +1,27 @@
+\documentclass[12pt]{article}
+\usepackage{mathdots}
+\usepackage[bb=boondox]{mathalfa}
+\usepackage{mathtools}
+\usepackage{amssymb}
+\usepackage{ctex}
+\setmainfont{Linux Libertine O}
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\begin{document}
+\[
+\textit{G\_σ(s\_i\^k)} = \sum_\textit{j} \textit{l}_{ \textit{j} }exp(-\frac{\textit{dist}(\textit{b\_i},\textit{b}_{ \textit{j} })}{(2\textit{σ}^{2})})(\textit{s}_{ \textit{j} })^{\textit{k}}
+\]
+
+where
+\begin{itemize}
+\item $\textit{l}_{\textit{j}} \in \mathbb{{R}}:$the length of b_j
+\item $\textit{dist} \in \mathbb{{R}},\mathbb{{R}}\rightarrow \mathbb{{R}}:$measures the geodesic distance between the centers of b_i and b_j along the boundary
+\item $\textit{σ} \in \mathbb{{R}}$
+\item $\textit{b\_i} \in \mathbb{{R}}$
+\item $\textit{b}_{\textit{j}} \in \mathbb{{R}}$
+\item $\textit{s}_{\textit{j}} \in \mathbb{{R}}:$unit direction vector of b_i
+\item $\textit{k} \in \mathbb{{R}}:$iteration number
+\end{itemize}
+
+
+\end{document}

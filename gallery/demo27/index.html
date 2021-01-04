@@ -1,0 +1,232 @@
+<!doctype html>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../../static/style.css">
+<title>demo27 — I❤LA</title>
+<body>
+  <header>
+    <link href="../../static/prism.css" rel="stylesheet" />
+    <h1> demo27 </h1>
+  </header>
+  <script src="../../static/prism.js"></script>
+  <div class="page">
+    
+  
+
+  
+    <div class="gallery_post">
+
+    <p>This page shows demo27 implementation.</p>
+
+
+    
+     It comes from  <a href="https://pressureless.github.io/resource/Siggraph2019/%201.%20Image%20Science/Handheld%20Multi-Frame%20Super-Resolution/Handheld%20Multi-Frame%20Super-Resolution.pdf"> Handheld Multi-Frame Super-Resolution </a><br><br>
+    
+    
+    
+    Here is the description: <br>
+      <img src=../../static/gallery_res/demo27/demo27.png alt="placeholder" width="700" style='object-fit: scale-down;'><br>
+    
+
+    
+      <br> Here is the LA input: <br>
+      <div class="code_block"><pre ><code class="language-cpsp">`Ω` = [`e_1` `e_2`][`k_1` 0
+		     0    `k_2`] [`e_1`^T
+				  `e_2`^T]
+
+where
+
+`k_1`: ℝ  : control the desired kernel variance in either edge or orthogonal direction
+`k_2`: ℝ  : control the desired kernel variance in either edge or orthogonal direction
+`e_1`: ℝ ^ 3: orthogonal direction vectors
+`e_2`: ℝ ^ 3: orthogonal direction vectors</code></pre></div>
+    
+
+    
+      <br> Here is the Eigen output: <br>
+      <div class="code_block"><pre ><code class="language-cpp">/*
+`Ω` = [`e_1` `e_2`][`k_1` 0
+		     0    `k_2`] [`e_1`^T
+				  `e_2`^T]
+
+where
+
+`k_1`: ℝ  : control the desired kernel variance in either edge or orthogonal direction
+`k_2`: ℝ  : control the desired kernel variance in either edge or orthogonal direction
+`e_1`: ℝ ^ 3: orthogonal direction vectors
+`e_2`: ℝ ^ 3: orthogonal direction vectors
+*/
+#include &lt;Eigen/Core&gt;
+#include &lt;Eigen/Dense&gt;
+#include &lt;Eigen/Sparse&gt;
+#include &lt;iostream&gt;
+#include &lt;set&gt;
+
+/**
+ * demo27
+ *
+ * @param k_1  ℝ  : control the desired kernel variance in either edge or orthogonal direction
+ * @param k_2  ℝ  : control the desired kernel variance in either edge or orthogonal direction
+ * @param e_1  ℝ ^ 3: orthogonal direction vectors
+ * @param e_2  ℝ ^ 3: orthogonal direction vectors
+ * @return Ω
+ */
+Eigen::Matrix&lt;double, 3, 3&gt; demo27(
+    const double &amp; k_1,
+    const double &amp; k_2,
+    const Eigen::Matrix&lt;double, 3, 1&gt; &amp; e_1,
+    const Eigen::Matrix&lt;double, 3, 1&gt; &amp; e_2)
+{
+    Eigen::Matrix&lt;double, 3, 2&gt; _Ω_0;
+    _Ω_0 &lt;&lt; e_1, e_2;
+    Eigen::Matrix&lt;double, 2, 2&gt; _Ω_1;
+    _Ω_1 &lt;&lt; k_1, 0,
+    0, k_2;
+    Eigen::Matrix&lt;double, 2, 3&gt; _Ω_2;
+    _Ω_2 &lt;&lt; e_1.transpose(),
+    e_2.transpose();
+    Eigen::Matrix&lt;double, 3, 3&gt; Ω = _Ω_0 * _Ω_1 * _Ω_2;
+
+    return Ω;
+}
+
+
+void generateRandomData(double &amp; k_1,
+    double &amp; k_2,
+    Eigen::Matrix&lt;double, 3, 1&gt; &amp; e_1,
+    Eigen::Matrix&lt;double, 3, 1&gt; &amp; e_2)
+{
+    k_1 = rand() % 10;
+    k_2 = rand() % 10;
+    e_1 = Eigen::VectorXd::Random(3);
+    e_2 = Eigen::VectorXd::Random(3);
+}
+
+
+int main(int argc, char *argv[])
+{
+    double k_1;
+    double k_2;
+    Eigen::Matrix&lt;double, 3, 1&gt; e_1;
+    Eigen::Matrix&lt;double, 3, 1&gt; e_2;
+    generateRandomData(k_1, k_2, e_1, e_2);
+    Eigen::Matrix&lt;double, 3, 3&gt; func_value = demo27(k_1, k_2, e_1, e_2);
+    std::cout&lt;&lt;&#34;func_value:\n&#34;&lt;&lt;func_value&lt;&lt;std::endl;
+    return 0;
+}</code></pre></div>
+    
+
+    
+      <br> Here is the Python output: <br>
+      <div class="code_block"><pre ><code class="language-python">&#34;&#34;&#34;
+`Ω` = [`e_1` `e_2`][`k_1` 0
+		     0    `k_2`] [`e_1`^T
+				  `e_2`^T]
+
+where
+
+`k_1`: ℝ  : control the desired kernel variance in either edge or orthogonal direction
+`k_2`: ℝ  : control the desired kernel variance in either edge or orthogonal direction
+`e_1`: ℝ ^ 3: orthogonal direction vectors
+`e_2`: ℝ ^ 3: orthogonal direction vectors
+&#34;&#34;&#34;
+import numpy as np
+import scipy
+import scipy.linalg
+from scipy import sparse
+from scipy.integrate import quad
+from scipy.optimize import minimize
+
+
+def demo27(k_1, k_2, e_1, e_2):
+    &#34;&#34;&#34;
+    :param :k_1 : ℝ  : control the desired kernel variance in either edge or orthogonal direction
+    :param :k_2 : ℝ  : control the desired kernel variance in either edge or orthogonal direction
+    :param :e_1 : ℝ ^ 3: orthogonal direction vectors
+    :param :e_2 : ℝ ^ 3: orthogonal direction vectors
+    &#34;&#34;&#34;
+    e_1 = np.asarray(e_1, dtype=np.float64)
+    e_2 = np.asarray(e_2, dtype=np.float64)
+
+    assert np.ndim(k_1) == 0
+    assert np.ndim(k_2) == 0
+    assert e_1.shape == (3,)
+    assert e_2.shape == (3,)
+
+    _Ω_0 = np.hstack((e_1, e_2))
+    _Ω_1 = np.zeros((2, 2))
+    _Ω_1[0] = [k_1, 0]
+    _Ω_1[1] = [0, k_2]
+    _Ω_2 = np.vstack((e_1.T, e_2.T))
+    Ω = _Ω_0 @ _Ω_1 @ _Ω_2
+
+    return Ω
+
+
+def generateRandomData():
+    k_1 = np.random.randn()
+    k_2 = np.random.randn()
+    e_1 = np.random.randn(3)
+    e_2 = np.random.randn(3)
+    return k_1, k_2, e_1, e_2
+
+
+if __name__ == &#39;__main__&#39;:
+    k_1, k_2, e_1, e_2 = generateRandomData()
+    print(&#34;k_1:&#34;, k_1)
+    print(&#34;k_2:&#34;, k_2)
+    print(&#34;e_1:&#34;, e_1)
+    print(&#34;e_2:&#34;, e_2)
+    func_value = demo27(k_1, k_2, e_1, e_2)
+    print(&#34;func_value: &#34;, func_value)</code></pre></div>
+    
+
+    
+      <br> Here is the Tex output: <br>
+      <div class="code_block"><pre ><code class="language-tex">\documentclass[12pt]{article}
+\usepackage{mathdots}
+\usepackage[bb=boondox]{mathalfa}
+\usepackage{mathtools}
+\usepackage{amssymb}
+\usepackage{ctex}
+\setmainfont{Linux Libertine O}
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\begin{document}
+\[
+\textit{Ω} = \begin{bmatrix}
+\textit{e\_1} &amp; \textit{e\_2}\\
+\end{bmatrix}\begin{bmatrix}
+\textit{k\_1} &amp; 0\\
+0 &amp; \textit{k\_2}\\
+\end{bmatrix}\begin{bmatrix}
+\textit{e\_1}^T\\
+\textit{e\_2}^T\\
+\end{bmatrix}
+\]
+
+where
+\begin{itemize}
+\item $\textit{k\_1} \in \mathbb{{R}}:$control the desired kernel variance in either edge or orthogonal direction
+\item $\textit{k\_2} \in \mathbb{{R}}:$control the desired kernel variance in either edge or orthogonal direction
+\item $\textit{e\_1} \in \mathbb{R}^{ 3}:$orthogonal direction vectors
+\item $\textit{e\_2} \in \mathbb{R}^{ 3}:$orthogonal direction vectors
+\end{itemize}
+
+
+\end{document}</code></pre></div>
+    
+
+    
+      <br> Below is the pdf: <br>
+      <img src=../../static/gallery_res/demo27/demo27.pdf alt="placeholder" width="700" style='object-fit: scale-down;'><br>
+    
+    </div>
+  
+
+
+ 
+
+
+
+  </div>
+</body>

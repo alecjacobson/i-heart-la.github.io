@@ -1,0 +1,7 @@
+`L(x,v)` = xᵀWx + ∑_i v_i(x_i^2-1)
+
+where
+
+x: ℝ^n
+W: ℝ^(n×n)
+v: ℝ^n

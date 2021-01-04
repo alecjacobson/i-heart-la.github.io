@@ -1,0 +1,32 @@
+\documentclass[12pt]{article}
+\usepackage{mathdots}
+\usepackage[bb=boondox]{mathalfa}
+\usepackage{mathtools}
+\usepackage{amssymb}
+\usepackage{ctex}
+\setmainfont{Linux Libertine O}
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\begin{document}
+\[
+\textit{Ω} = \begin{bmatrix}
+\textit{e\_1} & \textit{e\_2}\\
+\end{bmatrix}\begin{bmatrix}
+\textit{k\_1} & 0\\
+0 & \textit{k\_2}\\
+\end{bmatrix}\begin{bmatrix}
+\textit{e\_1}^T\\
+\textit{e\_2}^T\\
+\end{bmatrix}
+\]
+
+where
+\begin{itemize}
+\item $\textit{k\_1} \in \mathbb{{R}}:$control the desired kernel variance in either edge or orthogonal direction
+\item $\textit{k\_2} \in \mathbb{{R}}:$control the desired kernel variance in either edge or orthogonal direction
+\item $\textit{e\_1} \in \mathbb{R}^{ 3}:$orthogonal direction vectors
+\item $\textit{e\_2} \in \mathbb{R}^{ 3}:$orthogonal direction vectors
+\end{itemize}
+
+
+\end{document}

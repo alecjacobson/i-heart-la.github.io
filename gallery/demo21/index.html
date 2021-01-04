@@ -1,0 +1,271 @@
+<!doctype html>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../../static/style.css">
+<title>demo21 — I❤LA</title>
+<body>
+  <header>
+    <link href="../../static/prism.css" rel="stylesheet" />
+    <h1> demo21 </h1>
+  </header>
+  <script src="../../static/prism.js"></script>
+  <div class="page">
+    
+  
+
+  
+    <div class="gallery_post">
+
+    <p>This page shows demo21 implementation.</p>
+
+
+    
+     It comes from  <a href="https://pressureless.github.io/resource/Siggraph2019/16.%20Scene%20and%20Object%20Reconstruction/A%20Symmetric%20Objective%20Function%20for%20ICP/A%20Symmetric%20Objective%20Function%20for%20ICP.pdf"> A Symmetric Objective Function for ICP </a><br><br>
+    
+    
+    
+    Here is the description: <br>
+      <img src=../../static/gallery_res/demo21/demo21.png alt="placeholder" width="700" style='object-fit: scale-down;'><br>
+    
+
+    
+      <br> Here is the LA input: <br>
+      <div class="code_block"><pre ><code class="language-cpsp">from trigonometry: cos
+
+b = ∑_i cos(θ)²((p_i - q_i)⋅n_i +((p_i+q_i)×n_i)⋅a+n_i⋅t)² 
+
+where
+
+θ: ℝ: angle of rotation
+p_i: ℝ^3
+q_i: ℝ^3
+n_i: ℝ^3
+a: ℝ^3
+t: ℝ^3
+
+
+</code></pre></div>
+    
+
+    
+      <br> Here is the Eigen output: <br>
+      <div class="code_block"><pre ><code class="language-cpp">/*
+from trigonometry: cos
+
+b = ∑_i cos(θ)²((p_i - q_i)⋅n_i +((p_i+q_i)×n_i)⋅a+n_i⋅t)² 
+
+where
+
+θ: ℝ: angle of rotation
+p_i: ℝ^3
+q_i: ℝ^3
+n_i: ℝ^3
+a: ℝ^3
+t: ℝ^3
+
+
+
+*/
+#include &lt;Eigen/Core&gt;
+#include &lt;Eigen/Dense&gt;
+#include &lt;Eigen/Sparse&gt;
+#include &lt;iostream&gt;
+#include &lt;set&gt;
+
+/**
+ * demo21
+ *
+ * @param θ  ℝ: angle of rotation
+ * @param p  ℝ^3
+ * @param q  ℝ^3
+ * @param n  ℝ^3
+ * @param a  ℝ^3
+ * @param t  ℝ^3
+ * @return b
+ */
+double demo21(
+    const double &amp; θ,
+    const std::vector&lt;Eigen::Matrix&lt;double, 3, 1&gt;&gt; &amp; p,
+    const std::vector&lt;Eigen::Matrix&lt;double, 3, 1&gt;&gt; &amp; q,
+    const std::vector&lt;Eigen::Matrix&lt;double, 3, 1&gt;&gt; &amp; n,
+    const Eigen::Matrix&lt;double, 3, 1&gt; &amp; a,
+    const Eigen::Matrix&lt;double, 3, 1&gt; &amp; t)
+{
+    const long _dim_0 = p.size();
+    double _sum_0 = 0;
+    for(int i=1; i&lt;=q.size(); i++){
+        _sum_0 += pow(cos(θ), 2) * pow((((p.at(i-1) - q.at(i-1))).dot(n.at(i-1)) + ((((p.at(i-1) + q.at(i-1))).cross(n.at(i-1)))).dot(a) + (n.at(i-1)).dot(t)), 2);
+    }
+    double b = _sum_0;
+
+    return b;
+}
+
+
+void generateRandomData(double &amp; θ,
+    std::vector&lt;Eigen::Matrix&lt;double, 3, 1&gt;&gt; &amp; p,
+    std::vector&lt;Eigen::Matrix&lt;double, 3, 1&gt;&gt; &amp; q,
+    std::vector&lt;Eigen::Matrix&lt;double, 3, 1&gt;&gt; &amp; n,
+    Eigen::Matrix&lt;double, 3, 1&gt; &amp; a,
+    Eigen::Matrix&lt;double, 3, 1&gt; &amp; t)
+{
+    θ = rand() % 10;
+    const int _dim_0 = rand()%10;
+    p.resize(_dim_0);
+    for(int i=0; i&lt;_dim_0; i++){
+        p[i] = Eigen::VectorXd::Random(3);
+    }
+    q.resize(_dim_0);
+    for(int i=0; i&lt;_dim_0; i++){
+        q[i] = Eigen::VectorXd::Random(3);
+    }
+    n.resize(_dim_0);
+    for(int i=0; i&lt;_dim_0; i++){
+        n[i] = Eigen::VectorXd::Random(3);
+    }
+    a = Eigen::VectorXd::Random(3);
+    t = Eigen::VectorXd::Random(3);
+}
+
+
+int main(int argc, char *argv[])
+{
+    double θ;
+    std::vector&lt;Eigen::Matrix&lt;double, 3, 1&gt;&gt; p;
+    std::vector&lt;Eigen::Matrix&lt;double, 3, 1&gt;&gt; q;
+    std::vector&lt;Eigen::Matrix&lt;double, 3, 1&gt;&gt; n;
+    Eigen::Matrix&lt;double, 3, 1&gt; a;
+    Eigen::Matrix&lt;double, 3, 1&gt; t;
+    generateRandomData(θ, p, q, n, a, t);
+    double func_value = demo21(θ, p, q, n, a, t);
+    std::cout&lt;&lt;&#34;func_value:\n&#34;&lt;&lt;func_value&lt;&lt;std::endl;
+    return 0;
+}</code></pre></div>
+    
+
+    
+      <br> Here is the Python output: <br>
+      <div class="code_block"><pre ><code class="language-python">&#34;&#34;&#34;
+from trigonometry: cos
+
+b = ∑_i cos(θ)²((p_i - q_i)⋅n_i +((p_i+q_i)×n_i)⋅a+n_i⋅t)² 
+
+where
+
+θ: ℝ: angle of rotation
+p_i: ℝ^3
+q_i: ℝ^3
+n_i: ℝ^3
+a: ℝ^3
+t: ℝ^3
+
+
+
+&#34;&#34;&#34;
+import numpy as np
+import scipy
+import scipy.linalg
+from scipy import sparse
+from scipy.integrate import quad
+from scipy.optimize import minimize
+
+
+def demo21(θ, p, q, n, a, t):
+    &#34;&#34;&#34;
+    :param :θ : ℝ: angle of rotation
+    :param :p : ℝ^3
+    :param :q : ℝ^3
+    :param :n : ℝ^3
+    :param :a : ℝ^3
+    :param :t : ℝ^3
+    &#34;&#34;&#34;
+    p = np.asarray(p, dtype=np.float64)
+    q = np.asarray(q, dtype=np.float64)
+    n = np.asarray(n, dtype=np.float64)
+    a = np.asarray(a, dtype=np.float64)
+    t = np.asarray(t, dtype=np.float64)
+
+    _dim_0 = p.shape[0]
+    assert np.ndim(θ) == 0
+    assert p.shape == (_dim_0, 3, )
+    assert q.shape == (_dim_0, 3, )
+    assert n.shape == (_dim_0, 3, )
+    assert a.shape == (3,)
+    assert t.shape == (3,)
+
+    _sum_0 = 0
+    for i in range(1, len(q)+1):
+        _sum_0 += np.power(np.cos(θ), 2) * np.power((np.dot(((p[i-1] - q[i-1])).ravel(), (n[i-1]).ravel()) + np.dot(((np.cross((p[i-1] + q[i-1]), n[i-1]))).ravel(), (a).ravel()) + np.dot((n[i-1]).ravel(), (t).ravel())), 2)
+    b = _sum_0
+
+    return b
+
+
+def generateRandomData():
+    θ = np.random.randn()
+    _dim_0 = np.random.randint(10)
+    p = np.random.randn(_dim_0, 3, )
+    q = np.random.randn(_dim_0, 3, )
+    n = np.random.randn(_dim_0, 3, )
+    a = np.random.randn(3)
+    t = np.random.randn(3)
+    return θ, p, q, n, a, t
+
+
+if __name__ == &#39;__main__&#39;:
+    θ, p, q, n, a, t = generateRandomData()
+    print(&#34;θ:&#34;, θ)
+    print(&#34;p:&#34;, p)
+    print(&#34;q:&#34;, q)
+    print(&#34;n:&#34;, n)
+    print(&#34;a:&#34;, a)
+    print(&#34;t:&#34;, t)
+    func_value = demo21(θ, p, q, n, a, t)
+    print(&#34;func_value: &#34;, func_value)</code></pre></div>
+    
+
+    
+      <br> Here is the Tex output: <br>
+      <div class="code_block"><pre ><code class="language-tex">\documentclass[12pt]{article}
+\usepackage{mathdots}
+\usepackage[bb=boondox]{mathalfa}
+\usepackage{mathtools}
+\usepackage{amssymb}
+\usepackage{ctex}
+\setmainfont{Linux Libertine O}
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\begin{document}
+from trigonometry import cos
+
+\[
+\textit{b} = \sum_\textit{i} cos(\textit{θ})^{2}((\textit{p}_{ \textit{i} } - \textit{q}_{ \textit{i} }) \cdot \textit{n}_{ \textit{i} } + ((\textit{p}_{ \textit{i} } + \textit{q}_{ \textit{i} }) × \textit{n}_{ \textit{i} }) \cdot \textit{a} + \textit{n}_{ \textit{i} } \cdot \textit{t})^{2}
+\]
+
+where
+\begin{itemize}
+\item $\textit{θ} \in \mathbb{{R}}:$angle of rotation
+\item $\textit{p}_{\textit{i}} \in \mathbb{R}^{ 3}$
+\item $\textit{q}_{\textit{i}} \in \mathbb{R}^{ 3}$
+\item $\textit{n}_{\textit{i}} \in \mathbb{R}^{ 3}$
+\item $\textit{a} \in \mathbb{R}^{ 3}$
+\item $\textit{t} \in \mathbb{R}^{ 3}$
+\end{itemize}
+
+
+\end{document}</code></pre></div>
+    
+
+    
+      <br> Below is the pdf: <br>
+      <img src=../../static/gallery_res/demo21/demo21.pdf alt="placeholder" width="700" style='object-fit: scale-down;'><br>
+    
+    </div>
+  
+
+
+ 
+
+
+
+  </div>
+</body>
