@@ -3,50 +3,46 @@
 \usepackage[bb=boondox]{mathalfa}
 \usepackage{mathtools}
 \usepackage{amssymb}
+\usepackage{ctex}
+\setmainfont{Linux Libertine O}
 \DeclareMathOperator*{\argmax}{arg\,max}
 \DeclareMathOperator*{\argmin}{arg\,min}
 \begin{document}
 
 given
 \begin{itemize}
-\item $p_{i} \in \mathbb{R}^{ 3}:$points on lines
-\item $d_{i} \in \mathbb{R}^{ 3}:$unit directions along lines
+\item $\textit{p}_{\textit{i}} \in \mathbb{R}^{ 3}:$points on lines
+\item $\textit{d}_{\textit{i}} \in \mathbb{R}^{ 3}:$unit directions along lines
 \end{itemize}
 
 \[
-k_{i} = (p_{ i } - (p_{ i } \cdot d_{ i }) \cdot d_{ i })
+\textit{k}_{ \textit{i} } = (\textit{p}_{ \textit{i} } - (\textit{p}_{ \textit{i} } \cdot \textit{d}_{ \textit{i} })\textit{d}_{ \textit{i} })
 \]
 \[
-a_{i} = \begin{bmatrix}
-1 & 0 & 0\\
-\end{bmatrix}^T - d_{ i, 0 } \cdot d_{ i }
+\textit{a}_{ \textit{i} } = (1,0,0) - \textit{d}_{ \textit{i}, 1 }\textit{d}_{ \textit{i} }
 \]
 \[
-b_{i} = \begin{bmatrix}
-0 & 1 & 0\\
-\end{bmatrix}^T - d_{ i, 1 } \cdot d_{ i }
+\textit{b}_{ \textit{i} } = (0,1,0) - \textit{d}_{ \textit{i}, 2 }\textit{d}_{ \textit{i} }
 \]
 \[
-c_{i} = \begin{bmatrix}
-0 & 0 & 1\\
-\end{bmatrix}^T - d_{ i, 2 } \cdot d_{ i }
+\textit{c}_{ \textit{i} } = (0,0,1) - \textit{d}_{ \textit{i}, 3 }\textit{d}_{ \textit{i} }
 \]
 \[
-M = \begin{bmatrix}
-(\sum_i (a_{ i, 0 } - d_{ i, 0 } \cdot (d_{ i } \cdot a_{ i }))) & (\sum_i (a_{ i, 1 } - d_{ i, 1 } \cdot (d_{ i } \cdot a_{ i }))) & (\sum_i (a_{ i, 2 } - d_{ i, 2 } \cdot (d_{ i } \cdot a_{ i })))\\
-(\sum_i (b_{ i, 0 } - d_{ i, 0 } \cdot (d_{ i } \cdot b_{ i }))) & (\sum_i (b_{ i, 1 } - d_{ i, 1 } \cdot (d_{ i } \cdot b_{ i }))) & (\sum_i (b_{ i, 2 } - d_{ i, 2 } \cdot (d_{ i } \cdot b_{ i })))\\
-(\sum_i (c_{ i, 0 } - d_{ i, 0 } \cdot (d_{ i } \cdot c_{ i }))) & (\sum_i (c_{ i, 1 } - d_{ i, 1 } \cdot (d_{ i } \cdot c_{ i }))) & (\sum_i (c_{ i, 2 } - d_{ i, 2 } \cdot (d_{ i } \cdot c_{ i })))\\
+\textit{M} = \begin{bmatrix}
+\sum_\textit{i} (\textit{a}_{ \textit{i}, 1 } - \textit{d}_{ \textit{i}, 1 }(\textit{d}_{ \textit{i} } \cdot \textit{a}_{ \textit{i} })) & \sum_\textit{i} (\textit{a}_{ \textit{i}, 2 } - \textit{d}_{ \textit{i}, 2 }(\textit{d}_{ \textit{i} } \cdot \textit{a}_{ \textit{i} })) & \sum_\textit{i} (\textit{a}_{ \textit{i}, 3 } - \textit{d}_{ \textit{i}, 3 }(\textit{d}_{ \textit{i} } \cdot \textit{a}_{ \textit{i} }))\\
+\sum_\textit{i} (\textit{b}_{ \textit{i}, 1 } - \textit{d}_{ \textit{i}, 1 }(\textit{d}_{ \textit{i} } \cdot \textit{b}_{ \textit{i} })) & \sum_\textit{i} (\textit{b}_{ \textit{i}, 2 } - \textit{d}_{ \textit{i}, 2 }(\textit{d}_{ \textit{i} } \cdot \textit{b}_{ \textit{i} })) & \sum_\textit{i} (\textit{b}_{ \textit{i}, 3 } - \textit{d}_{ \textit{i}, 3 }(\textit{d}_{ \textit{i} } \cdot \textit{b}_{ \textit{i} }))\\
+\sum_\textit{i} (\textit{c}_{ \textit{i}, 1 } - \textit{d}_{ \textit{i}, 1 }(\textit{d}_{ \textit{i} } \cdot \textit{c}_{ \textit{i} })) & \sum_\textit{i} (\textit{c}_{ \textit{i}, 2 } - \textit{d}_{ \textit{i}, 2 }(\textit{d}_{ \textit{i} } \cdot \textit{c}_{ \textit{i} })) & \sum_\textit{i} (\textit{c}_{ \textit{i}, 3 } - \textit{d}_{ \textit{i}, 3 }(\textit{d}_{ \textit{i} } \cdot \textit{c}_{ \textit{i} }))\\
 \end{bmatrix}
 \]
 \[
-r = \begin{bmatrix}
-\sum_i (k_{ i } \cdot a_{ i })\\
-\sum_i (k_{ i } \cdot b_{ i })\\
-\sum_i (k_{ i } \cdot c_{ i })\\
+\textit{r} = \begin{bmatrix}
+\sum_\textit{i} (\textit{k}_{ \textit{i} } \cdot \textit{a}_{ \textit{i} })\\
+\sum_\textit{i} (\textit{k}_{ \textit{i} } \cdot \textit{b}_{ \textit{i} })\\
+\sum_\textit{i} (\textit{k}_{ \textit{i} } \cdot \textit{c}_{ \textit{i} })\\
 \end{bmatrix}
 \]
 \[
-q = M^{-1} \cdot r
+\textit{q} = \textit{M}^{-1}\textit{r}
 \]
 
 \end{document}

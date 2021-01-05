@@ -1,10 +1,10 @@
 /*
-`T_1` = 1/sqrt(2)U V^T
-c = [0 0 0
-                   0 0 -1
-                   0 1 0]
+`T₁` = 1/sqrt(2)U[0 0 0
+                  0 0 -1
+                  0 1 0]V^T
+ 
 
-where
+where 
 
 U: ℝ^(3×3) 
 V: ℝ^(3×3)
@@ -20,21 +20,19 @@ V: ℝ^(3×3)
  *
  * @param U  ℝ^(3×3)
  * @param V  ℝ^(3×3)
- * @return c
+ * @return T₁
  */
 Eigen::Matrix<double, 3, 3> demo22(
     const Eigen::Matrix<double, 3, 3> & U,
     const Eigen::Matrix<double, 3, 3> & V)
 {
-    Eigen::Matrix<double, 3, 3> T_1 = 1 / sqrt(2) * U * V.transpose();
-
-    Eigen::Matrix<double, 3, 3> _c_0;
-    _c_0 << 0, 0, 0,
+    Eigen::Matrix<double, 3, 3> _T₁_0;
+    _T₁_0 << 0, 0, 0,
     0, 0, -1,
     0, 1, 0;
-    Eigen::Matrix<double, 3, 3> c = _c_0;
+    Eigen::Matrix<double, 3, 3> T₁ = 1 / sqrt(2) * U * _T₁_0 * V.transpose();
 
-    return c;
+    return T₁;
 }
 
 

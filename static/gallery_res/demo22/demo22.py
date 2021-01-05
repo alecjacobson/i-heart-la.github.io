@@ -1,10 +1,10 @@
 """
-`T_1` = 1/sqrt(2)U V^T
-c = [0 0 0
-                   0 0 -1
-                   0 1 0]
+`T₁` = 1/sqrt(2)U[0 0 0
+                  0 0 -1
+                  0 1 0]V^T
+ 
 
-where
+where 
 
 U: ℝ^(3×3) 
 V: ℝ^(3×3)
@@ -28,15 +28,13 @@ def demo22(U, V):
     assert U.shape == (3, 3)
     assert V.shape == (3, 3)
 
-    T_1 = 1 / np.sqrt(2) * U @ V.T
+    _T₁_0 = np.zeros((3, 3))
+    _T₁_0[0] = [0, 0, 0]
+    _T₁_0[1] = [0, 0, -1]
+    _T₁_0[2] = [0, 1, 0]
+    T₁ = 1 / np.sqrt(2) * U @ _T₁_0 @ V.T
 
-    _c_0 = np.zeros((3, 3))
-    _c_0[0] = [0, 0, 0]
-    _c_0[1] = [0, 0, -1]
-    _c_0[2] = [0, 1, 0]
-    c = _c_0
-
-    return c
+    return T₁
 
 
 def generateRandomData():

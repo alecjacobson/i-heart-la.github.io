@@ -1,7 +1,8 @@
 /*
 from trigonometry: cos
 
-b = ∑_i cos(θ)²((p_i - q_i)⋅n_i +((p_i+q_i)×n_i)⋅a+n_i⋅t)² 
+b = ∑_i cos(θ)²((p_i - q_i)⋅n_i +((p_i+q_i)×n_i)⋅ã+n_i⋅t̃)² 
+
 
 where
 
@@ -9,11 +10,8 @@ where
 p_i: ℝ^3
 q_i: ℝ^3
 n_i: ℝ^3
-a: ℝ^3
-t: ℝ^3
-
-
-
+ã: ℝ^3
+t̃: ℝ^3
 */
 #include <Eigen/Core>
 #include <Eigen/Dense>
@@ -28,8 +26,8 @@ t: ℝ^3
  * @param p  ℝ^3
  * @param q  ℝ^3
  * @param n  ℝ^3
- * @param a  ℝ^3
- * @param t  ℝ^3
+ * @param ã  ℝ^3
+ * @param t̃  ℝ^3
  * @return b
  */
 double demo21(
@@ -37,13 +35,13 @@ double demo21(
     const std::vector<Eigen::Matrix<double, 3, 1>> & p,
     const std::vector<Eigen::Matrix<double, 3, 1>> & q,
     const std::vector<Eigen::Matrix<double, 3, 1>> & n,
-    const Eigen::Matrix<double, 3, 1> & a,
-    const Eigen::Matrix<double, 3, 1> & t)
+    const Eigen::Matrix<double, 3, 1> & ã,
+    const Eigen::Matrix<double, 3, 1> & t̃)
 {
     const long _dim_0 = p.size();
     double _sum_0 = 0;
-    for(int i=1; i<=q.size(); i++){
-        _sum_0 += pow(cos(θ), 2) * pow((((p.at(i-1) - q.at(i-1))).dot(n.at(i-1)) + ((((p.at(i-1) + q.at(i-1))).cross(n.at(i-1)))).dot(a) + (n.at(i-1)).dot(t)), 2);
+    for(int i=1; i<=n.size(); i++){
+        _sum_0 += pow(cos(θ), 2) * pow((((p.at(i-1) - q.at(i-1))).dot(n.at(i-1)) + ((((p.at(i-1) + q.at(i-1))).cross(n.at(i-1)))).dot(ã) + (n.at(i-1)).dot(t̃)), 2);
     }
     double b = _sum_0;
 
@@ -55,8 +53,8 @@ void generateRandomData(double & θ,
     std::vector<Eigen::Matrix<double, 3, 1>> & p,
     std::vector<Eigen::Matrix<double, 3, 1>> & q,
     std::vector<Eigen::Matrix<double, 3, 1>> & n,
-    Eigen::Matrix<double, 3, 1> & a,
-    Eigen::Matrix<double, 3, 1> & t)
+    Eigen::Matrix<double, 3, 1> & ã,
+    Eigen::Matrix<double, 3, 1> & t̃)
 {
     θ = rand() % 10;
     const int _dim_0 = rand()%10;
@@ -72,8 +70,8 @@ void generateRandomData(double & θ,
     for(int i=0; i<_dim_0; i++){
         n[i] = Eigen::VectorXd::Random(3);
     }
-    a = Eigen::VectorXd::Random(3);
-    t = Eigen::VectorXd::Random(3);
+    ã = Eigen::VectorXd::Random(3);
+    t̃ = Eigen::VectorXd::Random(3);
 }
 
 
@@ -83,10 +81,10 @@ int main(int argc, char *argv[])
     std::vector<Eigen::Matrix<double, 3, 1>> p;
     std::vector<Eigen::Matrix<double, 3, 1>> q;
     std::vector<Eigen::Matrix<double, 3, 1>> n;
-    Eigen::Matrix<double, 3, 1> a;
-    Eigen::Matrix<double, 3, 1> t;
-    generateRandomData(θ, p, q, n, a, t);
-    double func_value = demo21(θ, p, q, n, a, t);
+    Eigen::Matrix<double, 3, 1> ã;
+    Eigen::Matrix<double, 3, 1> t̃;
+    generateRandomData(θ, p, q, n, ã, t̃);
+    double func_value = demo21(θ, p, q, n, ã, t̃);
     std::cout<<"func_value:\n"<<func_value<<std::endl;
     return 0;
 }

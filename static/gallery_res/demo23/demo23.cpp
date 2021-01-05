@@ -1,19 +1,26 @@
 /*
-`x(θ,v)` =  (`r bar`⋅`D_A`(`θ`, v)+`k_r``δ`(`θ`, v))/(`n bar`⋅`D_A`(`θ`, v)+`k_n``δ`(`θ`, v))
-`y(θ,v)` =  (`s bar`⋅`D_A`(`θ`, v)+`k_s``δ`(`θ`, v))/(`n bar`⋅`D_A`(`θ`, v)+`k_n``δ`(`θ`, v))
+r̄ = v̄×ō
+s̄ = ō×ū
+n̄ = ū×v̄
+
+`k_r` = r̄⋅(`C̄ₐ`-V̄)
+`k_s` = s̄⋅(`C̄ₐ`-V̄)
+`k_n` = n̄⋅(`C̄ₐ`-V̄)
+
+`x(θ,v)` =  (r̄⋅`D_A`(θ, v)+`k_r`δ(θ, v))/(n̄⋅`D_A`(θ, v)+`k_n`δ(θ, v))
+`y(θ,v)` =  (s̄⋅`D_A`(θ, v)+`k_s`δ(θ, v))/(n̄⋅`D_A`(θ, v)+`k_n`δ(θ, v))
 
 where
 
-`r bar`: ℝ^3
-`s bar`: ℝ^3
-`n bar`: ℝ^3
-`θ`: ℝ 
+v̄: ℝ^3
+ō: ℝ^3
+ū: ℝ^3
+V̄: ℝ^3
+`C̄ₐ`: ℝ^3
+θ: ℝ 
 v: ℝ 
-`k_r`: ℝ 
-`k_s`: ℝ 
-`k_n`: ℝ 
 `D_A`: ℝ,ℝ->ℝ^3
-`δ`: ℝ,ℝ->ℝ  
+δ: ℝ,ℝ->ℝ 
 */
 #include <Eigen/Core>
 #include <Eigen/Dense>
@@ -24,57 +31,65 @@ v: ℝ
 /**
  * demo23
  *
- * @param r_bar  ℝ^3
- * @param s_bar  ℝ^3
- * @param n_bar  ℝ^3
+ * @param v̄  ℝ^3
+ * @param ō  ℝ^3
+ * @param ū  ℝ^3
+ * @param V̄  ℝ^3
+ * @param C_combining_macron_ₐ  ℝ^3
  * @param θ  ℝ
  * @param v  ℝ
- * @param k_r  ℝ
- * @param k_s  ℝ
- * @param k_n  ℝ
  * @param D_A  ℝ,ℝ->ℝ^3
  * @param δ  ℝ,ℝ->ℝ
  * @return y_left_parenthesis_θ_comma_v_right_parenthesis
  */
 double demo23(
-    const Eigen::Matrix<double, 3, 1> & r_bar,
-    const Eigen::Matrix<double, 3, 1> & s_bar,
-    const Eigen::Matrix<double, 3, 1> & n_bar,
+    const Eigen::Matrix<double, 3, 1> & v̄,
+    const Eigen::Matrix<double, 3, 1> & ō,
+    const Eigen::Matrix<double, 3, 1> & ū,
+    const Eigen::Matrix<double, 3, 1> & V̄,
+    const Eigen::Matrix<double, 3, 1> & C_combining_macron_ₐ,
     const double & θ,
     const double & v,
-    const double & k_r,
-    const double & k_s,
-    const double & k_n,
     const std::function<Eigen::Matrix<double, 3, 1>(double, double)> & D_A,
     const std::function<double(double, double)> & δ)
 {
-    double x_left_parenthesis_θ_comma_v_right_parenthesis = ((r_bar).dot(D_A(θ, v)) + k_r * δ(θ, v)) / ((n_bar).dot(D_A(θ, v)) + k_n * δ(θ, v));
+    Eigen::Matrix<double, 3, 1> r̄ = (v̄).cross(ō);
 
-    double y_left_parenthesis_θ_comma_v_right_parenthesis = ((s_bar).dot(D_A(θ, v)) + k_s * δ(θ, v)) / ((n_bar).dot(D_A(θ, v)) + k_n * δ(θ, v));
+    Eigen::Matrix<double, 3, 1> s̄ = (ō).cross(ū);
+
+    Eigen::Matrix<double, 3, 1> n̄ = (ū).cross(v̄);
+
+    double k_r = (r̄).dot((C_combining_macron_ₐ - V̄));
+
+    double k_s = (s̄).dot((C_combining_macron_ₐ - V̄));
+
+    double k_n = (n̄).dot((C_combining_macron_ₐ - V̄));
+
+    double x_left_parenthesis_θ_comma_v_right_parenthesis = ((r̄).dot(D_A(θ, v)) + k_r * δ(θ, v)) / ((n̄).dot(D_A(θ, v)) + k_n * δ(θ, v));
+
+    double y_left_parenthesis_θ_comma_v_right_parenthesis = ((s̄).dot(D_A(θ, v)) + k_s * δ(θ, v)) / ((n̄).dot(D_A(θ, v)) + k_n * δ(θ, v));
 
     return y_left_parenthesis_θ_comma_v_right_parenthesis;
 }
 
 
-void generateRandomData(Eigen::Matrix<double, 3, 1> & r_bar,
-    Eigen::Matrix<double, 3, 1> & s_bar,
-    Eigen::Matrix<double, 3, 1> & n_bar,
+void generateRandomData(Eigen::Matrix<double, 3, 1> & v̄,
+    Eigen::Matrix<double, 3, 1> & ō,
+    Eigen::Matrix<double, 3, 1> & ū,
+    Eigen::Matrix<double, 3, 1> & V̄,
+    Eigen::Matrix<double, 3, 1> & C_combining_macron_ₐ,
     double & θ,
     double & v,
-    double & k_r,
-    double & k_s,
-    double & k_n,
     std::function<Eigen::Matrix<double, 3, 1>(double, double)> & D_A,
     std::function<double(double, double)> & δ)
 {
     θ = rand() % 10;
     v = rand() % 10;
-    k_r = rand() % 10;
-    k_s = rand() % 10;
-    k_n = rand() % 10;
-    r_bar = Eigen::VectorXd::Random(3);
-    s_bar = Eigen::VectorXd::Random(3);
-    n_bar = Eigen::VectorXd::Random(3);
+    v̄ = Eigen::VectorXd::Random(3);
+    ō = Eigen::VectorXd::Random(3);
+    ū = Eigen::VectorXd::Random(3);
+    V̄ = Eigen::VectorXd::Random(3);
+    C_combining_macron_ₐ = Eigen::VectorXd::Random(3);
     D_A = [](double, double)->Eigen::Matrix<double, 3, 1>{
         return Eigen::VectorXd::Random(3);
     };
@@ -86,18 +101,17 @@ void generateRandomData(Eigen::Matrix<double, 3, 1> & r_bar,
 
 int main(int argc, char *argv[])
 {
-    Eigen::Matrix<double, 3, 1> r_bar;
-    Eigen::Matrix<double, 3, 1> s_bar;
-    Eigen::Matrix<double, 3, 1> n_bar;
+    Eigen::Matrix<double, 3, 1> v̄;
+    Eigen::Matrix<double, 3, 1> ō;
+    Eigen::Matrix<double, 3, 1> ū;
+    Eigen::Matrix<double, 3, 1> V̄;
+    Eigen::Matrix<double, 3, 1> C_combining_macron_ₐ;
     double θ;
     double v;
-    double k_r;
-    double k_s;
-    double k_n;
     std::function<Eigen::Matrix<double, 3, 1>(double, double)> D_A;
     std::function<double(double, double)> δ;
-    generateRandomData(r_bar, s_bar, n_bar, θ, v, k_r, k_s, k_n, D_A, δ);
-    double func_value = demo23(r_bar, s_bar, n_bar, θ, v, k_r, k_s, k_n, D_A, δ);
+    generateRandomData(v̄, ō, ū, V̄, C_combining_macron_ₐ, θ, v, D_A, δ);
+    double func_value = demo23(v̄, ō, ū, V̄, C_combining_macron_ₐ, θ, v, D_A, δ);
     std::cout<<"func_value:\n"<<func_value<<std::endl;
     return 0;
 }

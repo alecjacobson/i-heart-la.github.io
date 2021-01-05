@@ -52,7 +52,7 @@ double demo29(
         double _sum_2 = 0;
         for(int j=1; j<=X.cols(); j++){
             double _sum_3 = 0;
-            for(int k=1; k<=p.size(); k++){
+            for(int k=1; k<=α.size(); k++){
                 _sum_3 += α(k-1) * p(k-1) * X(i-1, j-1);
             }
             _sum_2 += (f(X(i-1, j-1)) / p_c(X(i-1, j-1)) - (_sum_3) / p_c(X(i-1, j-1)));

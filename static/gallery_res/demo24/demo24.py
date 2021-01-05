@@ -1,6 +1,5 @@
 """
-
-E = 1/`σ_N`^2`E_I` + sum_(j for j>1) α_j²/`σ_S`_j^2  + sum_(j for j>1) β_j²/`σ_T`_j^2   + sum_j (ρ_j-`ρ_bar`_j)²/`σ_ρ`_j^2 
+E = 1/`σ_N`^2`E_I` + sum_(j for j>1) α_j²/`σ_S`_j^2  + sum_(j for j>1) β_j²/`σ_T`_j^2   + sum_j (ρ_j-ρ̄_j)²/`σ_ρ`_j^2 
 
 where
 
@@ -11,7 +10,7 @@ where
 `σ_S`_i: ℝ 
 `σ_T`_i: ℝ 
 ρ_i: ℝ 
-`ρ_bar`_i: ℝ 
+ρ̄_i: ℝ 
 `σ_ρ`_i: ℝ 
 ā_i: ℝ 
 """
@@ -23,7 +22,7 @@ from scipy.integrate import quad
 from scipy.optimize import minimize
 
 
-def demo24(σ_N, E_I, α, β, σ_S, σ_T, ρ, ρ_bar, σ_ρ, ā):
+def demo24(σ_N, E_I, α, β, σ_S, σ_T, ρ, ρ̄, σ_ρ, ā):
     """
     :param :σ_N : ℝ
     :param :E_I : ℝ
@@ -32,7 +31,7 @@ def demo24(σ_N, E_I, α, β, σ_S, σ_T, ρ, ρ_bar, σ_ρ, ā):
     :param :σ_S : ℝ
     :param :σ_T : ℝ
     :param :ρ : ℝ
-    :param :ρ_bar : ℝ
+    :param :ρ̄ : ℝ
     :param :σ_ρ : ℝ
     :param :ā : ℝ
     """
@@ -41,7 +40,7 @@ def demo24(σ_N, E_I, α, β, σ_S, σ_T, ρ, ρ_bar, σ_ρ, ā):
     σ_S = np.asarray(σ_S)
     σ_T = np.asarray(σ_T)
     ρ = np.asarray(ρ)
-    ρ_bar = np.asarray(ρ_bar)
+    ρ̄ = np.asarray(ρ̄)
     σ_ρ = np.asarray(σ_ρ)
     ā = np.asarray(ā)
 
@@ -53,7 +52,7 @@ def demo24(σ_N, E_I, α, β, σ_S, σ_T, ρ, ρ_bar, σ_ρ, ā):
     assert σ_S.shape == (_dim_0,)
     assert σ_T.shape == (_dim_0,)
     assert ρ.shape == (_dim_0,)
-    assert ρ_bar.shape == (_dim_0,)
+    assert ρ̄.shape == (_dim_0,)
     assert σ_ρ.shape == (_dim_0,)
     assert ā.shape == (_dim_0,)
 
@@ -66,8 +65,8 @@ def demo24(σ_N, E_I, α, β, σ_S, σ_T, ρ, ρ_bar, σ_ρ, ā):
         if(j > 1):
             _sum_1 += np.power(β[j-1], 2) / np.power(σ_T[j-1], 2)
     _sum_2 = 0
-    for j in range(1, len(ρ)+1):
-        _sum_2 += np.power((ρ[j-1] - ρ_bar[j-1]), 2) / np.power(σ_ρ[j-1], 2)
+    for j in range(1, len(ρ̄)+1):
+        _sum_2 += np.power((ρ[j-1] - ρ̄[j-1]), 2) / np.power(σ_ρ[j-1], 2)
     E = 1 / np.power(σ_N, 2) * E_I + _sum_0 + _sum_1 + _sum_2
 
     return E
@@ -82,14 +81,14 @@ def generateRandomData():
     σ_S = np.random.randn(_dim_0)
     σ_T = np.random.randn(_dim_0)
     ρ = np.random.randn(_dim_0)
-    ρ_bar = np.random.randn(_dim_0)
+    ρ̄ = np.random.randn(_dim_0)
     σ_ρ = np.random.randn(_dim_0)
     ā = np.random.randn(_dim_0)
-    return σ_N, E_I, α, β, σ_S, σ_T, ρ, ρ_bar, σ_ρ, ā
+    return σ_N, E_I, α, β, σ_S, σ_T, ρ, ρ̄, σ_ρ, ā
 
 
 if __name__ == '__main__':
-    σ_N, E_I, α, β, σ_S, σ_T, ρ, ρ_bar, σ_ρ, ā = generateRandomData()
+    σ_N, E_I, α, β, σ_S, σ_T, ρ, ρ̄, σ_ρ, ā = generateRandomData()
     print("σ_N:", σ_N)
     print("E_I:", E_I)
     print("α:", α)
@@ -97,8 +96,8 @@ if __name__ == '__main__':
     print("σ_S:", σ_S)
     print("σ_T:", σ_T)
     print("ρ:", ρ)
-    print("ρ_bar:", ρ_bar)
+    print("ρ̄:", ρ̄)
     print("σ_ρ:", σ_ρ)
     print("ā:", ā)
-    func_value = demo24(σ_N, E_I, α, β, σ_S, σ_T, ρ, ρ_bar, σ_ρ, ā)
+    func_value = demo24(σ_N, E_I, α, β, σ_S, σ_T, ρ, ρ̄, σ_ρ, ā)
     print("func_value: ", func_value)

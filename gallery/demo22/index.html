@@ -29,12 +29,12 @@
 
     
       <br> Here is the LA input: <br>
-      <div class="code_block"><pre ><code class="language-cpsp">`T_1` = 1/sqrt(2)U V^T
-c = [0 0 0
-                   0 0 -1
-                   0 1 0]
+      <div class="code_block"><pre ><code class="language-cpsp">`T₁` = 1/sqrt(2)U[0 0 0
+                  0 0 -1
+                  0 1 0]V^T
+ 
 
-where
+where 
 
 U: ℝ^(3×3) 
 V: ℝ^(3×3)</code></pre></div>
@@ -43,12 +43,12 @@ V: ℝ^(3×3)</code></pre></div>
     
       <br> Here is the Eigen output: <br>
       <div class="code_block"><pre ><code class="language-cpp">/*
-`T_1` = 1/sqrt(2)U V^T
-c = [0 0 0
-                   0 0 -1
-                   0 1 0]
+`T₁` = 1/sqrt(2)U[0 0 0
+                  0 0 -1
+                  0 1 0]V^T
+ 
 
-where
+where 
 
 U: ℝ^(3×3) 
 V: ℝ^(3×3)
@@ -64,21 +64,19 @@ V: ℝ^(3×3)
  *
  * @param U  ℝ^(3×3)
  * @param V  ℝ^(3×3)
- * @return c
+ * @return T₁
  */
 Eigen::Matrix&lt;double, 3, 3&gt; demo22(
     const Eigen::Matrix&lt;double, 3, 3&gt; &amp; U,
     const Eigen::Matrix&lt;double, 3, 3&gt; &amp; V)
 {
-    Eigen::Matrix&lt;double, 3, 3&gt; T_1 = 1 / sqrt(2) * U * V.transpose();
-
-    Eigen::Matrix&lt;double, 3, 3&gt; _c_0;
-    _c_0 &lt;&lt; 0, 0, 0,
+    Eigen::Matrix&lt;double, 3, 3&gt; _T₁_0;
+    _T₁_0 &lt;&lt; 0, 0, 0,
     0, 0, -1,
     0, 1, 0;
-    Eigen::Matrix&lt;double, 3, 3&gt; c = _c_0;
+    Eigen::Matrix&lt;double, 3, 3&gt; T₁ = 1 / sqrt(2) * U * _T₁_0 * V.transpose();
 
-    return c;
+    return T₁;
 }
 
 
@@ -104,12 +102,12 @@ int main(int argc, char *argv[])
     
       <br> Here is the Python output: <br>
       <div class="code_block"><pre ><code class="language-python">&#34;&#34;&#34;
-`T_1` = 1/sqrt(2)U V^T
-c = [0 0 0
-                   0 0 -1
-                   0 1 0]
+`T₁` = 1/sqrt(2)U[0 0 0
+                  0 0 -1
+                  0 1 0]V^T
+ 
 
-where
+where 
 
 U: ℝ^(3×3) 
 V: ℝ^(3×3)
@@ -133,15 +131,13 @@ def demo22(U, V):
     assert U.shape == (3, 3)
     assert V.shape == (3, 3)
 
-    T_1 = 1 / np.sqrt(2) * U @ V.T
+    _T₁_0 = np.zeros((3, 3))
+    _T₁_0[0] = [0, 0, 0]
+    _T₁_0[1] = [0, 0, -1]
+    _T₁_0[2] = [0, 1, 0]
+    T₁ = 1 / np.sqrt(2) * U @ _T₁_0 @ V.T
 
-    _c_0 = np.zeros((3, 3))
-    _c_0[0] = [0, 0, 0]
-    _c_0[1] = [0, 0, -1]
-    _c_0[2] = [0, 1, 0]
-    c = _c_0
-
-    return c
+    return T₁
 
 
 def generateRandomData():
@@ -171,14 +167,11 @@ if __name__ == &#39;__main__&#39;:
 \DeclareMathOperator*{\argmin}{arg\,min}
 \begin{document}
 \[
-\textit{T\_1} = \frac{1}{ \sqrt{2}}\textit{U}\textit{V}^T
-\]
-\[
-\textit{c} = \begin{bmatrix}
+\textit{T₁} = \frac{1}{ \sqrt{2}}\textit{U}\begin{bmatrix}
 0 &amp; 0 &amp; 0\\
 0 &amp; 0 &amp; -1\\
 0 &amp; 1 &amp; 0\\
-\end{bmatrix}
+\end{bmatrix}\textit{V}^T
 \]
 
 where

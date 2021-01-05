@@ -1,6 +1,5 @@
 /*
-
-E = 1/`σ_N`^2`E_I` + sum_(j for j>1) α_j²/`σ_S`_j^2  + sum_(j for j>1) β_j²/`σ_T`_j^2   + sum_j (ρ_j-`ρ_bar`_j)²/`σ_ρ`_j^2 
+E = 1/`σ_N`^2`E_I` + sum_(j for j>1) α_j²/`σ_S`_j^2  + sum_(j for j>1) β_j²/`σ_T`_j^2   + sum_j (ρ_j-ρ̄_j)²/`σ_ρ`_j^2 
 
 where
 
@@ -11,7 +10,7 @@ where
 `σ_S`_i: ℝ 
 `σ_T`_i: ℝ 
 ρ_i: ℝ 
-`ρ_bar`_i: ℝ 
+ρ̄_i: ℝ 
 `σ_ρ`_i: ℝ 
 ā_i: ℝ 
 */
@@ -31,7 +30,7 @@ where
  * @param σ_S  ℝ
  * @param σ_T  ℝ
  * @param ρ  ℝ
- * @param ρ_bar  ℝ
+ * @param ρ̄  ℝ
  * @param σ_ρ  ℝ
  * @param ā  ℝ
  * @return E
@@ -44,7 +43,7 @@ double demo24(
     const std::vector<double> & σ_S,
     const std::vector<double> & σ_T,
     const std::vector<double> & ρ,
-    const std::vector<double> & ρ_bar,
+    const std::vector<double> & ρ̄,
     const std::vector<double> & σ_ρ,
     const std::vector<double> & ā)
 {
@@ -54,7 +53,7 @@ double demo24(
     assert( σ_S.size() == _dim_0 );
     assert( σ_T.size() == _dim_0 );
     assert( ρ.size() == _dim_0 );
-    assert( ρ_bar.size() == _dim_0 );
+    assert( ρ̄.size() == _dim_0 );
     assert( σ_ρ.size() == _dim_0 );
     assert( ā.size() == _dim_0 );
 
@@ -71,8 +70,8 @@ double demo24(
         }
     }
     double _sum_2 = 0;
-    for(int j=1; j<=ρ.size(); j++){
-        _sum_2 += pow((ρ.at(j-1) - ρ_bar.at(j-1)), 2) / pow(σ_ρ.at(j-1), 2);
+    for(int j=1; j<=ρ̄.size(); j++){
+        _sum_2 += pow((ρ.at(j-1) - ρ̄.at(j-1)), 2) / pow(σ_ρ.at(j-1), 2);
     }
     double E = 1 / pow(σ_N, 2) * E_I + _sum_0 + _sum_1 + _sum_2;
 
@@ -87,7 +86,7 @@ void generateRandomData(double & σ_N,
     std::vector<double> & σ_S,
     std::vector<double> & σ_T,
     std::vector<double> & ρ,
-    std::vector<double> & ρ_bar,
+    std::vector<double> & ρ̄,
     std::vector<double> & σ_ρ,
     std::vector<double> & ā)
 {
@@ -114,9 +113,9 @@ void generateRandomData(double & σ_N,
     for(int i=0; i<_dim_0; i++){
         ρ[i] = rand() % 10;
     }
-    ρ_bar.resize(_dim_0);
+    ρ̄.resize(_dim_0);
     for(int i=0; i<_dim_0; i++){
-        ρ_bar[i] = rand() % 10;
+        ρ̄[i] = rand() % 10;
     }
     σ_ρ.resize(_dim_0);
     for(int i=0; i<_dim_0; i++){
@@ -138,11 +137,11 @@ int main(int argc, char *argv[])
     std::vector<double> σ_S;
     std::vector<double> σ_T;
     std::vector<double> ρ;
-    std::vector<double> ρ_bar;
+    std::vector<double> ρ̄;
     std::vector<double> σ_ρ;
     std::vector<double> ā;
-    generateRandomData(σ_N, E_I, α, β, σ_S, σ_T, ρ, ρ_bar, σ_ρ, ā);
-    double func_value = demo24(σ_N, E_I, α, β, σ_S, σ_T, ρ, ρ_bar, σ_ρ, ā);
+    generateRandomData(σ_N, E_I, α, β, σ_S, σ_T, ρ, ρ̄, σ_ρ, ā);
+    double func_value = demo24(σ_N, E_I, α, β, σ_S, σ_T, ρ, ρ̄, σ_ρ, ā);
     std::cout<<"func_value:\n"<<func_value<<std::endl;
     return 0;
 }

@@ -1,6 +1,7 @@
 from trigonometry: cos
 
-b = ∑_i cos(θ)²((p_i - q_i)⋅n_i +((p_i+q_i)×n_i)⋅a+n_i⋅t)² 
+b = ∑_i cos(θ)²((p_i - q_i)⋅n_i +((p_i+q_i)×n_i)⋅ã+n_i⋅t̃)² 
+
 
 where
 
@@ -8,7 +9,5 @@ where
 p_i: ℝ^3
 q_i: ℝ^3
 n_i: ℝ^3
-a: ℝ^3
-t: ℝ^3
-
-
+ã: ℝ^3
+t̃: ℝ^3

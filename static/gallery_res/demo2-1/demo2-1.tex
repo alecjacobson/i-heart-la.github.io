@@ -1,0 +1,30 @@
+\documentclass[12pt]{article}
+\usepackage{mathdots}
+\usepackage[bb=boondox]{mathalfa}
+\usepackage{mathtools}
+\usepackage{amssymb}
+\usepackage{ctex}
+\setmainfont{Linux Libertine O}
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\begin{document}
+\[
+\textit{xᵢ} = \textit{T}_{*, 1}
+\]
+\[
+\textit{xⱼ} = \textit{T}_{*, 2}
+\]
+\[
+\textit{xₖ} = \textit{T}_{*, 3}
+\]
+\[
+\textit{n(T)} = \frac{(\textit{xⱼ} - \textit{xᵢ}) × (\textit{xₖ} - \textit{xᵢ})}{\|(\textit{xⱼ} - \textit{xᵢ}) × (\textit{xₖ} - \textit{xᵢ})\|_2}
+\]
+
+where
+\begin{itemize}
+\item $\textit{T} \in \mathbb{R}^{ 3 \times 3 }$
+\end{itemize}
+
+
+\end{document}

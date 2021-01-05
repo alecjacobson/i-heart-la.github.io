@@ -29,39 +29,41 @@
 
     
       <br> Here is the LA input: <br>
-      <div class="code_block"><pre ><code class="language-cpsp">[P_1  0
- 0  P_3][  L              0
-    P_3^TCP_2^TU^(-1)   -Lbar][U  L^(-1)P_1^TB
-                               0     `U_bar`][P_2   0
-                                               0   I_4]
+      <div class="code_block"><pre ><code class="language-cpsp">[P₁  0
+ 0   P₃][    L        0
+         P₃ᵀCP₂ᵀU⁻¹  -L̃][U  L⁻¹P₁ᵀB
+                         0     Ũ   ][P₂   0
+                                     0   I_4]
+
 where
 
 P_i: ℝ^(4×4) 
 B: ℝ^(4×4) 
 C: ℝ^(4×4) 
 L: ℝ^(4×4) 
-Lbar: ℝ^(4×4) 
+L̃: ℝ^(4×4) 
 U: ℝ^(4×4) 
-`U_bar`: ℝ^(4×4)</code></pre></div>
+Ũ: ℝ^(4×4)</code></pre></div>
     
 
     
       <br> Here is the Eigen output: <br>
       <div class="code_block"><pre ><code class="language-cpp">/*
-[P_1  0
- 0  P_3][  L              0
-    P_3^TCP_2^TU^(-1)   -Lbar][U  L^(-1)P_1^TB
-                               0     `U_bar`][P_2   0
-                                               0   I_4]
+[P₁  0
+ 0   P₃][    L        0
+         P₃ᵀCP₂ᵀU⁻¹  -L̃][U  L⁻¹P₁ᵀB
+                         0     Ũ   ][P₂   0
+                                     0   I_4]
+
 where
 
 P_i: ℝ^(4×4) 
 B: ℝ^(4×4) 
 C: ℝ^(4×4) 
 L: ℝ^(4×4) 
-Lbar: ℝ^(4×4) 
+L̃: ℝ^(4×4) 
 U: ℝ^(4×4) 
-`U_bar`: ℝ^(4×4)
+Ũ: ℝ^(4×4)
 */
 #include &lt;Eigen/Core&gt;
 #include &lt;Eigen/Dense&gt;
@@ -76,9 +78,9 @@ U: ℝ^(4×4)
  * @param B  ℝ^(4×4)
  * @param C  ℝ^(4×4)
  * @param L  ℝ^(4×4)
- * @param Lbar  ℝ^(4×4)
+ * @param L̃  ℝ^(4×4)
  * @param U  ℝ^(4×4)
- * @param U_bar  ℝ^(4×4)
+ * @param Ũ  ℝ^(4×4)
  * @return ret
  */
 Eigen::Matrix&lt;double, 8, 8&gt; demo15(
@@ -86,9 +88,9 @@ Eigen::Matrix&lt;double, 8, 8&gt; demo15(
     const Eigen::Matrix&lt;double, 4, 4&gt; &amp; B,
     const Eigen::Matrix&lt;double, 4, 4&gt; &amp; C,
     const Eigen::Matrix&lt;double, 4, 4&gt; &amp; L,
-    const Eigen::Matrix&lt;double, 4, 4&gt; &amp; Lbar,
+    const Eigen::Matrix&lt;double, 4, 4&gt; &amp; L̃,
     const Eigen::Matrix&lt;double, 4, 4&gt; &amp; U,
-    const Eigen::Matrix&lt;double, 4, 4&gt; &amp; U_bar)
+    const Eigen::Matrix&lt;double, 4, 4&gt; &amp; Ũ)
 {
     const long _dim_0 = P.size();
     assert( P.size() == _dim_0 );
@@ -98,10 +100,10 @@ Eigen::Matrix&lt;double, 8, 8&gt; demo15(
     Eigen::MatrixXd::Zero(4, 4), P.at(3-1);
     Eigen::Matrix&lt;double, 8, 8&gt; _ret_1;
     _ret_1 &lt;&lt; L, Eigen::MatrixXd::Zero(4, 4),
-    P.at(3-1).transpose() * C * P.at(2-1).transpose() * U.inverse(), -Lbar;
+    P.at(3-1).transpose() * C * P.at(2-1).transpose() * U.inverse(), -L̃;
     Eigen::Matrix&lt;double, 8, 8&gt; _ret_2;
     _ret_2 &lt;&lt; U, L.inverse() * P.at(1-1).transpose() * B,
-    Eigen::MatrixXd::Zero(4, 4), U_bar;
+    Eigen::MatrixXd::Zero(4, 4), Ũ;
     Eigen::Matrix&lt;double, 8, 8&gt; _ret_3;
     _ret_3 &lt;&lt; P.at(2-1), Eigen::MatrixXd::Zero(4, 4),
     Eigen::MatrixXd::Zero(4, 4), Eigen::MatrixXd::Identity(4, 4);
@@ -114,9 +116,9 @@ void generateRandomData(std::vector&lt;Eigen::Matrix&lt;double, 4, 4&gt;&gt; &am
     Eigen::Matrix&lt;double, 4, 4&gt; &amp; B,
     Eigen::Matrix&lt;double, 4, 4&gt; &amp; C,
     Eigen::Matrix&lt;double, 4, 4&gt; &amp; L,
-    Eigen::Matrix&lt;double, 4, 4&gt; &amp; Lbar,
+    Eigen::Matrix&lt;double, 4, 4&gt; &amp; L̃,
     Eigen::Matrix&lt;double, 4, 4&gt; &amp; U,
-    Eigen::Matrix&lt;double, 4, 4&gt; &amp; U_bar)
+    Eigen::Matrix&lt;double, 4, 4&gt; &amp; Ũ)
 {
     const int _dim_0 = rand()%10;
     P.resize(_dim_0);
@@ -126,9 +128,9 @@ void generateRandomData(std::vector&lt;Eigen::Matrix&lt;double, 4, 4&gt;&gt; &am
     B = Eigen::MatrixXd::Random(4, 4);
     C = Eigen::MatrixXd::Random(4, 4);
     L = Eigen::MatrixXd::Random(4, 4);
-    Lbar = Eigen::MatrixXd::Random(4, 4);
+    L̃ = Eigen::MatrixXd::Random(4, 4);
     U = Eigen::MatrixXd::Random(4, 4);
-    U_bar = Eigen::MatrixXd::Random(4, 4);
+    Ũ = Eigen::MatrixXd::Random(4, 4);
 }
 
 
@@ -138,11 +140,11 @@ int main(int argc, char *argv[])
     Eigen::Matrix&lt;double, 4, 4&gt; B;
     Eigen::Matrix&lt;double, 4, 4&gt; C;
     Eigen::Matrix&lt;double, 4, 4&gt; L;
-    Eigen::Matrix&lt;double, 4, 4&gt; Lbar;
+    Eigen::Matrix&lt;double, 4, 4&gt; L̃;
     Eigen::Matrix&lt;double, 4, 4&gt; U;
-    Eigen::Matrix&lt;double, 4, 4&gt; U_bar;
-    generateRandomData(P, B, C, L, Lbar, U, U_bar);
-    Eigen::Matrix&lt;double, 8, 8&gt; func_value = demo15(P, B, C, L, Lbar, U, U_bar);
+    Eigen::Matrix&lt;double, 4, 4&gt; Ũ;
+    generateRandomData(P, B, C, L, L̃, U, Ũ);
+    Eigen::Matrix&lt;double, 8, 8&gt; func_value = demo15(P, B, C, L, L̃, U, Ũ);
     std::cout&lt;&lt;&#34;func_value:\n&#34;&lt;&lt;func_value&lt;&lt;std::endl;
     return 0;
 }</code></pre></div>
@@ -151,20 +153,21 @@ int main(int argc, char *argv[])
     
       <br> Here is the Python output: <br>
       <div class="code_block"><pre ><code class="language-python">&#34;&#34;&#34;
-[P_1  0
- 0  P_3][  L              0
-    P_3^TCP_2^TU^(-1)   -Lbar][U  L^(-1)P_1^TB
-                               0     `U_bar`][P_2   0
-                                               0   I_4]
+[P₁  0
+ 0   P₃][    L        0
+         P₃ᵀCP₂ᵀU⁻¹  -L̃][U  L⁻¹P₁ᵀB
+                         0     Ũ   ][P₂   0
+                                     0   I_4]
+
 where
 
 P_i: ℝ^(4×4) 
 B: ℝ^(4×4) 
 C: ℝ^(4×4) 
 L: ℝ^(4×4) 
-Lbar: ℝ^(4×4) 
+L̃: ℝ^(4×4) 
 U: ℝ^(4×4) 
-`U_bar`: ℝ^(4×4)
+Ũ: ℝ^(4×4)
 &#34;&#34;&#34;
 import numpy as np
 import scipy
@@ -174,36 +177,36 @@ from scipy.integrate import quad
 from scipy.optimize import minimize
 
 
-def demo15(P, B, C, L, Lbar, U, U_bar):
+def demo15(P, B, C, L, L̃, U, Ũ):
     &#34;&#34;&#34;
     :param :P : ℝ^(4×4)
     :param :B : ℝ^(4×4)
     :param :C : ℝ^(4×4)
     :param :L : ℝ^(4×4)
-    :param :Lbar : ℝ^(4×4)
+    :param :L̃ : ℝ^(4×4)
     :param :U : ℝ^(4×4)
-    :param :U_bar : ℝ^(4×4)
+    :param :Ũ : ℝ^(4×4)
     &#34;&#34;&#34;
     P = np.asarray(P, dtype=np.float64)
     B = np.asarray(B, dtype=np.float64)
     C = np.asarray(C, dtype=np.float64)
     L = np.asarray(L, dtype=np.float64)
-    Lbar = np.asarray(Lbar, dtype=np.float64)
+    L̃ = np.asarray(L̃, dtype=np.float64)
     U = np.asarray(U, dtype=np.float64)
-    U_bar = np.asarray(U_bar, dtype=np.float64)
+    Ũ = np.asarray(Ũ, dtype=np.float64)
 
     _dim_0 = P.shape[0]
     assert P.shape == (_dim_0, 4, 4)
     assert B.shape == (4, 4)
     assert C.shape == (4, 4)
     assert L.shape == (4, 4)
-    assert Lbar.shape == (4, 4)
+    assert L̃.shape == (4, 4)
     assert U.shape == (4, 4)
-    assert U_bar.shape == (4, 4)
+    assert Ũ.shape == (4, 4)
 
     _ret_0 = np.block([[P[1-1], np.zeros((4, 4))], [np.zeros((4, 4)), P[3-1]]])
-    _ret_1 = np.block([[L, np.zeros((4, 4))], [P[3-1].T @ C @ P[2-1].T @ np.linalg.inv(U), -Lbar]])
-    _ret_2 = np.block([[U, np.linalg.inv(L) @ P[1-1].T @ B], [np.zeros((4, 4)), U_bar]])
+    _ret_1 = np.block([[L, np.zeros((4, 4))], [P[3-1].T @ C @ P[2-1].T @ np.linalg.inv(U), -L̃]])
+    _ret_2 = np.block([[U, np.linalg.inv(L) @ P[1-1].T @ B], [np.zeros((4, 4)), Ũ]])
     _ret_3 = np.block([[P[2-1], np.zeros((4, 4))], [np.zeros((4, 4)), np.identity(4)]])
     ret = _ret_0 @ _ret_1 @ _ret_2 @ _ret_3
     return ret
@@ -215,22 +218,22 @@ def generateRandomData():
     B = np.random.randn(4, 4)
     C = np.random.randn(4, 4)
     L = np.random.randn(4, 4)
-    Lbar = np.random.randn(4, 4)
+    L̃ = np.random.randn(4, 4)
     U = np.random.randn(4, 4)
-    U_bar = np.random.randn(4, 4)
-    return P, B, C, L, Lbar, U, U_bar
+    Ũ = np.random.randn(4, 4)
+    return P, B, C, L, L̃, U, Ũ
 
 
 if __name__ == &#39;__main__&#39;:
-    P, B, C, L, Lbar, U, U_bar = generateRandomData()
+    P, B, C, L, L̃, U, Ũ = generateRandomData()
     print(&#34;P:&#34;, P)
     print(&#34;B:&#34;, B)
     print(&#34;C:&#34;, C)
     print(&#34;L:&#34;, L)
-    print(&#34;Lbar:&#34;, Lbar)
+    print(&#34;L̃:&#34;, L̃)
     print(&#34;U:&#34;, U)
-    print(&#34;U_bar:&#34;, U_bar)
-    func_value = demo15(P, B, C, L, Lbar, U, U_bar)
+    print(&#34;Ũ:&#34;, Ũ)
+    func_value = demo15(P, B, C, L, L̃, U, Ũ)
     print(&#34;func_value: &#34;, func_value)</code></pre></div>
     
 
@@ -252,10 +255,10 @@ if __name__ == &#39;__main__&#39;:
 0 &amp; \textit{P}_{ 3 }\\
 \end{bmatrix}\begin{bmatrix}
 \textit{L} &amp; 0\\
-\textit{P}_{ 3 }^T\textit{C}\textit{P}_{ 2 }^T\textit{U}^{-1} &amp; -\textit{Lbar}\\
+\textit{P}_{ 3 }^T\textit{C}\textit{P}_{ 2 }^T\textit{U}^{-1} &amp; -\textit{L̃}\\
 \end{bmatrix}\begin{bmatrix}
 \textit{U} &amp; \textit{L}^{-1}\textit{P}_{ 1 }^T\textit{B}\\
-0 &amp; \textit{U\_bar}\\
+0 &amp; \textit{Ũ}\\
 \end{bmatrix}\begin{bmatrix}
 \textit{P}_{ 2 } &amp; 0\\
 0 &amp; I_{ 4 }\\
@@ -268,9 +271,9 @@ where
 \item $\textit{B} \in \mathbb{R}^{ 4 \times 4 }$
 \item $\textit{C} \in \mathbb{R}^{ 4 \times 4 }$
 \item $\textit{L} \in \mathbb{R}^{ 4 \times 4 }$
-\item $\textit{Lbar} \in \mathbb{R}^{ 4 \times 4 }$
+\item $\textit{L̃} \in \mathbb{R}^{ 4 \times 4 }$
 \item $\textit{U} \in \mathbb{R}^{ 4 \times 4 }$
-\item $\textit{U\_bar} \in \mathbb{R}^{ 4 \times 4 }$
+\item $\textit{Ũ} \in \mathbb{R}^{ 4 \times 4 }$
 \end{itemize}
 
 

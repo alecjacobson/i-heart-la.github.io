@@ -52,7 +52,7 @@ div.gallery_thumb {
     /*width: 300px;
     height: 300px;*/
     /*border: 1px outset green;*/
-    background: #f1fbfe;
+    background: #ffffff;
 }
 
 
@@ -85,6 +85,7 @@ img.align-center, .figure.align-center, object.align-center {
     margin-left: 0px;
     width: 170px;
     height: 170px;
+    background: #ffffff;
 }
 
 .figure img {

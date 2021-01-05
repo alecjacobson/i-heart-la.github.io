@@ -1,0 +1,194 @@
+<!doctype html>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../../static/style.css">
+<title>demo2-1 — I❤LA</title>
+<body>
+  <header>
+    <link href="../../static/prism.css" rel="stylesheet" />
+    <h1> demo2-1 </h1>
+  </header>
+  <script src="../../static/prism.js"></script>
+  <div class="page">
+    
+  
+
+  
+    <div class="gallery_post">
+
+    <p>This page shows demo2-1 implementation.</p>
+
+
+    
+     It comes from  <a href="http://www.pmp-book.org"> Polygon mesh processing </a><br><br>
+    
+    
+    
+    Here is the description: <br>
+      <img src=../../static/gallery_res/demo2-1/demo2-1.png alt="placeholder" width="700" style='object-fit: scale-down;'><br>
+    
+
+    
+      <br> Here is the LA input: <br>
+      <div class="code_block"><pre ><code class="language-cpsp">`xᵢ` = T_*,1
+`xⱼ` = T_*,2
+`xₖ` = T_*,3
+`n(T)` = (`xⱼ`-`xᵢ`)×(`xₖ`-`xᵢ`)/||(`xⱼ`-`xᵢ`)×(`xₖ`-`xᵢ`)||
+
+where
+ 
+T: ℝ^(3×3)</code></pre></div>
+    
+
+    
+      <br> Here is the Eigen output: <br>
+      <div class="code_block"><pre ><code class="language-cpp">/*
+`xᵢ` = T_*,1
+`xⱼ` = T_*,2
+`xₖ` = T_*,3
+`n(T)` = (`xⱼ`-`xᵢ`)×(`xₖ`-`xᵢ`)/||(`xⱼ`-`xᵢ`)×(`xₖ`-`xᵢ`)||
+
+where
+ 
+T: ℝ^(3×3)
+*/
+#include &lt;Eigen/Core&gt;
+#include &lt;Eigen/Dense&gt;
+#include &lt;Eigen/Sparse&gt;
+#include &lt;iostream&gt;
+#include &lt;set&gt;
+
+/**
+ * demo2-1
+ *
+ * @param T  ℝ^(3×3)
+ * @return n_left_parenthesis_T_right_parenthesis
+ */
+Eigen::Matrix&lt;double, 3, 1&gt; demo2-1(const Eigen::Matrix&lt;double, 3, 3&gt; &amp; T)
+{
+    Eigen::Matrix&lt;double, 3, 1&gt; xᵢ = T.col(1-1);
+
+    Eigen::Matrix&lt;double, 3, 1&gt; xⱼ = T.col(2-1);
+
+    Eigen::Matrix&lt;double, 3, 1&gt; xₖ = T.col(3-1);
+
+    Eigen::Matrix&lt;double, 3, 1&gt; n_left_parenthesis_T_right_parenthesis = ((xⱼ - xᵢ)).cross((xₖ - xᵢ)) / (((xⱼ - xᵢ)).cross((xₖ - xᵢ))).lpNorm&lt;2&gt;();
+
+    return n_left_parenthesis_T_right_parenthesis;
+}
+
+
+void generateRandomData(Eigen::Matrix&lt;double, 3, 3&gt; &amp; T)
+{
+    T = Eigen::MatrixXd::Random(3, 3);
+}
+
+
+int main(int argc, char *argv[])
+{
+    Eigen::Matrix&lt;double, 3, 3&gt; T;
+    generateRandomData(T);
+    Eigen::Matrix&lt;double, 3, 1&gt; func_value = demo2-1(T);
+    std::cout&lt;&lt;&#34;func_value:\n&#34;&lt;&lt;func_value&lt;&lt;std::endl;
+    return 0;
+}</code></pre></div>
+    
+
+    
+      <br> Here is the Python output: <br>
+      <div class="code_block"><pre ><code class="language-python">&#34;&#34;&#34;
+`xᵢ` = T_*,1
+`xⱼ` = T_*,2
+`xₖ` = T_*,3
+`n(T)` = (`xⱼ`-`xᵢ`)×(`xₖ`-`xᵢ`)/||(`xⱼ`-`xᵢ`)×(`xₖ`-`xᵢ`)||
+
+where
+ 
+T: ℝ^(3×3)
+&#34;&#34;&#34;
+import numpy as np
+import scipy
+import scipy.linalg
+from scipy import sparse
+from scipy.integrate import quad
+from scipy.optimize import minimize
+
+
+def demo2-1(T):
+    &#34;&#34;&#34;
+    :param :T : ℝ^(3×3)
+    &#34;&#34;&#34;
+    T = np.asarray(T, dtype=np.float64)
+
+    assert T.shape == (3, 3)
+
+    xᵢ = T[:, 1-1]
+
+    xⱼ = T[:, 2-1]
+
+    xₖ = T[:, 3-1]
+
+    n_left_parenthesis_T_right_parenthesis = np.cross((xⱼ - xᵢ), (xₖ - xᵢ)) / np.linalg.norm(np.cross((xⱼ - xᵢ), (xₖ - xᵢ)), 2)
+
+    return n_left_parenthesis_T_right_parenthesis
+
+
+def generateRandomData():
+    T = np.random.randn(3, 3)
+    return T
+
+
+if __name__ == &#39;__main__&#39;:
+    T = generateRandomData()
+    print(&#34;T:&#34;, T)
+    func_value = demo2-1(T)
+    print(&#34;func_value: &#34;, func_value)</code></pre></div>
+    
+
+    
+      <br> Here is the Tex output: <br>
+      <div class="code_block"><pre ><code class="language-tex">\documentclass[12pt]{article}
+\usepackage{mathdots}
+\usepackage[bb=boondox]{mathalfa}
+\usepackage{mathtools}
+\usepackage{amssymb}
+\usepackage{ctex}
+\setmainfont{Linux Libertine O}
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\begin{document}
+\[
+\textit{xᵢ} = \textit{T}_{*, 1}
+\]
+\[
+\textit{xⱼ} = \textit{T}_{*, 2}
+\]
+\[
+\textit{xₖ} = \textit{T}_{*, 3}
+\]
+\[
+\textit{n(T)} = \frac{(\textit{xⱼ} - \textit{xᵢ}) × (\textit{xₖ} - \textit{xᵢ})}{\|(\textit{xⱼ} - \textit{xᵢ}) × (\textit{xₖ} - \textit{xᵢ})\|_2}
+\]
+
+where
+\begin{itemize}
+\item $\textit{T} \in \mathbb{R}^{ 3 \times 3 }$
+\end{itemize}
+
+
+\end{document}</code></pre></div>
+    
+
+    
+      <br> Below is the pdf: <br>
+      <img src=../../static/gallery_res/demo2-1/demo2-1.pdf alt="placeholder" width="700" style='object-fit: scale-down;'><br>
+    
+    </div>
+  
+
+
+ 
+
+
+
+  </div>
+</body>

@@ -1,6 +1,6 @@
 /*
 y_i = (a_i)ᵀ x + w_i
-`x_bar` = (sum_i a_i(a_i)ᵀ)^(-1) sum_i y_i a_i
+x̂ = (sum_i a_i(a_i)ᵀ)^(-1) sum_i y_i a_i
 
 where
 
@@ -20,7 +20,7 @@ x: ℝ^n: measurement noise
  * @param a  ℝ^n: the measurement vectors  
  * @param w  ℝ: measurement noise 
  * @param x  ℝ^n: measurement noise 
- * @return x_bar
+ * @return x̂
  */
 Eigen::VectorXd demo11(
     const std::vector<Eigen::VectorXd> & a,
@@ -47,12 +47,12 @@ Eigen::VectorXd demo11(
         _sum_0 += a.at(i-1) * (a.at(i-1)).transpose();
     }
     Eigen::MatrixXd _sum_1 = Eigen::MatrixXd::Zero(n, 1);
-    for(int i=1; i<=a.size(); i++){
+    for(int i=1; i<=y.size(); i++){
         _sum_1 += y.at(i-1) * a.at(i-1);
     }
-    Eigen::VectorXd x_bar = (_sum_0).inverse() * _sum_1;
+    Eigen::VectorXd x̂ = (_sum_0).inverse() * _sum_1;
 
-    return x_bar;
+    return x̂;
 }
 
 

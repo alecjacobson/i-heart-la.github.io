@@ -30,7 +30,7 @@
     
       <br> Here is the LA input: <br>
       <div class="code_block"><pre ><code class="language-cpsp">y_i = (a_i)ᵀ x + w_i
-`x_bar` = (sum_i a_i(a_i)ᵀ)^(-1) sum_i y_i a_i
+x̂ = (sum_i a_i(a_i)ᵀ)^(-1) sum_i y_i a_i
 
 where
 
@@ -43,7 +43,7 @@ x: ℝ^n: measurement noise </code></pre></div>
       <br> Here is the Eigen output: <br>
       <div class="code_block"><pre ><code class="language-cpp">/*
 y_i = (a_i)ᵀ x + w_i
-`x_bar` = (sum_i a_i(a_i)ᵀ)^(-1) sum_i y_i a_i
+x̂ = (sum_i a_i(a_i)ᵀ)^(-1) sum_i y_i a_i
 
 where
 
@@ -63,7 +63,7 @@ x: ℝ^n: measurement noise
  * @param a  ℝ^n: the measurement vectors  
  * @param w  ℝ: measurement noise 
  * @param x  ℝ^n: measurement noise 
- * @return x_bar
+ * @return x̂
  */
 Eigen::VectorXd demo11(
     const std::vector&lt;Eigen::VectorXd&gt; &amp; a,
@@ -90,12 +90,12 @@ Eigen::VectorXd demo11(
         _sum_0 += a.at(i-1) * (a.at(i-1)).transpose();
     }
     Eigen::MatrixXd _sum_1 = Eigen::MatrixXd::Zero(n, 1);
-    for(int i=1; i&lt;=a.size(); i++){
+    for(int i=1; i&lt;=y.size(); i++){
         _sum_1 += y.at(i-1) * a.at(i-1);
     }
-    Eigen::VectorXd x_bar = (_sum_0).inverse() * _sum_1;
+    Eigen::VectorXd x̂ = (_sum_0).inverse() * _sum_1;
 
-    return x_bar;
+    return x̂;
 }
 
 
@@ -133,7 +133,7 @@ int main(int argc, char *argv[])
       <br> Here is the Python output: <br>
       <div class="code_block"><pre ><code class="language-python">&#34;&#34;&#34;
 y_i = (a_i)ᵀ x + w_i
-`x_bar` = (sum_i a_i(a_i)ᵀ)^(-1) sum_i y_i a_i
+x̂ = (sum_i a_i(a_i)ᵀ)^(-1) sum_i y_i a_i
 
 where
 
@@ -167,17 +167,17 @@ def demo11(a, w, x):
 
     y = np.zeros(_dim_0)
     for i in range(1, _dim_0+1):
-        y[i-1] = (a[i-1]).T @ x + w[i-1]
+        y[i-1] = (a[i-1]).T.reshape(1, n) @ x + w[i-1]
 
     _sum_0 = np.zeros((n, n))
     for i in range(1, len(a)+1):
-        _sum_0 += a[i-1] @ (a[i-1]).T
+        _sum_0 += a[i-1] @ (a[i-1]).T.reshape(1, n)
     _sum_1 = np.zeros((n, ))
-    for i in range(1, len(a)+1):
+    for i in range(1, len(y)+1):
         _sum_1 += y[i-1] * a[i-1]
-    x_bar = np.linalg.inv((_sum_0)) @ _sum_1
+    x̂ = np.linalg.inv((_sum_0)) @ _sum_1
 
-    return x_bar
+    return x̂
 
 
 def generateRandomData():
@@ -214,7 +214,7 @@ if __name__ == &#39;__main__&#39;:
 \textit{y}_{ \textit{i} } = (\textit{a}_{ \textit{i} })^T\textit{x} + \textit{w}_{ \textit{i} }
 \]
 \[
-\textit{x\_bar} = (\sum_\textit{i} \textit{a}_{ \textit{i} }(\textit{a}_{ \textit{i} })^T)^{-1}\sum_\textit{i} \textit{y}_{ \textit{i} }\textit{a}_{ \textit{i} }
+\textit{x̂} = (\sum_\textit{i} \textit{a}_{ \textit{i} }(\textit{a}_{ \textit{i} })^T)^{-1}\sum_\textit{i} \textit{y}_{ \textit{i} }\textit{a}_{ \textit{i} }
 \]
 
 where

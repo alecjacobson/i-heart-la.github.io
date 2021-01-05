@@ -1,10 +1,10 @@
-`Ω` = [`e_1` `e_2`][`k_1` 0
-		     0    `k_2`] [`e_1`^T
-				  `e_2`^T]
+Ω = [`e₁` `e₂`][`k₁`   0
+                 0    `k₂`] [`e₁`ᵀ
+			                 `e₂`ᵀ]
 
 where
 
-`k_1`: ℝ  : control the desired kernel variance in either edge or orthogonal direction
-`k_2`: ℝ  : control the desired kernel variance in either edge or orthogonal direction
-`e_1`: ℝ ^ 3: orthogonal direction vectors
-`e_2`: ℝ ^ 3: orthogonal direction vectors
+`k₁`: ℝ  : control the desired kernel variance in either edge or orthogonal direction
+`k₂`: ℝ  : control the desired kernel variance in either edge or orthogonal direction
+`e₁`: ℝ ^ 3: orthogonal direction vectors
+`e₂`: ℝ ^ 3: orthogonal direction vectors

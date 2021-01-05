@@ -1,19 +1,26 @@
 """
-`x(θ,v)` =  (`r bar`⋅`D_A`(`θ`, v)+`k_r``δ`(`θ`, v))/(`n bar`⋅`D_A`(`θ`, v)+`k_n``δ`(`θ`, v))
-`y(θ,v)` =  (`s bar`⋅`D_A`(`θ`, v)+`k_s``δ`(`θ`, v))/(`n bar`⋅`D_A`(`θ`, v)+`k_n``δ`(`θ`, v))
+r̄ = v̄×ō
+s̄ = ō×ū
+n̄ = ū×v̄
+
+`k_r` = r̄⋅(`C̄ₐ`-V̄)
+`k_s` = s̄⋅(`C̄ₐ`-V̄)
+`k_n` = n̄⋅(`C̄ₐ`-V̄)
+
+`x(θ,v)` =  (r̄⋅`D_A`(θ, v)+`k_r`δ(θ, v))/(n̄⋅`D_A`(θ, v)+`k_n`δ(θ, v))
+`y(θ,v)` =  (s̄⋅`D_A`(θ, v)+`k_s`δ(θ, v))/(n̄⋅`D_A`(θ, v)+`k_n`δ(θ, v))
 
 where
 
-`r bar`: ℝ^3
-`s bar`: ℝ^3
-`n bar`: ℝ^3
-`θ`: ℝ 
+v̄: ℝ^3
+ō: ℝ^3
+ū: ℝ^3
+V̄: ℝ^3
+`C̄ₐ`: ℝ^3
+θ: ℝ 
 v: ℝ 
-`k_r`: ℝ 
-`k_s`: ℝ 
-`k_n`: ℝ 
 `D_A`: ℝ,ℝ->ℝ^3
-`δ`: ℝ,ℝ->ℝ  
+δ: ℝ,ℝ->ℝ 
 """
 import numpy as np
 import scipy
@@ -23,35 +30,47 @@ from scipy.integrate import quad
 from scipy.optimize import minimize
 
 
-def demo23(r_bar, s_bar, n_bar, θ, v, k_r, k_s, k_n, D_A, δ):
+def demo23(v̄, ō, ū, V̄, C_combining_macron_ₐ, θ, v, D_A, δ):
     """
-    :param :r_bar : ℝ^3
-    :param :s_bar : ℝ^3
-    :param :n_bar : ℝ^3
+    :param :v̄ : ℝ^3
+    :param :ō : ℝ^3
+    :param :ū : ℝ^3
+    :param :V̄ : ℝ^3
+    :param :C_combining_macron_ₐ : ℝ^3
     :param :θ : ℝ
     :param :v : ℝ
-    :param :k_r : ℝ
-    :param :k_s : ℝ
-    :param :k_n : ℝ
     :param :D_A : ℝ,ℝ->ℝ^3
     :param :δ : ℝ,ℝ->ℝ
     """
-    r_bar = np.asarray(r_bar, dtype=np.float64)
-    s_bar = np.asarray(s_bar, dtype=np.float64)
-    n_bar = np.asarray(n_bar, dtype=np.float64)
+    v̄ = np.asarray(v̄, dtype=np.float64)
+    ō = np.asarray(ō, dtype=np.float64)
+    ū = np.asarray(ū, dtype=np.float64)
+    V̄ = np.asarray(V̄, dtype=np.float64)
+    C_combining_macron_ₐ = np.asarray(C_combining_macron_ₐ, dtype=np.float64)
 
-    assert r_bar.shape == (3,)
-    assert s_bar.shape == (3,)
-    assert n_bar.shape == (3,)
+    assert v̄.shape == (3,)
+    assert ō.shape == (3,)
+    assert ū.shape == (3,)
+    assert V̄.shape == (3,)
+    assert C_combining_macron_ₐ.shape == (3,)
     assert np.ndim(θ) == 0
     assert np.ndim(v) == 0
-    assert np.ndim(k_r) == 0
-    assert np.ndim(k_s) == 0
-    assert np.ndim(k_n) == 0
 
-    x_left_parenthesis_θ_comma_v_right_parenthesis = (np.dot((r_bar).ravel(), (D_A(θ, v)).ravel()) + k_r * δ(θ, v)) / (np.dot((n_bar).ravel(), (D_A(θ, v)).ravel()) + k_n * δ(θ, v))
+    r̄ = np.cross(v̄, ō)
 
-    y_left_parenthesis_θ_comma_v_right_parenthesis = (np.dot((s_bar).ravel(), (D_A(θ, v)).ravel()) + k_s * δ(θ, v)) / (np.dot((n_bar).ravel(), (D_A(θ, v)).ravel()) + k_n * δ(θ, v))
+    s̄ = np.cross(ō, ū)
+
+    n̄ = np.cross(ū, v̄)
+
+    k_r = np.dot((r̄).ravel(), ((C_combining_macron_ₐ - V̄)).ravel())
+
+    k_s = np.dot((s̄).ravel(), ((C_combining_macron_ₐ - V̄)).ravel())
+
+    k_n = np.dot((n̄).ravel(), ((C_combining_macron_ₐ - V̄)).ravel())
+
+    x_left_parenthesis_θ_comma_v_right_parenthesis = (np.dot((r̄).ravel(), (D_A(θ, v)).ravel()) + k_r * δ(θ, v)) / (np.dot((n̄).ravel(), (D_A(θ, v)).ravel()) + k_n * δ(θ, v))
+
+    y_left_parenthesis_θ_comma_v_right_parenthesis = (np.dot((s̄).ravel(), (D_A(θ, v)).ravel()) + k_s * δ(θ, v)) / (np.dot((n̄).ravel(), (D_A(θ, v)).ravel()) + k_n * δ(θ, v))
 
     return y_left_parenthesis_θ_comma_v_right_parenthesis
 
@@ -59,30 +78,28 @@ def demo23(r_bar, s_bar, n_bar, θ, v, k_r, k_s, k_n, D_A, δ):
 def generateRandomData():
     θ = np.random.randn()
     v = np.random.randn()
-    k_r = np.random.randn()
-    k_s = np.random.randn()
-    k_n = np.random.randn()
-    r_bar = np.random.randn(3)
-    s_bar = np.random.randn(3)
-    n_bar = np.random.randn(3)
+    v̄ = np.random.randn(3)
+    ō = np.random.randn(3)
+    ū = np.random.randn(3)
+    V̄ = np.random.randn(3)
+    C_combining_macron_ₐ = np.random.randn(3)
     def D_A(p0, p1):
         return np.random.randn(3)
     def δ(p0, p1):
         return np.random.randn()
-    return r_bar, s_bar, n_bar, θ, v, k_r, k_s, k_n, D_A, δ
+    return v̄, ō, ū, V̄, C_combining_macron_ₐ, θ, v, D_A, δ
 
 
 if __name__ == '__main__':
-    r_bar, s_bar, n_bar, θ, v, k_r, k_s, k_n, D_A, δ = generateRandomData()
-    print("r_bar:", r_bar)
-    print("s_bar:", s_bar)
-    print("n_bar:", n_bar)
+    v̄, ō, ū, V̄, C_combining_macron_ₐ, θ, v, D_A, δ = generateRandomData()
+    print("v̄:", v̄)
+    print("ō:", ō)
+    print("ū:", ū)
+    print("V̄:", V̄)
+    print("C_combining_macron_ₐ:", C_combining_macron_ₐ)
     print("θ:", θ)
     print("v:", v)
-    print("k_r:", k_r)
-    print("k_s:", k_s)
-    print("k_n:", k_n)
     print("D_A:", D_A)
     print("δ:", δ)
-    func_value = demo23(r_bar, s_bar, n_bar, θ, v, k_r, k_s, k_n, D_A, δ)
+    func_value = demo23(v̄, ō, ū, V̄, C_combining_macron_ₐ, θ, v, D_A, δ)
     print("func_value: ", func_value)

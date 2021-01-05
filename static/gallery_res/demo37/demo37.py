@@ -59,10 +59,10 @@ def demo37(p, d):
     for i in range(1, len(a)+1):
         _sum_0 += (a[i-1][1-1] - d[i-1][1-1] * (np.dot((d[i-1]).ravel(), (a[i-1]).ravel())))
     _sum_1 = 0
-    for i in range(1, len(d)+1):
+    for i in range(1, len(a)+1):
         _sum_1 += (a[i-1][2-1] - d[i-1][2-1] * (np.dot((d[i-1]).ravel(), (a[i-1]).ravel())))
     _sum_2 = 0
-    for i in range(1, len(d)+1):
+    for i in range(1, len(a)+1):
         _sum_2 += (a[i-1][3-1] - d[i-1][3-1] * (np.dot((d[i-1]).ravel(), (a[i-1]).ravel())))
     _sum_3 = 0
     for i in range(1, len(b)+1):
@@ -71,7 +71,7 @@ def demo37(p, d):
     for i in range(1, len(d)+1):
         _sum_4 += (b[i-1][2-1] - d[i-1][2-1] * (np.dot((d[i-1]).ravel(), (b[i-1]).ravel())))
     _sum_5 = 0
-    for i in range(1, len(b)+1):
+    for i in range(1, len(d)+1):
         _sum_5 += (b[i-1][3-1] - d[i-1][3-1] * (np.dot((d[i-1]).ravel(), (b[i-1]).ravel())))
     _sum_6 = 0
     for i in range(1, len(c)+1):
@@ -89,7 +89,7 @@ def demo37(p, d):
     M = _M_0
 
     _sum_9 = 0
-    for i in range(1, len(a)+1):
+    for i in range(1, len(k)+1):
         _sum_9 += (np.dot((k[i-1]).ravel(), (a[i-1]).ravel()))
     _sum_10 = 0
     for i in range(1, len(k)+1):

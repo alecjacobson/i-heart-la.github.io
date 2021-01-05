@@ -1,11 +1,11 @@
-`G_σ(s_i^k)` = sum_j l_j exp(-`dist`(`b_i`, b_j)/(2`σ`^2))(s_j)^k
+`G_σ(s_i^k)` = sum_j l_j exp(-dist(`b_i`, b_j)/(2σ^2))(s_j)^k
 
 where
 
-l_j: ℝ : the length of b_j
-`dist`: ℝ, ℝ -> ℝ : measures the geodesic distance between the centers of b_i and b_j along the boundary
-`σ`: ℝ
-`b_i`: ℝ
-b_j: ℝ
-s_j: ℝ : unit direction vector of b_i
+l_j: ℝ : the length of bj
+dist: ℝ^n, ℝ^n -> ℝ : measures the geodesic distance between the centers of bi and bj along the boundary
+σ: ℝ
+`b_i`: ℝ^n
+b_j: ℝ^n
+s_j: ℝ : unit direction vector of bi
 k: ℝ : iteration number

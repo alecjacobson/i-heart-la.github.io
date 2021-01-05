@@ -1,7 +1,7 @@
-min_(x ∈ ℝ^n) sum_i ||A_i x + b_i ||_2 +(1/2)||x-`x_0`||^2_2
+min_(x ∈ ℝ^n) sum_i ||A_i x + b_i ||_2 +(1/2)||x-`x₀`||^2_2
 
 where
 
 A_i: ℝ^(m × n)  
-`x_0`: ℝ^n  
+`x₀`: ℝ^n  
 b_i: ℝ^m  

@@ -1,5 +1,4 @@
-
-E = 1/`σ_N`^2`E_I` + sum_(j for j>1) α_j²/`σ_S`_j^2  + sum_(j for j>1) β_j²/`σ_T`_j^2   + sum_j (ρ_j-`ρ_bar`_j)²/`σ_ρ`_j^2 
+E = 1/`σ_N`^2`E_I` + sum_(j for j>1) α_j²/`σ_S`_j^2  + sum_(j for j>1) β_j²/`σ_T`_j^2   + sum_j (ρ_j-ρ̄_j)²/`σ_ρ`_j^2 
 
 where
 
@@ -10,6 +9,6 @@ where
 `σ_S`_i: ℝ 
 `σ_T`_i: ℝ 
 ρ_i: ℝ 
-`ρ_bar`_i: ℝ 
+ρ̄_i: ℝ 
 `σ_ρ`_i: ℝ 
 ā_i: ℝ 
