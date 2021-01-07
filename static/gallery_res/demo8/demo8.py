@@ -1,11 +1,10 @@
 """
-`I(X;Y)` = ∑_i ∑_j x_j p_i,j log(p_ij/∑_k x_k p_ik)
+`I(X;Y)` = ∑_i ∑_j x_j p_i,j log(p_i,j/∑_k x_k p_i,k)
 
 where
 
 x: ℝ^n
 p: ℝ^(n×m)
-
 """
 import numpy as np
 import scipy
@@ -31,7 +30,7 @@ def demo8(x, p):
     _sum_0 = 0
     for i in range(1, len(p)+1):
         _sum_1 = 0
-        for j in range(1, len(p)+1):
+        for j in range(1, len(x)+1):
             _sum_1 += x[j-1] * p[i-1, j-1] * np.log10(p[i-1, j-1] / _sum_2)
         _sum_0 += _sum_1
     I_left_parenthesis_X_semicolon_Y_right_parenthesis = _sum_0

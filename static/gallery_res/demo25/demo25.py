@@ -1,5 +1,5 @@
 """
-min_(u ∈ ℝ^6) uᵀ(sum_i [x_i×n̂_i; n̂_i][(x_i×n̂_i)ᵀ n̂_iᵀ])u - 2uᵀ(sum_i [x_i×n̂_i; n̂_i]n̂_iᵀ(p_i-x_i)) + sum_i(p_i-x_i)ᵀn̂_i n̂_iᵀ(p_i-x_i)
+min_(u ∈ ℝ^6) uᵀ(∑_i [x_i×n̂_i; n̂_i][(x_i×n̂_i)ᵀ n̂_iᵀ])u - 2uᵀ(∑_i [x_i×n̂_i; n̂_i]n̂_iᵀ(p_i-x_i)) + ∑_i(p_i-x_i)ᵀn̂_i n̂_iᵀ(p_i-x_i)
 
 where
 
@@ -37,11 +37,11 @@ def demo25(x, n̂, p):
             _ret_1 = np.hstack(((np.cross(x[i-1], n̂[i-1])).T.reshape(1, 3), n̂[i-1].T.reshape(1, 3)))
             _sum_0 += _ret_0 @ _ret_1
         _sum_1 = np.zeros((6, ))
-        for i in range(1, len(n̂)+1):
+        for i in range(1, len(p)+1):
             _ret_2 = np.vstack(((np.cross(x[i-1], n̂[i-1])).reshape(3, 1), (n̂[i-1]).reshape(3, 1)))
             _sum_1 += _ret_2 @ n̂[i-1].T.reshape(1, 3) @ (p[i-1] - x[i-1])
         _sum_2 = 0
-        for i in range(1, len(p)+1):
+        for i in range(1, len(x)+1):
             _sum_2 += (p[i-1] - x[i-1]).T.reshape(1, 3) @ n̂[i-1] * n̂[i-1].T.reshape(1, 3) @ (p[i-1] - x[i-1])
         return u.T.reshape(1, 6) @ (_sum_0) @ u - 2 * u.T.reshape(1, 6) @ (_sum_1) + _sum_2
     ret = minimize(_target_0, np.zeros(6)).fun

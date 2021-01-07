@@ -1,6 +1,6 @@
 """
 y_i = (a_i)ᵀ x + w_i
-x̂ = (sum_i a_i(a_i)ᵀ)^(-1) sum_i y_i a_i
+x̂ = (∑_i a_i(a_i)ᵀ)⁻¹ ∑_i y_i a_i
 
 where
 

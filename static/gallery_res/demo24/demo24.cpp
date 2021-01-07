@@ -1,5 +1,5 @@
 /*
-E = 1/`σ_N`^2`E_I` + sum_(j for j>1) α_j²/`σ_S`_j^2  + sum_(j for j>1) β_j²/`σ_T`_j^2   + sum_j (ρ_j-ρ̄_j)²/`σ_ρ`_j^2 
+E = 1/`σ_N`²`E_I` + ∑_(j for j>1) α_j²/`σ_S`_j² + ∑_(j for j>1) β_j²/`σ_T`_j²  + ∑_j (ρ_j-ρ̄_j)²/`σ_ρ`_j²
 
 where
 
@@ -70,7 +70,7 @@ double demo24(
         }
     }
     double _sum_2 = 0;
-    for(int j=1; j<=ρ̄.size(); j++){
+    for(int j=1; j<=ρ.size(); j++){
         _sum_2 += pow((ρ.at(j-1) - ρ̄.at(j-1)), 2) / pow(σ_ρ.at(j-1), 2);
     }
     double E = 1 / pow(σ_N, 2) * E_I + _sum_0 + _sum_1 + _sum_2;

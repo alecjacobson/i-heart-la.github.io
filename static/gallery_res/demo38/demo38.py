@@ -1,10 +1,10 @@
 """
-min_(C ∈ ℝ^3) sum_i ||x_i + (R_i - I_3)C ||²
+min_(C ∈ ℝ^3) ∑_i ||x_i + (R_i - I_3)C ||²
 
 where
 
 x_i: ℝ^3
-R_i: ℝ^(3×3) 
+R_i: ℝ^(3×3)
 """
 import numpy as np
 import scipy

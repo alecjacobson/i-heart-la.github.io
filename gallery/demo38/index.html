@@ -29,23 +29,23 @@
 
     
       <br> Here is the LA input: <br>
-      <div class="code_block"><pre ><code class="language-cpsp">min_(C ∈ ℝ^3) sum_i ||x_i + (R_i - I_3)C ||²
+      <div class="code_block"><pre ><code class="language-cpsp">min_(C ∈ ℝ^3) ∑_i ||x_i + (R_i - I_3)C ||²
 
 where
 
 x_i: ℝ^3
-R_i: ℝ^(3×3) </code></pre></div>
+R_i: ℝ^(3×3)</code></pre></div>
     
 
     
       <br> Here is the Eigen output: <br>
       <div class="code_block"><pre ><code class="language-cpp">/*
-min_(C ∈ ℝ^3) sum_i ||x_i + (R_i - I_3)C ||²
+min_(C ∈ ℝ^3) ∑_i ||x_i + (R_i - I_3)C ||²
 
 where
 
 x_i: ℝ^3
-R_i: ℝ^(3×3) 
+R_i: ℝ^(3×3)
 */
 #include &lt;Eigen/Core&gt;
 #include &lt;Eigen/Dense&gt;
@@ -101,12 +101,12 @@ int main(int argc, char *argv[])
     
       <br> Here is the Python output: <br>
       <div class="code_block"><pre ><code class="language-python">&#34;&#34;&#34;
-min_(C ∈ ℝ^3) sum_i ||x_i + (R_i - I_3)C ||²
+min_(C ∈ ℝ^3) ∑_i ||x_i + (R_i - I_3)C ||²
 
 where
 
 x_i: ℝ^3
-R_i: ℝ^(3×3) 
+R_i: ℝ^(3×3)
 &#34;&#34;&#34;
 import numpy as np
 import scipy

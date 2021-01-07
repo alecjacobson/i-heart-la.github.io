@@ -1,5 +1,5 @@
 /*
-sum_i f_i²p_i - (sum_i f_i p_i)²
+∑_i f_i²p_i - (∑_i f_i p_i)²
 
 where
 

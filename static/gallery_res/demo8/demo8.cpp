@@ -1,11 +1,10 @@
 /*
-`I(X;Y)` = ∑_i ∑_j x_j p_i,j log(p_ij/∑_k x_k p_ik)
+`I(X;Y)` = ∑_i ∑_j x_j p_i,j log(p_i,j/∑_k x_k p_i,k)
 
 where
 
 x: ℝ^n
 p: ℝ^(n×m)
-
 */
 #include <Eigen/Core>
 #include <Eigen/Dense>
@@ -33,7 +32,7 @@ double demo8(
     double _sum_0 = 0;
     for(int i=1; i<=p.rows(); i++){
         double _sum_1 = 0;
-        for(int j=1; j<=p.cols(); j++){
+        for(int j=1; j<=x.size(); j++){
             double _sum_2 = 0;
             for(int k=1; k<=x.size(); k++){
                 _sum_2 += x(k-1) * p(i-1, k-1);

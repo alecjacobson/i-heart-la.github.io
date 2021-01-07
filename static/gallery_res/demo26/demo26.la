@@ -1,4 +1,4 @@
-`C(x,y)` = (sum_n sum_i c_n,i w_n,i R̂_n) / (sum_n sum_i w_n,i R̂_n)
+`C(x,y)` = (∑_n ∑_i c_n,i w_n,i R̂_n) / (∑_n ∑_i w_n,i R̂_n)
 
 where
 

@@ -1,4 +1,4 @@
-`L(x,v)` = xᵀWx + ∑_i v_i(x_i^2-1)
+`L(x,v)` = xᵀWx + ∑_i v_i(x_i²-1)
 
 where
 

@@ -1,5 +1,5 @@
 /*
-`G_σ(s_i^k)` = sum_j l_j exp(-dist(`b_i`, b_j)/(2σ^2))(s_j)^k
+`G_σ(s_i^k)` = ∑_j l_j exp(-dist(`b_i`, b_j)/(2σ²))(s_j)^k
 
 where
 
@@ -49,7 +49,7 @@ double demo28(
     assert( s.size() == _dim_0 );
 
     double _sum_0 = 0;
-    for(int j=1; j<=l.size(); j++){
+    for(int j=1; j<=s.size(); j++){
         _sum_0 += l.at(j-1) * exp(-dist(b_i, b.at(j-1)) / (2 * pow(σ, 2))) * pow((s.at(j-1)), k);
     }
     double G_σ_left_parenthesis_s_i_circumflex_accent_k_right_parenthesis = _sum_0;

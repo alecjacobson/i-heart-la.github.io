@@ -1,4 +1,4 @@
-v_i = sum_j w_i,j M_j u_i
+v_i = ∑_j w_i,j M_j u_i
 
 where
 

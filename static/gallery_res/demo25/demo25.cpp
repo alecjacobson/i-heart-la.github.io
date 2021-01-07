@@ -1,5 +1,5 @@
 /*
-min_(u ∈ ℝ^6) uᵀ(sum_i [x_i×n̂_i; n̂_i][(x_i×n̂_i)ᵀ n̂_iᵀ])u - 2uᵀ(sum_i [x_i×n̂_i; n̂_i]n̂_iᵀ(p_i-x_i)) + sum_i(p_i-x_i)ᵀn̂_i n̂_iᵀ(p_i-x_i)
+min_(u ∈ ℝ^6) uᵀ(∑_i [x_i×n̂_i; n̂_i][(x_i×n̂_i)ᵀ n̂_iᵀ])u - 2uᵀ(∑_i [x_i×n̂_i; n̂_i]n̂_iᵀ(p_i-x_i)) + ∑_i(p_i-x_i)ᵀn̂_i n̂_iᵀ(p_i-x_i)
 
 where
 

@@ -29,7 +29,7 @@
 
     
       <br> Here is the LA input: <br>
-      <div class="code_block"><pre ><code class="language-cpsp">sum_i α_i + 1/M sum_i sum_j (f(X_i,j)/`p_c`(X_i,j) - (sum_k α_k p_k X_i,j)/`p_c`(X_i,j))
+      <div class="code_block"><pre ><code class="language-cpsp">∑_i α_i + 1/M ∑_i ∑_j (f(X_i,j)/`p_c`(X_i,j) - (∑_k α_k p_k X_i,j)/`p_c`(X_i,j))
 
 where
 
@@ -45,7 +45,7 @@ f: ℝ -&gt; ℝ
     
       <br> Here is the Eigen output: <br>
       <div class="code_block"><pre ><code class="language-cpp">/*
-sum_i α_i + 1/M sum_i sum_j (f(X_i,j)/`p_c`(X_i,j) - (sum_k α_k p_k X_i,j)/`p_c`(X_i,j))
+∑_i α_i + 1/M ∑_i ∑_j (f(X_i,j)/`p_c`(X_i,j) - (∑_k α_k p_k X_i,j)/`p_c`(X_i,j))
 
 where
 
@@ -98,7 +98,7 @@ double demo29(
         double _sum_2 = 0;
         for(int j=1; j&lt;=X.cols(); j++){
             double _sum_3 = 0;
-            for(int k=1; k&lt;=α.size(); k++){
+            for(int k=1; k&lt;=p.size(); k++){
                 _sum_3 += α(k-1) * p(k-1) * X(i-1, j-1);
             }
             _sum_2 += (f(X(i-1, j-1)) / p_c(X(i-1, j-1)) - (_sum_3) / p_c(X(i-1, j-1)));
@@ -150,7 +150,7 @@ int main(int argc, char *argv[])
     
       <br> Here is the Python output: <br>
       <div class="code_block"><pre ><code class="language-python">&#34;&#34;&#34;
-sum_i α_i + 1/M sum_i sum_j (f(X_i,j)/`p_c`(X_i,j) - (sum_k α_k p_k X_i,j)/`p_c`(X_i,j))
+∑_i α_i + 1/M ∑_i ∑_j (f(X_i,j)/`p_c`(X_i,j) - (∑_k α_k p_k X_i,j)/`p_c`(X_i,j))
 
 where
 
@@ -198,7 +198,7 @@ def demo29(α, p, X, M, f, p_c):
         _sum_2 = 0
         for j in range(1, len(X)+1):
             _sum_3 = 0
-            for k in range(1, len(α)+1):
+            for k in range(1, len(p)+1):
                 _sum_3 += α[k-1] * p[k-1] * X[i-1, j-1]
             _sum_2 += (f(X[i-1, j-1]) / p_c(X[i-1, j-1]) - (_sum_3) / p_c(X[i-1, j-1]))
         _sum_1 += _sum_2

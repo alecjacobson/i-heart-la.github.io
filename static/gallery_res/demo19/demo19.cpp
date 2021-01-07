@@ -1,11 +1,11 @@
 /*
 from linearalgebra: tr
 
-`k_angle(Dₘ)` = 3(sqrt(2)v)^(2/3)(7/4||`Dₘ`||_F^2-1/4tr(J_3 `Dₘ`ᵀ`Dₘ`))⁻¹
+`k_angle(Dₘ)` = 3(sqrt(2)v)^(2/3)(7/4||Dₘ||_F^2-1/4tr(J_3(Dₘ)ᵀDₘ))⁻¹
 
 where
 
-`Dₘ`: ℝ^(n×n) 
+Dₘ: ℝ^(n×n) 
 J_i: ℝ^(n×n) 
 v: ℝ
 */
@@ -38,7 +38,7 @@ double demo19(
         assert( el.cols() == n );
     }
 
-    double k_angle_left_parenthesis_Dₘ_right_parenthesis = 3 * pow((sqrt(2) * v), (2 / 3)) * 1 / ((7 / 4 * pow((Dₘ).norm(), 2) - 1 / 4 * (J.at(3-1) * Dₘ.transpose() * Dₘ).trace()));
+    double k_angle_left_parenthesis_Dₘ_right_parenthesis = 3 * pow((sqrt(2) * v), (2 / 3)) * 1 / ((7 / 4 * pow((Dₘ).norm(), 2) - 1 / 4 * (J.at(3-1) * (Dₘ).transpose() * Dₘ).trace()));
 
     return k_angle_left_parenthesis_Dₘ_right_parenthesis;
 }

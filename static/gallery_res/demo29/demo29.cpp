@@ -1,5 +1,5 @@
 /*
-sum_i α_i + 1/M sum_i sum_j (f(X_i,j)/`p_c`(X_i,j) - (sum_k α_k p_k X_i,j)/`p_c`(X_i,j))
+∑_i α_i + 1/M ∑_i ∑_j (f(X_i,j)/`p_c`(X_i,j) - (∑_k α_k p_k X_i,j)/`p_c`(X_i,j))
 
 where
 
@@ -52,7 +52,7 @@ double demo29(
         double _sum_2 = 0;
         for(int j=1; j<=X.cols(); j++){
             double _sum_3 = 0;
-            for(int k=1; k<=α.size(); k++){
+            for(int k=1; k<=p.size(); k++){
                 _sum_3 += α(k-1) * p(k-1) * X(i-1, j-1);
             }
             _sum_2 += (f(X(i-1, j-1)) / p_c(X(i-1, j-1)) - (_sum_3) / p_c(X(i-1, j-1)));

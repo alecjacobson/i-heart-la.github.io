@@ -1,11 +1,11 @@
 """
 from linearalgebra: tr
 
-`k_angle(Dₘ)` = 3(sqrt(2)v)^(2/3)(7/4||`Dₘ`||_F^2-1/4tr(J_3 `Dₘ`ᵀ`Dₘ`))⁻¹
+`k_angle(Dₘ)` = 3(sqrt(2)v)^(2/3)(7/4||Dₘ||_F^2-1/4tr(J_3(Dₘ)ᵀDₘ))⁻¹
 
 where
 
-`Dₘ`: ℝ^(n×n) 
+Dₘ: ℝ^(n×n) 
 J_i: ℝ^(n×n) 
 v: ℝ
 """
@@ -32,7 +32,7 @@ def demo19(Dₘ, J, v):
     assert J.shape == (_dim_0, n, n)
     assert np.ndim(v) == 0
 
-    k_angle_left_parenthesis_Dₘ_right_parenthesis = 3 * np.power((np.sqrt(2) * v), (2 / 3)) * 1 / ((7 / 4 * np.power(np.linalg.norm(Dₘ, 'fro'), 2) - 1 / 4 * np.trace(J[3-1] @ Dₘ.T @ Dₘ)))
+    k_angle_left_parenthesis_Dₘ_right_parenthesis = 3 * np.power((np.sqrt(2) * v), (2 / 3)) * 1 / ((7 / 4 * np.power(np.linalg.norm(Dₘ, 'fro'), 2) - 1 / 4 * np.trace(J[3-1] @ (Dₘ).T @ Dₘ)))
 
     return k_angle_left_parenthesis_Dₘ_right_parenthesis
 

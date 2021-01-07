@@ -31,11 +31,11 @@
       <br> Here is the LA input: <br>
       <div class="code_block"><pre ><code class="language-cpsp">from linearalgebra: tr
 
-`k_angle(Dₘ)` = 3(sqrt(2)v)^(2/3)(7/4||`Dₘ`||_F^2-1/4tr(J_3 `Dₘ`ᵀ`Dₘ`))⁻¹
+`k_angle(Dₘ)` = 3(sqrt(2)v)^(2/3)(7/4||Dₘ||_F^2-1/4tr(J_3(Dₘ)ᵀDₘ))⁻¹
 
 where
 
-`Dₘ`: ℝ^(n×n) 
+Dₘ: ℝ^(n×n) 
 J_i: ℝ^(n×n) 
 v: ℝ</code></pre></div>
     
@@ -45,11 +45,11 @@ v: ℝ</code></pre></div>
       <div class="code_block"><pre ><code class="language-cpp">/*
 from linearalgebra: tr
 
-`k_angle(Dₘ)` = 3(sqrt(2)v)^(2/3)(7/4||`Dₘ`||_F^2-1/4tr(J_3 `Dₘ`ᵀ`Dₘ`))⁻¹
+`k_angle(Dₘ)` = 3(sqrt(2)v)^(2/3)(7/4||Dₘ||_F^2-1/4tr(J_3(Dₘ)ᵀDₘ))⁻¹
 
 where
 
-`Dₘ`: ℝ^(n×n) 
+Dₘ: ℝ^(n×n) 
 J_i: ℝ^(n×n) 
 v: ℝ
 */
@@ -82,7 +82,7 @@ double demo19(
         assert( el.cols() == n );
     }
 
-    double k_angle_left_parenthesis_Dₘ_right_parenthesis = 3 * pow((sqrt(2) * v), (2 / 3)) * 1 / ((7 / 4 * pow((Dₘ).norm(), 2) - 1 / 4 * (J.at(3-1) * Dₘ.transpose() * Dₘ).trace()));
+    double k_angle_left_parenthesis_Dₘ_right_parenthesis = 3 * pow((sqrt(2) * v), (2 / 3)) * 1 / ((7 / 4 * pow((Dₘ).norm(), 2) - 1 / 4 * (J.at(3-1) * (Dₘ).transpose() * Dₘ).trace()));
 
     return k_angle_left_parenthesis_Dₘ_right_parenthesis;
 }
@@ -120,11 +120,11 @@ int main(int argc, char *argv[])
       <div class="code_block"><pre ><code class="language-python">&#34;&#34;&#34;
 from linearalgebra: tr
 
-`k_angle(Dₘ)` = 3(sqrt(2)v)^(2/3)(7/4||`Dₘ`||_F^2-1/4tr(J_3 `Dₘ`ᵀ`Dₘ`))⁻¹
+`k_angle(Dₘ)` = 3(sqrt(2)v)^(2/3)(7/4||Dₘ||_F^2-1/4tr(J_3(Dₘ)ᵀDₘ))⁻¹
 
 where
 
-`Dₘ`: ℝ^(n×n) 
+Dₘ: ℝ^(n×n) 
 J_i: ℝ^(n×n) 
 v: ℝ
 &#34;&#34;&#34;
@@ -151,7 +151,7 @@ def demo19(Dₘ, J, v):
     assert J.shape == (_dim_0, n, n)
     assert np.ndim(v) == 0
 
-    k_angle_left_parenthesis_Dₘ_right_parenthesis = 3 * np.power((np.sqrt(2) * v), (2 / 3)) * 1 / ((7 / 4 * np.power(np.linalg.norm(Dₘ, &#39;fro&#39;), 2) - 1 / 4 * np.trace(J[3-1] @ Dₘ.T @ Dₘ)))
+    k_angle_left_parenthesis_Dₘ_right_parenthesis = 3 * np.power((np.sqrt(2) * v), (2 / 3)) * 1 / ((7 / 4 * np.power(np.linalg.norm(Dₘ, &#39;fro&#39;), 2) - 1 / 4 * np.trace(J[3-1] @ (Dₘ).T @ Dₘ)))
 
     return k_angle_left_parenthesis_Dₘ_right_parenthesis
 
@@ -189,7 +189,7 @@ if __name__ == &#39;__main__&#39;:
 from linearalgebra import tr
 
 \[
-\textit{k\_angle(Dₘ)} = 3( \sqrt{2}\textit{v})^{(\frac{2}{3})}(\frac{7}{4}\|\textit{Dₘ}\|_F^{2} - \frac{1}{4}tr(\textit{J}_{ 3 }\textit{Dₘ}^T\textit{Dₘ}))^{-1}
+\textit{k\_angle(Dₘ)} = 3( \sqrt{2}\textit{v})^{(\frac{2}{3})}(\frac{7}{4}\|\textit{Dₘ}\|_F^{2} - \frac{1}{4}tr(\textit{J}_{ 3 }(\textit{Dₘ})^T\textit{Dₘ}))^{-1}
 \]
 
 where

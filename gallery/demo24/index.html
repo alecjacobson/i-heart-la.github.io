@@ -29,7 +29,7 @@
 
     
       <br> Here is the LA input: <br>
-      <div class="code_block"><pre ><code class="language-cpsp">E = 1/`σ_N`^2`E_I` + sum_(j for j&gt;1) α_j²/`σ_S`_j^2  + sum_(j for j&gt;1) β_j²/`σ_T`_j^2   + sum_j (ρ_j-ρ̄_j)²/`σ_ρ`_j^2 
+      <div class="code_block"><pre ><code class="language-cpsp">E = 1/`σ_N`²`E_I` + ∑_(j for j&gt;1) α_j²/`σ_S`_j² + ∑_(j for j&gt;1) β_j²/`σ_T`_j²  + ∑_j (ρ_j-ρ̄_j)²/`σ_ρ`_j²
 
 where
 
@@ -48,7 +48,7 @@ where
     
       <br> Here is the Eigen output: <br>
       <div class="code_block"><pre ><code class="language-cpp">/*
-E = 1/`σ_N`^2`E_I` + sum_(j for j&gt;1) α_j²/`σ_S`_j^2  + sum_(j for j&gt;1) β_j²/`σ_T`_j^2   + sum_j (ρ_j-ρ̄_j)²/`σ_ρ`_j^2 
+E = 1/`σ_N`²`E_I` + ∑_(j for j&gt;1) α_j²/`σ_S`_j² + ∑_(j for j&gt;1) β_j²/`σ_T`_j²  + ∑_j (ρ_j-ρ̄_j)²/`σ_ρ`_j²
 
 where
 
@@ -119,7 +119,7 @@ double demo24(
         }
     }
     double _sum_2 = 0;
-    for(int j=1; j&lt;=ρ̄.size(); j++){
+    for(int j=1; j&lt;=ρ.size(); j++){
         _sum_2 += pow((ρ.at(j-1) - ρ̄.at(j-1)), 2) / pow(σ_ρ.at(j-1), 2);
     }
     double E = 1 / pow(σ_N, 2) * E_I + _sum_0 + _sum_1 + _sum_2;
@@ -199,7 +199,7 @@ int main(int argc, char *argv[])
     
       <br> Here is the Python output: <br>
       <div class="code_block"><pre ><code class="language-python">&#34;&#34;&#34;
-E = 1/`σ_N`^2`E_I` + sum_(j for j&gt;1) α_j²/`σ_S`_j^2  + sum_(j for j&gt;1) β_j²/`σ_T`_j^2   + sum_j (ρ_j-ρ̄_j)²/`σ_ρ`_j^2 
+E = 1/`σ_N`²`E_I` + ∑_(j for j&gt;1) α_j²/`σ_S`_j² + ∑_(j for j&gt;1) β_j²/`σ_T`_j²  + ∑_j (ρ_j-ρ̄_j)²/`σ_ρ`_j²
 
 where
 
@@ -265,7 +265,7 @@ def demo24(σ_N, E_I, α, β, σ_S, σ_T, ρ, ρ̄, σ_ρ, ā):
         if(j &gt; 1):
             _sum_1 += np.power(β[j-1], 2) / np.power(σ_T[j-1], 2)
     _sum_2 = 0
-    for j in range(1, len(ρ̄)+1):
+    for j in range(1, len(ρ)+1):
         _sum_2 += np.power((ρ[j-1] - ρ̄[j-1]), 2) / np.power(σ_ρ[j-1], 2)
     E = 1 / np.power(σ_N, 2) * E_I + _sum_0 + _sum_1 + _sum_2
 

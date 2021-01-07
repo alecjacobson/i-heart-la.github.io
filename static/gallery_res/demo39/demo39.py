@@ -1,5 +1,5 @@
 """
-v_i = sum_j w_i,j M_j u_i
+v_i = ∑_j w_i,j M_j u_i
 
 where
 
@@ -34,7 +34,7 @@ def demo39(w, M, u):
     v = np.zeros((_dim_1, 4, ))
     for i in range(1, _dim_1+1):
         _sum_0 = np.zeros((4, ))
-        for j in range(1, len(M)+1):
+        for j in range(1, len(w)+1):
             _sum_0 += w[i-1, j-1] * M[j-1] @ u[i-1]
         v[i-1] = _sum_0
 

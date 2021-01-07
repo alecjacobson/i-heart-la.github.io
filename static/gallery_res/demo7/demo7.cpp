@@ -72,11 +72,11 @@ Eigen::Matrix<double, 3, 1> demo7(
         _sum_0 += (a.at(i-1)(1-1) - d.at(i-1)(1-1) * ((d.at(i-1)).dot(a.at(i-1))));
     }
     double _sum_1 = 0;
-    for(int i=1; i<=d.size(); i++){
+    for(int i=1; i<=a.size(); i++){
         _sum_1 += (a.at(i-1)(2-1) - d.at(i-1)(2-1) * ((d.at(i-1)).dot(a.at(i-1))));
     }
     double _sum_2 = 0;
-    for(int i=1; i<=d.size(); i++){
+    for(int i=1; i<=a.size(); i++){
         _sum_2 += (a.at(i-1)(3-1) - d.at(i-1)(3-1) * ((d.at(i-1)).dot(a.at(i-1))));
     }
     double _sum_3 = 0;
@@ -88,7 +88,7 @@ Eigen::Matrix<double, 3, 1> demo7(
         _sum_4 += (b.at(i-1)(2-1) - d.at(i-1)(2-1) * ((d.at(i-1)).dot(b.at(i-1))));
     }
     double _sum_5 = 0;
-    for(int i=1; i<=d.size(); i++){
+    for(int i=1; i<=b.size(); i++){
         _sum_5 += (b.at(i-1)(3-1) - d.at(i-1)(3-1) * ((d.at(i-1)).dot(b.at(i-1))));
     }
     double _sum_6 = 0;
