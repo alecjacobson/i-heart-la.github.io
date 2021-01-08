@@ -1,9 +1,9 @@
 from linearalgebra: tr
 
-`k_angle(Dₘ)` = 3(sqrt(2)v)^(2/3)(7/4||Dₘ||_F^2-1/4tr(J_3(Dₘ)ᵀDₘ))⁻¹
+`J₃` = [1_3,3]
+`k_angle(Dₘ)` = 3(sqrt(2)v)^(2/3)(7/4||Dₘ||_F^2-1/4tr(`J₃` (Dₘ)ᵀDₘ))⁻¹
 
 where
 
-Dₘ: ℝ^(n×n) 
-J_i: ℝ^(n×n) 
+Dₘ: ℝ^(3×3)  
 v: ℝ

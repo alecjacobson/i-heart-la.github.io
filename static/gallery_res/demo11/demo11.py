@@ -4,7 +4,7 @@ x̂ = (∑_i a_i(a_i)ᵀ)⁻¹ ∑_i y_i a_i
 
 where
 
-a_i: ℝ^n: the measurement vectors  
+a_i: ℝ^(n×1): the measurement vectors  
 w_i: ℝ: measurement noise 
 x: ℝ^n: measurement noise 
 """
@@ -18,7 +18,7 @@ from scipy.optimize import minimize
 
 def demo11(a, w, x):
     """
-    :param :a : ℝ^n: the measurement vectors  
+    :param :a : ℝ^(n×1): the measurement vectors  
     :param :w : ℝ: measurement noise 
     :param :x : ℝ^n: measurement noise 
     """
@@ -28,19 +28,19 @@ def demo11(a, w, x):
 
     _dim_0 = w.shape[0]
     n = x.shape[0]
-    assert a.shape == (_dim_0, n, )
+    assert a.shape == (_dim_0, n, 1)
     assert w.shape == (_dim_0,)
     assert x.shape == (n,)
 
     y = np.zeros(_dim_0)
     for i in range(1, _dim_0+1):
-        y[i-1] = (a[i-1]).T.reshape(1, n) @ x + w[i-1]
+        y[i-1] = (a[i-1]).T @ x + w[i-1]
 
     _sum_0 = np.zeros((n, n))
     for i in range(1, len(a)+1):
-        _sum_0 += a[i-1] @ (a[i-1]).T.reshape(1, n)
-    _sum_1 = np.zeros((n, ))
-    for i in range(1, len(y)+1):
+        _sum_0 += a[i-1] @ (a[i-1]).T
+    _sum_1 = np.zeros((n, 1))
+    for i in range(1, len(a)+1):
         _sum_1 += y[i-1] * a[i-1]
     x̂ = np.linalg.inv((_sum_0)) @ _sum_1
 
@@ -50,7 +50,7 @@ def demo11(a, w, x):
 def generateRandomData():
     _dim_0 = np.random.randint(10)
     n = np.random.randint(10)
-    a = np.random.randn(_dim_0, n, )
+    a = np.random.randn(_dim_0, n, 1)
     w = np.random.randn(_dim_0)
     x = np.random.randn(n)
     return a, w, x

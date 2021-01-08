@@ -28,7 +28,7 @@ def demo38(x, R):
 
     def _target_0(C):
         _sum_0 = 0
-        for i in range(1, len(x)+1):
+        for i in range(1, len(R)+1):
             _sum_0 += np.power(np.linalg.norm(x[i-1] + (R[i-1] - np.identity(3)) @ C, 2), 2)
         return _sum_0
     ret = minimize(_target_0, np.zeros(3)).fun

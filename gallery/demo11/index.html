@@ -34,7 +34,7 @@ x̂ = (∑_i a_i(a_i)ᵀ)⁻¹ ∑_i y_i a_i
 
 where
 
-a_i: ℝ^n: the measurement vectors  
+a_i: ℝ^(n×1): the measurement vectors  
 w_i: ℝ: measurement noise 
 x: ℝ^n: measurement noise </code></pre></div>
     
@@ -47,7 +47,7 @@ x̂ = (∑_i a_i(a_i)ᵀ)⁻¹ ∑_i y_i a_i
 
 where
 
-a_i: ℝ^n: the measurement vectors  
+a_i: ℝ^(n×1): the measurement vectors  
 w_i: ℝ: measurement noise 
 x: ℝ^n: measurement noise 
 */
@@ -60,13 +60,13 @@ x: ℝ^n: measurement noise
 /**
  * demo11
  *
- * @param a  ℝ^n: the measurement vectors  
+ * @param a  ℝ^(n×1): the measurement vectors  
  * @param w  ℝ: measurement noise 
  * @param x  ℝ^n: measurement noise 
  * @return x̂
  */
-Eigen::VectorXd demo11(
-    const std::vector&lt;Eigen::VectorXd&gt; &amp; a,
+Eigen::MatrixXd demo11(
+    const std::vector&lt;Eigen::MatrixXd&gt; &amp; a,
     const std::vector&lt;double&gt; &amp; w,
     const Eigen::VectorXd &amp; x)
 {
@@ -74,7 +74,8 @@ Eigen::VectorXd demo11(
     const long n = x.size();
     assert( a.size() == _dim_0 );
     for( const auto&amp; el : a ) {
-        assert( el.size() == n );
+        assert( el.rows() == n );
+        assert( el.cols() == 1 );
     }
     assert( w.size() == _dim_0 );
     assert( x.size() == n );
@@ -90,16 +91,16 @@ Eigen::VectorXd demo11(
         _sum_0 += a.at(i-1) * (a.at(i-1)).transpose();
     }
     Eigen::MatrixXd _sum_1 = Eigen::MatrixXd::Zero(n, 1);
-    for(int i=1; i&lt;=y.size(); i++){
+    for(int i=1; i&lt;=a.size(); i++){
         _sum_1 += y.at(i-1) * a.at(i-1);
     }
-    Eigen::VectorXd x̂ = (_sum_0).inverse() * _sum_1;
+    Eigen::MatrixXd x̂ = (_sum_0).inverse() * _sum_1;
 
     return x̂;
 }
 
 
-void generateRandomData(std::vector&lt;Eigen::VectorXd&gt; &amp; a,
+void generateRandomData(std::vector&lt;Eigen::MatrixXd&gt; &amp; a,
     std::vector&lt;double&gt; &amp; w,
     Eigen::VectorXd &amp; x)
 {
@@ -107,7 +108,7 @@ void generateRandomData(std::vector&lt;Eigen::VectorXd&gt; &amp; a,
     const int n = rand()%10;
     a.resize(_dim_0);
     for(int i=0; i&lt;_dim_0; i++){
-        a[i] = Eigen::VectorXd::Random(n);
+        a[i] = Eigen::MatrixXd::Random(n, 1);
     }
     w.resize(_dim_0);
     for(int i=0; i&lt;_dim_0; i++){
@@ -119,11 +120,11 @@ void generateRandomData(std::vector&lt;Eigen::VectorXd&gt; &amp; a,
 
 int main(int argc, char *argv[])
 {
-    std::vector&lt;Eigen::VectorXd&gt; a;
+    std::vector&lt;Eigen::MatrixXd&gt; a;
     std::vector&lt;double&gt; w;
     Eigen::VectorXd x;
     generateRandomData(a, w, x);
-    Eigen::VectorXd func_value = demo11(a, w, x);
+    Eigen::MatrixXd func_value = demo11(a, w, x);
     std::cout&lt;&lt;&#34;func_value:\n&#34;&lt;&lt;func_value&lt;&lt;std::endl;
     return 0;
 }</code></pre></div>
@@ -137,7 +138,7 @@ x̂ = (∑_i a_i(a_i)ᵀ)⁻¹ ∑_i y_i a_i
 
 where
 
-a_i: ℝ^n: the measurement vectors  
+a_i: ℝ^(n×1): the measurement vectors  
 w_i: ℝ: measurement noise 
 x: ℝ^n: measurement noise 
 &#34;&#34;&#34;
@@ -151,7 +152,7 @@ from scipy.optimize import minimize
 
 def demo11(a, w, x):
     &#34;&#34;&#34;
-    :param :a : ℝ^n: the measurement vectors  
+    :param :a : ℝ^(n×1): the measurement vectors  
     :param :w : ℝ: measurement noise 
     :param :x : ℝ^n: measurement noise 
     &#34;&#34;&#34;
@@ -161,19 +162,19 @@ def demo11(a, w, x):
 
     _dim_0 = w.shape[0]
     n = x.shape[0]
-    assert a.shape == (_dim_0, n, )
+    assert a.shape == (_dim_0, n, 1)
     assert w.shape == (_dim_0,)
     assert x.shape == (n,)
 
     y = np.zeros(_dim_0)
     for i in range(1, _dim_0+1):
-        y[i-1] = (a[i-1]).T.reshape(1, n) @ x + w[i-1]
+        y[i-1] = (a[i-1]).T @ x + w[i-1]
 
     _sum_0 = np.zeros((n, n))
     for i in range(1, len(a)+1):
-        _sum_0 += a[i-1] @ (a[i-1]).T.reshape(1, n)
-    _sum_1 = np.zeros((n, ))
-    for i in range(1, len(y)+1):
+        _sum_0 += a[i-1] @ (a[i-1]).T
+    _sum_1 = np.zeros((n, 1))
+    for i in range(1, len(a)+1):
         _sum_1 += y[i-1] * a[i-1]
     x̂ = np.linalg.inv((_sum_0)) @ _sum_1
 
@@ -183,7 +184,7 @@ def demo11(a, w, x):
 def generateRandomData():
     _dim_0 = np.random.randint(10)
     n = np.random.randint(10)
-    a = np.random.randn(_dim_0, n, )
+    a = np.random.randn(_dim_0, n, 1)
     w = np.random.randn(_dim_0)
     x = np.random.randn(n)
     return a, w, x
@@ -219,7 +220,7 @@ if __name__ == &#39;__main__&#39;:
 
 where
 \begin{itemize}
-\item $\textit{a}_{\textit{i}} \in \mathbb{R}^{ \textit{n}}:$the measurement vectors  
+\item $\textit{a}_{\textit{i}} \in \mathbb{R}^{ \textit{n} \times 1 }:$the measurement vectors  
 \item $\textit{w}_{\textit{i}} \in \mathbb{{R}}:$measurement noise 
 \item $\textit{x} \in \mathbb{R}^{ \textit{n}}:$measurement noise 
 \end{itemize}

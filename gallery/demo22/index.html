@@ -131,13 +131,13 @@ def demo22(U, V):
     assert U.shape == (3, 3)
     assert V.shape == (3, 3)
 
-    _T₁_0 = np.zeros((3, 3))
-    _T₁_0[0] = [0, 0, 0]
-    _T₁_0[1] = [0, 0, -1]
-    _T₁_0[2] = [0, 1, 0]
-    T₁ = 1 / np.sqrt(2) * U @ _T₁_0 @ V.T
+    _T1_0 = np.zeros((3, 3))
+    _T1_0[0] = [0, 0, 0]
+    _T1_0[1] = [0, 0, -1]
+    _T1_0[2] = [0, 1, 0]
+    T1 = 1 / np.sqrt(2) * U @ _T1_0 @ V.T
 
-    return T₁
+    return T1
 
 
 def generateRandomData():

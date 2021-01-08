@@ -15,28 +15,28 @@ from scipy.integrate import quad
 from scipy.optimize import minimize
 
 
-def demo10(A, x₀, b):
+def demo10(A, x0, b):
     """
     :param :A : ℝ^(m × n)
-    :param :x₀ : ℝ^n
+    :param :x0 : ℝ^n
     :param :b : ℝ^m
     """
     A = np.asarray(A, dtype=np.float64)
-    x₀ = np.asarray(x₀, dtype=np.float64)
+    x0 = np.asarray(x0, dtype=np.float64)
     b = np.asarray(b, dtype=np.float64)
 
     _dim_0 = A.shape[0]
     m = b.shape[1]
-    n = x₀.shape[0]
+    n = x0.shape[0]
     assert A.shape == (_dim_0, m, n)
-    assert x₀.shape == (n,)
+    assert x0.shape == (n,)
     assert b.shape == (_dim_0, m, )
 
     def _target_0(x):
         _sum_0 = 0
         for i in range(1, len(b)+1):
             _sum_0 += np.linalg.norm(A[i-1] @ x + b[i-1], 2)
-        return _sum_0 + (1 / 2) * np.power(np.linalg.norm(x - x₀, 2), 2)
+        return _sum_0 + (1 / 2) * np.power(np.linalg.norm(x - x0, 2), 2)
     ret = minimize(_target_0, np.zeros(n)).fun
     return ret
 
@@ -46,15 +46,15 @@ def generateRandomData():
     m = np.random.randint(10)
     n = np.random.randint(10)
     A = np.random.randn(_dim_0, m, n)
-    x₀ = np.random.randn(n)
+    x0 = np.random.randn(n)
     b = np.random.randn(_dim_0, m, )
-    return A, x₀, b
+    return A, x0, b
 
 
 if __name__ == '__main__':
-    A, x₀, b = generateRandomData()
+    A, x0, b = generateRandomData()
     print("A:", A)
-    print("x₀:", x₀)
+    print("x0:", x0)
     print("b:", b)
-    func_value = demo10(A, x₀, b)
+    func_value = demo10(A, x0, b)
     print("func_value: ", func_value)

@@ -65,7 +65,7 @@ def demo24(σ_N, E_I, α, β, σ_S, σ_T, ρ, ρ̄, σ_ρ, ā):
         if(j > 1):
             _sum_1 += np.power(β[j-1], 2) / np.power(σ_T[j-1], 2)
     _sum_2 = 0
-    for j in range(1, len(ρ)+1):
+    for j in range(1, len(ρ̄)+1):
         _sum_2 += np.power((ρ[j-1] - ρ̄[j-1]), 2) / np.power(σ_ρ[j-1], 2)
     E = 1 / np.power(σ_N, 2) * E_I + _sum_0 + _sum_1 + _sum_2
 

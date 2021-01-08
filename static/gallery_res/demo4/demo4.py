@@ -35,7 +35,7 @@ def demo4(v, u, M, A):
     assert A.shape == (_dim_0,)
 
     _sum_0 = 0
-    for T in range(1, len(M)+1):
+    for T in range(1, len(v)+1):
         _n_0 = np.zeros((2, 2))
         _n_0[0] = [0, -1]
         _n_0[1] = [1, 0]

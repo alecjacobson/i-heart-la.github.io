@@ -11,13 +11,17 @@
 from linearalgebra import tr
 
 \[
-\textit{k\_angle(Dₘ)} = 3( \sqrt{2}\textit{v})^{(\frac{2}{3})}(\frac{7}{4}\|\textit{Dₘ}\|_F^{2} - \frac{1}{4}tr(\textit{J}_{ 3 }(\textit{Dₘ})^T\textit{Dₘ}))^{-1}
+\textit{J₃} = \begin{bmatrix}
+\mathbb{ 1 }_{ 3,3 }\\
+\end{bmatrix}
+\]
+\[
+\textit{k\_angle(Dₘ)} = 3( \sqrt{2}\textit{v})^{(\frac{2}{3})}(\frac{7}{4}\|\textit{Dₘ}\|_F^{2} - \frac{1}{4}tr(\textit{J₃}(\textit{Dₘ})^T\textit{Dₘ}))^{-1}
 \]
 
 where
 \begin{itemize}
-\item $\textit{Dₘ} \in \mathbb{R}^{ \textit{n} \times \textit{n} }$
-\item $\textit{J}_{\textit{i}} \in \mathbb{R}^{ \textit{n} \times \textit{n} }$
+\item $\textit{Dₘ} \in \mathbb{R}^{ 3 \times 3 }$
 \item $\textit{v} \in \mathbb{{R}}$
 \end{itemize}
 

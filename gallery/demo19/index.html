@@ -31,12 +31,12 @@
       <br> Here is the LA input: <br>
       <div class="code_block"><pre ><code class="language-cpsp">from linearalgebra: tr
 
-`k_angle(Dₘ)` = 3(sqrt(2)v)^(2/3)(7/4||Dₘ||_F^2-1/4tr(J_3(Dₘ)ᵀDₘ))⁻¹
+`J₃` = [1_3,3]
+`k_angle(Dₘ)` = 3(sqrt(2)v)^(2/3)(7/4||Dₘ||_F^2-1/4tr(`J₃` (Dₘ)ᵀDₘ))⁻¹
 
 where
 
-Dₘ: ℝ^(n×n) 
-J_i: ℝ^(n×n) 
+Dₘ: ℝ^(3×3)  
 v: ℝ</code></pre></div>
     
 
@@ -45,12 +45,12 @@ v: ℝ</code></pre></div>
       <div class="code_block"><pre ><code class="language-cpp">/*
 from linearalgebra: tr
 
-`k_angle(Dₘ)` = 3(sqrt(2)v)^(2/3)(7/4||Dₘ||_F^2-1/4tr(J_3(Dₘ)ᵀDₘ))⁻¹
+`J₃` = [1_3,3]
+`k_angle(Dₘ)` = 3(sqrt(2)v)^(2/3)(7/4||Dₘ||_F^2-1/4tr(`J₃` (Dₘ)ᵀDₘ))⁻¹
 
 where
 
-Dₘ: ℝ^(n×n) 
-J_i: ℝ^(n×n) 
+Dₘ: ℝ^(3×3)  
 v: ℝ
 */
 #include &lt;Eigen/Core&gt;
@@ -62,54 +62,38 @@ v: ℝ
 /**
  * demo19
  *
- * @param Dₘ  ℝ^(n×n)
- * @param J  ℝ^(n×n)
+ * @param Dₘ  ℝ^(3×3)
  * @param v  ℝ
  * @return k_angle_left_parenthesis_Dₘ_right_parenthesis
  */
 double demo19(
-    const Eigen::MatrixXd &amp; Dₘ,
-    const std::vector&lt;Eigen::MatrixXd&gt; &amp; J,
+    const Eigen::Matrix&lt;double, 3, 3&gt; &amp; Dₘ,
     const double &amp; v)
 {
-    const long n = J[0].cols();
-    const long _dim_0 = J.size();
-    assert( Dₘ.rows() == n );
-    assert( Dₘ.cols() == n );
-    assert( J.size() == _dim_0 );
-    for( const auto&amp; el : J ) {
-        assert( el.rows() == n );
-        assert( el.cols() == n );
-    }
+    Eigen::Matrix&lt;double, 3, 3&gt; _J₃_0;
+    _J₃_0 &lt;&lt; Eigen::MatrixXd::Ones(3, 3);
+    Eigen::Matrix&lt;double, 3, 3&gt; J₃ = _J₃_0;
 
-    double k_angle_left_parenthesis_Dₘ_right_parenthesis = 3 * pow((sqrt(2) * v), (2 / 3)) * 1 / ((7 / 4 * pow((Dₘ).norm(), 2) - 1 / 4 * (J.at(3-1) * (Dₘ).transpose() * Dₘ).trace()));
+    double k_angle_left_parenthesis_Dₘ_right_parenthesis = 3 * pow((sqrt(2) * v), (2 / 3)) * 1 / ((7 / 4 * pow((Dₘ).norm(), 2) - 1 / 4 * (J₃ * (Dₘ).transpose() * Dₘ).trace()));
 
     return k_angle_left_parenthesis_Dₘ_right_parenthesis;
 }
 
 
-void generateRandomData(Eigen::MatrixXd &amp; Dₘ,
-    std::vector&lt;Eigen::MatrixXd&gt; &amp; J,
+void generateRandomData(Eigen::Matrix&lt;double, 3, 3&gt; &amp; Dₘ,
     double &amp; v)
 {
     v = rand() % 10;
-    const int n = rand()%10;
-    const int _dim_0 = rand()%10;
-    Dₘ = Eigen::MatrixXd::Random(n, n);
-    J.resize(_dim_0);
-    for(int i=0; i&lt;_dim_0; i++){
-        J[i] = Eigen::MatrixXd::Random(n, n);
-    }
+    Dₘ = Eigen::MatrixXd::Random(3, 3);
 }
 
 
 int main(int argc, char *argv[])
 {
-    Eigen::MatrixXd Dₘ;
-    std::vector&lt;Eigen::MatrixXd&gt; J;
+    Eigen::Matrix&lt;double, 3, 3&gt; Dₘ;
     double v;
-    generateRandomData(Dₘ, J, v);
-    double func_value = demo19(Dₘ, J, v);
+    generateRandomData(Dₘ, v);
+    double func_value = demo19(Dₘ, v);
     std::cout&lt;&lt;&#34;func_value:\n&#34;&lt;&lt;func_value&lt;&lt;std::endl;
     return 0;
 }</code></pre></div>
@@ -120,12 +104,12 @@ int main(int argc, char *argv[])
       <div class="code_block"><pre ><code class="language-python">&#34;&#34;&#34;
 from linearalgebra: tr
 
-`k_angle(Dₘ)` = 3(sqrt(2)v)^(2/3)(7/4||Dₘ||_F^2-1/4tr(J_3(Dₘ)ᵀDₘ))⁻¹
+`J₃` = [1_3,3]
+`k_angle(Dₘ)` = 3(sqrt(2)v)^(2/3)(7/4||Dₘ||_F^2-1/4tr(`J₃` (Dₘ)ᵀDₘ))⁻¹
 
 where
 
-Dₘ: ℝ^(n×n) 
-J_i: ℝ^(n×n) 
+Dₘ: ℝ^(3×3)  
 v: ℝ
 &#34;&#34;&#34;
 import numpy as np
@@ -136,41 +120,35 @@ from scipy.integrate import quad
 from scipy.optimize import minimize
 
 
-def demo19(Dₘ, J, v):
+def demo19(Dₘ, v):
     &#34;&#34;&#34;
-    :param :Dₘ : ℝ^(n×n)
-    :param :J : ℝ^(n×n)
+    :param :Dₘ : ℝ^(3×3)
     :param :v : ℝ
     &#34;&#34;&#34;
     Dₘ = np.asarray(Dₘ, dtype=np.float64)
-    J = np.asarray(J, dtype=np.float64)
 
-    n = J.shape[2]
-    _dim_0 = J.shape[0]
-    assert Dₘ.shape == (n, n)
-    assert J.shape == (_dim_0, n, n)
+    assert Dₘ.shape == (3, 3)
     assert np.ndim(v) == 0
 
-    k_angle_left_parenthesis_Dₘ_right_parenthesis = 3 * np.power((np.sqrt(2) * v), (2 / 3)) * 1 / ((7 / 4 * np.power(np.linalg.norm(Dₘ, &#39;fro&#39;), 2) - 1 / 4 * np.trace(J[3-1] @ (Dₘ).T @ Dₘ)))
+    _J3_0 = np.vstack((np.ones((3, 3))))
+    J3 = _J3_0
+
+    k_angle_left_parenthesis_Dₘ_right_parenthesis = 3 * np.power((np.sqrt(2) * v), (2 / 3)) * 1 / ((7 / 4 * np.power(np.linalg.norm(Dₘ, &#39;fro&#39;), 2) - 1 / 4 * np.trace(J3 @ (Dₘ).T @ Dₘ)))
 
     return k_angle_left_parenthesis_Dₘ_right_parenthesis
 
 
 def generateRandomData():
     v = np.random.randn()
-    n = np.random.randint(10)
-    _dim_0 = np.random.randint(10)
-    Dₘ = np.random.randn(n, n)
-    J = np.random.randn(_dim_0, n, n)
-    return Dₘ, J, v
+    Dₘ = np.random.randn(3, 3)
+    return Dₘ, v
 
 
 if __name__ == &#39;__main__&#39;:
-    Dₘ, J, v = generateRandomData()
+    Dₘ, v = generateRandomData()
     print(&#34;Dₘ:&#34;, Dₘ)
-    print(&#34;J:&#34;, J)
     print(&#34;v:&#34;, v)
-    func_value = demo19(Dₘ, J, v)
+    func_value = demo19(Dₘ, v)
     print(&#34;func_value: &#34;, func_value)</code></pre></div>
     
 
@@ -189,13 +167,17 @@ if __name__ == &#39;__main__&#39;:
 from linearalgebra import tr
 
 \[
-\textit{k\_angle(Dₘ)} = 3( \sqrt{2}\textit{v})^{(\frac{2}{3})}(\frac{7}{4}\|\textit{Dₘ}\|_F^{2} - \frac{1}{4}tr(\textit{J}_{ 3 }(\textit{Dₘ})^T\textit{Dₘ}))^{-1}
+\textit{J₃} = \begin{bmatrix}
+\mathbb{ 1 }_{ 3,3 }\\
+\end{bmatrix}
+\]
+\[
+\textit{k\_angle(Dₘ)} = 3( \sqrt{2}\textit{v})^{(\frac{2}{3})}(\frac{7}{4}\|\textit{Dₘ}\|_F^{2} - \frac{1}{4}tr(\textit{J₃}(\textit{Dₘ})^T\textit{Dₘ}))^{-1}
 \]
 
 where
 \begin{itemize}
-\item $\textit{Dₘ} \in \mathbb{R}^{ \textit{n} \times \textit{n} }$
-\item $\textit{J}_{\textit{i}} \in \mathbb{R}^{ \textit{n} \times \textit{n} }$
+\item $\textit{Dₘ} \in \mathbb{R}^{ 3 \times 3 }$
 \item $\textit{v} \in \mathbb{{R}}$
 \end{itemize}
 

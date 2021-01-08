@@ -68,7 +68,7 @@ Eigen::Matrix<double, 3, 1> demo44(
 
 
     double _sum_0 = 0;
-    for(int i=1; i<=d.size(); i++){
+    for(int i=1; i<=a.size(); i++){
         _sum_0 += (a.at(i-1)(1-1) - d.at(i-1)(1-1) * ((d.at(i-1)).dot(a.at(i-1))));
     }
     double _sum_1 = 0;
@@ -84,7 +84,7 @@ Eigen::Matrix<double, 3, 1> demo44(
         _sum_3 += (b.at(i-1)(1-1) - d.at(i-1)(1-1) * ((d.at(i-1)).dot(b.at(i-1))));
     }
     double _sum_4 = 0;
-    for(int i=1; i<=d.size(); i++){
+    for(int i=1; i<=b.size(); i++){
         _sum_4 += (b.at(i-1)(2-1) - d.at(i-1)(2-1) * ((d.at(i-1)).dot(b.at(i-1))));
     }
     double _sum_5 = 0;
@@ -110,15 +110,15 @@ Eigen::Matrix<double, 3, 1> demo44(
     Eigen::Matrix<double, 3, 3> M = _M_0;
 
     double _sum_9 = 0;
-    for(int i=1; i<=k.size(); i++){
+    for(int i=1; i<=a.size(); i++){
         _sum_9 += ((k.at(i-1)).dot(a.at(i-1)));
     }
     double _sum_10 = 0;
-    for(int i=1; i<=k.size(); i++){
+    for(int i=1; i<=b.size(); i++){
         _sum_10 += ((k.at(i-1)).dot(b.at(i-1)));
     }
     double _sum_11 = 0;
-    for(int i=1; i<=k.size(); i++){
+    for(int i=1; i<=c.size(); i++){
         _sum_11 += ((k.at(i-1)).dot(c.at(i-1)));
     }
     Eigen::Matrix<double, 3, 1> _r_0;
