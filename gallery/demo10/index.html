@@ -29,7 +29,7 @@
 
     
       <br> Here is the LA input: <br>
-      <div class="code_block"><pre ><code class="language-cpsp">min_(x ∈ ℝ^n) ∑_i ||A_i x + b_i ||_2 +(1/2)||x-`x₀`||^2_2
+      <div class="code_block" style='height: 220px;'><pre ><code class="language-cpsp">min_(x ∈ ℝ^n) ∑_i ||A_i x + b_i ||_2 +(1/2)||x-`x₀`||^2_2
 
 where
 
@@ -38,84 +38,6 @@ A_i: ℝ^(m × n)
 b_i: ℝ^m  </code></pre></div>
     
 
-    
-      <br> Here is the Eigen output: <br>
-      <div class="code_block"><pre ><code class="language-cpp">/*
-min_(x ∈ ℝ^n) ∑_i ||A_i x + b_i ||_2 +(1/2)||x-`x₀`||^2_2
-
-where
-
-A_i: ℝ^(m × n)  
-`x₀`: ℝ^n  
-b_i: ℝ^m  
-*/
-#include &lt;Eigen/Core&gt;
-#include &lt;Eigen/Dense&gt;
-#include &lt;Eigen/Sparse&gt;
-#include &lt;iostream&gt;
-#include &lt;set&gt;
-
-/**
- * demo10
- *
- * @param A  ℝ^(m × n)
- * @param x₀  ℝ^n
- * @param b  ℝ^m
- * @return ret
- */
-double demo10(
-    const std::vector&lt;Eigen::MatrixXd&gt; &amp; A,
-    const Eigen::VectorXd &amp; x₀,
-    const std::vector&lt;Eigen::VectorXd&gt; &amp; b)
-{
-    const long _dim_0 = A.size();
-    const long m = b[0].rows();
-    const long n = x₀.size();
-    assert( A.size() == _dim_0 );
-    for( const auto&amp; el : A ) {
-        assert( el.rows() == m );
-        assert( el.cols() == n );
-    }
-    assert( x₀.size() == n );
-    assert( b.size() == _dim_0 );
-    for( const auto&amp; el : b ) {
-        assert( el.size() == m );
-    }
-
-    double ret = ;
-    return ret;
-}
-
-
-void generateRandomData(std::vector&lt;Eigen::MatrixXd&gt; &amp; A,
-    Eigen::VectorXd &amp; x₀,
-    std::vector&lt;Eigen::VectorXd&gt; &amp; b)
-{
-    const int _dim_0 = rand()%10;
-    const int m = rand()%10;
-    const int n = rand()%10;
-    A.resize(_dim_0);
-    for(int i=0; i&lt;_dim_0; i++){
-        A[i] = Eigen::MatrixXd::Random(m, n);
-    }
-    x₀ = Eigen::VectorXd::Random(n);
-    b.resize(_dim_0);
-    for(int i=0; i&lt;_dim_0; i++){
-        b[i] = Eigen::VectorXd::Random(m);
-    }
-}
-
-
-int main(int argc, char *argv[])
-{
-    std::vector&lt;Eigen::MatrixXd&gt; A;
-    Eigen::VectorXd x₀;
-    std::vector&lt;Eigen::VectorXd&gt; b;
-    generateRandomData(A, x₀, b);
-    double func_value = demo10(A, x₀, b);
-    std::cout&lt;&lt;&#34;func_value:\n&#34;&lt;&lt;func_value&lt;&lt;std::endl;
-    return 0;
-}</code></pre></div>
     
 
     

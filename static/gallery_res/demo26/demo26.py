@@ -32,9 +32,9 @@ def demo26(c, w, R̂):
     assert R̂.shape == (x,)
 
     _sum_0 = 0
-    for n in range(1, len(c)+1):
+    for n in range(1, len(w)+1):
         _sum_1 = 0
-        for i in range(1, len(c)+1):
+        for i in range(1, len(w)+1):
             _sum_1 += c[n-1, i-1] * w[n-1, i-1] * R̂[n-1]
         _sum_0 += _sum_1
     _sum_2 = 0

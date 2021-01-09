@@ -2,7 +2,6 @@ from trigonometry: cos
 
 b = ∑_i cos(θ)²((p_i - q_i)⋅n_i +((p_i+q_i)×n_i)⋅ã+n_i⋅t̃)² 
 
-
 where
 
 θ: ℝ: angle of rotation

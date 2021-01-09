@@ -3,12 +3,12 @@ r̄ = v̄×ō
 s̄ = ō×ū
 n̄ = ū×v̄
 
-`k_r` = r̄⋅(`C̄ₐ`-V̄)
-`k_s` = s̄⋅(`C̄ₐ`-V̄)
-`k_n` = n̄⋅(`C̄ₐ`-V̄)
+kᵣ = r̄⋅(C̄ₐ-V̄)
+kₛ = s̄⋅(C̄ₐ-V̄)
+kₙ = n̄⋅(C̄ₐ-V̄)
 
-`x(θ,v)` =  (r̄⋅`D_A`(θ, v)+`k_r`δ(θ, v))/(n̄⋅`D_A`(θ, v)+`k_n`δ(θ, v))
-`y(θ,v)` =  (s̄⋅`D_A`(θ, v)+`k_s`δ(θ, v))/(n̄⋅`D_A`(θ, v)+`k_n`δ(θ, v))
+`x(θ,v)` =  (r̄⋅`D_A`(θ, v)+kᵣ δ(θ, v))/(n̄⋅`D_A`(θ, v)+kₙ δ(θ, v))
+`y(θ,v)` =  (s̄⋅`D_A`(θ, v)+kₛ δ(θ, v))/(n̄⋅`D_A`(θ, v)+kₙ δ(θ, v))
 
 where
 
@@ -16,7 +16,7 @@ v̄: ℝ^3
 ō: ℝ^3
 ū: ℝ^3
 V̄: ℝ^3
-`C̄ₐ`: ℝ^3
+C̄ₐ: ℝ^3
 θ: ℝ 
 v: ℝ 
 `D_A`: ℝ,ℝ->ℝ^3
@@ -30,13 +30,13 @@ from scipy.integrate import quad
 from scipy.optimize import minimize
 
 
-def demo23(v̄, ō, ū, V̄, C_combining_macron_ₐ, θ, v, D_A, δ):
+def demo23(v̄, ō, ū, V̄, C̄ₐ, θ, v, D_A, δ):
     """
     :param :v̄ : ℝ^3
     :param :ō : ℝ^3
     :param :ū : ℝ^3
     :param :V̄ : ℝ^3
-    :param :C_combining_macron_ₐ : ℝ^3
+    :param :C̄ₐ : ℝ^3
     :param :θ : ℝ
     :param :v : ℝ
     :param :D_A : ℝ,ℝ->ℝ^3
@@ -46,13 +46,13 @@ def demo23(v̄, ō, ū, V̄, C_combining_macron_ₐ, θ, v, D_A, δ):
     ō = np.asarray(ō, dtype=np.float64)
     ū = np.asarray(ū, dtype=np.float64)
     V̄ = np.asarray(V̄, dtype=np.float64)
-    C_combining_macron_ₐ = np.asarray(C_combining_macron_ₐ, dtype=np.float64)
+    C̄ₐ = np.asarray(C̄ₐ, dtype=np.float64)
 
     assert v̄.shape == (3,)
     assert ō.shape == (3,)
     assert ū.shape == (3,)
     assert V̄.shape == (3,)
-    assert C_combining_macron_ₐ.shape == (3,)
+    assert C̄ₐ.shape == (3,)
     assert np.ndim(θ) == 0
     assert np.ndim(v) == 0
 
@@ -62,15 +62,15 @@ def demo23(v̄, ō, ū, V̄, C_combining_macron_ₐ, θ, v, D_A, δ):
 
     n̄ = np.cross(ū, v̄)
 
-    k_r = np.dot((r̄).ravel(), ((C_combining_macron_ₐ - V̄)).ravel())
+    kᵣ = np.dot((r̄).ravel(), ((C̄ₐ - V̄)).ravel())
 
-    k_s = np.dot((s̄).ravel(), ((C_combining_macron_ₐ - V̄)).ravel())
+    kₛ = np.dot((s̄).ravel(), ((C̄ₐ - V̄)).ravel())
 
-    k_n = np.dot((n̄).ravel(), ((C_combining_macron_ₐ - V̄)).ravel())
+    kₙ = np.dot((n̄).ravel(), ((C̄ₐ - V̄)).ravel())
 
-    x_left_parenthesis_θ_comma_v_right_parenthesis = (np.dot((r̄).ravel(), (D_A(θ, v)).ravel()) + k_r * δ(θ, v)) / (np.dot((n̄).ravel(), (D_A(θ, v)).ravel()) + k_n * δ(θ, v))
+    x_left_parenthesis_θ_comma_v_right_parenthesis = (np.dot((r̄).ravel(), (D_A(θ, v)).ravel()) + kᵣ * δ(θ, v)) / (np.dot((n̄).ravel(), (D_A(θ, v)).ravel()) + kₙ * δ(θ, v))
 
-    y_left_parenthesis_θ_comma_v_right_parenthesis = (np.dot((s̄).ravel(), (D_A(θ, v)).ravel()) + k_s * δ(θ, v)) / (np.dot((n̄).ravel(), (D_A(θ, v)).ravel()) + k_n * δ(θ, v))
+    y_left_parenthesis_θ_comma_v_right_parenthesis = (np.dot((s̄).ravel(), (D_A(θ, v)).ravel()) + kₛ * δ(θ, v)) / (np.dot((n̄).ravel(), (D_A(θ, v)).ravel()) + kₙ * δ(θ, v))
 
     return y_left_parenthesis_θ_comma_v_right_parenthesis
 
@@ -82,24 +82,24 @@ def generateRandomData():
     ō = np.random.randn(3)
     ū = np.random.randn(3)
     V̄ = np.random.randn(3)
-    C_combining_macron_ₐ = np.random.randn(3)
+    C̄ₐ = np.random.randn(3)
     def D_A(p0, p1):
         return np.random.randn(3)
     def δ(p0, p1):
         return np.random.randn()
-    return v̄, ō, ū, V̄, C_combining_macron_ₐ, θ, v, D_A, δ
+    return v̄, ō, ū, V̄, C̄ₐ, θ, v, D_A, δ
 
 
 if __name__ == '__main__':
-    v̄, ō, ū, V̄, C_combining_macron_ₐ, θ, v, D_A, δ = generateRandomData()
+    v̄, ō, ū, V̄, C̄ₐ, θ, v, D_A, δ = generateRandomData()
     print("v̄:", v̄)
     print("ō:", ō)
     print("ū:", ū)
     print("V̄:", V̄)
-    print("C_combining_macron_ₐ:", C_combining_macron_ₐ)
+    print("C̄ₐ:", C̄ₐ)
     print("θ:", θ)
     print("v:", v)
     print("D_A:", D_A)
     print("δ:", δ)
-    func_value = demo23(v̄, ō, ū, V̄, C_combining_macron_ₐ, θ, v, D_A, δ)
+    func_value = demo23(v̄, ō, ū, V̄, C̄ₐ, θ, v, D_A, δ)
     print("func_value: ", func_value)

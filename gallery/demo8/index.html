@@ -29,7 +29,7 @@
 
     
       <br> Here is the LA input: <br>
-      <div class="code_block"><pre ><code class="language-cpsp">`I(X;Y)` = ∑_i ∑_j x_j p_i,j log(p_i,j/∑_k x_k p_i,k)
+      <div class="code_block" style='height: 200px;'><pre ><code class="language-cpsp">`I(X;Y)` = ∑_i ∑_j x_j p_i,j log(p_i,j/∑_k x_k p_i,k)
 
 where
 
@@ -38,8 +38,9 @@ p: ℝ^(n×m)</code></pre></div>
     
 
     
-      <br> Here is the Eigen output: <br>
-      <div class="code_block"><pre ><code class="language-cpp">/*
+      
+        <br> Here is the Eigen output: <br>
+        <div class="code_block"><pre ><code class="language-cpp">/*
 `I(X;Y)` = ∑_i ∑_j x_j p_i,j log(p_i,j/∑_k x_k p_i,k)
 
 where
@@ -73,12 +74,12 @@ double demo8(
     double _sum_0 = 0;
     for(int i=1; i&lt;=p.rows(); i++){
         double _sum_1 = 0;
-        for(int j=1; j&lt;=p.cols(); j++){
+        for(int j=1; j&lt;=x.size(); j++){
             double _sum_2 = 0;
             for(int k=1; k&lt;=x.size(); k++){
                 _sum_2 += x(k-1) * p(i-1, k-1);
             }
-            _sum_1 += x(j-1) * p(i-1, j-1) * log10(p(i-1, j-1) / _sum_2);
+            _sum_1 += x(j-1) * p(i-1, j-1) * log10(p(i-1, j-1) / double(_sum_2));
         }
         _sum_0 += _sum_1;
     }
@@ -107,6 +108,7 @@ int main(int argc, char *argv[])
     std::cout&lt;&lt;&#34;func_value:\n&#34;&lt;&lt;func_value&lt;&lt;std::endl;
     return 0;
 }</code></pre></div>
+      
     
 
     
@@ -143,7 +145,10 @@ def demo8(x, p):
     _sum_0 = 0
     for i in range(1, len(p)+1):
         _sum_1 = 0
-        for j in range(1, len(p)+1):
+        for j in range(1, len(x)+1):
+            _sum_2 = 0
+            for k in range(1, len(x)+1):
+                _sum_2 += x[k-1] * p[i-1, k-1]
             _sum_1 += x[j-1] * p[i-1, j-1] * np.log10(p[i-1, j-1] / _sum_2)
         _sum_0 += _sum_1
     I_left_parenthesis_X_semicolon_Y_right_parenthesis = _sum_0

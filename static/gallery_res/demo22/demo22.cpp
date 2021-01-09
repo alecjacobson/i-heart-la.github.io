@@ -2,7 +2,6 @@
 `T₁` = 1/sqrt(2)U[0 0 0
                   0 0 -1
                   0 1 0]Vᵀ
- 
 
 where 
 
@@ -30,7 +29,7 @@ Eigen::Matrix<double, 3, 3> demo22(
     _T₁_0 << 0, 0, 0,
     0, 0, -1,
     0, 1, 0;
-    Eigen::Matrix<double, 3, 3> T₁ = 1 / sqrt(2) * U * _T₁_0 * V.transpose();
+    Eigen::Matrix<double, 3, 3> T₁ = 1 / double(sqrt(2)) * U * _T₁_0 * V.transpose();
 
     return T₁;
 }

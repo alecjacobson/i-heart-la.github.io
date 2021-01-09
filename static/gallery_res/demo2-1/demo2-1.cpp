@@ -28,7 +28,7 @@ Eigen::Matrix<double, 3, 1> demo2-1(const Eigen::Matrix<double, 3, 3> & T)
 
     Eigen::Matrix<double, 3, 1> xₖ = T.col(3-1);
 
-    Eigen::Matrix<double, 3, 1> n_left_parenthesis_T_right_parenthesis = ((xⱼ - xᵢ)).cross((xₖ - xᵢ)) / (((xⱼ - xᵢ)).cross((xₖ - xᵢ))).lpNorm<2>();
+    Eigen::Matrix<double, 3, 1> n_left_parenthesis_T_right_parenthesis = ((xⱼ - xᵢ)).cross((xₖ - xᵢ)) / double((((xⱼ - xᵢ)).cross((xₖ - xᵢ))).lpNorm<2>());
 
     return n_left_parenthesis_T_right_parenthesis;
 }

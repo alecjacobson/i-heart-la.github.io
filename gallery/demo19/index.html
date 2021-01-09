@@ -29,7 +29,7 @@
 
     
       <br> Here is the LA input: <br>
-      <div class="code_block"><pre ><code class="language-cpsp">from linearalgebra: tr
+      <div class="code_block" style='height: 270px;'><pre ><code class="language-cpsp">from linearalgebra: tr
 
 `J₃` = [1_3,3]
 `k_angle(Dₘ)` = 3(sqrt(2)v)^(2/3)(7/4||Dₘ||_F^2-1/4tr(`J₃` (Dₘ)ᵀDₘ))⁻¹
@@ -41,8 +41,9 @@ v: ℝ</code></pre></div>
     
 
     
-      <br> Here is the Eigen output: <br>
-      <div class="code_block"><pre ><code class="language-cpp">/*
+      
+        <br> Here is the Eigen output: <br>
+        <div class="code_block"><pre ><code class="language-cpp">/*
 from linearalgebra: tr
 
 `J₃` = [1_3,3]
@@ -74,7 +75,7 @@ double demo19(
     _J₃_0 &lt;&lt; Eigen::MatrixXd::Ones(3, 3);
     Eigen::Matrix&lt;double, 3, 3&gt; J₃ = _J₃_0;
 
-    double k_angle_left_parenthesis_Dₘ_right_parenthesis = 3 * pow((sqrt(2) * v), (2 / 3)) * 1 / ((7 / 4 * pow((Dₘ).norm(), 2) - 1 / 4 * (J₃ * (Dₘ).transpose() * Dₘ).trace()));
+    double k_angle_left_parenthesis_Dₘ_right_parenthesis = 3 * pow((sqrt(2) * v), (2 / double(3))) * 1 / ((7 / double(4) * pow((Dₘ).norm(), 2) - 1 / double(4) * (J₃ * (Dₘ).transpose() * Dₘ).trace()));
 
     return k_angle_left_parenthesis_Dₘ_right_parenthesis;
 }
@@ -97,6 +98,7 @@ int main(int argc, char *argv[])
     std::cout&lt;&lt;&#34;func_value:\n&#34;&lt;&lt;func_value&lt;&lt;std::endl;
     return 0;
 }</code></pre></div>
+      
     
 
     

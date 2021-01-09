@@ -29,7 +29,7 @@
 
     
       <br> Here is the LA input: <br>
-      <div class="code_block"><pre ><code class="language-cpsp">`C(x,y)` = (∑_n ∑_i c_n,i w_n,i R̂_n) / (∑_n ∑_i w_n,i R̂_n)
+      <div class="code_block" style='height: 220px;'><pre ><code class="language-cpsp">`C(x,y)` = (∑_n ∑_i c_n,i w_n,i R̂_n) / (∑_n ∑_i w_n,i R̂_n)
 
 where
 
@@ -39,8 +39,9 @@ R̂: ℝ^x: the local robustness</code></pre></div>
     
 
     
-      <br> Here is the Eigen output: <br>
-      <div class="code_block"><pre ><code class="language-cpp">/*
+      
+        <br> Here is the Eigen output: <br>
+        <div class="code_block"><pre ><code class="language-cpp">/*
 `C(x,y)` = (∑_n ∑_i c_n,i w_n,i R̂_n) / (∑_n ∑_i w_n,i R̂_n)
 
 where
@@ -77,9 +78,9 @@ double demo26(
     assert( R̂.size() == x );
 
     double _sum_0 = 0;
-    for(int n=1; n&lt;=c.rows(); n++){
+    for(int n=1; n&lt;=w.rows(); n++){
         double _sum_1 = 0;
-        for(int i=1; i&lt;=c.cols(); i++){
+        for(int i=1; i&lt;=w.cols(); i++){
             _sum_1 += c(n-1, i-1) * w(n-1, i-1) * R̂(n-1);
         }
         _sum_0 += _sum_1;
@@ -92,7 +93,7 @@ double demo26(
         }
         _sum_2 += _sum_3;
     }
-    double C_left_parenthesis_x_comma_y_right_parenthesis = (_sum_0) / (_sum_2);
+    double C_left_parenthesis_x_comma_y_right_parenthesis = (_sum_0) / double((_sum_2));
 
     return C_left_parenthesis_x_comma_y_right_parenthesis;
 }
@@ -120,6 +121,7 @@ int main(int argc, char *argv[])
     std::cout&lt;&lt;&#34;func_value:\n&#34;&lt;&lt;func_value&lt;&lt;std::endl;
     return 0;
 }</code></pre></div>
+      
     
 
     
@@ -158,9 +160,9 @@ def demo26(c, w, R̂):
     assert R̂.shape == (x,)
 
     _sum_0 = 0
-    for n in range(1, len(c)+1):
+    for n in range(1, len(w)+1):
         _sum_1 = 0
-        for i in range(1, len(c)+1):
+        for i in range(1, len(w)+1):
             _sum_1 += c[n-1, i-1] * w[n-1, i-1] * R̂[n-1]
         _sum_0 += _sum_1
     _sum_2 = 0

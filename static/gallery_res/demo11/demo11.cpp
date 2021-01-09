@@ -4,7 +4,7 @@ x̂ = (∑_i a_i(a_i)ᵀ)⁻¹ ∑_i y_i a_i
 
 where
 
-a_i: ℝ^(n×1): the measurement vectors  
+a_i: ℝ^n: the measurement vectors  
 w_i: ℝ: measurement noise 
 x: ℝ^n: measurement noise 
 */
@@ -17,13 +17,13 @@ x: ℝ^n: measurement noise
 /**
  * demo11
  *
- * @param a  ℝ^(n×1): the measurement vectors  
+ * @param a  ℝ^n: the measurement vectors  
  * @param w  ℝ: measurement noise 
  * @param x  ℝ^n: measurement noise 
  * @return x̂
  */
-Eigen::MatrixXd demo11(
-    const std::vector<Eigen::MatrixXd> & a,
+Eigen::VectorXd demo11(
+    const std::vector<Eigen::VectorXd> & a,
     const std::vector<double> & w,
     const Eigen::VectorXd & x)
 {
@@ -31,8 +31,7 @@ Eigen::MatrixXd demo11(
     const long n = x.size();
     assert( a.size() == _dim_0 );
     for( const auto& el : a ) {
-        assert( el.rows() == n );
-        assert( el.cols() == 1 );
+        assert( el.size() == n );
     }
     assert( w.size() == _dim_0 );
     assert( x.size() == n );
@@ -51,13 +50,13 @@ Eigen::MatrixXd demo11(
     for(int i=1; i<=a.size(); i++){
         _sum_1 += y.at(i-1) * a.at(i-1);
     }
-    Eigen::MatrixXd x̂ = (_sum_0).inverse() * _sum_1;
+    Eigen::VectorXd x̂ = (_sum_0).inverse() * _sum_1;
 
     return x̂;
 }
 
 
-void generateRandomData(std::vector<Eigen::MatrixXd> & a,
+void generateRandomData(std::vector<Eigen::VectorXd> & a,
     std::vector<double> & w,
     Eigen::VectorXd & x)
 {
@@ -65,7 +64,7 @@ void generateRandomData(std::vector<Eigen::MatrixXd> & a,
     const int n = rand()%10;
     a.resize(_dim_0);
     for(int i=0; i<_dim_0; i++){
-        a[i] = Eigen::MatrixXd::Random(n, 1);
+        a[i] = Eigen::VectorXd::Random(n);
     }
     w.resize(_dim_0);
     for(int i=0; i<_dim_0; i++){
@@ -77,11 +76,11 @@ void generateRandomData(std::vector<Eigen::MatrixXd> & a,
 
 int main(int argc, char *argv[])
 {
-    std::vector<Eigen::MatrixXd> a;
+    std::vector<Eigen::VectorXd> a;
     std::vector<double> w;
     Eigen::VectorXd x;
     generateRandomData(a, w, x);
-    Eigen::MatrixXd func_value = demo11(a, w, x);
+    Eigen::VectorXd func_value = demo11(a, w, x);
     std::cout<<"func_value:\n"<<func_value<<std::endl;
     return 0;
 }

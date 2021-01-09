@@ -29,7 +29,7 @@
 
     
       <br> Here is the LA input: <br>
-      <div class="code_block"><pre ><code class="language-cpsp">min_(u ∈ ℝ^6) uᵀ(∑_i [x_i×n̂_i; n̂_i][(x_i×n̂_i)ᵀ n̂_iᵀ])u - 2uᵀ(∑_i [x_i×n̂_i; n̂_i]n̂_iᵀ(p_i-x_i)) + ∑_i(p_i-x_i)ᵀn̂_i n̂_iᵀ(p_i-x_i)
+      <div class="code_block" style='height: 220px;'><pre ><code class="language-cpsp">min_(u ∈ ℝ^6) uᵀ(∑_i [x_i×n̂_i; n̂_i][(x_i×n̂_i)ᵀ n̂_iᵀ])u - 2uᵀ(∑_i [x_i×n̂_i; n̂_i]n̂_iᵀ(p_i-x_i)) + ∑_i(p_i-x_i)ᵀn̂_i n̂_iᵀ(p_i-x_i)
 
 where
 
@@ -38,72 +38,6 @@ n̂_i: ℝ^3
 p_i: ℝ^3  </code></pre></div>
     
 
-    
-      <br> Here is the Eigen output: <br>
-      <div class="code_block"><pre ><code class="language-cpp">/*
-min_(u ∈ ℝ^6) uᵀ(∑_i [x_i×n̂_i; n̂_i][(x_i×n̂_i)ᵀ n̂_iᵀ])u - 2uᵀ(∑_i [x_i×n̂_i; n̂_i]n̂_iᵀ(p_i-x_i)) + ∑_i(p_i-x_i)ᵀn̂_i n̂_iᵀ(p_i-x_i)
-
-where
-
-x_i: ℝ^3 
-n̂_i: ℝ^3  
-p_i: ℝ^3  
-*/
-#include &lt;Eigen/Core&gt;
-#include &lt;Eigen/Dense&gt;
-#include &lt;Eigen/Sparse&gt;
-#include &lt;iostream&gt;
-#include &lt;set&gt;
-
-/**
- * demo25
- *
- * @param x  ℝ^3
- * @param n̂  ℝ^3
- * @param p  ℝ^3
- * @return ret
- */
-double demo25(
-    const std::vector&lt;Eigen::Matrix&lt;double, 3, 1&gt;&gt; &amp; x,
-    const std::vector&lt;Eigen::Matrix&lt;double, 3, 1&gt;&gt; &amp; n̂,
-    const std::vector&lt;Eigen::Matrix&lt;double, 3, 1&gt;&gt; &amp; p)
-{
-    const long _dim_0 = x.size();
-    double ret = ;
-    return ret;
-}
-
-
-void generateRandomData(std::vector&lt;Eigen::Matrix&lt;double, 3, 1&gt;&gt; &amp; x,
-    std::vector&lt;Eigen::Matrix&lt;double, 3, 1&gt;&gt; &amp; n̂,
-    std::vector&lt;Eigen::Matrix&lt;double, 3, 1&gt;&gt; &amp; p)
-{
-    const int _dim_0 = rand()%10;
-    x.resize(_dim_0);
-    for(int i=0; i&lt;_dim_0; i++){
-        x[i] = Eigen::VectorXd::Random(3);
-    }
-    n̂.resize(_dim_0);
-    for(int i=0; i&lt;_dim_0; i++){
-        n̂[i] = Eigen::VectorXd::Random(3);
-    }
-    p.resize(_dim_0);
-    for(int i=0; i&lt;_dim_0; i++){
-        p[i] = Eigen::VectorXd::Random(3);
-    }
-}
-
-
-int main(int argc, char *argv[])
-{
-    std::vector&lt;Eigen::Matrix&lt;double, 3, 1&gt;&gt; x;
-    std::vector&lt;Eigen::Matrix&lt;double, 3, 1&gt;&gt; n̂;
-    std::vector&lt;Eigen::Matrix&lt;double, 3, 1&gt;&gt; p;
-    generateRandomData(x, n̂, p);
-    double func_value = demo25(x, n̂, p);
-    std::cout&lt;&lt;&#34;func_value:\n&#34;&lt;&lt;func_value&lt;&lt;std::endl;
-    return 0;
-}</code></pre></div>
     
 
     
@@ -151,7 +85,7 @@ def demo25(x, n̂, p):
             _ret_2 = np.vstack(((np.cross(x[i-1], n̂[i-1])).reshape(3, 1), (n̂[i-1]).reshape(3, 1)))
             _sum_1 += _ret_2 @ n̂[i-1].T.reshape(1, 3) @ (p[i-1] - x[i-1])
         _sum_2 = 0
-        for i in range(1, len(x)+1):
+        for i in range(1, len(p)+1):
             _sum_2 += (p[i-1] - x[i-1]).T.reshape(1, 3) @ n̂[i-1] * n̂[i-1].T.reshape(1, 3) @ (p[i-1] - x[i-1])
         return u.T.reshape(1, 6) @ (_sum_0) @ u - 2 * u.T.reshape(1, 6) @ (_sum_1) + _sum_2
     ret = minimize(_target_0, np.zeros(6)).fun

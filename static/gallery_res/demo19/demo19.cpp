@@ -30,7 +30,7 @@ double demo19(
     _J₃_0 << Eigen::MatrixXd::Ones(3, 3);
     Eigen::Matrix<double, 3, 3> J₃ = _J₃_0;
 
-    double k_angle_left_parenthesis_Dₘ_right_parenthesis = 3 * pow((sqrt(2) * v), (2 / 3)) * 1 / ((7 / 4 * pow((Dₘ).norm(), 2) - 1 / 4 * (J₃ * (Dₘ).transpose() * Dₘ).trace()));
+    double k_angle_left_parenthesis_Dₘ_right_parenthesis = 3 * pow((sqrt(2) * v), (2 / double(3))) * 1 / ((7 / double(4) * pow((Dₘ).norm(), 2) - 1 / double(4) * (J₃ * (Dₘ).transpose() * Dₘ).trace()));
 
     return k_angle_left_parenthesis_Dₘ_right_parenthesis;
 }

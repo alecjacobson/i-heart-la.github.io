@@ -29,30 +29,31 @@
 
     
       <br> Here is the LA input: <br>
-      <div class="code_block"><pre ><code class="language-cpsp">`G_σ(s_i^k)` = ∑_j l_j exp(-dist(`b_i`, b_j)/(2σ²))(s_j)^k
+      <div class="code_block" style='height: 320px;'><pre ><code class="language-cpsp">`G_σ(s_i^k)` = ∑_j l_j exp(-dist(bᵢ , b_j)/(2σ²))(s_j)^k
 
 where
 
 l_j: ℝ : the length of bj
 dist: ℝ^n, ℝ^n -&gt; ℝ : measures the geodesic distance between the centers of bi and bj along the boundary
 σ: ℝ
-`b_i`: ℝ^n
+bᵢ: ℝ^n
 b_j: ℝ^n
 s_j: ℝ : unit direction vector of bi
 k: ℝ : iteration number</code></pre></div>
     
 
     
-      <br> Here is the Eigen output: <br>
-      <div class="code_block"><pre ><code class="language-cpp">/*
-`G_σ(s_i^k)` = ∑_j l_j exp(-dist(`b_i`, b_j)/(2σ²))(s_j)^k
+      
+        <br> Here is the Eigen output: <br>
+        <div class="code_block"><pre ><code class="language-cpp">/*
+`G_σ(s_i^k)` = ∑_j l_j exp(-dist(bᵢ , b_j)/(2σ²))(s_j)^k
 
 where
 
 l_j: ℝ : the length of bj
 dist: ℝ^n, ℝ^n -&gt; ℝ : measures the geodesic distance between the centers of bi and bj along the boundary
 σ: ℝ
-`b_i`: ℝ^n
+bᵢ: ℝ^n
 b_j: ℝ^n
 s_j: ℝ : unit direction vector of bi
 k: ℝ : iteration number
@@ -69,7 +70,7 @@ k: ℝ : iteration number
  * @param l  ℝ : the length of bj
  * @param dist  ℝ^n, ℝ^n -&gt; ℝ : measures the geodesic distance between the centers of bi and bj along the boundary
  * @param σ  ℝ
- * @param b_i  ℝ^n
+ * @param bᵢ  ℝ^n
  * @param b  ℝ^n
  * @param s  ℝ : unit direction vector of bi
  * @param k  ℝ : iteration number
@@ -79,7 +80,7 @@ double demo28(
     const std::vector&lt;double&gt; &amp; l,
     const std::function&lt;double(Eigen::VectorXd, Eigen::VectorXd)&gt; &amp; dist,
     const double &amp; σ,
-    const Eigen::VectorXd &amp; b_i,
+    const Eigen::VectorXd &amp; bᵢ,
     const std::vector&lt;Eigen::VectorXd&gt; &amp; b,
     const std::vector&lt;double&gt; &amp; s,
     const double &amp; k)
@@ -87,7 +88,7 @@ double demo28(
     const long _dim_0 = l.size();
     const long n = b[0].rows();
     assert( l.size() == _dim_0 );
-    assert( b_i.size() == n );
+    assert( bᵢ.size() == n );
     assert( b.size() == _dim_0 );
     for( const auto&amp; el : b ) {
         assert( el.size() == n );
@@ -95,8 +96,8 @@ double demo28(
     assert( s.size() == _dim_0 );
 
     double _sum_0 = 0;
-    for(int j=1; j&lt;=l.size(); j++){
-        _sum_0 += l.at(j-1) * exp(-dist(b_i, b.at(j-1)) / (2 * pow(σ, 2))) * pow((s.at(j-1)), k);
+    for(int j=1; j&lt;=s.size(); j++){
+        _sum_0 += l.at(j-1) * exp(-dist(bᵢ, b.at(j-1)) / double((2 * pow(σ, 2)))) * pow((s.at(j-1)), k);
     }
     double G_σ_left_parenthesis_s_i_circumflex_accent_k_right_parenthesis = _sum_0;
 
@@ -107,7 +108,7 @@ double demo28(
 void generateRandomData(std::vector&lt;double&gt; &amp; l,
     std::function&lt;double(Eigen::VectorXd, Eigen::VectorXd)&gt; &amp; dist,
     double &amp; σ,
-    Eigen::VectorXd &amp; b_i,
+    Eigen::VectorXd &amp; bᵢ,
     std::vector&lt;Eigen::VectorXd&gt; &amp; b,
     std::vector&lt;double&gt; &amp; s,
     double &amp; k)
@@ -123,7 +124,7 @@ void generateRandomData(std::vector&lt;double&gt; &amp; l,
     dist = [](Eigen::VectorXd, Eigen::VectorXd)-&gt;double{
         return rand() % 10;
     };
-    b_i = Eigen::VectorXd::Random(n);
+    bᵢ = Eigen::VectorXd::Random(n);
     b.resize(_dim_0);
     for(int i=0; i&lt;_dim_0; i++){
         b[i] = Eigen::VectorXd::Random(n);
@@ -140,28 +141,29 @@ int main(int argc, char *argv[])
     std::vector&lt;double&gt; l;
     std::function&lt;double(Eigen::VectorXd, Eigen::VectorXd)&gt; dist;
     double σ;
-    Eigen::VectorXd b_i;
+    Eigen::VectorXd bᵢ;
     std::vector&lt;Eigen::VectorXd&gt; b;
     std::vector&lt;double&gt; s;
     double k;
-    generateRandomData(l, dist, σ, b_i, b, s, k);
-    double func_value = demo28(l, dist, σ, b_i, b, s, k);
+    generateRandomData(l, dist, σ, bᵢ, b, s, k);
+    double func_value = demo28(l, dist, σ, bᵢ, b, s, k);
     std::cout&lt;&lt;&#34;func_value:\n&#34;&lt;&lt;func_value&lt;&lt;std::endl;
     return 0;
 }</code></pre></div>
+      
     
 
     
       <br> Here is the Python output: <br>
       <div class="code_block"><pre ><code class="language-python">&#34;&#34;&#34;
-`G_σ(s_i^k)` = ∑_j l_j exp(-dist(`b_i`, b_j)/(2σ²))(s_j)^k
+`G_σ(s_i^k)` = ∑_j l_j exp(-dist(bᵢ , b_j)/(2σ²))(s_j)^k
 
 where
 
 l_j: ℝ : the length of bj
 dist: ℝ^n, ℝ^n -&gt; ℝ : measures the geodesic distance between the centers of bi and bj along the boundary
 σ: ℝ
-`b_i`: ℝ^n
+bᵢ: ℝ^n
 b_j: ℝ^n
 s_j: ℝ : unit direction vector of bi
 k: ℝ : iteration number
@@ -174,18 +176,18 @@ from scipy.integrate import quad
 from scipy.optimize import minimize
 
 
-def demo28(l, dist, σ, b_i, b, s, k):
+def demo28(l, dist, σ, bᵢ, b, s, k):
     &#34;&#34;&#34;
     :param :l : ℝ : the length of bj
     :param :dist : ℝ^n, ℝ^n -&gt; ℝ : measures the geodesic distance between the centers of bi and bj along the boundary
     :param :σ : ℝ
-    :param :b_i : ℝ^n
+    :param :bᵢ : ℝ^n
     :param :b : ℝ^n
     :param :s : ℝ : unit direction vector of bi
     :param :k : ℝ : iteration number
     &#34;&#34;&#34;
     l = np.asarray(l)
-    b_i = np.asarray(b_i, dtype=np.float64)
+    bᵢ = np.asarray(bᵢ, dtype=np.float64)
     b = np.asarray(b, dtype=np.float64)
     s = np.asarray(s)
 
@@ -193,14 +195,14 @@ def demo28(l, dist, σ, b_i, b, s, k):
     n = b.shape[1]
     assert l.shape == (_dim_0,)
     assert np.ndim(σ) == 0
-    assert b_i.shape == (n,)
+    assert bᵢ.shape == (n,)
     assert b.shape == (_dim_0, n, )
     assert s.shape == (_dim_0,)
     assert np.ndim(k) == 0
 
     _sum_0 = 0
-    for j in range(1, len(l)+1):
-        _sum_0 += l[j-1] * np.exp(-dist(b_i, b[j-1]) / (2 * np.power(σ, 2))) * np.power((s[j-1]), k)
+    for j in range(1, len(s)+1):
+        _sum_0 += l[j-1] * np.exp(-dist(bᵢ, b[j-1]) / (2 * np.power(σ, 2))) * np.power((s[j-1]), k)
     G_σ_left_parenthesis_s_i_circumflex_accent_k_right_parenthesis = _sum_0
 
     return G_σ_left_parenthesis_s_i_circumflex_accent_k_right_parenthesis
@@ -214,22 +216,22 @@ def generateRandomData():
     l = np.random.randn(_dim_0)
     def dist(p0, p1):
         return np.random.randn()
-    b_i = np.random.randn(n)
+    bᵢ = np.random.randn(n)
     b = np.random.randn(_dim_0, n, )
     s = np.random.randn(_dim_0)
-    return l, dist, σ, b_i, b, s, k
+    return l, dist, σ, bᵢ, b, s, k
 
 
 if __name__ == &#39;__main__&#39;:
-    l, dist, σ, b_i, b, s, k = generateRandomData()
+    l, dist, σ, bᵢ, b, s, k = generateRandomData()
     print(&#34;l:&#34;, l)
     print(&#34;dist:&#34;, dist)
     print(&#34;σ:&#34;, σ)
-    print(&#34;b_i:&#34;, b_i)
+    print(&#34;bᵢ:&#34;, bᵢ)
     print(&#34;b:&#34;, b)
     print(&#34;s:&#34;, s)
     print(&#34;k:&#34;, k)
-    func_value = demo28(l, dist, σ, b_i, b, s, k)
+    func_value = demo28(l, dist, σ, bᵢ, b, s, k)
     print(&#34;func_value: &#34;, func_value)</code></pre></div>
     
 
@@ -246,7 +248,7 @@ if __name__ == &#39;__main__&#39;:
 \DeclareMathOperator*{\argmin}{arg\,min}
 \begin{document}
 \[
-\textit{G\_σ(s\_i\^k)} = \sum_\textit{j} \textit{l}_{ \textit{j} }exp(-\frac{\textit{dist}(\textit{b\_i},\textit{b}_{ \textit{j} })}{(2\textit{σ}^{2})})(\textit{s}_{ \textit{j} })^{\textit{k}}
+\textit{G\_σ(s\_i\^k)} = \sum_\textit{j} \textit{l}_{ \textit{j} }exp(-\frac{\textit{dist}(\textit{b\textsubscript{i}},\textit{b}_{ \textit{j} })}{(2\textit{σ}^{2})})(\textit{s}_{ \textit{j} })^{\textit{k}}
 \]
 
 where
@@ -254,7 +256,7 @@ where
 \item $\textit{l}_{\textit{j}} \in \mathbb{{R}}:$the length of bj
 \item $\textit{dist} \in \mathbb{R}^{ \textit{n}},\mathbb{R}^{ \textit{n}}\rightarrow \mathbb{{R}}:$measures the geodesic distance between the centers of bi and bj along the boundary
 \item $\textit{σ} \in \mathbb{{R}}$
-\item $\textit{b\_i} \in \mathbb{R}^{ \textit{n}}$
+\item $\textit{b\textsubscript{i}} \in \mathbb{R}^{ \textit{n}}$
 \item $\textit{b}_{\textit{j}} \in \mathbb{R}^{ \textit{n}}$
 \item $\textit{s}_{\textit{j}} \in \mathbb{{R}}:$unit direction vector of bi
 \item $\textit{k} \in \mathbb{{R}}:$iteration number

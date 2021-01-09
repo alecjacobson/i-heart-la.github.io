@@ -47,7 +47,7 @@ def demo29(α, p, X, M, f, p_c):
         _sum_2 = 0
         for j in range(1, len(X)+1):
             _sum_3 = 0
-            for k in range(1, len(α)+1):
+            for k in range(1, len(p)+1):
                 _sum_3 += α[k-1] * p[k-1] * X[i-1, j-1]
             _sum_2 += (f(X[i-1, j-1]) / p_c(X[i-1, j-1]) - (_sum_3) / p_c(X[i-1, j-1]))
         _sum_1 += _sum_2

@@ -29,7 +29,7 @@
 
     
       <br> Here is the LA input: <br>
-      <div class="code_block"><pre ><code class="language-cpsp">xᵢ = T_*,1
+      <div class="code_block" style='height: 240px;'><pre ><code class="language-cpsp">xᵢ = T_*,1
 xⱼ = T_*,2
 xₖ = T_*,3
 `n(T)` = (xⱼ-xᵢ)×(xₖ-xᵢ)/||(xⱼ-xᵢ)×(xₖ-xᵢ)||
@@ -40,8 +40,9 @@ T: ℝ^(3×3)</code></pre></div>
     
 
     
-      <br> Here is the Eigen output: <br>
-      <div class="code_block"><pre ><code class="language-cpp">/*
+      
+        <br> Here is the Eigen output: <br>
+        <div class="code_block"><pre ><code class="language-cpp">/*
 xᵢ = T_*,1
 xⱼ = T_*,2
 xₖ = T_*,3
@@ -71,7 +72,7 @@ Eigen::Matrix&lt;double, 3, 1&gt; demo2-1(const Eigen::Matrix&lt;double, 3, 3&gt
 
     Eigen::Matrix&lt;double, 3, 1&gt; xₖ = T.col(3-1);
 
-    Eigen::Matrix&lt;double, 3, 1&gt; n_left_parenthesis_T_right_parenthesis = ((xⱼ - xᵢ)).cross((xₖ - xᵢ)) / (((xⱼ - xᵢ)).cross((xₖ - xᵢ))).lpNorm&lt;2&gt;();
+    Eigen::Matrix&lt;double, 3, 1&gt; n_left_parenthesis_T_right_parenthesis = ((xⱼ - xᵢ)).cross((xₖ - xᵢ)) / double((((xⱼ - xᵢ)).cross((xₖ - xᵢ))).lpNorm&lt;2&gt;());
 
     return n_left_parenthesis_T_right_parenthesis;
 }
@@ -91,6 +92,7 @@ int main(int argc, char *argv[])
     std::cout&lt;&lt;&#34;func_value:\n&#34;&lt;&lt;func_value&lt;&lt;std::endl;
     return 0;
 }</code></pre></div>
+      
     
 
     
@@ -157,16 +159,16 @@ if __name__ == &#39;__main__&#39;:
 \DeclareMathOperator*{\argmin}{arg\,min}
 \begin{document}
 \[
-\textit{xᵢ} = \textit{T}_{*, 1}
+\textit{x\textsubscript{i}} = \textit{T}_{*, 1}
 \]
 \[
-\textit{xⱼ} = \textit{T}_{*, 2}
+\textit{x\textsubscript{j}} = \textit{T}_{*, 2}
 \]
 \[
 \textit{xₖ} = \textit{T}_{*, 3}
 \]
 \[
-\textit{n(T)} = \frac{(\textit{xⱼ} - \textit{xᵢ}) × (\textit{xₖ} - \textit{xᵢ})}{\|(\textit{xⱼ} - \textit{xᵢ}) × (\textit{xₖ} - \textit{xᵢ})\|_2}
+\textit{n(T)} = \frac{(\textit{x\textsubscript{j}} - \textit{x\textsubscript{i}}) × (\textit{xₖ} - \textit{x\textsubscript{i}})}{\|(\textit{x\textsubscript{j}} - \textit{x\textsubscript{i}}) × (\textit{xₖ} - \textit{x\textsubscript{i}})\|_2}
 \]
 
 where

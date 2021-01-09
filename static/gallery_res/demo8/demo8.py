@@ -30,7 +30,10 @@ def demo8(x, p):
     _sum_0 = 0
     for i in range(1, len(p)+1):
         _sum_1 = 0
-        for j in range(1, len(p)+1):
+        for j in range(1, len(x)+1):
+            _sum_2 = 0
+            for k in range(1, len(x)+1):
+                _sum_2 += x[k-1] * p[i-1, k-1]
             _sum_1 += x[j-1] * p[i-1, j-1] * np.log10(p[i-1, j-1] / _sum_2)
         _sum_0 += _sum_1
     I_left_parenthesis_X_semicolon_Y_right_parenthesis = _sum_0

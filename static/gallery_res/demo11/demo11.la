@@ -3,6 +3,6 @@ x̂ = (∑_i a_i(a_i)ᵀ)⁻¹ ∑_i y_i a_i
 
 where
 
-a_i: ℝ^(n×1): the measurement vectors  
+a_i: ℝ^n: the measurement vectors  
 w_i: ℝ: measurement noise 
 x: ℝ^n: measurement noise 

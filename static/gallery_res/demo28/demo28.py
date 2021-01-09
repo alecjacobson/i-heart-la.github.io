@@ -1,12 +1,12 @@
 """
-`G_σ(s_i^k)` = ∑_j l_j exp(-dist(`b_i`, b_j)/(2σ²))(s_j)^k
+`G_σ(s_i^k)` = ∑_j l_j exp(-dist(bᵢ , b_j)/(2σ²))(s_j)^k
 
 where
 
 l_j: ℝ : the length of bj
 dist: ℝ^n, ℝ^n -> ℝ : measures the geodesic distance between the centers of bi and bj along the boundary
 σ: ℝ
-`b_i`: ℝ^n
+bᵢ: ℝ^n
 b_j: ℝ^n
 s_j: ℝ : unit direction vector of bi
 k: ℝ : iteration number
@@ -19,18 +19,18 @@ from scipy.integrate import quad
 from scipy.optimize import minimize
 
 
-def demo28(l, dist, σ, b_i, b, s, k):
+def demo28(l, dist, σ, bᵢ, b, s, k):
     """
     :param :l : ℝ : the length of bj
     :param :dist : ℝ^n, ℝ^n -> ℝ : measures the geodesic distance between the centers of bi and bj along the boundary
     :param :σ : ℝ
-    :param :b_i : ℝ^n
+    :param :bᵢ : ℝ^n
     :param :b : ℝ^n
     :param :s : ℝ : unit direction vector of bi
     :param :k : ℝ : iteration number
     """
     l = np.asarray(l)
-    b_i = np.asarray(b_i, dtype=np.float64)
+    bᵢ = np.asarray(bᵢ, dtype=np.float64)
     b = np.asarray(b, dtype=np.float64)
     s = np.asarray(s)
 
@@ -38,14 +38,14 @@ def demo28(l, dist, σ, b_i, b, s, k):
     n = b.shape[1]
     assert l.shape == (_dim_0,)
     assert np.ndim(σ) == 0
-    assert b_i.shape == (n,)
+    assert bᵢ.shape == (n,)
     assert b.shape == (_dim_0, n, )
     assert s.shape == (_dim_0,)
     assert np.ndim(k) == 0
 
     _sum_0 = 0
-    for j in range(1, len(l)+1):
-        _sum_0 += l[j-1] * np.exp(-dist(b_i, b[j-1]) / (2 * np.power(σ, 2))) * np.power((s[j-1]), k)
+    for j in range(1, len(s)+1):
+        _sum_0 += l[j-1] * np.exp(-dist(bᵢ, b[j-1]) / (2 * np.power(σ, 2))) * np.power((s[j-1]), k)
     G_σ_left_parenthesis_s_i_circumflex_accent_k_right_parenthesis = _sum_0
 
     return G_σ_left_parenthesis_s_i_circumflex_accent_k_right_parenthesis
@@ -59,20 +59,20 @@ def generateRandomData():
     l = np.random.randn(_dim_0)
     def dist(p0, p1):
         return np.random.randn()
-    b_i = np.random.randn(n)
+    bᵢ = np.random.randn(n)
     b = np.random.randn(_dim_0, n, )
     s = np.random.randn(_dim_0)
-    return l, dist, σ, b_i, b, s, k
+    return l, dist, σ, bᵢ, b, s, k
 
 
 if __name__ == '__main__':
-    l, dist, σ, b_i, b, s, k = generateRandomData()
+    l, dist, σ, bᵢ, b, s, k = generateRandomData()
     print("l:", l)
     print("dist:", dist)
     print("σ:", σ)
-    print("b_i:", b_i)
+    print("bᵢ:", bᵢ)
     print("b:", b)
     print("s:", s)
     print("k:", k)
-    func_value = demo28(l, dist, σ, b_i, b, s, k)
+    func_value = demo28(l, dist, σ, bᵢ, b, s, k)
     print("func_value: ", func_value)
