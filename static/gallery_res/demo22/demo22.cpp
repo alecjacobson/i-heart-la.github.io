@@ -45,6 +45,7 @@ void generateRandomData(Eigen::Matrix<double, 3, 3> & U,
 
 int main(int argc, char *argv[])
 {
+    srand((int)time(NULL));
     Eigen::Matrix<double, 3, 3> U;
     Eigen::Matrix<double, 3, 3> V;
     generateRandomData(U, V);

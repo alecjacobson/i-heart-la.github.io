@@ -99,6 +99,7 @@ void generateRandomData(std::vector&lt;double&gt; &amp; f,
 
 int main(int argc, char *argv[])
 {
+    srand((int)time(NULL));
     std::vector&lt;double&gt; f;
     std::vector&lt;double&gt; p;
     generateRandomData(f, p);

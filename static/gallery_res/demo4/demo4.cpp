@@ -34,7 +34,7 @@ double demo4(
     assert( A.size() == _dim_0 );
 
     double _sum_0 = 0;
-    for(int T=1; T<=A.size(); T++){
+    for(int T=1; T<=M.size(); T++){
         Eigen::Matrix<double, 2, 2> _n_0;
         _n_0 << 0, -1,
         1, 0;
@@ -73,6 +73,7 @@ void generateRandomData(std::vector<Eigen::Matrix<double, 3, 1>> & v,
 
 int main(int argc, char *argv[])
 {
+    srand((int)time(NULL));
     std::vector<Eigen::Matrix<double, 3, 1>> v;
     std::vector<Eigen::Matrix<double, 3, 1>> u;
     std::vector<Eigen::Matrix<double, 2, 3>> M;

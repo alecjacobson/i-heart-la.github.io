@@ -16,33 +16,10 @@ given
 \end{itemize}
 
 \[
-\textit{k}_{ \textit{i} } = (\textit{p}_{ \textit{i} } - (\textit{p}_{ \textit{i} } \cdot \textit{d}_{ \textit{i} })\textit{d}_{ \textit{i} })
+\textit{P}_{ \textit{i} } = (I_{ 3 } - \textit{d}_{ \textit{i} }\textit{d}_{ \textit{i} }^T)
 \]
 \[
-\textit{a}_{ \textit{i} } = (1,0,0) - \textit{d}_{ \textit{i}, 1 }\textit{d}_{ \textit{i} }
-\]
-\[
-\textit{b}_{ \textit{i} } = (0,1,0) - \textit{d}_{ \textit{i}, 2 }\textit{d}_{ \textit{i} }
-\]
-\[
-\textit{c}_{ \textit{i} } = (0,0,1) - \textit{d}_{ \textit{i}, 3 }\textit{d}_{ \textit{i} }
-\]
-\[
-\textit{M} = \begin{bmatrix}
-\sum_\textit{i} (\textit{a}_{ \textit{i}, 1 } - \textit{d}_{ \textit{i}, 1 }(\textit{d}_{ \textit{i} } \cdot \textit{a}_{ \textit{i} })) & \sum_\textit{i} (\textit{a}_{ \textit{i}, 2 } - \textit{d}_{ \textit{i}, 2 }(\textit{d}_{ \textit{i} } \cdot \textit{a}_{ \textit{i} })) & \sum_\textit{i} (\textit{a}_{ \textit{i}, 3 } - \textit{d}_{ \textit{i}, 3 }(\textit{d}_{ \textit{i} } \cdot \textit{a}_{ \textit{i} }))\\
-\sum_\textit{i} (\textit{b}_{ \textit{i}, 1 } - \textit{d}_{ \textit{i}, 1 }(\textit{d}_{ \textit{i} } \cdot \textit{b}_{ \textit{i} })) & \sum_\textit{i} (\textit{b}_{ \textit{i}, 2 } - \textit{d}_{ \textit{i}, 2 }(\textit{d}_{ \textit{i} } \cdot \textit{b}_{ \textit{i} })) & \sum_\textit{i} (\textit{b}_{ \textit{i}, 3 } - \textit{d}_{ \textit{i}, 3 }(\textit{d}_{ \textit{i} } \cdot \textit{b}_{ \textit{i} }))\\
-\sum_\textit{i} (\textit{c}_{ \textit{i}, 1 } - \textit{d}_{ \textit{i}, 1 }(\textit{d}_{ \textit{i} } \cdot \textit{c}_{ \textit{i} })) & \sum_\textit{i} (\textit{c}_{ \textit{i}, 2 } - \textit{d}_{ \textit{i}, 2 }(\textit{d}_{ \textit{i} } \cdot \textit{c}_{ \textit{i} })) & \sum_\textit{i} (\textit{c}_{ \textit{i}, 3 } - \textit{d}_{ \textit{i}, 3 }(\textit{d}_{ \textit{i} } \cdot \textit{c}_{ \textit{i} }))\\
-\end{bmatrix}
-\]
-\[
-\textit{r} = \begin{bmatrix}
-\sum_\textit{i} (\textit{k}_{ \textit{i} } \cdot \textit{a}_{ \textit{i} })\\
-\sum_\textit{i} (\textit{k}_{ \textit{i} } \cdot \textit{b}_{ \textit{i} })\\
-\sum_\textit{i} (\textit{k}_{ \textit{i} } \cdot \textit{c}_{ \textit{i} })\\
-\end{bmatrix}
-\]
-\[
-\textit{q} = \textit{M}^{-1}\textit{r}
+\textit{q} = (\sum_\textit{i} \textit{P}_{ \textit{i} }^T\textit{P}_{ \textit{i} })^{-1}(\sum_\textit{i} \textit{P}_{ \textit{i} }^T\textit{P}_{ \textit{i} }\textit{p}_{ \textit{i} })
 \]
 
 \end{document}

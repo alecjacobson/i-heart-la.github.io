@@ -39,6 +39,7 @@ void generateRandomData(Eigen::Matrix<double, 3, 3> & A)
 
 int main(int argc, char *argv[])
 {
+    srand((int)time(NULL));
     Eigen::Matrix<double, 3, 3> A;
     generateRandomData(A);
     Eigen::Matrix<double, 9, 9> func_value = demo17(A);

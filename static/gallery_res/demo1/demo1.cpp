@@ -51,6 +51,7 @@ void generateRandomData(double & ϕ,
 
 int main(int argc, char *argv[])
 {
+    srand((int)time(NULL));
     double ϕ;
     double θ;
     double R;

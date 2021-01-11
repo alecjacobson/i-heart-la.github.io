@@ -47,6 +47,7 @@ void generateRandomData(Eigen::Matrix<double, 4, 4> & A,
 
 int main(int argc, char *argv[])
 {
+    srand((int)time(NULL));
     Eigen::Matrix<double, 4, 4> A;
     Eigen::Matrix<double, 4, 4> B;
     Eigen::Matrix<double, 4, 4> S;

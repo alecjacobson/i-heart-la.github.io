@@ -120,6 +120,7 @@ void generateRandomData(std::vector&lt;Eigen::VectorXd&gt; &amp; a,
 
 int main(int argc, char *argv[])
 {
+    srand((int)time(NULL));
     std::vector&lt;Eigen::VectorXd&gt; a;
     std::vector&lt;double&gt; w;
     Eigen::VectorXd x;

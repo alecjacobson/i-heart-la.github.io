@@ -1,4 +1,4 @@
-`I(X;Y)` = ∑_i ∑_j x_j p_i,j log(p_i,j/∑_k x_k p_i,k)
+`I(X;Y)` = ∑_i ∑_j x_j p_i,j log_2(p_i,j/∑_k x_k p_i,k)
 
 where
 

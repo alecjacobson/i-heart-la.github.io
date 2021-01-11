@@ -91,6 +91,7 @@ void generateRandomData(Eigen::Matrix&lt;double, 4, 4&gt; &amp; A,
 
 int main(int argc, char *argv[])
 {
+    srand((int)time(NULL));
     Eigen::Matrix&lt;double, 4, 4&gt; A;
     Eigen::Matrix&lt;double, 4, 4&gt; B;
     Eigen::Matrix&lt;double, 4, 4&gt; S;

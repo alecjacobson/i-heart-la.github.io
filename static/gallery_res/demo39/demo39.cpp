@@ -64,6 +64,7 @@ void generateRandomData(Eigen::Matrix<double, 4, 4> & w,
 
 int main(int argc, char *argv[])
 {
+    srand((int)time(NULL));
     Eigen::Matrix<double, 4, 4> w;
     std::vector<Eigen::Matrix<double, 4, 4>> M;
     std::vector<Eigen::Matrix<double, 4, 1>> u;

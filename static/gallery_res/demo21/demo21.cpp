@@ -39,7 +39,7 @@ double demo21(
 {
     const long _dim_0 = p.size();
     double _sum_0 = 0;
-    for(int i=1; i<=q.size(); i++){
+    for(int i=1; i<=p.size(); i++){
         _sum_0 += pow(cos(θ), 2) * pow((((p.at(i-1) - q.at(i-1))).dot(n.at(i-1)) + ((((p.at(i-1) + q.at(i-1))).cross(n.at(i-1)))).dot(ã) + (n.at(i-1)).dot(t̃)), 2);
     }
     double b = _sum_0;
@@ -76,6 +76,7 @@ void generateRandomData(double & θ,
 
 int main(int argc, char *argv[])
 {
+    srand((int)time(NULL));
     double θ;
     std::vector<Eigen::Matrix<double, 3, 1>> p;
     std::vector<Eigen::Matrix<double, 3, 1>> q;

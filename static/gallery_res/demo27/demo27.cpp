@@ -59,6 +59,7 @@ void generateRandomData(double & k₁,
 
 int main(int argc, char *argv[])
 {
+    srand((int)time(NULL));
     double k₁;
     double k₂;
     Eigen::Matrix<double, 3, 1> e₁;

@@ -1,8 +1,8 @@
 /*
-xᵢ = T_*,1
-xⱼ = T_*,2
-xₖ = T_*,3
-`n(T)` = (xⱼ-xᵢ)×(xₖ-xᵢ)/||(xⱼ-xᵢ)×(xₖ-xᵢ)||
+`xᵢ` = T_*,1
+`xⱼ` = T_*,2
+`xₖ` = T_*,3
+`n(T)` = (`xⱼ`-`xᵢ`)×(`xₖ`-`xᵢ`)/||(`xⱼ`-`xᵢ`)×(`xₖ`-`xᵢ`)||
 
 where
  
@@ -42,6 +42,7 @@ void generateRandomData(Eigen::Matrix<double, 3, 3> & T)
 
 int main(int argc, char *argv[])
 {
+    srand((int)time(NULL));
     Eigen::Matrix<double, 3, 3> T;
     generateRandomData(T);
     Eigen::Matrix<double, 3, 1> func_value = demo2-1(T);

@@ -76,6 +76,7 @@ void generateRandomData(std::vector<Eigen::VectorXd> & a,
 
 int main(int argc, char *argv[])
 {
+    srand((int)time(NULL));
     std::vector<Eigen::VectorXd> a;
     std::vector<double> w;
     Eigen::VectorXd x;

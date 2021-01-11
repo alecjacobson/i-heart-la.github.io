@@ -57,6 +57,7 @@ void generateRandomData(std::vector<double> & f,
 
 int main(int argc, char *argv[])
 {
+    srand((int)time(NULL));
     std::vector<double> f;
     std::vector<double> p;
     generateRandomData(f, p);

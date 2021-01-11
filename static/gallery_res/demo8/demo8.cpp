@@ -1,5 +1,5 @@
 /*
-`I(X;Y)` = ∑_i ∑_j x_j p_i,j log(p_i,j/∑_k x_k p_i,k)
+`I(X;Y)` = ∑_i ∑_j x_j p_i,j log_2(p_i,j/∑_k x_k p_i,k)
 
 where
 
@@ -37,7 +37,7 @@ double demo8(
             for(int k=1; k<=x.size(); k++){
                 _sum_2 += x(k-1) * p(i-1, k-1);
             }
-            _sum_1 += x(j-1) * p(i-1, j-1) * log10(p(i-1, j-1) / double(_sum_2));
+            _sum_1 += x(j-1) * p(i-1, j-1) * (log10(p(i-1, j-1) / double(_sum_2)) / log10(2));
         }
         _sum_0 += _sum_1;
     }
@@ -59,6 +59,7 @@ void generateRandomData(Eigen::VectorXd & x,
 
 int main(int argc, char *argv[])
 {
+    srand((int)time(NULL));
     Eigen::VectorXd x;
     Eigen::MatrixXd p;
     generateRandomData(x, p);

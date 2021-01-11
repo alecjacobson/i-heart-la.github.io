@@ -66,6 +66,7 @@ void generateRandomData(std::vector<Eigen::MatrixXd> & A,
 
 int main(int argc, char *argv[])
 {
+    srand((int)time(NULL));
     std::vector<Eigen::MatrixXd> A;
     Eigen::VectorXd x₀;
     std::vector<Eigen::VectorXd> b;

@@ -1,12 +1,12 @@
 /*
-`G_σ(s_i^k)` = ∑_j l_j exp(-dist(bᵢ , b_j)/(2σ²))(s_j)^k
+`G_σ(s_i^k)` = ∑_j l_j exp(-dist(`bᵢ`, b_j)/(2σ²))(s_j)^k
 
 where
 
 l_j: ℝ : the length of bj
 dist: ℝ^n, ℝ^n -> ℝ : measures the geodesic distance between the centers of bi and bj along the boundary
 σ: ℝ
-bᵢ: ℝ^n
+`bᵢ`: ℝ^n
 b_j: ℝ^n
 s_j: ℝ : unit direction vector of bi
 k: ℝ : iteration number
@@ -49,7 +49,7 @@ double demo28(
     assert( s.size() == _dim_0 );
 
     double _sum_0 = 0;
-    for(int j=1; j<=s.size(); j++){
+    for(int j=1; j<=b.size(); j++){
         _sum_0 += l.at(j-1) * exp(-dist(bᵢ, b.at(j-1)) / double((2 * pow(σ, 2)))) * pow((s.at(j-1)), k);
     }
     double G_σ_left_parenthesis_s_i_circumflex_accent_k_right_parenthesis = _sum_0;
@@ -91,6 +91,7 @@ void generateRandomData(std::vector<double> & l,
 
 int main(int argc, char *argv[])
 {
+    srand((int)time(NULL));
     std::vector<double> l;
     std::function<double(Eigen::VectorXd, Eigen::VectorXd)> dist;
     double σ;

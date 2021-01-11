@@ -54,6 +54,7 @@ void generateRandomData(std::vector<Eigen::Matrix<double, 3, 1>> & x,
 
 int main(int argc, char *argv[])
 {
+    srand((int)time(NULL));
     std::vector<Eigen::Matrix<double, 3, 1>> x;
     std::vector<Eigen::Matrix<double, 3, 1>> n̂;
     std::vector<Eigen::Matrix<double, 3, 1>> p;

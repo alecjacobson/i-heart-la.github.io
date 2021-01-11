@@ -3,21 +3,8 @@ given
 p_i: ℝ^3: points on lines
 d_i: ℝ^3: unit directions along lines
 
-k_i = (p_i - (p_i⋅d_i)d_i)
-a_i = (1,0,0) - d_i,1 d_i
-b_i = (0,1,0) - d_i,2 d_i
-c_i = (0,0,1) - d_i,3 d_i
-
- 
-M = [ ∑_i( a_i,1 - d_i,1 (d_i⋅a_i) )    ∑_i( a_i,2 - d_i,2 (d_i⋅a_i) )    ∑_i( a_i,3 - d_i,3 (d_i⋅a_i) )
-      ∑_i( b_i,1 - d_i,1 (d_i⋅b_i) )    ∑_i( b_i,2 - d_i,2 (d_i⋅b_i) )    ∑_i( b_i,3 - d_i,3 (d_i⋅b_i) )
-      ∑_i( c_i,1 - d_i,1 (d_i⋅c_i) )    ∑_i( c_i,2 - d_i,2 (d_i⋅c_i) )    ∑_i( c_i,3 - d_i,3 (d_i⋅c_i) ) ]
-
-r = [ ∑_i( k_i⋅a_i )
-      ∑_i( k_i⋅b_i )
-      ∑_i( k_i⋅c_i ) ]
-
-q = M^(-1) r
+P_i = ( I_3 - d_i d_iᵀ )
+q = ( ∑_i P_iᵀP_i )⁻¹ ( ∑_i P_iᵀP_i p_i )
 """
 import numpy as np
 import scipy
@@ -39,71 +26,17 @@ def least_square(p, d):
     assert p.shape == (_dim_0, 3, )
     assert d.shape == (_dim_0, 3, )
 
-    k = np.zeros((_dim_0, 3, ))
+    P = np.zeros((_dim_0, 3, 3))
     for i in range(1, _dim_0+1):
-        k[i-1] = (p[i-1] - (np.dot((p[i-1]).ravel(), (d[i-1]).ravel())) * d[i-1])
+        P[i-1] = (np.identity(3) - (d[i-1]).reshape(3, 1) @ d[i-1].T.reshape(1, 3))
 
-    a = np.zeros((_dim_0, 3, ))
-    for i in range(1, _dim_0+1):
-        a[i-1] = np.array([1, 0, 0]) - d[i-1][1-1] * d[i-1]
-
-    b = np.zeros((_dim_0, 3, ))
-    for i in range(1, _dim_0+1):
-        b[i-1] = np.array([0, 1, 0]) - d[i-1][2-1] * d[i-1]
-
-    c = np.zeros((_dim_0, 3, ))
-    for i in range(1, _dim_0+1):
-        c[i-1] = np.array([0, 0, 1]) - d[i-1][3-1] * d[i-1]
-
-    _sum_0 = 0
-    for i in range(1, len(d)+1):
-        _sum_0 += (a[i-1][1-1] - d[i-1][1-1] * (np.dot((d[i-1]).ravel(), (a[i-1]).ravel())))
-    _sum_1 = 0
-    for i in range(1, len(d)+1):
-        _sum_1 += (a[i-1][2-1] - d[i-1][2-1] * (np.dot((d[i-1]).ravel(), (a[i-1]).ravel())))
-    _sum_2 = 0
-    for i in range(1, len(d)+1):
-        _sum_2 += (a[i-1][3-1] - d[i-1][3-1] * (np.dot((d[i-1]).ravel(), (a[i-1]).ravel())))
-    _sum_3 = 0
-    for i in range(1, len(d)+1):
-        _sum_3 += (b[i-1][1-1] - d[i-1][1-1] * (np.dot((d[i-1]).ravel(), (b[i-1]).ravel())))
-    _sum_4 = 0
-    for i in range(1, len(d)+1):
-        _sum_4 += (b[i-1][2-1] - d[i-1][2-1] * (np.dot((d[i-1]).ravel(), (b[i-1]).ravel())))
-    _sum_5 = 0
-    for i in range(1, len(d)+1):
-        _sum_5 += (b[i-1][3-1] - d[i-1][3-1] * (np.dot((d[i-1]).ravel(), (b[i-1]).ravel())))
-    _sum_6 = 0
-    for i in range(1, len(d)+1):
-        _sum_6 += (c[i-1][1-1] - d[i-1][1-1] * (np.dot((d[i-1]).ravel(), (c[i-1]).ravel())))
-    _sum_7 = 0
-    for i in range(1, len(d)+1):
-        _sum_7 += (c[i-1][2-1] - d[i-1][2-1] * (np.dot((d[i-1]).ravel(), (c[i-1]).ravel())))
-    _sum_8 = 0
-    for i in range(1, len(d)+1):
-        _sum_8 += (c[i-1][3-1] - d[i-1][3-1] * (np.dot((d[i-1]).ravel(), (c[i-1]).ravel())))
-    _M_0 = np.zeros((3, 3))
-    _M_0[0] = [_sum_0, _sum_1, _sum_2]
-    _M_0[1] = [_sum_3, _sum_4, _sum_5]
-    _M_0[2] = [_sum_6, _sum_7, _sum_8]
-    M = _M_0
-
-    _sum_9 = 0
-    for i in range(1, len(a)+1):
-        _sum_9 += (np.dot((k[i-1]).ravel(), (a[i-1]).ravel()))
-    _sum_10 = 0
-    for i in range(1, len(b)+1):
-        _sum_10 += (np.dot((k[i-1]).ravel(), (b[i-1]).ravel()))
-    _sum_11 = 0
-    for i in range(1, len(c)+1):
-        _sum_11 += (np.dot((k[i-1]).ravel(), (c[i-1]).ravel()))
-    _r_0 = np.zeros((3, 1))
-    _r_0[0] = [_sum_9]
-    _r_0[1] = [_sum_10]
-    _r_0[2] = [_sum_11]
-    r = _r_0
-
-    q = np.linalg.inv(M) @ r
+    _sum_0 = np.zeros((3, 3))
+    for i in range(1, len(P)+1):
+        _sum_0 += P[i-1].T @ P[i-1]
+    _sum_1 = np.zeros((3, ))
+    for i in range(1, len(p)+1):
+        _sum_1 += P[i-1].T @ P[i-1] @ p[i-1]
+    q = np.linalg.inv((_sum_0)) @ (_sum_1)
 
     return q
 

@@ -78,9 +78,9 @@ double demo26(
     assert( R̂.size() == x );
 
     double _sum_0 = 0;
-    for(int n=1; n&lt;=w.rows(); n++){
+    for(int n=1; n&lt;=c.rows(); n++){
         double _sum_1 = 0;
-        for(int i=1; i&lt;=w.cols(); i++){
+        for(int i=1; i&lt;=c.cols(); i++){
             _sum_1 += c(n-1, i-1) * w(n-1, i-1) * R̂(n-1);
         }
         _sum_0 += _sum_1;
@@ -113,6 +113,7 @@ void generateRandomData(Eigen::MatrixXd &amp; c,
 
 int main(int argc, char *argv[])
 {
+    srand((int)time(NULL));
     Eigen::MatrixXd c;
     Eigen::MatrixXd w;
     Eigen::VectorXd R̂;
@@ -160,9 +161,9 @@ def demo26(c, w, R̂):
     assert R̂.shape == (x,)
 
     _sum_0 = 0
-    for n in range(1, len(w)+1):
+    for n in range(1, len(c)+1):
         _sum_1 = 0
-        for i in range(1, len(w)+1):
+        for i in range(1, len(c)+1):
             _sum_1 += c[n-1, i-1] * w[n-1, i-1] * R̂[n-1]
         _sum_0 += _sum_1
     _sum_2 = 0

@@ -55,6 +55,7 @@ void generateRandomData(Eigen::VectorXd & x,
 
 int main(int argc, char *argv[])
 {
+    srand((int)time(NULL));
     Eigen::VectorXd x;
     Eigen::MatrixXd W;
     Eigen::VectorXd v;

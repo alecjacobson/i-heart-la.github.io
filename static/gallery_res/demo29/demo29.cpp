@@ -88,6 +88,7 @@ void generateRandomData(Eigen::VectorXd & α,
 
 int main(int argc, char *argv[])
 {
+    srand((int)time(NULL));
     Eigen::VectorXd α;
     Eigen::VectorXd p;
     Eigen::MatrixXd X;

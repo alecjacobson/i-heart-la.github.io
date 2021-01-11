@@ -130,6 +130,7 @@ void generateRandomData(double & σ_N,
 
 int main(int argc, char *argv[])
 {
+    srand((int)time(NULL));
     double σ_N;
     double E_I;
     std::vector<double> α;
