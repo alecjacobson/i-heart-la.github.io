@@ -1,0 +1,274 @@
+<!doctype html>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../../static/style.css">
+<title>laplacian — I❤LA</title>
+<body>
+  <header>
+    <link href="../../static/prism.css" rel="stylesheet" />
+    <h1> laplacian </h1>
+  </header>
+  <script src="../../static/prism.js"></script>
+  <div class="page">
+    
+  
+
+  
+    <div class="gallery_post">
+
+    <p>This page shows laplacian implementation.</p>
+
+
+    
+    
+    
+    Here is the description: <br>
+      <img src=../../static/gallery_res/laplacian/laplacian.png alt="placeholder" width="700" style='object-fit: scale-down;'><br>
+    
+
+    
+      <br> Here is the LA input: <br>
+      <div class="code_block" style='height: 510px;'><pre ><code class="language-cpsp">from trigonometry: cot
+
+L_i,j = { cot(α_ij) + cot(β_ij) if j ∈ N(i)
+
+L_i,i = -sum_(k for k != i) L_i,k
+
+where
+
+L: ℝ^(n×n)
+α: ℝ^(n×n)
+β: ℝ^(n×n)
+N: ℤ -&gt; {ℤ}</code></pre></div>
+    
+
+    
+      
+        <br> Here is the Eigen output: <br>
+        <div class="code_block"><pre ><code class="language-cpp">/*
+from trigonometry: cot
+
+L_i,j = { cot(α_ij) + cot(β_ij) if j ∈ N(i)
+
+L_i,i = -sum_(k for k != i) L_i,k
+
+where
+
+L: ℝ^(n×n)
+α: ℝ^(n×n)
+β: ℝ^(n×n)
+N: ℤ -&gt; {ℤ}
+*/
+#include &lt;Eigen/Core&gt;
+#include &lt;Eigen/Dense&gt;
+#include &lt;Eigen/Sparse&gt;
+#include &lt;iostream&gt;
+#include &lt;set&gt;
+
+/**
+ * laplacian
+ *
+ * @param α  ℝ^(n×n)
+ * @param β  ℝ^(n×n)
+ * @param N  ℤ -&gt; {ℤ}
+ * @return L
+ */
+Eigen::SparseMatrix&lt;double&gt; laplacian(
+    const Eigen::MatrixXd &amp; α,
+    const Eigen::MatrixXd &amp; β,
+    const std::function&lt;std::set&lt;std::tuple&lt; int &gt; &gt;(int)&gt; &amp; N)
+{
+    const long n = β.cols();
+    assert( α.rows() == n );
+    assert( α.cols() == n );
+    assert( β.rows() == n );
+    assert( β.cols() == n );
+
+    Eigen::SparseMatrix&lt;double&gt; L(n, n);
+    std::vector&lt;Eigen::Triplet&lt;double&gt; &gt; tripletList_L;
+    for( int i=1; i&lt;=n; i++){
+        for( int j=1; j&lt;=n; j++){
+            if(N(i).find(std::tuple&lt; int &gt;(j)) != N(i).end()){
+                tripletList_L.push_back(Eigen::Triplet&lt;double&gt;(i-1, j-1, 1/tan(α(i-1, j-1)) + 1/tan(β(i-1, j-1))));
+            }
+        }
+    }
+    L.setFromTriplets(tripletList_L.begin(), tripletList_L.end());
+
+
+    for( int i=1; i&lt;=n; i++){
+        double _sum_0 = 0;
+        for(int k=1; k&lt;=L.cols(); k++){
+            if(k != i){
+                _sum_0 += L.coeff(i-1, k-1);
+            }
+        }
+        tripletList_L.push_back(Eigen::Triplet&lt;double&gt;(i-1, i-1, -_sum_0));
+    }
+    L.setFromTriplets(tripletList_L.begin(), tripletList_L.end());
+
+
+    return L;
+}
+
+
+void generateRandomData(Eigen::MatrixXd &amp; α,
+    Eigen::MatrixXd &amp; β,
+    std::function&lt;std::set&lt;std::tuple&lt; int &gt; &gt;(int)&gt; &amp; N)
+{
+    const int n = rand()%10;
+    α = Eigen::MatrixXd::Random(n, n);
+    β = Eigen::MatrixXd::Random(n, n);
+    N = [](int)-&gt;std::set&lt;std::tuple&lt; int &gt; &gt;{
+        std::set&lt;std::tuple&lt; int &gt; &gt; tmp;
+        const int tmp_0 = rand()%10;
+        for(int i=0; i&lt;tmp_0; i++){
+            tmp.insert(std::make_tuple(rand()%10));
+        }
+        return tmp;
+    };
+}
+
+
+int main(int argc, char *argv[])
+{
+    srand((int)time(NULL));
+    Eigen::MatrixXd α;
+    Eigen::MatrixXd β;
+    std::function&lt;std::set&lt;std::tuple&lt; int &gt; &gt;(int)&gt; N;
+    generateRandomData(α, β, N);
+    Eigen::SparseMatrix&lt;double&gt; func_value = laplacian(α, β, N);
+    std::cout&lt;&lt;&#34;func_value:\n&#34;&lt;&lt;func_value&lt;&lt;std::endl;
+    return 0;
+}</code></pre></div>
+      
+    
+
+    
+      <br> Here is the Python output: <br>
+      <div class="code_block"><pre ><code class="language-python">&#34;&#34;&#34;
+from trigonometry: cot
+
+L_i,j = { cot(α_ij) + cot(β_ij) if j ∈ N(i)
+
+L_i,i = -sum_(k for k != i) L_i,k
+
+where
+
+L: ℝ^(n×n)
+α: ℝ^(n×n)
+β: ℝ^(n×n)
+N: ℤ -&gt; {ℤ}
+&#34;&#34;&#34;
+import numpy as np
+import scipy
+import scipy.linalg
+from scipy import sparse
+from scipy.integrate import quad
+from scipy.optimize import minimize
+
+
+def laplacian(α, β, N):
+    &#34;&#34;&#34;
+    :param :α : ℝ^(n×n)
+    :param :β : ℝ^(n×n)
+    :param :N : ℤ -&gt; {ℤ}
+    &#34;&#34;&#34;
+    α = np.asarray(α, dtype=np.float64)
+    β = np.asarray(β, dtype=np.float64)
+
+    n = β.shape[1]
+    assert α.shape == (n, n)
+    assert β.shape == (n, n)
+
+    _Lij_0 = []
+    _Lvals_0 = []
+    for i in range(1, n+1):
+        for j in range(1, n+1):
+            if (j) in N(i):
+                _Lij_0.append((i-1, j-1))
+                _Lvals_0.append(1/np.tan(α[i-1, j-1]) + 1/np.tan(β[i-1, j-1]))
+    _sparse_0 = scipy.sparse.coo_matrix((_Lvals_0, np.asarray(_Lij_0).T), shape=(n, n))
+    L = _sparse_0
+
+    for i in range(1, n+1):
+        _sum_0 = 0
+        for k in range(1, L.shape[0]+1):
+            if(k != i):
+                _sum_0 += L.tocsr()[i-1, k-1]
+        _Lij_0.append((i - 1, i - 1))
+        _Lvals_0.append(-_sum_0)
+    L = scipy.sparse.coo_matrix((_Lvals_0, np.asarray(_Lij_0).T), shape=(n, n))
+
+
+    return L
+
+
+def generateRandomData():
+    n = np.random.randint(10)
+    α = np.random.randn(n, n)
+    β = np.random.randn(n, n)
+    def N(p0):
+        tmp = []
+        tmp_0 = np.random.randint(1, 10)
+        for i in range(tmp_0):
+            tmp.append((np.random.randint(10)))
+        return tmp
+    return α, β, N
+
+
+if __name__ == &#39;__main__&#39;:
+    α, β, N = generateRandomData()
+    print(&#34;α:&#34;, α)
+    print(&#34;β:&#34;, β)
+    print(&#34;N:&#34;, N)
+    func_value = laplacian(α, β, N)
+    print(&#34;func_value: &#34;, func_value)</code></pre></div>
+    
+
+    
+      <br> Here is the Tex output: <br>
+      <div class="code_block"><pre ><code class="language-tex">\documentclass[12pt]{article}
+\usepackage{mathdots}
+\usepackage[bb=boondox]{mathalfa}
+\usepackage{mathtools}
+\usepackage{amssymb}
+\usepackage{ctex}
+\setmainfont{Linux Libertine O}
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\begin{document}
+from trigonometry import cot
+
+\[
+\textit{L}_{\textit{i}, \textit{j}} = \begin{cases} cot(\textit{α}_{\textit{i}, \textit{j}}) + cot(\textit{β}_{\textit{i}, \textit{j}}) &amp; \text{if}  \textit{j} \in \textit{N}(\textit{i})  \\ \end{cases} 
+\]
+\[
+\textit{L}_{\textit{i}, \textit{i}} = -\sum_{\textit{k} != \textit{i}} \textit{L}_{\textit{i}, \textit{k}}
+\]
+
+where
+\begin{itemize}
+\item $\textit{L} \in \mathbb{R}^{ \textit{n} \times \textit{n} }$
+\item $\textit{α} \in \mathbb{R}^{ \textit{n} \times \textit{n} }$
+\item $\textit{β} \in \mathbb{R}^{ \textit{n} \times \textit{n} }$
+\item $\textit{N} \in \mathbb{{Z}}\rightarrow \mathbb{Z}$
+\end{itemize}
+
+
+\end{document}</code></pre></div>
+    
+
+    
+      <br> Below is the pdf: <br>
+      <img src=../../static/gallery_res/laplacian/laplacian.pdf alt="placeholder" width="700" style='object-fit: scale-down;'><br>
+    
+    </div>
+  
+
+
+ 
+
+
+
+  </div>
+</body>

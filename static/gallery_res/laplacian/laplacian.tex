@@ -1,0 +1,29 @@
+\documentclass[12pt]{article}
+\usepackage{mathdots}
+\usepackage[bb=boondox]{mathalfa}
+\usepackage{mathtools}
+\usepackage{amssymb}
+\usepackage{ctex}
+\setmainfont{Linux Libertine O}
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\begin{document}
+from trigonometry import cot
+
+\[
+\textit{L}_{\textit{i}, \textit{j}} = \begin{cases} cot(\textit{α}_{\textit{i}, \textit{j}}) + cot(\textit{β}_{\textit{i}, \textit{j}}) & \text{if}  \textit{j} \in \textit{N}(\textit{i})  \\ \end{cases} 
+\]
+\[
+\textit{L}_{\textit{i}, \textit{i}} = -\sum_{\textit{k} != \textit{i}} \textit{L}_{\textit{i}, \textit{k}}
+\]
+
+where
+\begin{itemize}
+\item $\textit{L} \in \mathbb{R}^{ \textit{n} \times \textit{n} }$
+\item $\textit{α} \in \mathbb{R}^{ \textit{n} \times \textit{n} }$
+\item $\textit{β} \in \mathbb{R}^{ \textit{n} \times \textit{n} }$
+\item $\textit{N} \in \mathbb{{Z}}\rightarrow \mathbb{Z}$
+\end{itemize}
+
+
+\end{document}

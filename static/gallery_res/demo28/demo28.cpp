@@ -49,7 +49,7 @@ double demo28(
     assert( s.size() == _dim_0 );
 
     double _sum_0 = 0;
-    for(int j=1; j<=b.size(); j++){
+    for(int j=1; j<=s.size(); j++){
         _sum_0 += l.at(j-1) * exp(-dist(bᵢ, b.at(j-1)) / double((2 * pow(σ, 2)))) * pow((s.at(j-1)), k);
     }
     double G_σ_left_parenthesis_s_i_circumflex_accent_k_right_parenthesis = _sum_0;

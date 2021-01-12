@@ -76,7 +76,7 @@ std::vector&lt;Eigen::Matrix&lt;double, 4, 1&gt;&gt; demo39(
     std::vector&lt;Eigen::Matrix&lt;double, 4, 1&gt;&gt; v(_dim_1);
     for( int i=1; i&lt;=_dim_1; i++){
         Eigen::MatrixXd _sum_0 = Eigen::MatrixXd::Zero(4, 1);
-        for(int j=1; j&lt;=M.size(); j++){
+        for(int j=1; j&lt;=w.cols(); j++){
             _sum_0 += w(i-1, j-1) * M.at(j-1) * u.at(i-1);
         }
         v.at(i-1) = _sum_0;
@@ -160,7 +160,7 @@ def demo39(w, M, u):
     v = np.zeros((_dim_1, 4, ))
     for i in range(1, _dim_1+1):
         _sum_0 = np.zeros((4, ))
-        for j in range(1, len(M)+1):
+        for j in range(1, len(w)+1):
             _sum_0 += w[i-1, j-1] * M[j-1] @ u[i-1]
         v[i-1] = _sum_0
 

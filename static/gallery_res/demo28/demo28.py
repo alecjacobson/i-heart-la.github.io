@@ -44,7 +44,7 @@ def demo28(l, dist, σ, bᵢ, b, s, k):
     assert np.ndim(k) == 0
 
     _sum_0 = 0
-    for j in range(1, len(b)+1):
+    for j in range(1, len(s)+1):
         _sum_0 += l[j-1] * np.exp(-dist(bᵢ, b[j-1]) / (2 * np.power(σ, 2))) * np.power((s[j-1]), k)
     G_σ_left_parenthesis_s_i_circumflex_accent_k_right_parenthesis = _sum_0
 

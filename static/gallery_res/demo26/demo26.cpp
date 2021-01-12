@@ -35,7 +35,7 @@ double demo26(
     assert( R̂.size() == x );
 
     double _sum_0 = 0;
-    for(int n=1; n<=c.rows(); n++){
+    for(int n=1; n<=R̂.size(); n++){
         double _sum_1 = 0;
         for(int i=1; i<=c.cols(); i++){
             _sum_1 += c(n-1, i-1) * w(n-1, i-1) * R̂(n-1);
@@ -43,7 +43,7 @@ double demo26(
         _sum_0 += _sum_1;
     }
     double _sum_2 = 0;
-    for(int n=1; n<=w.rows(); n++){
+    for(int n=1; n<=R̂.size(); n++){
         double _sum_3 = 0;
         for(int i=1; i<=w.cols(); i++){
             _sum_3 += w(n-1, i-1) * R̂(n-1);

@@ -70,7 +70,7 @@ double demo24(
         }
     }
     double _sum_2 = 0;
-    for(int j=1; j<=ρ̄.size(); j++){
+    for(int j=1; j<=ρ.size(); j++){
         _sum_2 += pow((ρ.at(j-1) - ρ̄.at(j-1)), 2) / double(pow(σ_ρ.at(j-1), 2));
     }
     double E = 1 / double(pow(σ_N, 2)) * E_I + _sum_0 + _sum_1 + _sum_2;
