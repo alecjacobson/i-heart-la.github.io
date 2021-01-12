@@ -41,7 +41,8 @@ Eigen::SparseMatrix<double> laplacian(
     std::vector<Eigen::Triplet<double> > tripletList_L;
     for( int i=1; i<=n; i++){
         for( int j=1; j<=n; j++){
-            if(N(i).find(std::tuple< int >(j)) != N(i).end()){
+            std::set<std::tuple< int > > _set_0 = N(i);
+            if(_set_0.find(std::tuple< int >(j)) != _set_0.end()){
                 tripletList_L.push_back(Eigen::Triplet<double>(i-1, j-1, 1/tan(α(i-1, j-1)) + 1/tan(β(i-1, j-1))));
             }
         }
