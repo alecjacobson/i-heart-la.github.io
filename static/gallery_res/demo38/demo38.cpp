@@ -1,5 +1,5 @@
 /*
-min_(C ∈ ℝ^3) ∑_i ||x_i + (R_i - I_3)C ||²
+min_(C ∈ ℝ^3) ∑_i ||x_i + (R_i - I₃)C ||²
 
 where
 

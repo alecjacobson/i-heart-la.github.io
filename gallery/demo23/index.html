@@ -298,30 +298,16 @@ if __name__ == &#39;__main__&#39;:
 \DeclareMathOperator*{\argmax}{arg\,max}
 \DeclareMathOperator*{\argmin}{arg\,min}
 \begin{document}
-\[
-\textit{r̄} = \textit{v̄} × \textit{ō}
-\]
-\[
-\textit{s̄} = \textit{ō} × \textit{ū}
-\]
-\[
-\textit{n̄} = \textit{ū} × \textit{v̄}
-\]
-\[
-\textit{k\textsubscript{r}} = \textit{r̄} \cdot (\textit{C̄ₐ} - \textit{V̄})
-\]
-\[
-\textit{kₛ} = \textit{s̄} \cdot (\textit{C̄ₐ} - \textit{V̄})
-\]
-\[
-\textit{kₙ} = \textit{n̄} \cdot (\textit{C̄ₐ} - \textit{V̄})
-\]
-\[
-\textit{x(θ,v)} = \frac{(\textit{r̄} \cdot \textit{D\_A}(\textit{θ},\textit{v}) + \textit{k\textsubscript{r}}\textit{δ}(\textit{θ},\textit{v}))}{(\textit{n̄} \cdot \textit{D\_A}(\textit{θ},\textit{v}) + \textit{kₙ}\textit{δ}(\textit{θ},\textit{v}))}
-\]
-\[
-\textit{y(θ,v)} = \frac{(\textit{s̄} \cdot \textit{D\_A}(\textit{θ},\textit{v}) + \textit{kₛ}\textit{δ}(\textit{θ},\textit{v}))}{(\textit{n̄} \cdot \textit{D\_A}(\textit{θ},\textit{v}) + \textit{kₙ}\textit{δ}(\textit{θ},\textit{v}))}
-\]
+\begin{align*}
+\textit{r̄} &amp; = \textit{v̄} × \textit{ō} \\
+\textit{s̄} &amp; = \textit{ō} × \textit{ū} \\
+\textit{n̄} &amp; = \textit{ū} × \textit{v̄} \\
+\textit{k\textsubscript{r}} &amp; = \textit{r̄} \cdot \left( \textit{C̄ₐ} - \textit{V̄} \right) \\
+\textit{kₛ} &amp; = \textit{s̄} \cdot \left( \textit{C̄ₐ} - \textit{V̄} \right) \\
+\textit{kₙ} &amp; = \textit{n̄} \cdot \left( \textit{C̄ₐ} - \textit{V̄} \right) \\
+\textit{x(θ,v)} &amp; = \frac{\left( \textit{r̄} \cdot \textit{D\_A}\left( \textit{θ},\textit{v} \right) + \textit{k\textsubscript{r}}\textit{δ}\left( \textit{θ},\textit{v} \right) \right)}{\left( \textit{n̄} \cdot \textit{D\_A}\left( \textit{θ},\textit{v} \right) + \textit{kₙ}\textit{δ}\left( \textit{θ},\textit{v} \right) \right)} \\
+\textit{y(θ,v)} &amp; = \frac{\left( \textit{s̄} \cdot \textit{D\_A}\left( \textit{θ},\textit{v} \right) + \textit{kₛ}\textit{δ}\left( \textit{θ},\textit{v} \right) \right)}{\left( \textit{n̄} \cdot \textit{D\_A}\left( \textit{θ},\textit{v} \right) + \textit{kₙ}\textit{δ}\left( \textit{θ},\textit{v} \right) \right)}
+\end{align*}
 
 where
 \begin{itemize}
@@ -337,7 +323,8 @@ where
 \end{itemize}
 
 
-\end{document}</code></pre></div>
+\end{document}
+</code></pre></div>
     
 
     

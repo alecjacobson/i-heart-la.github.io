@@ -10,12 +10,10 @@
 \begin{document}
 from trigonometry import cot
 
-\[
-\textit{L}_{\textit{i}, \textit{j}} = \begin{cases} cot(\textit{α}_{\textit{i}, \textit{j}}) + cot(\textit{β}_{\textit{i}, \textit{j}}) & \text{if}  \textit{j} \in \textit{N}(\textit{i})  \\ \end{cases} 
-\]
-\[
-\textit{L}_{\textit{i}, \textit{i}} = -\sum_{\textit{k} != \textit{i}} \textit{L}_{\textit{i}, \textit{k}}
-\]
+\begin{align*}
+\textit{L}_{\textit{i}, \textit{j}} & = \begin{cases} cot\left( \textit{α}_{\textit{i}, \textit{j}} \right) + cot\left( \textit{β}_{\textit{i}, \textit{j}} \right) & \text{if}  \textit{j} \in \textit{N}\left( \textit{i} \right)  \\ \end{cases}  \\
+\textit{L}_{\textit{i}, \textit{i}} & = -\sum_{\textit{k} != \textit{i}} \textit{L}_{\textit{i}, \textit{k}}
+\end{align*}
 
 where
 \begin{itemize}

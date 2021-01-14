@@ -78,7 +78,7 @@ def demo10(A, x0, b):
 
     def _target_0(x):
         _sum_0 = 0
-        for i in range(1, len(b)+1):
+        for i in range(1, len(A)+1):
             _sum_0 += np.linalg.norm(A[i-1] @ x + b[i-1], 2)
         return _sum_0 + (1 / 2) * np.power(np.linalg.norm(x - x0, 2), 2)
     ret = minimize(_target_0, np.zeros(n)).fun
@@ -116,10 +116,10 @@ if __name__ == &#39;__main__&#39;:
 \DeclareMathOperator*{\argmax}{arg\,max}
 \DeclareMathOperator*{\argmin}{arg\,min}
 \begin{document}
-\[
-\begin{aligned} \min_{\textit{x} \in \mathbb{R}^{ \textit{n}}} \quad &amp; \sum_\textit{i} \|\textit{A}_{ \textit{i} }\textit{x} + \textit{b}_{ \textit{i} }\|_2 + (\frac{1}{2})\|\textit{x} - \textit{x₀}\|_2^{2} \\
+\begin{align*}
+\begin{aligned} \min_{\textit{x} \in \mathbb{R}^{ \textit{n}}} \quad &amp; \sum_\textit{i} \|\textit{A}_{ \textit{i} }\textit{x} + \textit{b}_{ \textit{i} }\|_2 + \left( \frac{1}{2} \right)\|\textit{x} - \textit{x₀}\|_2^{2} \\
 \end{aligned}
-\]
+\end{align*}
 
 where
 \begin{itemize}
@@ -129,7 +129,8 @@ where
 \end{itemize}
 
 
-\end{document}</code></pre></div>
+\end{document}
+</code></pre></div>
     
 
     

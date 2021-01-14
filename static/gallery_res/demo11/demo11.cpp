@@ -6,7 +6,7 @@ where
 
 a_i: ℝ^n: the measurement vectors  
 w_i: ℝ: measurement noise 
-x: ℝ^n: measurement noise 
+x: ℝ^n: original vector 
 */
 #include <Eigen/Core>
 #include <Eigen/Dense>
@@ -19,7 +19,7 @@ x: ℝ^n: measurement noise
  *
  * @param a  ℝ^n: the measurement vectors  
  * @param w  ℝ: measurement noise 
- * @param x  ℝ^n: measurement noise 
+ * @param x  ℝ^n: original vector 
  * @return x̂
  */
 Eigen::VectorXd demo11(
@@ -47,7 +47,7 @@ Eigen::VectorXd demo11(
         _sum_0 += a.at(i-1) * (a.at(i-1)).transpose();
     }
     Eigen::MatrixXd _sum_1 = Eigen::MatrixXd::Zero(n, 1);
-    for(int i=1; i<=a.size(); i++){
+    for(int i=1; i<=y.size(); i++){
         _sum_1 += y.at(i-1) * a.at(i-1);
     }
     Eigen::VectorXd x̂ = (_sum_0).inverse() * _sum_1;

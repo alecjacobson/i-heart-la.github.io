@@ -34,7 +34,7 @@ def least_square(p, d):
     for i in range(1, len(P)+1):
         _sum_0 += P[i-1].T @ P[i-1]
     _sum_1 = np.zeros((3, ))
-    for i in range(1, len(P)+1):
+    for i in range(1, len(p)+1):
         _sum_1 += P[i-1].T @ P[i-1] @ p[i-1]
     q = np.linalg.inv((_sum_0)) @ (_sum_1)
 

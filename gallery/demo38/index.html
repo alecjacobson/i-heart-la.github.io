@@ -29,7 +29,7 @@
 
     
       <br> Here is the LA input: <br>
-      <div class="code_block" style='height: 200px;'><pre ><code class="language-cpsp">min_(C ∈ ℝ^3) ∑_i ||x_i + (R_i - I_3)C ||²
+      <div class="code_block" style='height: 200px;'><pre ><code class="language-cpsp">min_(C ∈ ℝ^3) ∑_i ||x_i + (R_i - I₃)C ||²
 
 where
 
@@ -42,7 +42,7 @@ R_i: ℝ^(3×3)</code></pre></div>
     
       <br> Here is the Python output: <br>
       <div class="code_block"><pre ><code class="language-python">&#34;&#34;&#34;
-min_(C ∈ ℝ^3) ∑_i ||x_i + (R_i - I_3)C ||²
+min_(C ∈ ℝ^3) ∑_i ||x_i + (R_i - I₃)C ||²
 
 where
 
@@ -71,7 +71,7 @@ def demo38(x, R):
 
     def _target_0(C):
         _sum_0 = 0
-        for i in range(1, len(x)+1):
+        for i in range(1, len(R)+1):
             _sum_0 += np.power(np.linalg.norm(x[i-1] + (R[i-1] - np.identity(3)) @ C, 2), 2)
         return _sum_0
     ret = minimize(_target_0, np.zeros(3)).fun
@@ -105,10 +105,10 @@ if __name__ == &#39;__main__&#39;:
 \DeclareMathOperator*{\argmax}{arg\,max}
 \DeclareMathOperator*{\argmin}{arg\,min}
 \begin{document}
-\[
-\begin{aligned} \min_{\textit{C} \in \mathbb{R}^{ 3}} \quad &amp; \sum_\textit{i} \|\textit{x}_{ \textit{i} } + (\textit{R}_{ \textit{i} } - I_{ 3 })\textit{C}\|_2^{2} \\
+\begin{align*}
+\begin{aligned} \min_{\textit{C} \in \mathbb{R}^{ 3}} \quad &amp; \sum_\textit{i} \|\textit{x}_{ \textit{i} } + \left( \textit{R}_{ \textit{i} } - I_{ 3 } \right)\textit{C}\|_2^{2} \\
 \end{aligned}
-\]
+\end{align*}
 
 where
 \begin{itemize}
@@ -117,7 +117,8 @@ where
 \end{itemize}
 
 
-\end{document}</code></pre></div>
+\end{document}
+</code></pre></div>
     
 
     

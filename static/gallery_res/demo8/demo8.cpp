@@ -34,7 +34,7 @@ double demo8(
         double _sum_1 = 0;
         for(int j=1; j<=p.cols(); j++){
             double _sum_2 = 0;
-            for(int k=1; k<=p.cols(); k++){
+            for(int k=1; k<=x.size(); k++){
                 _sum_2 += x(k-1) * p(i-1, k-1);
             }
             _sum_1 += x(j-1) * p(i-1, j-1) * (log10(p(i-1, j-1) / double(_sum_2)) / log10(2));

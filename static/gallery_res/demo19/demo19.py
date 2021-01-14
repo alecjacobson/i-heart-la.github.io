@@ -1,7 +1,7 @@
 """
 from linearalgebra: tr
 
-`J₃` = 1_3,3
+`J₃` = 1₃,₃
 `k_angle(Dₘ)` = 3(sqrt(2)v)^(2/3)(7/4||`Dₘ`||_F^2-1/4tr(`J₃``Dₘ`ᵀ`Dₘ`))⁻¹
 
 where

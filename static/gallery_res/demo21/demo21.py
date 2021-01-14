@@ -44,7 +44,7 @@ def demo21(θ, p, q, n, ã, t̃):
     assert t̃.shape == (3,)
 
     _sum_0 = 0
-    for i in range(1, len(p)+1):
+    for i in range(1, len(q)+1):
         _sum_0 += np.power(np.cos(θ), 2) * np.power((np.dot(((p[i-1] - q[i-1])).ravel(), (n[i-1]).ravel()) + np.dot(((np.cross((p[i-1] + q[i-1]), n[i-1]))).ravel(), (ã).ravel()) + np.dot((n[i-1]).ravel(), (t̃).ravel())), 2)
     b = _sum_0
 

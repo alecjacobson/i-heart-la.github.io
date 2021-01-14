@@ -35,7 +35,7 @@ Eigen::Matrix<double, 3, 1> least_square(
         _sum_0 += P.at(i-1).transpose() * P.at(i-1);
     }
     Eigen::MatrixXd _sum_1 = Eigen::MatrixXd::Zero(3, 1);
-    for(int i=1; i<=P.size(); i++){
+    for(int i=1; i<=p.size(); i++){
         _sum_1 += P.at(i-1).transpose() * P.at(i-1) * p.at(i-1);
     }
     Eigen::Matrix<double, 3, 1> q = (_sum_0).inverse() * (_sum_1);

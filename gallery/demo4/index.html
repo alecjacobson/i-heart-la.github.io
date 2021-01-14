@@ -78,7 +78,7 @@ double demo4(
     assert( A.size() == _dim_0 );
 
     double _sum_0 = 0;
-    for(int T=1; T&lt;=M.size(); T++){
+    for(int T=1; T&lt;=v.size(); T++){
         Eigen::Matrix&lt;double, 2, 2&gt; _n_0;
         _n_0 &lt;&lt; 0, -1,
         1, 0;
@@ -169,7 +169,7 @@ def demo4(v, u, M, A):
     assert A.shape == (_dim_0,)
 
     _sum_0 = 0
-    for T in range(1, len(M)+1):
+    for T in range(1, len(v)+1):
         _n_0 = np.zeros((2, 2))
         _n_0[0] = [0, -1]
         _n_0[1] = [1, 0]
@@ -210,12 +210,12 @@ if __name__ == &#39;__main__&#39;:
 \DeclareMathOperator*{\argmax}{arg\,max}
 \DeclareMathOperator*{\argmin}{arg\,min}
 \begin{document}
-\[
-\textit{n} = \sum_\textit{T} \textit{A}_{ \textit{T} }\|\textit{M}_{ \textit{T} }\textit{v}_{ \textit{T} } - \begin{bmatrix}
+\begin{align*}
+\textit{n} &amp; = \sum_\textit{T} \textit{A}_{ \textit{T} }\|\textit{M}_{ \textit{T} }\textit{v}_{ \textit{T} } - \begin{bmatrix}
 0 &amp; -1\\
 1 &amp; 0\\
 \end{bmatrix}\textit{M}_{ \textit{T} }\textit{u}_{ \textit{T} }\|_2^{2}
-\]
+\end{align*}
 
 where
 \begin{itemize}
@@ -226,7 +226,8 @@ where
 \end{itemize}
 
 
-\end{document}</code></pre></div>
+\end{document}
+</code></pre></div>
     
 
     

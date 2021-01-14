@@ -8,9 +8,9 @@
 \DeclareMathOperator*{\argmax}{arg\,max}
 \DeclareMathOperator*{\argmin}{arg\,min}
 \begin{document}
-\[
-\sum_\textit{i} \textit{α}_{ \textit{i} } + \frac{1}{\textit{M}}\sum_\textit{i} \sum_\textit{j} (\frac{\textit{f}(\textit{X}_{\textit{i}, \textit{j}})}{\textit{p\_c}(\textit{X}_{\textit{i}, \textit{j}})} - \frac{(\sum_\textit{k} \textit{α}_{ \textit{k} }\textit{p}_{ \textit{k} }\textit{X}_{\textit{i}, \textit{j}})}{\textit{p\_c}(\textit{X}_{\textit{i}, \textit{j}})})
-\]
+\begin{align*}
+\sum_\textit{i} \textit{α}_{ \textit{i} } + \frac{1}{\textit{M}}\sum_\textit{i} \sum_\textit{j} \left( \frac{\textit{f}\left( \textit{X}_{\textit{i}, \textit{j}} \right)}{\textit{p\_c}\left( \textit{X}_{\textit{i}, \textit{j}} \right)} - \frac{\left( \sum_\textit{k} \textit{α}_{ \textit{k} }\textit{p}_{ \textit{k} }\textit{X}_{\textit{i}, \textit{j}} \right)}{\textit{p\_c}\left( \textit{X}_{\textit{i}, \textit{j}} \right)} \right)
+\end{align*}
 
 where
 \begin{itemize}

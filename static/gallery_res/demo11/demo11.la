@@ -5,4 +5,4 @@ where
 
 a_i: ℝ^n: the measurement vectors  
 w_i: ℝ: measurement noise 
-x: ℝ^n: measurement noise 
+x: ℝ^n: original vector 

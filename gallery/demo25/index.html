@@ -85,7 +85,7 @@ def demo25(x, n̂, p):
             _ret_2 = np.vstack(((np.cross(x[i-1], n̂[i-1])).reshape(3, 1), (n̂[i-1]).reshape(3, 1)))
             _sum_1 += _ret_2 @ n̂[i-1].T.reshape(1, 3) @ (p[i-1] - x[i-1])
         _sum_2 = 0
-        for i in range(1, len(p)+1):
+        for i in range(1, len(x)+1):
             _sum_2 += (p[i-1] - x[i-1]).T.reshape(1, 3) @ n̂[i-1] * n̂[i-1].T.reshape(1, 3) @ (p[i-1] - x[i-1])
         return u.T.reshape(1, 6) @ (_sum_0) @ u - 2 * u.T.reshape(1, 6) @ (_sum_1) + _sum_2
     ret = minimize(_target_0, np.zeros(6)).fun
@@ -121,18 +121,18 @@ if __name__ == &#39;__main__&#39;:
 \DeclareMathOperator*{\argmax}{arg\,max}
 \DeclareMathOperator*{\argmin}{arg\,min}
 \begin{document}
-\[
-\begin{aligned} \min_{\textit{u} \in \mathbb{R}^{ 6}} \quad &amp; \textit{u}^T(\sum_\textit{i} \begin{bmatrix}
+\begin{align*}
+\begin{aligned} \min_{\textit{u} \in \mathbb{R}^{ 6}} \quad &amp; \textit{u}^T\left( \sum_\textit{i} \begin{bmatrix}
 \textit{x}_{ \textit{i} } × \textit{n̂}_{ \textit{i} }\\
 \textit{n̂}_{ \textit{i} }\\
 \end{bmatrix}\begin{bmatrix}
-(\textit{x}_{ \textit{i} } × \textit{n̂}_{ \textit{i} })^T &amp; \textit{n̂}_{ \textit{i} }^T\\
-\end{bmatrix})\textit{u} - 2\textit{u}^T(\sum_\textit{i} \begin{bmatrix}
+\left( \textit{x}_{ \textit{i} } × \textit{n̂}_{ \textit{i} } \right)^T &amp; \textit{n̂}_{ \textit{i} }^T\\
+\end{bmatrix} \right)\textit{u} - 2\textit{u}^T\left( \sum_\textit{i} \begin{bmatrix}
 \textit{x}_{ \textit{i} } × \textit{n̂}_{ \textit{i} }\\
 \textit{n̂}_{ \textit{i} }\\
-\end{bmatrix}\textit{n̂}_{ \textit{i} }^T(\textit{p}_{ \textit{i} } - \textit{x}_{ \textit{i} })) + \sum_\textit{i} (\textit{p}_{ \textit{i} } - \textit{x}_{ \textit{i} })^T\textit{n̂}_{ \textit{i} }\textit{n̂}_{ \textit{i} }^T(\textit{p}_{ \textit{i} } - \textit{x}_{ \textit{i} }) \\
+\end{bmatrix}\textit{n̂}_{ \textit{i} }^T\left( \textit{p}_{ \textit{i} } - \textit{x}_{ \textit{i} } \right) \right) + \sum_\textit{i} \left( \textit{p}_{ \textit{i} } - \textit{x}_{ \textit{i} } \right)^T\textit{n̂}_{ \textit{i} }\textit{n̂}_{ \textit{i} }^T\left( \textit{p}_{ \textit{i} } - \textit{x}_{ \textit{i} } \right) \\
 \end{aligned}
-\]
+\end{align*}
 
 where
 \begin{itemize}
@@ -142,7 +142,8 @@ where
 \end{itemize}
 
 
-\end{document}</code></pre></div>
+\end{document}
+</code></pre></div>
     
 
     

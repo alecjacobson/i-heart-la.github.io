@@ -8,18 +8,16 @@
 \DeclareMathOperator*{\argmax}{arg\,max}
 \DeclareMathOperator*{\argmin}{arg\,min}
 \begin{document}
-\[
-\textit{y}_{ \textit{i} } = (\textit{a}_{ \textit{i} })^T\textit{x} + \textit{w}_{ \textit{i} }
-\]
-\[
-\textit{x̂} = (\sum_\textit{i} \textit{a}_{ \textit{i} }(\textit{a}_{ \textit{i} })^T)^{-1}\sum_\textit{i} \textit{y}_{ \textit{i} }\textit{a}_{ \textit{i} }
-\]
+\begin{align*}
+\textit{y}_{ \textit{i} } & = \left( \textit{a}_{ \textit{i} } \right)^T\textit{x} + \textit{w}_{ \textit{i} } \\
+\textit{x̂} & = \left( \sum_\textit{i} \textit{a}_{ \textit{i} }\left( \textit{a}_{ \textit{i} } \right)^T \right)^{-1}\sum_\textit{i} \textit{y}_{ \textit{i} }\textit{a}_{ \textit{i} }
+\end{align*}
 
 where
 \begin{itemize}
-\item $\textit{a}_{\textit{i}} \in \mathbb{R}^{ \textit{n}}:$the measurement vectors  
-\item $\textit{w}_{\textit{i}} \in \mathbb{{R}}:$measurement noise 
-\item $\textit{x} \in \mathbb{R}^{ \textit{n}}:$measurement noise 
+\item $\textit{a}_{\textit{i}} \in \mathbb{R}^{ \textit{n}}$ the measurement vectors  
+\item $\textit{w}_{\textit{i}} \in \mathbb{{R}}$ measurement noise 
+\item $\textit{x} \in \mathbb{R}^{ \textit{n}}$ original vector 
 \end{itemize}
 
 

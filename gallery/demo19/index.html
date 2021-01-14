@@ -31,7 +31,7 @@
       <br> Here is the LA input: <br>
       <div class="code_block" style='height: 270px;'><pre ><code class="language-cpsp">from linearalgebra: tr
 
-`J₃` = 1_3,3
+`J₃` = 1₃,₃
 `k_angle(Dₘ)` = 3(sqrt(2)v)^(2/3)(7/4||`Dₘ`||_F^2-1/4tr(`J₃``Dₘ`ᵀ`Dₘ`))⁻¹
 
 where
@@ -46,7 +46,7 @@ v: ℝ</code></pre></div>
         <div class="code_block"><pre ><code class="language-cpp">/*
 from linearalgebra: tr
 
-`J₃` = 1_3,3
+`J₃` = 1₃,₃
 `k_angle(Dₘ)` = 3(sqrt(2)v)^(2/3)(7/4||`Dₘ`||_F^2-1/4tr(`J₃``Dₘ`ᵀ`Dₘ`))⁻¹
 
 where
@@ -105,7 +105,7 @@ int main(int argc, char *argv[])
       <div class="code_block"><pre ><code class="language-python">&#34;&#34;&#34;
 from linearalgebra: tr
 
-`J₃` = 1_3,3
+`J₃` = 1₃,₃
 `k_angle(Dₘ)` = 3(sqrt(2)v)^(2/3)(7/4||`Dₘ`||_F^2-1/4tr(`J₃``Dₘ`ᵀ`Dₘ`))⁻¹
 
 where
@@ -166,12 +166,10 @@ if __name__ == &#39;__main__&#39;:
 \begin{document}
 from linearalgebra import tr
 
-\[
-\textit{J₃} = \mathbb{ 1 }_{ 3,3 }
-\]
-\[
-\textit{k\_angle(Dₘ)} = 3( \sqrt{2}\textit{v})^{(\frac{2}{3})}(\frac{7}{4}\|\textit{Dₘ}\|_F^{2} - \frac{1}{4}tr(\textit{J₃}\textit{Dₘ}^T\textit{Dₘ}))^{-1}
-\]
+\begin{align*}
+\textit{J₃} &amp; = \mathbb{ 1 }_{ 3,3 } \\
+\textit{k\_angle(Dₘ)} &amp; = 3\left(  \sqrt{2}\textit{v} \right)^{\left( \frac{2}{3} \right)}\left( \frac{7}{4}\|\textit{Dₘ}\|_F^{2} - \frac{1}{4}tr\left( \textit{J₃}\textit{Dₘ}^T\textit{Dₘ} \right) \right)^{-1}
+\end{align*}
 
 where
 \begin{itemize}
@@ -180,7 +178,8 @@ where
 \end{itemize}
 
 
-\end{document}</code></pre></div>
+\end{document}
+</code></pre></div>
     
 
     

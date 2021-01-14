@@ -36,7 +36,7 @@ where
 
 a_i: ℝ^n: the measurement vectors  
 w_i: ℝ: measurement noise 
-x: ℝ^n: measurement noise </code></pre></div>
+x: ℝ^n: original vector </code></pre></div>
     
 
     
@@ -50,7 +50,7 @@ where
 
 a_i: ℝ^n: the measurement vectors  
 w_i: ℝ: measurement noise 
-x: ℝ^n: measurement noise 
+x: ℝ^n: original vector 
 */
 #include &lt;Eigen/Core&gt;
 #include &lt;Eigen/Dense&gt;
@@ -63,7 +63,7 @@ x: ℝ^n: measurement noise
  *
  * @param a  ℝ^n: the measurement vectors  
  * @param w  ℝ: measurement noise 
- * @param x  ℝ^n: measurement noise 
+ * @param x  ℝ^n: original vector 
  * @return x̂
  */
 Eigen::VectorXd demo11(
@@ -91,7 +91,7 @@ Eigen::VectorXd demo11(
         _sum_0 += a.at(i-1) * (a.at(i-1)).transpose();
     }
     Eigen::MatrixXd _sum_1 = Eigen::MatrixXd::Zero(n, 1);
-    for(int i=1; i&lt;=a.size(); i++){
+    for(int i=1; i&lt;=y.size(); i++){
         _sum_1 += y.at(i-1) * a.at(i-1);
     }
     Eigen::VectorXd x̂ = (_sum_0).inverse() * _sum_1;
@@ -142,7 +142,7 @@ where
 
 a_i: ℝ^n: the measurement vectors  
 w_i: ℝ: measurement noise 
-x: ℝ^n: measurement noise 
+x: ℝ^n: original vector 
 &#34;&#34;&#34;
 import numpy as np
 import scipy
@@ -156,7 +156,7 @@ def demo11(a, w, x):
     &#34;&#34;&#34;
     :param :a : ℝ^n: the measurement vectors  
     :param :w : ℝ: measurement noise 
-    :param :x : ℝ^n: measurement noise 
+    :param :x : ℝ^n: original vector 
     &#34;&#34;&#34;
     a = np.asarray(a, dtype=np.float64)
     w = np.asarray(w)
@@ -176,7 +176,7 @@ def demo11(a, w, x):
     for i in range(1, len(a)+1):
         _sum_0 += (a[i-1]).reshape(n, 1) @ (a[i-1]).T.reshape(1, n)
     _sum_1 = np.zeros((n, ))
-    for i in range(1, len(a)+1):
+    for i in range(1, len(y)+1):
         _sum_1 += y[i-1] * a[i-1]
     x̂ = np.linalg.inv((_sum_0)) @ _sum_1
 
@@ -213,22 +213,21 @@ if __name__ == &#39;__main__&#39;:
 \DeclareMathOperator*{\argmax}{arg\,max}
 \DeclareMathOperator*{\argmin}{arg\,min}
 \begin{document}
-\[
-\textit{y}_{ \textit{i} } = (\textit{a}_{ \textit{i} })^T\textit{x} + \textit{w}_{ \textit{i} }
-\]
-\[
-\textit{x̂} = (\sum_\textit{i} \textit{a}_{ \textit{i} }(\textit{a}_{ \textit{i} })^T)^{-1}\sum_\textit{i} \textit{y}_{ \textit{i} }\textit{a}_{ \textit{i} }
-\]
+\begin{align*}
+\textit{y}_{ \textit{i} } &amp; = \left( \textit{a}_{ \textit{i} } \right)^T\textit{x} + \textit{w}_{ \textit{i} } \\
+\textit{x̂} &amp; = \left( \sum_\textit{i} \textit{a}_{ \textit{i} }\left( \textit{a}_{ \textit{i} } \right)^T \right)^{-1}\sum_\textit{i} \textit{y}_{ \textit{i} }\textit{a}_{ \textit{i} }
+\end{align*}
 
 where
 \begin{itemize}
-\item $\textit{a}_{\textit{i}} \in \mathbb{R}^{ \textit{n}}:$the measurement vectors  
-\item $\textit{w}_{\textit{i}} \in \mathbb{{R}}:$measurement noise 
-\item $\textit{x} \in \mathbb{R}^{ \textit{n}}:$measurement noise 
+\item $\textit{a}_{\textit{i}} \in \mathbb{R}^{ \textit{n}}$ the measurement vectors  
+\item $\textit{w}_{\textit{i}} \in \mathbb{{R}}$ measurement noise 
+\item $\textit{x} \in \mathbb{R}^{ \textit{n}}$ original vector 
 \end{itemize}
 
 
-\end{document}</code></pre></div>
+\end{document}
+</code></pre></div>
     
 
     
