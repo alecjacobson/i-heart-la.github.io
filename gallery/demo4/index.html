@@ -29,8 +29,8 @@
 
     
       <br> Here is the LA input: <br>
-      <div class="code_block" style='height: 240px;'><pre ><code class="language-cpsp">n = ∑_T A_T||M_T v_T - [0 -1
-                        1  0] M_T u_T||²
+      <div class="code_block" style='height: 240px;'><pre ><code class="language-cpsp">`E_LSCM` = ∑_T A_T||M_T v_T - [0 -1
+                               1  0] M_T u_T||²
 where
  
 v_i: ℝ^3
@@ -43,8 +43,8 @@ A_i: ℝ</code></pre></div>
       
         <br> Here is the Eigen output: <br>
         <div class="code_block"><pre ><code class="language-cpp">/*
-n = ∑_T A_T||M_T v_T - [0 -1
-                        1  0] M_T u_T||²
+`E_LSCM` = ∑_T A_T||M_T v_T - [0 -1
+                               1  0] M_T u_T||²
 where
  
 v_i: ℝ^3
@@ -65,7 +65,7 @@ A_i: ℝ
  * @param u  ℝ^3
  * @param M  ℝ^(2×3)
  * @param A  ℝ
- * @return n
+ * @return E_LSCM
  */
 double demo4(
     const std::vector&lt;Eigen::Matrix&lt;double, 3, 1&gt;&gt; &amp; v,
@@ -78,15 +78,15 @@ double demo4(
     assert( A.size() == _dim_0 );
 
     double _sum_0 = 0;
-    for(int T=1; T&lt;=v.size(); T++){
-        Eigen::Matrix&lt;double, 2, 2&gt; _n_0;
-        _n_0 &lt;&lt; 0, -1,
+    for(int T=1; T&lt;=A.size(); T++){
+        Eigen::Matrix&lt;double, 2, 2&gt; _E_LSCM_0;
+        _E_LSCM_0 &lt;&lt; 0, -1,
         1, 0;
-        _sum_0 += A.at(T-1) * pow((M.at(T-1) * v.at(T-1) - _n_0 * M.at(T-1) * u.at(T-1)).lpNorm&lt;2&gt;(), 2);
+        _sum_0 += A.at(T-1) * pow((M.at(T-1) * v.at(T-1) - _E_LSCM_0 * M.at(T-1) * u.at(T-1)).lpNorm&lt;2&gt;(), 2);
     }
-    double n = _sum_0;
+    double E_LSCM = _sum_0;
 
-    return n;
+    return E_LSCM;
 }
 
 
@@ -133,8 +133,8 @@ int main(int argc, char *argv[])
     
       <br> Here is the Python output: <br>
       <div class="code_block"><pre ><code class="language-python">&#34;&#34;&#34;
-n = ∑_T A_T||M_T v_T - [0 -1
-                        1  0] M_T u_T||²
+`E_LSCM` = ∑_T A_T||M_T v_T - [0 -1
+                               1  0] M_T u_T||²
 where
  
 v_i: ℝ^3
@@ -169,14 +169,14 @@ def demo4(v, u, M, A):
     assert A.shape == (_dim_0,)
 
     _sum_0 = 0
-    for T in range(1, len(v)+1):
-        _n_0 = np.zeros((2, 2))
-        _n_0[0] = [0, -1]
-        _n_0[1] = [1, 0]
-        _sum_0 += A[T-1] * np.power(np.linalg.norm(M[T-1] @ v[T-1] - _n_0 @ M[T-1] @ u[T-1], 2), 2)
-    n = _sum_0
+    for T in range(1, len(A)+1):
+        _E_LSCM_0 = np.zeros((2, 2))
+        _E_LSCM_0[0] = [0, -1]
+        _E_LSCM_0[1] = [1, 0]
+        _sum_0 += A[T-1] * np.power(np.linalg.norm(M[T-1] @ v[T-1] - _E_LSCM_0 @ M[T-1] @ u[T-1], 2), 2)
+    E_LSCM = _sum_0
 
-    return n
+    return E_LSCM
 
 
 def generateRandomData():
@@ -211,7 +211,7 @@ if __name__ == &#39;__main__&#39;:
 \DeclareMathOperator*{\argmin}{arg\,min}
 \begin{document}
 \begin{align*}
-\textit{n} &amp; = \sum_\textit{T} \textit{A}_{ \textit{T} }\|\textit{M}_{ \textit{T} }\textit{v}_{ \textit{T} } - \begin{bmatrix}
+\textit{E\_LSCM} &amp; = \sum_\textit{T} \textit{A}_{ \textit{T} }\|\textit{M}_{ \textit{T} }\textit{v}_{ \textit{T} } - \begin{bmatrix}
 0 &amp; -1\\
 1 &amp; 0\\
 \end{bmatrix}\textit{M}_{ \textit{T} }\textit{u}_{ \textit{T} }\|_2^{2}

@@ -1,6 +1,6 @@
 /*
-y_i = (a_i)ᵀ x + w_i
-x̂ = (∑_i a_i(a_i)ᵀ)⁻¹ ∑_i y_i a_i
+y_i = a_iᵀ x + w_i
+x̂ = (∑_i a_i a_iᵀ)⁻¹ ∑_i y_i a_i
 
 where
 
@@ -38,13 +38,13 @@ Eigen::VectorXd demo11(
 
     std::vector<double> y(_dim_0);
     for( int i=1; i<=_dim_0; i++){
-        y.at(i-1) = (a.at(i-1)).transpose() * x + w.at(i-1);
+        y.at(i-1) = a.at(i-1).transpose() * x + w.at(i-1);
     }
 
 
     Eigen::MatrixXd _sum_0 = Eigen::MatrixXd::Zero(n, n);
     for(int i=1; i<=a.size(); i++){
-        _sum_0 += a.at(i-1) * (a.at(i-1)).transpose();
+        _sum_0 += a.at(i-1) * a.at(i-1).transpose();
     }
     Eigen::MatrixXd _sum_1 = Eigen::MatrixXd::Zero(n, 1);
     for(int i=1; i<=y.size(); i++){

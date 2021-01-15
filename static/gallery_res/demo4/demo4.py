@@ -1,6 +1,6 @@
 """
-n = ∑_T A_T||M_T v_T - [0 -1
-                        1  0] M_T u_T||²
+`E_LSCM` = ∑_T A_T||M_T v_T - [0 -1
+                               1  0] M_T u_T||²
 where
  
 v_i: ℝ^3
@@ -35,14 +35,14 @@ def demo4(v, u, M, A):
     assert A.shape == (_dim_0,)
 
     _sum_0 = 0
-    for T in range(1, len(v)+1):
-        _n_0 = np.zeros((2, 2))
-        _n_0[0] = [0, -1]
-        _n_0[1] = [1, 0]
-        _sum_0 += A[T-1] * np.power(np.linalg.norm(M[T-1] @ v[T-1] - _n_0 @ M[T-1] @ u[T-1], 2), 2)
-    n = _sum_0
+    for T in range(1, len(A)+1):
+        _E_LSCM_0 = np.zeros((2, 2))
+        _E_LSCM_0[0] = [0, -1]
+        _E_LSCM_0[1] = [1, 0]
+        _sum_0 += A[T-1] * np.power(np.linalg.norm(M[T-1] @ v[T-1] - _E_LSCM_0 @ M[T-1] @ u[T-1], 2), 2)
+    E_LSCM = _sum_0
 
-    return n
+    return E_LSCM
 
 
 def generateRandomData():

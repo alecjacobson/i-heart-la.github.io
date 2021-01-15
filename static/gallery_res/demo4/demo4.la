@@ -1,5 +1,5 @@
-n = ∑_T A_T||M_T v_T - [0 -1
-                        1  0] M_T u_T||²
+`E_LSCM` = ∑_T A_T||M_T v_T - [0 -1
+                               1  0] M_T u_T||²
 where
  
 v_i: ℝ^3

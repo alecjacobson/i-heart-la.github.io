@@ -1,6 +1,6 @@
 """
-y_i = (a_i)ᵀ x + w_i
-x̂ = (∑_i a_i(a_i)ᵀ)⁻¹ ∑_i y_i a_i
+y_i = a_iᵀ x + w_i
+x̂ = (∑_i a_i a_iᵀ)⁻¹ ∑_i y_i a_i
 
 where
 
@@ -34,11 +34,11 @@ def demo11(a, w, x):
 
     y = np.zeros(_dim_0)
     for i in range(1, _dim_0+1):
-        y[i-1] = (a[i-1]).T.reshape(1, n) @ x + w[i-1]
+        y[i-1] = a[i-1].T.reshape(1, n) @ x + w[i-1]
 
     _sum_0 = np.zeros((n, n))
     for i in range(1, len(a)+1):
-        _sum_0 += (a[i-1]).reshape(n, 1) @ (a[i-1]).T.reshape(1, n)
+        _sum_0 += (a[i-1]).reshape(n, 1) @ a[i-1].T.reshape(1, n)
     _sum_1 = np.zeros((n, ))
     for i in range(1, len(y)+1):
         _sum_1 += y[i-1] * a[i-1]

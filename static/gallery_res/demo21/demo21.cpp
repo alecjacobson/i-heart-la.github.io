@@ -1,7 +1,7 @@
 /*
 from trigonometry: cos
 
-b = ∑_i cos(θ)²((p_i - q_i)⋅n_i +((p_i+q_i)×n_i)⋅ã+n_i⋅t̃)² 
+`ε_symm` = ∑_i cos(θ)²((p_i - q_i)⋅n_i +((p_i+q_i)×n_i)⋅ã+n_i⋅t̃)² 
 
 where
 
@@ -27,7 +27,7 @@ t̃: ℝ^3
  * @param n  ℝ^3
  * @param ã  ℝ^3
  * @param t̃  ℝ^3
- * @return b
+ * @return ε_symm
  */
 double demo21(
     const double & θ,
@@ -42,9 +42,9 @@ double demo21(
     for(int i=1; i<=q.size(); i++){
         _sum_0 += pow(cos(θ), 2) * pow((((p.at(i-1) - q.at(i-1))).dot(n.at(i-1)) + ((((p.at(i-1) + q.at(i-1))).cross(n.at(i-1)))).dot(ã) + (n.at(i-1)).dot(t̃)), 2);
     }
-    double b = _sum_0;
+    double ε_symm = _sum_0;
 
-    return b;
+    return ε_symm;
 }
 
 

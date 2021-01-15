@@ -31,7 +31,7 @@
       <br> Here is the LA input: <br>
       <div class="code_block" style='height: 360px;'><pre ><code class="language-cpsp">from trigonometry: cos
 
-b = ∑_i cos(θ)²((p_i - q_i)⋅n_i +((p_i+q_i)×n_i)⋅ã+n_i⋅t̃)² 
+`ε_symm` = ∑_i cos(θ)²((p_i - q_i)⋅n_i +((p_i+q_i)×n_i)⋅ã+n_i⋅t̃)² 
 
 where
 
@@ -49,7 +49,7 @@ t̃: ℝ^3</code></pre></div>
         <div class="code_block"><pre ><code class="language-cpp">/*
 from trigonometry: cos
 
-b = ∑_i cos(θ)²((p_i - q_i)⋅n_i +((p_i+q_i)×n_i)⋅ã+n_i⋅t̃)² 
+`ε_symm` = ∑_i cos(θ)²((p_i - q_i)⋅n_i +((p_i+q_i)×n_i)⋅ã+n_i⋅t̃)² 
 
 where
 
@@ -75,7 +75,7 @@ t̃: ℝ^3
  * @param n  ℝ^3
  * @param ã  ℝ^3
  * @param t̃  ℝ^3
- * @return b
+ * @return ε_symm
  */
 double demo21(
     const double &amp; θ,
@@ -90,9 +90,9 @@ double demo21(
     for(int i=1; i&lt;=q.size(); i++){
         _sum_0 += pow(cos(θ), 2) * pow((((p.at(i-1) - q.at(i-1))).dot(n.at(i-1)) + ((((p.at(i-1) + q.at(i-1))).cross(n.at(i-1)))).dot(ã) + (n.at(i-1)).dot(t̃)), 2);
     }
-    double b = _sum_0;
+    double ε_symm = _sum_0;
 
-    return b;
+    return ε_symm;
 }
 
 
@@ -144,7 +144,7 @@ int main(int argc, char *argv[])
       <div class="code_block"><pre ><code class="language-python">&#34;&#34;&#34;
 from trigonometry: cos
 
-b = ∑_i cos(θ)²((p_i - q_i)⋅n_i +((p_i+q_i)×n_i)⋅ã+n_i⋅t̃)² 
+`ε_symm` = ∑_i cos(θ)²((p_i - q_i)⋅n_i +((p_i+q_i)×n_i)⋅ã+n_i⋅t̃)² 
 
 where
 
@@ -189,9 +189,9 @@ def demo21(θ, p, q, n, ã, t̃):
     _sum_0 = 0
     for i in range(1, len(q)+1):
         _sum_0 += np.power(np.cos(θ), 2) * np.power((np.dot(((p[i-1] - q[i-1])).ravel(), (n[i-1]).ravel()) + np.dot(((np.cross((p[i-1] + q[i-1]), n[i-1]))).ravel(), (ã).ravel()) + np.dot((n[i-1]).ravel(), (t̃).ravel())), 2)
-    b = _sum_0
+    ε_symm = _sum_0
 
-    return b
+    return ε_symm
 
 
 def generateRandomData():
@@ -232,7 +232,7 @@ if __name__ == &#39;__main__&#39;:
 from trigonometry import cos
 
 \begin{align*}
-\textit{b} &amp; = \sum_\textit{i} cos\left( \textit{θ} \right)^{2}\left( \left( \textit{p}_{ \textit{i} } - \textit{q}_{ \textit{i} } \right) \cdot \textit{n}_{ \textit{i} } + \left( \left( \textit{p}_{ \textit{i} } + \textit{q}_{ \textit{i} } \right) × \textit{n}_{ \textit{i} } \right) \cdot \textit{ã} + \textit{n}_{ \textit{i} } \cdot \textit{t̃} \right)^{2}
+\textit{ε\_symm} &amp; = \sum_\textit{i} cos\left( \textit{θ} \right)^{2}\left( \left( \textit{p}_{ \textit{i} } - \textit{q}_{ \textit{i} } \right) \cdot \textit{n}_{ \textit{i} } + \left( \left( \textit{p}_{ \textit{i} } + \textit{q}_{ \textit{i} } \right) × \textit{n}_{ \textit{i} } \right) \cdot \textit{ã} + \textit{n}_{ \textit{i} } \cdot \textit{t̃} \right)^{2}
 \end{align*}
 
 where
