@@ -28,11 +28,11 @@ double demo6(
     assert( p.size() == _dim_0 );
 
     double _sum_0 = 0;
-    for(int i=1; i<=p.size(); i++){
+    for(int i=1; i<=f.size(); i++){
         _sum_0 += pow(f.at(i-1), 2) * p.at(i-1);
     }
     double _sum_1 = 0;
-    for(int i=1; i<=p.size(); i++){
+    for(int i=1; i<=f.size(); i++){
         _sum_1 += f.at(i-1) * p.at(i-1);
     }
     double ret = _sum_0 - pow((_sum_1), 2);

@@ -1,0 +1,6 @@
+`H(p)` = 1/(2π)int_[0, 2π] `kₙ`(φ, p) ∂φ
+
+where 
+
+p: ℝ^3 : point on the surface
+`kₙ`: ℝ,ℝ^3->ℝ : normal curvature

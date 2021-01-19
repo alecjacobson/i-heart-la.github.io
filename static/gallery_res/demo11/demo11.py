@@ -40,7 +40,7 @@ def demo11(a, w, x):
     for i in range(1, len(a)+1):
         _sum_0 += (a[i-1]).reshape(n, 1) @ a[i-1].T.reshape(1, n)
     _sum_1 = np.zeros((n, ))
-    for i in range(1, len(y)+1):
+    for i in range(1, len(a)+1):
         _sum_1 += y[i-1] * a[i-1]
     x̂ = np.linalg.inv((_sum_0)) @ _sum_1
 

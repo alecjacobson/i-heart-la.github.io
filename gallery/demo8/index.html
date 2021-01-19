@@ -76,10 +76,10 @@ double demo8(
         double _sum_1 = 0;
         for(int j=1; j&lt;=x.size(); j++){
             double _sum_2 = 0;
-            for(int k=1; k&lt;=p.cols(); k++){
-                _sum_2 += x(k-1) * p(i-1, k-1);
+            for(int k=1; k&lt;=x.size(); k++){
+                _sum_2 += x[k-1] * p(i-1, k-1);
             }
-            _sum_1 += x(j-1) * p(i-1, j-1) * (log10(p(i-1, j-1) / double(_sum_2)) / log10(2));
+            _sum_1 += x[j-1] * p(i-1, j-1) * (log10(p(i-1, j-1) / double(_sum_2)) / log10(2));
         }
         _sum_0 += _sum_1;
     }
@@ -148,7 +148,7 @@ def demo8(x, p):
         _sum_1 = 0
         for j in range(1, len(x)+1):
             _sum_2 = 0
-            for k in range(1, len(p)+1):
+            for k in range(1, len(x)+1):
                 _sum_2 += x[k-1] * p[i-1, k-1]
             _sum_1 += x[j-1] * p[i-1, j-1] * np.log2(p[i-1, j-1] / _sum_2)
         _sum_0 += _sum_1
@@ -186,7 +186,7 @@ if __name__ == &#39;__main__&#39;:
 \DeclareMathOperator*{\argmin}{arg\,min}
 \begin{document}
 \begin{align*}
-\textit{I(X;Y)} &amp; = \sum_\textit{i} \sum_\textit{j} \textit{x}_{ \textit{j} }\textit{p}_{\textit{i}, \textit{j}} \log_2{ \frac{\textit{p}_{\textit{i}, \textit{j}}}{\sum_\textit{k} \textit{x}_{ \textit{k} }\textit{p}_{\textit{i}, \textit{k}}} }
+\textit{I(X;Y)} = &amp; \sum_\textit{i} \sum_\textit{j} \textit{x}_{ \textit{j} }\textit{p}_{\textit{i}, \textit{j}} \log_2{ \frac{\textit{p}_{\textit{i}, \textit{j}}}{\sum_\textit{k} \textit{x}_{ \textit{k} }\textit{p}_{\textit{i}, \textit{k}}} }
 \end{align*}
 
 where

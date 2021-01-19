@@ -81,7 +81,7 @@ double demo26(
     for(int n=1; n&lt;=c.rows(); n++){
         double _sum_1 = 0;
         for(int i=1; i&lt;=c.cols(); i++){
-            _sum_1 += c(n-1, i-1) * w(n-1, i-1) * R̂(n-1);
+            _sum_1 += c(n-1, i-1) * w(n-1, i-1) * R̂[n-1];
         }
         _sum_0 += _sum_1;
     }
@@ -89,7 +89,7 @@ double demo26(
     for(int n=1; n&lt;=w.rows(); n++){
         double _sum_3 = 0;
         for(int i=1; i&lt;=w.cols(); i++){
-            _sum_3 += w(n-1, i-1) * R̂(n-1);
+            _sum_3 += w(n-1, i-1) * R̂[n-1];
         }
         _sum_2 += _sum_3;
     }
@@ -208,7 +208,7 @@ if __name__ == &#39;__main__&#39;:
 \DeclareMathOperator*{\argmin}{arg\,min}
 \begin{document}
 \begin{align*}
-\textit{C(x,y)} &amp; = \frac{\sum_\textit{n} \sum_\textit{i} \textit{c}_{\textit{n}, \textit{i}}\textit{w}_{\textit{n}, \textit{i}}\textit{R̂}_{ \textit{n} }}{\sum_\textit{n} \sum_\textit{i} \textit{w}_{\textit{n}, \textit{i}}\textit{R̂}_{ \textit{n} }}
+\textit{C(x,y)} = &amp; \frac{\sum_\textit{n} \sum_\textit{i} \textit{c}_{\textit{n}, \textit{i}}\textit{w}_{\textit{n}, \textit{i}}\textit{R̂}_{ \textit{n} }}{\sum_\textit{n} \sum_\textit{i} \textit{w}_{\textit{n}, \textit{i}}\textit{R̂}_{ \textit{n} }}
 \end{align*}
 
 where

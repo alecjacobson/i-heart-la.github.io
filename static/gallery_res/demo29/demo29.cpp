@@ -45,7 +45,7 @@ double demo29(
 
     double _sum_0 = 0;
     for(int i=1; i<=α.size(); i++){
-        _sum_0 += α(i-1);
+        _sum_0 += α[i-1];
     }
     double _sum_1 = 0;
     for(int i=1; i<=X.rows(); i++){
@@ -53,7 +53,7 @@ double demo29(
         for(int j=1; j<=X.cols(); j++){
             double _sum_3 = 0;
             for(int k=1; k<=α.size(); k++){
-                _sum_3 += α(k-1) * p(k-1) * X(i-1, j-1);
+                _sum_3 += α[k-1] * p[k-1] * X(i-1, j-1);
             }
             _sum_2 += (f(X(i-1, j-1)) / double(p_c(X(i-1, j-1))) - (_sum_3) / double(p_c(X(i-1, j-1))));
         }

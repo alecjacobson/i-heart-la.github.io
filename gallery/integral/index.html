@@ -1,0 +1,184 @@
+<!doctype html>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../../static/style.css">
+<title>integral — I❤LA</title>
+<body>
+  <header>
+    <link href="../../static/prism.css" rel="stylesheet" />
+    <h1> integral </h1>
+  </header>
+  <script src="../../static/prism.js"></script>
+  <div class="page">
+    
+  
+
+  
+    <div class="gallery_post">
+
+    <p>This page shows integral implementation.</p>
+
+
+    
+     It comes from  <a href="https://github.com/alecjacobson/geometry-processing-curvature"> Geometry Processing - Curvature </a><br><br>
+    
+    
+    
+    Here is the description: <br>
+      <img src=../../static/gallery_res/integral/integral.png alt="placeholder" width="700" style='object-fit: scale-down;'><br>
+    
+
+    
+      <br> Here is the LA input: <br>
+      <div class="code_block" style='height: 510px;'><pre ><code class="language-cpsp">`H(p)` = 1/(2π)int_[0, 2π] `kₙ`(φ, p) ∂φ
+
+where 
+
+p: ℝ^3 : point on the surface
+`kₙ`: ℝ,ℝ^3-&gt;ℝ : normal curvature</code></pre></div>
+    
+
+    
+      
+        <br> Here is the Eigen output: <br>
+        <div class="code_block"><pre ><code class="language-cpp">/*
+`H(p)` = 1/(2π)int_[0, 2π] `kₙ`(φ, p) ∂φ
+
+where 
+
+p: ℝ^3 : point on the surface
+`kₙ`: ℝ,ℝ^3-&gt;ℝ : normal curvature
+*/
+#include &lt;Eigen/Core&gt;
+#include &lt;Eigen/Dense&gt;
+#include &lt;Eigen/Sparse&gt;
+#include &lt;iostream&gt;
+#include &lt;set&gt;
+
+/**
+ * integral
+ *
+ * @param p  ℝ^3 : point on the surface
+ * @param kₙ  ℝ,ℝ^3-&gt;ℝ : normal curvature
+ * @return H_left_parenthesis_p_right_parenthesis
+ */
+double integral(
+    const Eigen::Matrix&lt;double, 3, 1&gt; &amp; p,
+    const std::function&lt;double(double, Eigen::Matrix&lt;double, 3, 1&gt;)&gt; &amp; kₙ)
+{
+    double H_left_parenthesis_p_right_parenthesis = 1 / double((2 * M_PI)) * ;
+
+    return H_left_parenthesis_p_right_parenthesis;
+}
+
+
+void generateRandomData(Eigen::Matrix&lt;double, 3, 1&gt; &amp; p,
+    std::function&lt;double(double, Eigen::Matrix&lt;double, 3, 1&gt;)&gt; &amp; kₙ)
+{
+    p = Eigen::VectorXd::Random(3);
+    kₙ = [](double, Eigen::Matrix&lt;double, 3, 1&gt;)-&gt;double{
+        return rand() % 10;
+    };
+}
+
+
+int main(int argc, char *argv[])
+{
+    srand((int)time(NULL));
+    Eigen::Matrix&lt;double, 3, 1&gt; p;
+    std::function&lt;double(double, Eigen::Matrix&lt;double, 3, 1&gt;)&gt; kₙ;
+    generateRandomData(p, kₙ);
+    double func_value = integral(p, kₙ);
+    std::cout&lt;&lt;&#34;func_value:\n&#34;&lt;&lt;func_value&lt;&lt;std::endl;
+    return 0;
+}</code></pre></div>
+      
+    
+
+    
+      <br> Here is the Python output: <br>
+      <div class="code_block"><pre ><code class="language-python">&#34;&#34;&#34;
+`H(p)` = 1/(2π)int_[0, 2π] `kₙ`(φ, p) ∂φ
+
+where 
+
+p: ℝ^3 : point on the surface
+`kₙ`: ℝ,ℝ^3-&gt;ℝ : normal curvature
+&#34;&#34;&#34;
+import numpy as np
+import scipy
+import scipy.linalg
+from scipy import sparse
+from scipy.integrate import quad
+from scipy.optimize import minimize
+
+
+def integral(p, kₙ):
+    &#34;&#34;&#34;
+    :param :p : ℝ^3 : point on the surface
+    :param :kₙ : ℝ,ℝ^3-&gt;ℝ : normal curvature
+    &#34;&#34;&#34;
+    p = np.asarray(p, dtype=np.float64)
+
+    assert p.shape == (3,)
+
+    H_left_parenthesis_p_right_parenthesis = 1 / (2 * np.pi) * quad(lambda φ: kₙ(φ, p), 0, 2 * np.pi)[0]
+
+    return H_left_parenthesis_p_right_parenthesis
+
+
+def generateRandomData():
+    p = np.random.randn(3)
+    def kₙ(p0, p1):
+        return np.random.randn()
+    return p, kₙ
+
+
+if __name__ == &#39;__main__&#39;:
+    p, kₙ = generateRandomData()
+    print(&#34;p:&#34;, p)
+    print(&#34;kₙ:&#34;, kₙ)
+    func_value = integral(p, kₙ)
+    print(&#34;func_value: &#34;, func_value)</code></pre></div>
+    
+
+    
+      <br> Here is the Tex output: <br>
+      <div class="code_block"><pre ><code class="language-tex">\documentclass[12pt]{article}
+\usepackage{mathdots}
+\usepackage[bb=boondox]{mathalfa}
+\usepackage{mathtools}
+\usepackage{amssymb}
+\usepackage{ctex}
+\setmainfont{Linux Libertine O}
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\begin{document}
+\begin{align*}
+\textit{H(p)} = &amp; \frac{1}{2\pi}\int_{0}^{2\pi} \textit{kₙ}\left( \textit{φ},\textit{p} \right) d\textit{φ}
+\end{align*}
+
+where
+\begin{itemize}
+\item $\textit{p} \in \mathbb{R}^{ 3}$ point on the surface
+\item $\textit{kₙ} \in \mathbb{{R}},\mathbb{R}^{ 3}\rightarrow \mathbb{{R}}$ normal curvature
+\end{itemize}
+
+
+\end{document}
+</code></pre></div>
+    
+
+    
+      <br> Below is the pdf: <br>
+      <img src=../../static/gallery_res/integral/integral.pdf alt="placeholder" width="700" style='object-fit: scale-down;'><br>
+    
+    </div>
+  
+
+
+ 
+
+
+
+  </div>
+</body>

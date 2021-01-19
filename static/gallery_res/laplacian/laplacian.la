@@ -1,12 +1,9 @@
-from trigonometry: cot
+L_i,j = { w_i,j if (i,j) ∈ E
 
-L_i,j = { cot(α_ij) + cot(β_ij) if j ∈ N(i)
-
-L_i,i = -sum_(k for k != i) L_i,k
+L_i,i = -sum_(l for l != i) L_i,l
 
 where
 
 L: ℝ^(n×n)
-α: ℝ^(n×n)
-β: ℝ^(n×n)
-N: ℤ -> {ℤ}
+w: ℝ^(n×n): edge weight matrix
+E: {ℤ²} index: edges

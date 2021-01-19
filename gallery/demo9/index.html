@@ -77,7 +77,7 @@ double demo9(
 
     double _sum_0 = 0;
     for(int i=1; i&lt;=x.size(); i++){
-        _sum_0 += v(i-1) * (pow(x(i-1), 2) - 1);
+        _sum_0 += v[i-1] * (pow(x[i-1], 2) - 1);
     }
     double L_left_parenthesis_x_comma_v_right_parenthesis = x.transpose() * W * x + _sum_0;
 
@@ -182,7 +182,7 @@ if __name__ == &#39;__main__&#39;:
 \DeclareMathOperator*{\argmin}{arg\,min}
 \begin{document}
 \begin{align*}
-\textit{L(x,v)} &amp; = \textit{x}^T\textit{W}\textit{x} + \sum_\textit{i} \textit{v}_{ \textit{i} }\left( \textit{x}_{ \textit{i} }^{2} - 1 \right)
+\textit{L(x,v)} = &amp; \textit{x}^T\textit{W}\textit{x} + \sum_\textit{i} \textit{v}_{ \textit{i} }\left( \textit{x}_{ \textit{i} }^{2} - 1 \right)
 \end{align*}
 
 where

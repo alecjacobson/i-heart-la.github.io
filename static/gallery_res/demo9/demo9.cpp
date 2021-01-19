@@ -34,7 +34,7 @@ double demo9(
 
     double _sum_0 = 0;
     for(int i=1; i<=x.size(); i++){
-        _sum_0 += v(i-1) * (pow(x(i-1), 2) - 1);
+        _sum_0 += v[i-1] * (pow(x[i-1], 2) - 1);
     }
     double L_left_parenthesis_x_comma_v_right_parenthesis = x.transpose() * W * x + _sum_0;
 

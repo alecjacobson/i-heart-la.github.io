@@ -70,11 +70,11 @@ double demo6(
     assert( p.size() == _dim_0 );
 
     double _sum_0 = 0;
-    for(int i=1; i&lt;=p.size(); i++){
+    for(int i=1; i&lt;=f.size(); i++){
         _sum_0 += pow(f.at(i-1), 2) * p.at(i-1);
     }
     double _sum_1 = 0;
-    for(int i=1; i&lt;=p.size(); i++){
+    for(int i=1; i&lt;=f.size(); i++){
         _sum_1 += f.at(i-1) * p.at(i-1);
     }
     double ret = _sum_0 - pow((_sum_1), 2);
@@ -141,10 +141,10 @@ def demo6(f, p):
     assert p.shape == (_dim_0,)
 
     _sum_0 = 0
-    for i in range(1, len(p)+1):
+    for i in range(1, len(f)+1):
         _sum_0 += np.power(f[i-1], 2) * p[i-1]
     _sum_1 = 0
-    for i in range(1, len(p)+1):
+    for i in range(1, len(f)+1):
         _sum_1 += f[i-1] * p[i-1]
     ret = _sum_0 - np.power((_sum_1), 2)
     return ret
@@ -178,7 +178,7 @@ if __name__ == &#39;__main__&#39;:
 \DeclareMathOperator*{\argmin}{arg\,min}
 \begin{document}
 \begin{align*}
-\sum_\textit{i} \textit{f}_{ \textit{i} }^{2}\textit{p}_{ \textit{i} } - \left( \sum_\textit{i} \textit{f}_{ \textit{i} }\textit{p}_{ \textit{i} } \right)^{2}
+ &amp; \sum_\textit{i} \textit{f}_{ \textit{i} }^{2}\textit{p}_{ \textit{i} } - \left( \sum_\textit{i} \textit{f}_{ \textit{i} }\textit{p}_{ \textit{i} } \right)^{2}
 \end{align*}
 
 where
