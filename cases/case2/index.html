@@ -1,0 +1,80 @@
+<!doctype html>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../../static/style.css">
+<title>case2 — I❤LA</title>
+<body>
+  <header>
+    <link href="../../static/prism.css" rel="stylesheet" />
+    <h1> case2 </h1>
+  </header>
+  <script src="../../static/prism.js"></script>
+  <div class="page">
+    
+  
+
+  
+    <div class="cases_post">
+
+    <p>This page shows case2 implementation.</p>
+
+
+    
+     It comes from  <a href="https://www.cg.tu-berlin.de/research/projects/cwdt/"> Conforming Weighted Delaunay Triangulations </a><br><br>
+    
+    
+    
+
+
+
+    
+    Here is the formula: <br>
+      <img src=../../static/cases_res/case2/formula.png alt="placeholder" width="700" style='object-fit: scale-down;'><br>
+    
+
+
+
+    
+    
+    Here is the screenshot of the <a href="/static/cases_res/case2/cwdt3.cc"> original file </a>: <br>
+      <img src=../../static/cases_res/case2/before.png alt="placeholder" width="700" style='object-fit: scale-down;'><br>
+    
+    
+    
+    Here is the screenshot of the <a href="/static/cases_res/case2/cwdt3_after.cc"> modified file </a>: <br>
+      <img src=../../static/cases_res/case2/after.png alt="placeholder" width="700" style='object-fit: scale-down;'><br>
+    
+
+    
+      <br> Here is the LA input: <br>
+      <div class="code_block" style='height: px;'><pre ><code class="language-cpsp">`p0` = [V_`v0`,1  V_`v0`,2  V_`v0`,3]
+`p1` = [V_`v1`,1  V_`v1`,2  V_`v1`,3]
+`p2` = [V_`v2`,1  V_`v2`,2  V_`v2`,3]
+`x0s` = ||`p0`||²
+`Mi` = [2(`p1`-`p0`)
+     2(`p2`-`p0`)
+     nᵀ]^(-1)
+m = `Mi` (||`p1`||²-`x0s`, ||`p2`||²-`x0s`, `p0`⋅n)
+
+where
+
+`v0` ∈ ℤ index
+`v1` ∈ ℤ index
+`v2` ∈ ℤ index
+V_i ∈ ℝ^3 
+n ∈ ℝ^3 </code></pre></div>
+    
+
+    
+      <br> Below is the pdf: <br>
+      <img src=../../static/cases_res/case2/cwdt.pdf alt="placeholder" width="700" style='object-fit: scale-down;'><br>
+    
+    </div>
+  
+
+
+ 
+
+
+
+  </div>
+</body>

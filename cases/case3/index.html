@@ -1,0 +1,75 @@
+<!doctype html>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../../static/style.css">
+<title>case3 — I❤LA</title>
+<body>
+  <header>
+    <link href="../../static/prism.css" rel="stylesheet" />
+    <h1> case3 </h1>
+  </header>
+  <script src="../../static/prism.js"></script>
+  <div class="page">
+    
+  
+
+  
+    <div class="cases_post">
+
+    <p>This page shows case3 implementation.</p>
+
+
+    
+     It comes from  <a href="https://igl.ethz.ch/projects/LB3D/"> Properties of Laplace Operators for Tetrahedral Meshes </a><br><br>
+    
+    
+    
+
+
+
+    
+    Here is the formula: <br>
+      <img src=../../static/cases_res/case3/formula.png alt="placeholder" width="700" style='object-fit: scale-down;'><br>
+    
+
+
+
+    
+    
+    Here is the screenshot of the <a href="/static/cases_res/case3/dualLaplace.cpp"> original file </a>: <br>
+      <img src=../../static/cases_res/case3/before.png alt="placeholder" width="700" style='object-fit: scale-down;'><br>
+    
+    
+    
+    Here is the screenshot of the <a href="/static/cases_res/case3/dualLaplace_after.cpp"> modified file </a>: <br>
+      <img src=../../static/cases_res/case3/after.png alt="placeholder" width="700" style='object-fit: scale-down;'><br>
+    
+
+    
+      <br> Here is the LA input: <br>
+      <div class="code_block" style='height: px;'><pre ><code class="language-cpsp">from linearalgebra: det
+
+E = [`x₁`-`x₀`, `x₂`-`x₀`, `x₃`-`x₀`]
+`Vol(i, j, k, l)` = 1/6 det(E)
+
+where
+
+`x₀` ∈ ℝ^3
+`x₁` ∈ ℝ^3
+`x₂` ∈ ℝ^3
+`x₃` ∈ ℝ^3</code></pre></div>
+    
+
+    
+      <br> Below is the pdf: <br>
+      <img src=../../static/cases_res/case3/volume.pdf alt="placeholder" width="700" style='object-fit: scale-down;'><br>
+    
+    </div>
+  
+
+
+ 
+
+
+
+  </div>
+</body>

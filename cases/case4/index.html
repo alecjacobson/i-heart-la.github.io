@@ -1,0 +1,70 @@
+<!doctype html>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../../static/style.css">
+<title>case4 — I❤LA</title>
+<body>
+  <header>
+    <link href="../../static/prism.css" rel="stylesheet" />
+    <h1> case4 </h1>
+  </header>
+  <script src="../../static/prism.js"></script>
+  <div class="page">
+    
+  
+
+  
+    <div class="cases_post">
+
+    <p>This page shows case4 implementation.</p>
+
+
+    
+     It comes from  <a href="https://igl.ethz.ch/projects/LB3D/"> Properties of Laplace Operators for Tetrahedral Meshes </a><br><br>
+    
+    
+    
+
+
+
+    
+
+
+
+    
+    
+    Here is the screenshot of the <a href="/static/cases_res/case4/dualLaplace.cpp"> original file </a>: <br>
+      <img src=../../static/cases_res/case4/before.png alt="placeholder" width="700" style='object-fit: scale-down;'><br>
+    
+    
+    
+    Here is the screenshot of the <a href="/static/cases_res/case4/dualLaplace_after.cpp"> modified file </a>: <br>
+      <img src=../../static/cases_res/case4/after.png alt="placeholder" width="700" style='object-fit: scale-down;'><br>
+    
+
+    
+      <br> Here is the LA input: <br>
+      <div class="code_block" style='height: px;'><pre ><code class="language-cpsp">l = (||b-c||^2, ||a-c||^2, ||a-b||^2)
+ba = (l₁(l₂+l₃-l₁), l₂(l₃+l₁-l₂), l₃(l₁+l₂-l₃))
+cc = 1/(`ba`₁+`ba`₂+`ba`₃)(`ba`₁a+`ba`₂b+`ba`₃c)
+
+where
+
+a ∈ ℝ^3
+b ∈ ℝ^3
+c ∈ ℝ^3</code></pre></div>
+    
+
+    
+      <br> Below is the pdf: <br>
+      <img src=../../static/cases_res/case4/circumcenter.pdf alt="placeholder" width="700" style='object-fit: scale-down;'><br>
+    
+    </div>
+  
+
+
+ 
+
+
+
+  </div>
+</body>
