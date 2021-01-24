@@ -33,9 +33,9 @@
 
 where
 
-A_i: ℝ^(m × n)  
-`x₀`: ℝ^n  
-b_i: ℝ^m  </code></pre></div>
+A_i ∈ ℝ^(m × n)  
+`x₀` ∈ ℝ^n  
+b_i ∈ ℝ^m  </code></pre></div>
     
 
     
@@ -47,9 +47,9 @@ min_(x ∈ ℝ^n) ∑_i ||A_i x + b_i || + (1/2)||x-`x₀`||²
 
 where
 
-A_i: ℝ^(m × n)  
-`x₀`: ℝ^n  
-b_i: ℝ^m  
+A_i ∈ ℝ^(m × n)  
+`x₀` ∈ ℝ^n  
+b_i ∈ ℝ^m  
 &#34;&#34;&#34;
 import numpy as np
 import scipy
@@ -60,18 +60,13 @@ from scipy.optimize import minimize
 
 
 def demo10(A, x0, b):
-    &#34;&#34;&#34;
-    :param :A : ℝ^(m × n)
-    :param :x0 : ℝ^n
-    :param :b : ℝ^m
-    &#34;&#34;&#34;
     A = np.asarray(A, dtype=np.float64)
     x0 = np.asarray(x0, dtype=np.float64)
     b = np.asarray(b, dtype=np.float64)
 
     _dim_0 = A.shape[0]
-    m = b.shape[1]
-    n = x0.shape[0]
+    m = A.shape[1]
+    n = A.shape[2]
     assert A.shape == (_dim_0, m, n)
     assert x0.shape == (n,)
     assert b.shape == (_dim_0, m, )
@@ -115,19 +110,25 @@ if __name__ == &#39;__main__&#39;:
 \setmainfont{Linux Libertine O}
 \DeclareMathOperator*{\argmax}{arg\,max}
 \DeclareMathOperator*{\argmin}{arg\,min}
+\usepackage[paperheight=8in,paperwidth=4in,margin=.3in,heightrounded]{geometry}
 \begin{document}
+
+\begin{center}
+\resizebox{\textwidth}{!} 
+{
+\begin{minipage}[c]{\textwidth}
 \begin{align*}
- &amp; \begin{aligned} \min_{\textit{x} \in \mathbb{R}^{ \textit{n}}} \quad &amp; \sum_\textit{i} \|\textit{A}_{ \textit{i} }\textit{x} + \textit{b}_{ \textit{i} }\|_2 + \left( \frac{1}{2} \right)\|\textit{x} - \textit{x₀}\|_2^{2} \\
-\end{aligned}
+ \omit \span \begin{aligned} \min_{\textit{x} \in \mathbb{R}^{ \textit{n}}} \quad &amp; \sum_\textit{i} \|\textit{A}_{ \textit{i} }\textit{x} + \textit{b}_{ \textit{i} }\|_2 + \left( \frac{1}{2} \right)\|\textit{x} - \textit{x₀}\|_2^{2} \\
+\end{aligned} \\
+\intertext{where} 
+\textit{A}_{\textit{i}} &amp; \in \mathbb{R}^{ \textit{m} \times \textit{n} } \\
+\textit{x₀} &amp; \in \mathbb{R}^{ \textit{n}} \\
+\textit{b}_{\textit{i}} &amp; \in \mathbb{R}^{ \textit{m}} \\
+\\
 \end{align*}
-
-where
-\begin{itemize}
-\item $\textit{A}_{\textit{i}} \in \mathbb{R}^{ \textit{m} \times \textit{n} }$
-\item $\textit{x₀} \in \mathbb{R}^{ \textit{n}}$
-\item $\textit{b}_{\textit{i}} \in \mathbb{R}^{ \textit{m}}$
-\end{itemize}
-
+\end{minipage}
+}
+\end{center}
 
 \end{document}
 </code></pre></div>

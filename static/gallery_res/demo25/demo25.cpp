@@ -3,9 +3,9 @@ min_(u ∈ ℝ^6) uᵀ(∑_i [x_i×n̂_i; n̂_i][(x_i×n̂_i)ᵀ n̂_iᵀ])u - 2
 
 where
 
-x_i: ℝ^3 
-n̂_i: ℝ^3  
-p_i: ℝ^3  
+x_i ∈ ℝ^3 
+n̂_i ∈ ℝ^3  
+p_i ∈ ℝ^3  
 */
 #include <Eigen/Core>
 #include <Eigen/Dense>
@@ -13,14 +13,6 @@ p_i: ℝ^3
 #include <iostream>
 #include <set>
 
-/**
- * demo25
- *
- * @param x  ℝ^3
- * @param n̂  ℝ^3
- * @param p  ℝ^3
- * @return ret
- */
 double demo25(
     const std::vector<Eigen::Matrix<double, 3, 1>> & x,
     const std::vector<Eigen::Matrix<double, 3, 1>> & n̂,

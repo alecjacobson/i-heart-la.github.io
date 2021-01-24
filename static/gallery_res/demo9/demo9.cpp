@@ -3,9 +3,9 @@
 
 where
 
-x: ℝ^n
-W: ℝ^(n×n)
-v: ℝ^n
+x ∈ ℝ^n
+W ∈ ℝ^(n×n)
+v ∈ ℝ^n
 */
 #include <Eigen/Core>
 #include <Eigen/Dense>
@@ -13,20 +13,12 @@ v: ℝ^n
 #include <iostream>
 #include <set>
 
-/**
- * demo9
- *
- * @param x  ℝ^n
- * @param W  ℝ^(n×n)
- * @param v  ℝ^n
- * @return L_left_parenthesis_x_comma_v_right_parenthesis
- */
 double demo9(
     const Eigen::VectorXd & x,
     const Eigen::MatrixXd & W,
     const Eigen::VectorXd & v)
 {
-    const long n = v.size();
+    const long n = x.size();
     assert( x.size() == n );
     assert( W.rows() == n );
     assert( W.cols() == n );
@@ -36,7 +28,7 @@ double demo9(
     for(int i=1; i<=x.size(); i++){
         _sum_0 += v[i-1] * (pow(x[i-1], 2) - 1);
     }
-    double L_left_parenthesis_x_comma_v_right_parenthesis = x.transpose() * W * x + _sum_0;
+    double L_left_parenthesis_x_comma_v_right_parenthesis = (double)(x.transpose() * W * x) + _sum_0;
 
     return L_left_parenthesis_x_comma_v_right_parenthesis;
 }

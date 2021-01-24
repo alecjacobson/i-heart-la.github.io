@@ -7,21 +7,27 @@
 \setmainfont{Linux Libertine O}
 \DeclareMathOperator*{\argmax}{arg\,max}
 \DeclareMathOperator*{\argmin}{arg\,min}
+\usepackage[paperheight=8in,paperwidth=4in,margin=.3in,heightrounded]{geometry}
 \begin{document}
+
+\begin{center}
+\resizebox{\textwidth}{!} 
+{
+\begin{minipage}[c]{\textwidth}
 \begin{align*}
-\textit{G\_σ(s\_i\^k)} = & \sum_\textit{j} \textit{l}_{ \textit{j} }exp\left( -\frac{\textit{dist}\left( \textit{b\textsubscript{i}},\textit{b}_{ \textit{j} } \right)}{2\textit{σ}^{2}} \right)\left( \textit{s}_{ \textit{j} } \right)^{\textit{k}}
+\textit{G\_σ(s\_i\^k)} & = \sum_\textit{j} \textit{l}_{ \textit{j} }exp\left( -\frac{\textit{dist}\left( \textit{b\textsubscript{i}},\textit{b}_{ \textit{j} } \right)}{2\textit{σ}^{2}} \right)\left( \textit{s}_{ \textit{j} } \right)^{\textit{k}} \\
+\intertext{where} 
+\textit{l}_{\textit{j}} & \in \mathbb{R} \text{ the length of bj} \\
+\textit{dist} & \in \mathbb{R}^{ \textit{n}},\mathbb{R}^{ \textit{n}}\rightarrow \mathbb{R} \text{ measures the geodesic distance between the centers of bi and bj along the boundary} \\
+\textit{σ} & \in \mathbb{R} \\
+\textit{b\textsubscript{i}} & \in \mathbb{R}^{ \textit{n}} \\
+\textit{b}_{\textit{j}} & \in \mathbb{R}^{ \textit{n}} \\
+\textit{s}_{\textit{j}} & \in \mathbb{R} \text{ unit direction vector of bi} \\
+\textit{k} & \in \mathbb{R} \text{ iteration number} \\
+\\
 \end{align*}
-
-where
-\begin{itemize}
-\item $\textit{l}_{\textit{j}} \in \mathbb{{R}}$ the length of bj
-\item $\textit{dist} \in \mathbb{R}^{ \textit{n}},\mathbb{R}^{ \textit{n}}\rightarrow \mathbb{{R}}$ measures the geodesic distance between the centers of bi and bj along the boundary
-\item $\textit{σ} \in \mathbb{{R}}$
-\item $\textit{b\textsubscript{i}} \in \mathbb{R}^{ \textit{n}}$
-\item $\textit{b}_{\textit{j}} \in \mathbb{R}^{ \textit{n}}$
-\item $\textit{s}_{\textit{j}} \in \mathbb{{R}}$ unit direction vector of bi
-\item $\textit{k} \in \mathbb{{R}}$ iteration number
-\end{itemize}
-
+\end{minipage}
+}
+\end{center}
 
 \end{document}

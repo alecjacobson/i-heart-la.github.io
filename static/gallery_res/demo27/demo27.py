@@ -5,10 +5,10 @@
 
 where
 
-`k₁`: ℝ  : control the desired kernel variance in either edge or orthogonal direction
-`k₂`: ℝ  : control the desired kernel variance in either edge or orthogonal direction
-`e₁`: ℝ ^ 3: orthogonal direction vectors
-`e₂`: ℝ ^ 3: orthogonal direction vectors
+`k₁` ∈ ℝ  : control the desired kernel variance in either edge or orthogonal direction
+`k₂` ∈ ℝ  : control the desired kernel variance in either edge or orthogonal direction
+`e₁` ∈ ℝ ^ 3: orthogonal direction vectors
+`e₂` ∈ ℝ ^ 3: orthogonal direction vectors
 """
 import numpy as np
 import scipy
@@ -20,10 +20,10 @@ from scipy.optimize import minimize
 
 def demo27(k1, k2, e1, e2):
     """
-    :param :k1 : ℝ  : control the desired kernel variance in either edge or orthogonal direction
-    :param :k2 : ℝ  : control the desired kernel variance in either edge or orthogonal direction
-    :param :e1 : ℝ ^ 3: orthogonal direction vectors
-    :param :e2 : ℝ ^ 3: orthogonal direction vectors
+    :param :k1 : control the desired kernel variance in either edge or orthogonal direction
+    :param :k2 : control the desired kernel variance in either edge or orthogonal direction
+    :param :e1 : orthogonal direction vectors
+    :param :e2 : orthogonal direction vectors
     """
     e1 = np.asarray(e1, dtype=np.float64)
     e2 = np.asarray(e2, dtype=np.float64)

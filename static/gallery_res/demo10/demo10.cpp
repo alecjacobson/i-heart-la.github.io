@@ -3,9 +3,9 @@ min_(x ∈ ℝ^n) ∑_i ||A_i x + b_i || + (1/2)||x-`x₀`||²
 
 where
 
-A_i: ℝ^(m × n)  
-`x₀`: ℝ^n  
-b_i: ℝ^m  
+A_i ∈ ℝ^(m × n)  
+`x₀` ∈ ℝ^n  
+b_i ∈ ℝ^m  
 */
 #include <Eigen/Core>
 #include <Eigen/Dense>
@@ -13,22 +13,14 @@ b_i: ℝ^m
 #include <iostream>
 #include <set>
 
-/**
- * demo10
- *
- * @param A  ℝ^(m × n)
- * @param x₀  ℝ^n
- * @param b  ℝ^m
- * @return ret
- */
 double demo10(
     const std::vector<Eigen::MatrixXd> & A,
     const Eigen::VectorXd & x₀,
     const std::vector<Eigen::VectorXd> & b)
 {
     const long _dim_0 = A.size();
-    const long m = b[0].rows();
-    const long n = x₀.size();
+    const long m = A[0].rows();
+    const long n = A[0].cols();
     assert( A.size() == _dim_0 );
     for( const auto& el : A ) {
         assert( el.rows() == m );

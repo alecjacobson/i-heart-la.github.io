@@ -5,12 +5,12 @@ from trigonometry: cos
 
 where
 
-θ: ℝ: angle of rotation
-p_i: ℝ^3
-q_i: ℝ^3
-n_i: ℝ^3
-ã: ℝ^3
-t̃: ℝ^3
+θ ∈ ℝ: angle of rotation
+p_i ∈ ℝ^3
+q_i ∈ ℝ^3
+n_i ∈ ℝ^3
+ã ∈ ℝ^3
+t̃ ∈ ℝ^3
 """
 import numpy as np
 import scipy
@@ -22,12 +22,7 @@ from scipy.optimize import minimize
 
 def demo21(θ, p, q, n, ã, t̃):
     """
-    :param :θ : ℝ: angle of rotation
-    :param :p : ℝ^3
-    :param :q : ℝ^3
-    :param :n : ℝ^3
-    :param :ã : ℝ^3
-    :param :t̃ : ℝ^3
+    :param :θ : angle of rotation
     """
     p = np.asarray(p, dtype=np.float64)
     q = np.asarray(q, dtype=np.float64)
@@ -44,7 +39,7 @@ def demo21(θ, p, q, n, ã, t̃):
     assert t̃.shape == (3,)
 
     _sum_0 = 0
-    for i in range(1, len(q)+1):
+    for i in range(1, len(n)+1):
         _sum_0 += np.power(np.cos(θ), 2) * np.power((np.dot(((p[i-1] - q[i-1])).ravel(), (n[i-1]).ravel()) + np.dot(((np.cross((p[i-1] + q[i-1]), n[i-1]))).ravel(), (ã).ravel()) + np.dot((n[i-1]).ravel(), (t̃).ravel())), 2)
     ε_symm = _sum_0
 

@@ -7,20 +7,26 @@
 \setmainfont{Linux Libertine O}
 \DeclareMathOperator*{\argmax}{arg\,max}
 \DeclareMathOperator*{\argmin}{arg\,min}
+\usepackage[paperheight=8in,paperwidth=4in,margin=.3in,heightrounded]{geometry}
 \begin{document}
+
+\begin{center}
+\resizebox{\textwidth}{!} 
+{
+\begin{minipage}[c]{\textwidth}
 \begin{align*}
- & \begin{bmatrix}
+ \omit \span \begin{bmatrix}
 \textit{A}^{-1} + \textit{A}^{-1}\textit{B}\textit{S}^{-1}\textit{B}^T\textit{A}^{-1} & -\textit{A}^{-1}\textit{B}\textit{S}^{-1}\\
 -\textit{S}^{-1}\textit{B}^T\textit{A}^{-1} & \textit{S}^{-1}\\
-\end{bmatrix}
+\end{bmatrix} \\
+\intertext{where} 
+\textit{A} & \in \mathbb{R}^{ 4 \times 4 } \\
+\textit{B} & \in \mathbb{R}^{ 4 \times 4 } \\
+\textit{S} & \in \mathbb{R}^{ 4 \times 4 } \\
+\\
 \end{align*}
-
-where
-\begin{itemize}
-\item $\textit{A} \in \mathbb{R}^{ 4 \times 4 }$
-\item $\textit{B} \in \mathbb{R}^{ 4 \times 4 }$
-\item $\textit{S} \in \mathbb{R}^{ 4 \times 4 }$
-\end{itemize}
-
+\end{minipage}
+}
+\end{center}
 
 \end{document}

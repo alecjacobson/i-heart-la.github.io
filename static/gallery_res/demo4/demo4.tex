@@ -7,21 +7,27 @@
 \setmainfont{Linux Libertine O}
 \DeclareMathOperator*{\argmax}{arg\,max}
 \DeclareMathOperator*{\argmin}{arg\,min}
+\usepackage[paperheight=8in,paperwidth=4in,margin=.3in,heightrounded]{geometry}
 \begin{document}
+
+\begin{center}
+\resizebox{\textwidth}{!} 
+{
+\begin{minipage}[c]{\textwidth}
 \begin{align*}
-\textit{E\_LSCM} = & \sum_\textit{T} \textit{A}_{ \textit{T} }\|\textit{M}_{ \textit{T} }\textit{v}_{ \textit{T} } - \begin{bmatrix}
+\textit{E\_LSCM} & = \sum_\textit{T} \textit{A}_{ \textit{T} }\|\textit{M}_{ \textit{T} }\textit{v}_{ \textit{T} } - \begin{bmatrix}
 0 & -1\\
 1 & 0\\
-\end{bmatrix}\textit{M}_{ \textit{T} }\textit{u}_{ \textit{T} }\|_2^{2}
+\end{bmatrix}\textit{M}_{ \textit{T} }\textit{u}_{ \textit{T} }\|_2^{2} \\
+\intertext{where} 
+\textit{v}_{\textit{i}} & \in \mathbb{R}^{ 3} \\
+\textit{u}_{\textit{i}} & \in \mathbb{R}^{ 3} \\
+\textit{M}_{\textit{i}} & \in \mathbb{R}^{ 2 \times 3 } \\
+\textit{A}_{\textit{i}} & \in \mathbb{R} \\
+\\
 \end{align*}
-
-where
-\begin{itemize}
-\item $\textit{v}_{\textit{i}} \in \mathbb{R}^{ 3}$
-\item $\textit{u}_{\textit{i}} \in \mathbb{R}^{ 3}$
-\item $\textit{M}_{\textit{i}} \in \mathbb{R}^{ 2 \times 3 }$
-\item $\textit{A}_{\textit{i}} \in \mathbb{{R}}$
-\end{itemize}
-
+\end{minipage}
+}
+\end{center}
 
 \end{document}

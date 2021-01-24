@@ -3,9 +3,9 @@
 
 where
 
-x: ℝ^n
-W: ℝ^(n×n)
-v: ℝ^n
+x ∈ ℝ^n
+W ∈ ℝ^(n×n)
+v ∈ ℝ^n
 """
 import numpy as np
 import scipy
@@ -16,16 +16,11 @@ from scipy.optimize import minimize
 
 
 def demo9(x, W, v):
-    """
-    :param :x : ℝ^n
-    :param :W : ℝ^(n×n)
-    :param :v : ℝ^n
-    """
     x = np.asarray(x, dtype=np.float64)
     W = np.asarray(W, dtype=np.float64)
     v = np.asarray(v, dtype=np.float64)
 
-    n = v.shape[0]
+    n = x.shape[0]
     assert x.shape == (n,)
     assert W.shape == (n, n)
     assert v.shape == (n,)
@@ -33,7 +28,7 @@ def demo9(x, W, v):
     _sum_0 = 0
     for i in range(1, len(x)+1):
         _sum_0 += v[i-1] * (np.power(x[i-1], 2) - 1)
-    L_left_parenthesis_x_comma_v_right_parenthesis = x.T.reshape(1, n) @ W @ x + _sum_0
+    L_left_parenthesis_x_comma_v_right_parenthesis = (x.T.reshape(1, n) @ W @ x).item() + _sum_0
 
     return L_left_parenthesis_x_comma_v_right_parenthesis
 

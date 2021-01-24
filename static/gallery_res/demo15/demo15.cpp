@@ -7,13 +7,13 @@
 
 where
 
-P_i: ℝ^(4×4) 
-B: ℝ^(4×4) 
-C: ℝ^(4×4) 
-L: ℝ^(4×4) 
-L̃: ℝ^(4×4) 
-U: ℝ^(4×4) 
-Ũ: ℝ^(4×4)
+P_i ∈ ℝ^(4×4) 
+B ∈ ℝ^(4×4) 
+C ∈ ℝ^(4×4) 
+L ∈ ℝ^(4×4) 
+L̃ ∈ ℝ^(4×4) 
+U ∈ ℝ^(4×4) 
+Ũ ∈ ℝ^(4×4)
 */
 #include <Eigen/Core>
 #include <Eigen/Dense>
@@ -21,18 +21,6 @@ Ũ: ℝ^(4×4)
 #include <iostream>
 #include <set>
 
-/**
- * demo15
- *
- * @param P  ℝ^(4×4)
- * @param B  ℝ^(4×4)
- * @param C  ℝ^(4×4)
- * @param L  ℝ^(4×4)
- * @param L̃  ℝ^(4×4)
- * @param U  ℝ^(4×4)
- * @param Ũ  ℝ^(4×4)
- * @return ret
- */
 Eigen::Matrix<double, 8, 8> demo15(
     const std::vector<Eigen::Matrix<double, 4, 4>> & P,
     const Eigen::Matrix<double, 4, 4> & B,

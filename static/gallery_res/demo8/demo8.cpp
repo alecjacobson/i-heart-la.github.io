@@ -3,8 +3,8 @@
 
 where
 
-x: ℝ^n
-p: ℝ^(n×m)
+x ∈ ℝ^n
+p ∈ ℝ^(n×m)
 */
 #include <Eigen/Core>
 #include <Eigen/Dense>
@@ -12,18 +12,11 @@ p: ℝ^(n×m)
 #include <iostream>
 #include <set>
 
-/**
- * demo8
- *
- * @param x  ℝ^n
- * @param p  ℝ^(n×m)
- * @return I_left_parenthesis_X_semicolon_Y_right_parenthesis
- */
 double demo8(
     const Eigen::VectorXd & x,
     const Eigen::MatrixXd & p)
 {
-    const long n = p.rows();
+    const long n = x.size();
     const long m = p.cols();
     assert( x.size() == n );
     assert( p.rows() == n );
@@ -32,7 +25,7 @@ double demo8(
     double _sum_0 = 0;
     for(int i=1; i<=p.rows(); i++){
         double _sum_1 = 0;
-        for(int j=1; j<=x.size(); j++){
+        for(int j=1; j<=p.cols(); j++){
             double _sum_2 = 0;
             for(int k=1; k<=x.size(); k++){
                 _sum_2 += x[k-1] * p(i-1, k-1);

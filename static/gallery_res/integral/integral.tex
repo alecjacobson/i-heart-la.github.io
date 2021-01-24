@@ -7,16 +7,22 @@
 \setmainfont{Linux Libertine O}
 \DeclareMathOperator*{\argmax}{arg\,max}
 \DeclareMathOperator*{\argmin}{arg\,min}
+\usepackage[paperheight=8in,paperwidth=4in,margin=.3in,heightrounded]{geometry}
 \begin{document}
+
+\begin{center}
+\resizebox{\textwidth}{!} 
+{
+\begin{minipage}[c]{\textwidth}
 \begin{align*}
-\textit{H(p)} = & \frac{1}{2\pi}\int_{0}^{2\pi} \textit{kₙ}\left( \textit{φ},\textit{p} \right) d\textit{φ}
+\textit{H(p)} & = \frac{1}{2\pi}\int_{0}^{2\pi} \textit{kₙ}\left( \textit{φ},\textit{p} \right) d\textit{φ} \\
+\intertext{where} 
+\textit{p} & \in \mathbb{R}^{ 3} \text{ point on the surface} \\
+\textit{kₙ} & \in \mathbb{R},\mathbb{R}^{ 3}\rightarrow \mathbb{R} \text{ normal curvature} \\
+\\
 \end{align*}
-
-where
-\begin{itemize}
-\item $\textit{p} \in \mathbb{R}^{ 3}$ point on the surface
-\item $\textit{kₙ} \in \mathbb{{R}},\mathbb{R}^{ 3}\rightarrow \mathbb{{R}}$ normal curvature
-\end{itemize}
-
+\end{minipage}
+}
+\end{center}
 
 \end{document}

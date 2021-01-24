@@ -7,19 +7,24 @@
 \setmainfont{Linux Libertine O}
 \DeclareMathOperator*{\argmax}{arg\,max}
 \DeclareMathOperator*{\argmin}{arg\,min}
+\usepackage[paperheight=8in,paperwidth=4in,margin=.3in,heightrounded]{geometry}
 \begin{document}
-from linearalgebra import tr
 
+\begin{center}
+\resizebox{\textwidth}{!} 
+{
+\begin{minipage}[c]{\textwidth}
 \begin{align*}
-\textit{J₃} = & \mathbb{ 1 }_{ 3,3 } \\
-\textit{k\_angle(Dₘ)} = & 3\left(  \sqrt{2}\textit{v} \right)^{\left( \frac{2}{3} \right)}\left( \frac{7}{4}\|\textit{Dₘ}\|_F^{2} - \frac{1}{4}tr\left( \textit{J₃}\textit{Dₘ}^T\textit{Dₘ} \right) \right)^{-1}
+\text{from linearalgebra import tr}\\
+\textit{J₃} & = \mathbb{ 1 }_{ 3,3 } \\
+\textit{k\_angle(Dₘ)} & = 3\left(  \sqrt{2}\textit{v} \right)^{\frac{2}{3}}\left( \frac{7}{4}\|\textit{Dₘ}\|_F^{2} - \frac{1}{4}tr\left( \textit{J₃}\textit{Dₘ}^T\textit{Dₘ} \right) \right)^{-1} \\
+\intertext{where} 
+\textit{Dₘ} & \in \mathbb{R}^{ 3 \times 3 } \\
+\textit{v} & \in \mathbb{R} \\
+\\
 \end{align*}
-
-where
-\begin{itemize}
-\item $\textit{Dₘ} \in \mathbb{R}^{ 3 \times 3 }$
-\item $\textit{v} \in \mathbb{{R}}$
-\end{itemize}
-
+\end{minipage}
+}
+\end{center}
 
 \end{document}

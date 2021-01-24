@@ -7,13 +7,13 @@
 
 where
 
-P_i: ℝ^(4×4) 
-B: ℝ^(4×4) 
-C: ℝ^(4×4) 
-L: ℝ^(4×4) 
-L̃: ℝ^(4×4) 
-U: ℝ^(4×4) 
-Ũ: ℝ^(4×4)
+P_i ∈ ℝ^(4×4) 
+B ∈ ℝ^(4×4) 
+C ∈ ℝ^(4×4) 
+L ∈ ℝ^(4×4) 
+L̃ ∈ ℝ^(4×4) 
+U ∈ ℝ^(4×4) 
+Ũ ∈ ℝ^(4×4)
 """
 import numpy as np
 import scipy
@@ -24,15 +24,6 @@ from scipy.optimize import minimize
 
 
 def demo15(P, B, C, L, L̃, U, Ũ):
-    """
-    :param :P : ℝ^(4×4)
-    :param :B : ℝ^(4×4)
-    :param :C : ℝ^(4×4)
-    :param :L : ℝ^(4×4)
-    :param :L̃ : ℝ^(4×4)
-    :param :U : ℝ^(4×4)
-    :param :Ũ : ℝ^(4×4)
-    """
     P = np.asarray(P, dtype=np.float64)
     B = np.asarray(B, dtype=np.float64)
     C = np.asarray(C, dtype=np.float64)

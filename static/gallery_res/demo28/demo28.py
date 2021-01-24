@@ -3,13 +3,13 @@
 
 where
 
-l_j: ℝ : the length of bj
+l_j ∈ ℝ : the length of bj
 dist: ℝ^n, ℝ^n -> ℝ : measures the geodesic distance between the centers of bi and bj along the boundary
-σ: ℝ
-`bᵢ`: ℝ^n
-b_j: ℝ^n
-s_j: ℝ : unit direction vector of bi
-k: ℝ : iteration number
+σ ∈ ℝ
+`bᵢ` ∈ ℝ^n
+b_j ∈ ℝ^n
+s_j ∈ ℝ : unit direction vector of bi
+k ∈ ℝ : iteration number
 """
 import numpy as np
 import scipy
@@ -21,13 +21,10 @@ from scipy.optimize import minimize
 
 def demo28(l, dist, σ, bᵢ, b, s, k):
     """
-    :param :l : ℝ : the length of bj
+    :param :l : the length of bj
     :param :dist : ℝ^n, ℝ^n -> ℝ : measures the geodesic distance between the centers of bi and bj along the boundary
-    :param :σ : ℝ
-    :param :bᵢ : ℝ^n
-    :param :b : ℝ^n
-    :param :s : ℝ : unit direction vector of bi
-    :param :k : ℝ : iteration number
+    :param :s : unit direction vector of bi
+    :param :k : iteration number
     """
     l = np.asarray(l)
     bᵢ = np.asarray(bᵢ, dtype=np.float64)
@@ -35,7 +32,7 @@ def demo28(l, dist, σ, bᵢ, b, s, k):
     s = np.asarray(s)
 
     _dim_0 = l.shape[0]
-    n = b.shape[1]
+    n = bᵢ.shape[0]
     assert l.shape == (_dim_0,)
     assert np.ndim(σ) == 0
     assert bᵢ.shape == (n,)
@@ -44,7 +41,7 @@ def demo28(l, dist, σ, bᵢ, b, s, k):
     assert np.ndim(k) == 0
 
     _sum_0 = 0
-    for j in range(1, len(l)+1):
+    for j in range(1, len(s)+1):
         _sum_0 += l[j-1] * np.exp(-dist(bᵢ, b[j-1]) / (2 * np.power(σ, 2))) * np.power((s[j-1]), k)
     G_σ_left_parenthesis_s_i_circumflex_accent_k_right_parenthesis = _sum_0
 

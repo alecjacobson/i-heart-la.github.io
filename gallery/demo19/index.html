@@ -36,8 +36,8 @@
 
 where
 
-`Dₘ`: ℝ^(3×3)  
-v: ℝ</code></pre></div>
+`Dₘ` ∈ ℝ^(3×3)  
+v ∈ ℝ</code></pre></div>
     
 
     
@@ -51,8 +51,8 @@ from linearalgebra: tr
 
 where
 
-`Dₘ`: ℝ^(3×3)  
-v: ℝ
+`Dₘ` ∈ ℝ^(3×3)  
+v ∈ ℝ
 */
 #include &lt;Eigen/Core&gt;
 #include &lt;Eigen/Dense&gt;
@@ -60,13 +60,6 @@ v: ℝ
 #include &lt;iostream&gt;
 #include &lt;set&gt;
 
-/**
- * demo19
- *
- * @param Dₘ  ℝ^(3×3)
- * @param v  ℝ
- * @return k_angle_left_parenthesis_Dₘ_right_parenthesis
- */
 double demo19(
     const Eigen::Matrix&lt;double, 3, 3&gt; &amp; Dₘ,
     const double &amp; v)
@@ -110,8 +103,8 @@ from linearalgebra: tr
 
 where
 
-`Dₘ`: ℝ^(3×3)  
-v: ℝ
+`Dₘ` ∈ ℝ^(3×3)  
+v ∈ ℝ
 &#34;&#34;&#34;
 import numpy as np
 import scipy
@@ -122,10 +115,6 @@ from scipy.optimize import minimize
 
 
 def demo19(Dₘ, v):
-    &#34;&#34;&#34;
-    :param :Dₘ : ℝ^(3×3)
-    :param :v : ℝ
-    &#34;&#34;&#34;
     Dₘ = np.asarray(Dₘ, dtype=np.float64)
 
     assert Dₘ.shape == (3, 3)
@@ -163,20 +152,25 @@ if __name__ == &#39;__main__&#39;:
 \setmainfont{Linux Libertine O}
 \DeclareMathOperator*{\argmax}{arg\,max}
 \DeclareMathOperator*{\argmin}{arg\,min}
+\usepackage[paperheight=8in,paperwidth=4in,margin=.3in,heightrounded]{geometry}
 \begin{document}
-from linearalgebra import tr
 
+\begin{center}
+\resizebox{\textwidth}{!} 
+{
+\begin{minipage}[c]{\textwidth}
 \begin{align*}
-\textit{J₃} = &amp; \mathbb{ 1 }_{ 3,3 } \\
-\textit{k\_angle(Dₘ)} = &amp; 3\left(  \sqrt{2}\textit{v} \right)^{\left( \frac{2}{3} \right)}\left( \frac{7}{4}\|\textit{Dₘ}\|_F^{2} - \frac{1}{4}tr\left( \textit{J₃}\textit{Dₘ}^T\textit{Dₘ} \right) \right)^{-1}
+\text{from linearalgebra import tr}\\
+\textit{J₃} &amp; = \mathbb{ 1 }_{ 3,3 } \\
+\textit{k\_angle(Dₘ)} &amp; = 3\left(  \sqrt{2}\textit{v} \right)^{\frac{2}{3}}\left( \frac{7}{4}\|\textit{Dₘ}\|_F^{2} - \frac{1}{4}tr\left( \textit{J₃}\textit{Dₘ}^T\textit{Dₘ} \right) \right)^{-1} \\
+\intertext{where} 
+\textit{Dₘ} &amp; \in \mathbb{R}^{ 3 \times 3 } \\
+\textit{v} &amp; \in \mathbb{R} \\
+\\
 \end{align*}
-
-where
-\begin{itemize}
-\item $\textit{Dₘ} \in \mathbb{R}^{ 3 \times 3 }$
-\item $\textit{v} \in \mathbb{{R}}$
-\end{itemize}
-
+\end{minipage}
+}
+\end{center}
 
 \end{document}
 </code></pre></div>

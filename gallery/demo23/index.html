@@ -42,13 +42,13 @@ n̄ = ū×v̄
 
 where
 
-v̄: ℝ^3
-ō: ℝ^3
-ū: ℝ^3
-V̄: ℝ^3
-`C̄ₐ`: ℝ^3
-θ: ℝ 
-v: ℝ 
+v̄ ∈ ℝ^3
+ō ∈ ℝ^3
+ū ∈ ℝ^3
+V̄ ∈ ℝ^3
+`C̄ₐ` ∈ ℝ^3
+θ ∈ ℝ 
+v ∈ ℝ 
 `D_A`: ℝ,ℝ-&gt;ℝ^3
 δ: ℝ,ℝ-&gt;ℝ </code></pre></div>
     
@@ -70,13 +70,13 @@ n̄ = ū×v̄
 
 where
 
-v̄: ℝ^3
-ō: ℝ^3
-ū: ℝ^3
-V̄: ℝ^3
-`C̄ₐ`: ℝ^3
-θ: ℝ 
-v: ℝ 
+v̄ ∈ ℝ^3
+ō ∈ ℝ^3
+ū ∈ ℝ^3
+V̄ ∈ ℝ^3
+`C̄ₐ` ∈ ℝ^3
+θ ∈ ℝ 
+v ∈ ℝ 
 `D_A`: ℝ,ℝ-&gt;ℝ^3
 δ: ℝ,ℝ-&gt;ℝ 
 */
@@ -89,13 +89,6 @@ v: ℝ
 /**
  * demo23
  *
- * @param v̄  ℝ^3
- * @param ō  ℝ^3
- * @param ū  ℝ^3
- * @param V̄  ℝ^3
- * @param C_combining_macron_ₐ  ℝ^3
- * @param θ  ℝ
- * @param v  ℝ
  * @param D_A  ℝ,ℝ-&gt;ℝ^3
  * @param δ  ℝ,ℝ-&gt;ℝ
  * @return y_left_parenthesis_θ_comma_v_right_parenthesis
@@ -193,13 +186,13 @@ n̄ = ū×v̄
 
 where
 
-v̄: ℝ^3
-ō: ℝ^3
-ū: ℝ^3
-V̄: ℝ^3
-`C̄ₐ`: ℝ^3
-θ: ℝ 
-v: ℝ 
+v̄ ∈ ℝ^3
+ō ∈ ℝ^3
+ū ∈ ℝ^3
+V̄ ∈ ℝ^3
+`C̄ₐ` ∈ ℝ^3
+θ ∈ ℝ 
+v ∈ ℝ 
 `D_A`: ℝ,ℝ-&gt;ℝ^3
 δ: ℝ,ℝ-&gt;ℝ 
 &#34;&#34;&#34;
@@ -213,13 +206,6 @@ from scipy.optimize import minimize
 
 def demo23(v̄, ō, ū, V̄, C_combining_macron_ₐ, θ, v, D_A, δ):
     &#34;&#34;&#34;
-    :param :v̄ : ℝ^3
-    :param :ō : ℝ^3
-    :param :ū : ℝ^3
-    :param :V̄ : ℝ^3
-    :param :C_combining_macron_ₐ : ℝ^3
-    :param :θ : ℝ
-    :param :v : ℝ
     :param :D_A : ℝ,ℝ-&gt;ℝ^3
     :param :δ : ℝ,ℝ-&gt;ℝ
     &#34;&#34;&#34;
@@ -297,31 +283,37 @@ if __name__ == &#39;__main__&#39;:
 \setmainfont{Linux Libertine O}
 \DeclareMathOperator*{\argmax}{arg\,max}
 \DeclareMathOperator*{\argmin}{arg\,min}
+\usepackage[paperheight=8in,paperwidth=4in,margin=.3in,heightrounded]{geometry}
 \begin{document}
+
+\begin{center}
+\resizebox{\textwidth}{!} 
+{
+\begin{minipage}[c]{\textwidth}
 \begin{align*}
-\textit{r̄} = &amp; \textit{v̄} × \textit{ō} \\
-\textit{s̄} = &amp; \textit{ō} × \textit{ū} \\
-\textit{n̄} = &amp; \textit{ū} × \textit{v̄} \\
-\textit{k\textsubscript{r}} = &amp; \textit{r̄} \cdot \left( \textit{C̄ₐ} - \textit{V̄} \right) \\
-\textit{kₛ} = &amp; \textit{s̄} \cdot \left( \textit{C̄ₐ} - \textit{V̄} \right) \\
-\textit{kₙ} = &amp; \textit{n̄} \cdot \left( \textit{C̄ₐ} - \textit{V̄} \right) \\
-\textit{x(θ,v)} = &amp; \frac{\textit{r̄} \cdot \textit{D\_A}\left( \textit{θ},\textit{v} \right) + \textit{k\textsubscript{r}}\textit{δ}\left( \textit{θ},\textit{v} \right)}{\textit{n̄} \cdot \textit{D\_A}\left( \textit{θ},\textit{v} \right) + \textit{kₙ}\textit{δ}\left( \textit{θ},\textit{v} \right)} \\
-\textit{y(θ,v)} = &amp; \frac{\textit{s̄} \cdot \textit{D\_A}\left( \textit{θ},\textit{v} \right) + \textit{kₛ}\textit{δ}\left( \textit{θ},\textit{v} \right)}{\textit{n̄} \cdot \textit{D\_A}\left( \textit{θ},\textit{v} \right) + \textit{kₙ}\textit{δ}\left( \textit{θ},\textit{v} \right)}
+\textit{r̄} &amp; = \textit{v̄} × \textit{ō} \\
+\textit{s̄} &amp; = \textit{ō} × \textit{ū} \\
+\textit{n̄} &amp; = \textit{ū} × \textit{v̄} \\
+\textit{k\textsubscript{r}} &amp; = \textit{r̄} \cdot \left( \textit{C̄ₐ} - \textit{V̄} \right) \\
+\textit{kₛ} &amp; = \textit{s̄} \cdot \left( \textit{C̄ₐ} - \textit{V̄} \right) \\
+\textit{kₙ} &amp; = \textit{n̄} \cdot \left( \textit{C̄ₐ} - \textit{V̄} \right) \\
+\textit{x(θ,v)} &amp; = \frac{\textit{r̄} \cdot \textit{D\_A}\left( \textit{θ},\textit{v} \right) + \textit{k\textsubscript{r}}\textit{δ}\left( \textit{θ},\textit{v} \right)}{\textit{n̄} \cdot \textit{D\_A}\left( \textit{θ},\textit{v} \right) + \textit{kₙ}\textit{δ}\left( \textit{θ},\textit{v} \right)} \\
+\textit{y(θ,v)} &amp; = \frac{\textit{s̄} \cdot \textit{D\_A}\left( \textit{θ},\textit{v} \right) + \textit{kₛ}\textit{δ}\left( \textit{θ},\textit{v} \right)}{\textit{n̄} \cdot \textit{D\_A}\left( \textit{θ},\textit{v} \right) + \textit{kₙ}\textit{δ}\left( \textit{θ},\textit{v} \right)} \\
+\intertext{where} 
+\textit{v̄} &amp; \in \mathbb{R}^{ 3} \\
+\textit{ō} &amp; \in \mathbb{R}^{ 3} \\
+\textit{ū} &amp; \in \mathbb{R}^{ 3} \\
+\textit{V̄} &amp; \in \mathbb{R}^{ 3} \\
+\textit{C̄ₐ} &amp; \in \mathbb{R}^{ 3} \\
+\textit{θ} &amp; \in \mathbb{R} \\
+\textit{v} &amp; \in \mathbb{R} \\
+\textit{D\_A} &amp; \in \mathbb{R},\mathbb{R}\rightarrow \mathbb{R}^{ 3} \\
+\textit{δ} &amp; \in \mathbb{R},\mathbb{R}\rightarrow \mathbb{R} \\
+\\
 \end{align*}
-
-where
-\begin{itemize}
-\item $\textit{v̄} \in \mathbb{R}^{ 3}$
-\item $\textit{ō} \in \mathbb{R}^{ 3}$
-\item $\textit{ū} \in \mathbb{R}^{ 3}$
-\item $\textit{V̄} \in \mathbb{R}^{ 3}$
-\item $\textit{C̄ₐ} \in \mathbb{R}^{ 3}$
-\item $\textit{θ} \in \mathbb{{R}}$
-\item $\textit{v} \in \mathbb{{R}}$
-\item $\textit{D\_A} \in \mathbb{{R}},\mathbb{{R}}\rightarrow \mathbb{R}^{ 3}$
-\item $\textit{δ} \in \mathbb{{R}},\mathbb{{R}}\rightarrow \mathbb{{R}}$
-\end{itemize}
-
+\end{minipage}
+}
+\end{center}
 
 \end{document}
 </code></pre></div>

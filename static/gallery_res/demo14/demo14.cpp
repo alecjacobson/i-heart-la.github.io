@@ -4,9 +4,9 @@
 
 where
 
-A: ℝ^(4×4) 
-B: ℝ^(4×4) 
-S: ℝ^(4×4) 
+A ∈ ℝ^(4×4) 
+B ∈ ℝ^(4×4) 
+S ∈ ℝ^(4×4) 
 */
 #include <Eigen/Core>
 #include <Eigen/Dense>
@@ -14,14 +14,6 @@ S: ℝ^(4×4)
 #include <iostream>
 #include <set>
 
-/**
- * demo14
- *
- * @param A  ℝ^(4×4)
- * @param B  ℝ^(4×4)
- * @param S  ℝ^(4×4)
- * @return ret
- */
 Eigen::Matrix<double, 8, 8> demo14(
     const Eigen::Matrix<double, 4, 4> & A,
     const Eigen::Matrix<double, 4, 4> & B,

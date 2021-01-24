@@ -33,8 +33,8 @@
 
 where
 
-x: ℝ^n
-p: ℝ^(n×m)</code></pre></div>
+x ∈ ℝ^n
+p ∈ ℝ^(n×m)</code></pre></div>
     
 
     
@@ -45,8 +45,8 @@ p: ℝ^(n×m)</code></pre></div>
 
 where
 
-x: ℝ^n
-p: ℝ^(n×m)
+x ∈ ℝ^n
+p ∈ ℝ^(n×m)
 */
 #include &lt;Eigen/Core&gt;
 #include &lt;Eigen/Dense&gt;
@@ -54,18 +54,11 @@ p: ℝ^(n×m)
 #include &lt;iostream&gt;
 #include &lt;set&gt;
 
-/**
- * demo8
- *
- * @param x  ℝ^n
- * @param p  ℝ^(n×m)
- * @return I_left_parenthesis_X_semicolon_Y_right_parenthesis
- */
 double demo8(
     const Eigen::VectorXd &amp; x,
     const Eigen::MatrixXd &amp; p)
 {
-    const long n = p.rows();
+    const long n = x.size();
     const long m = p.cols();
     assert( x.size() == n );
     assert( p.rows() == n );
@@ -74,7 +67,7 @@ double demo8(
     double _sum_0 = 0;
     for(int i=1; i&lt;=p.rows(); i++){
         double _sum_1 = 0;
-        for(int j=1; j&lt;=x.size(); j++){
+        for(int j=1; j&lt;=p.cols(); j++){
             double _sum_2 = 0;
             for(int k=1; k&lt;=x.size(); k++){
                 _sum_2 += x[k-1] * p(i-1, k-1);
@@ -119,8 +112,8 @@ int main(int argc, char *argv[])
 
 where
 
-x: ℝ^n
-p: ℝ^(n×m)
+x ∈ ℝ^n
+p ∈ ℝ^(n×m)
 &#34;&#34;&#34;
 import numpy as np
 import scipy
@@ -131,14 +124,10 @@ from scipy.optimize import minimize
 
 
 def demo8(x, p):
-    &#34;&#34;&#34;
-    :param :x : ℝ^n
-    :param :p : ℝ^(n×m)
-    &#34;&#34;&#34;
     x = np.asarray(x, dtype=np.float64)
     p = np.asarray(p, dtype=np.float64)
 
-    n = p.shape[0]
+    n = x.shape[0]
     m = p.shape[1]
     assert x.shape == (n,)
     assert p.shape == (n, m)
@@ -146,7 +135,7 @@ def demo8(x, p):
     _sum_0 = 0
     for i in range(1, len(p)+1):
         _sum_1 = 0
-        for j in range(1, len(x)+1):
+        for j in range(1, len(p)+1):
             _sum_2 = 0
             for k in range(1, len(x)+1):
                 _sum_2 += x[k-1] * p[i-1, k-1]
@@ -184,17 +173,23 @@ if __name__ == &#39;__main__&#39;:
 \setmainfont{Linux Libertine O}
 \DeclareMathOperator*{\argmax}{arg\,max}
 \DeclareMathOperator*{\argmin}{arg\,min}
+\usepackage[paperheight=8in,paperwidth=4in,margin=.3in,heightrounded]{geometry}
 \begin{document}
+
+\begin{center}
+\resizebox{\textwidth}{!} 
+{
+\begin{minipage}[c]{\textwidth}
 \begin{align*}
-\textit{I(X;Y)} = &amp; \sum_\textit{i} \sum_\textit{j} \textit{x}_{ \textit{j} }\textit{p}_{\textit{i}, \textit{j}} \log_2{ \frac{\textit{p}_{\textit{i}, \textit{j}}}{\sum_\textit{k} \textit{x}_{ \textit{k} }\textit{p}_{\textit{i}, \textit{k}}} }
+\textit{I(X;Y)} &amp; = \sum_\textit{i} \sum_\textit{j} \textit{x}_{ \textit{j} }\textit{p}_{\textit{i}, \textit{j}} \log_2{ \frac{\textit{p}_{\textit{i}, \textit{j}}}{\sum_\textit{k} \textit{x}_{ \textit{k} }\textit{p}_{\textit{i}, \textit{k}}} } \\
+\intertext{where} 
+\textit{x} &amp; \in \mathbb{R}^{ \textit{n}} \\
+\textit{p} &amp; \in \mathbb{R}^{ \textit{n} \times \textit{m} } \\
+\\
 \end{align*}
-
-where
-\begin{itemize}
-\item $\textit{x} \in \mathbb{R}^{ \textit{n}}$
-\item $\textit{p} \in \mathbb{R}^{ \textit{n} \times \textit{m} }$
-\end{itemize}
-
+\end{minipage}
+}
+\end{center}
 
 \end{document}
 </code></pre></div>

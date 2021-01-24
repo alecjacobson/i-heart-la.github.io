@@ -4,10 +4,10 @@
 where
 
 
-α: ℝ^m
-p: ℝ^m
-X: ℝ^(m×n)
-M: ℝ  
+α ∈ ℝ^m
+p ∈ ℝ^m
+X ∈ ℝ^(m×n)
+M ∈ ℝ  
 f: ℝ -> ℝ 
 `p_c`: ℝ -> ℝ 
 */
@@ -20,10 +20,6 @@ f: ℝ -> ℝ
 /**
  * demo29
  *
- * @param α  ℝ^m
- * @param p  ℝ^m
- * @param X  ℝ^(m×n)
- * @param M  ℝ
  * @param f  ℝ -> ℝ
  * @param p_c  ℝ -> ℝ
  * @return ret
@@ -36,7 +32,7 @@ double demo29(
     const std::function<double(double)> & f,
     const std::function<double(double)> & p_c)
 {
-    const long m = X.rows();
+    const long m = α.size();
     const long n = X.cols();
     assert( α.size() == m );
     assert( p.size() == m );
@@ -52,7 +48,7 @@ double demo29(
         double _sum_2 = 0;
         for(int j=1; j<=X.cols(); j++){
             double _sum_3 = 0;
-            for(int k=1; k<=α.size(); k++){
+            for(int k=1; k<=p.size(); k++){
                 _sum_3 += α[k-1] * p[k-1] * X(i-1, j-1);
             }
             _sum_2 += (f(X(i-1, j-1)) / double(p_c(X(i-1, j-1))) - (_sum_3) / double(p_c(X(i-1, j-1))));

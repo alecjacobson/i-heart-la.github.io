@@ -3,8 +3,8 @@ min_(C ∈ ℝ^3) ∑_i ||x_i + (R_i - I₃)C ||²
 
 where
 
-x_i: ℝ^3
-R_i: ℝ^(3×3)
+x_i ∈ ℝ^3
+R_i ∈ ℝ^(3×3)
 */
 #include <Eigen/Core>
 #include <Eigen/Dense>
@@ -12,13 +12,6 @@ R_i: ℝ^(3×3)
 #include <iostream>
 #include <set>
 
-/**
- * demo38
- *
- * @param x  ℝ^3
- * @param R  ℝ^(3×3)
- * @return ret
- */
 double demo38(
     const std::vector<Eigen::Matrix<double, 3, 1>> & x,
     const std::vector<Eigen::Matrix<double, 3, 3>> & R)

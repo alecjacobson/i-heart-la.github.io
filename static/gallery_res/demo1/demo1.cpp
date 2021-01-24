@@ -6,9 +6,9 @@ from trigonometry: sin, cos
 
 where
 
-ϕ: ℝ : angle between 0 and 2π
-θ: ℝ : angle between -π/2 and π/2
-R: ℝ : the radius of the sphere
+ϕ ∈ ℝ : angle between 0 and 2π
+θ ∈ ℝ : angle between -π/2 and π/2
+R ∈ ℝ : the radius of the sphere
 */
 #include <Eigen/Core>
 #include <Eigen/Dense>
@@ -19,9 +19,9 @@ R: ℝ : the radius of the sphere
 /**
  * demo1
  *
- * @param ϕ  ℝ : angle between 0 and 2π
- * @param θ  ℝ : angle between -π/2 and π/2
- * @param R  ℝ : the radius of the sphere
+ * @param ϕ  angle between 0 and 2π
+ * @param θ  angle between -π/2 and π/2
+ * @param R  the radius of the sphere
  * @return x_left_parenthesis_θ_comma__ϕ_right_parenthesis
  */
 Eigen::Matrix<double, 3, 1> demo1(

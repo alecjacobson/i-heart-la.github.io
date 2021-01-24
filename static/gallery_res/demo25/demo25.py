@@ -3,9 +3,9 @@ min_(u ∈ ℝ^6) uᵀ(∑_i [x_i×n̂_i; n̂_i][(x_i×n̂_i)ᵀ n̂_iᵀ])u - 2
 
 where
 
-x_i: ℝ^3 
-n̂_i: ℝ^3  
-p_i: ℝ^3  
+x_i ∈ ℝ^3 
+n̂_i ∈ ℝ^3  
+p_i ∈ ℝ^3  
 """
 import numpy as np
 import scipy
@@ -16,11 +16,6 @@ from scipy.optimize import minimize
 
 
 def demo25(x, n̂, p):
-    """
-    :param :x : ℝ^3
-    :param :n̂ : ℝ^3
-    :param :p : ℝ^3
-    """
     x = np.asarray(x, dtype=np.float64)
     n̂ = np.asarray(n̂, dtype=np.float64)
     p = np.asarray(p, dtype=np.float64)
@@ -42,8 +37,8 @@ def demo25(x, n̂, p):
             _sum_1 += _ret_2 @ n̂[i-1].T.reshape(1, 3) @ (p[i-1] - x[i-1])
         _sum_2 = 0
         for i in range(1, len(p)+1):
-            _sum_2 += (p[i-1] - x[i-1]).T.reshape(1, 3) @ n̂[i-1] * n̂[i-1].T.reshape(1, 3) @ (p[i-1] - x[i-1])
-        return u.T.reshape(1, 6) @ (_sum_0) @ u - 2 * u.T.reshape(1, 6) @ (_sum_1) + _sum_2
+            _sum_2 += (((p[i-1] - x[i-1]).T.reshape(1, 3) @ n̂[i-1]).item() * n̂[i-1].T.reshape(1, 3) @ (p[i-1] - x[i-1])).item()
+        return (u.T.reshape(1, 6) @ (_sum_0) @ u).item() - (2 * u.T.reshape(1, 6) @ (_sum_1)).item() + _sum_2
     ret = minimize(_target_0, np.zeros(6)).fun
     return ret
 

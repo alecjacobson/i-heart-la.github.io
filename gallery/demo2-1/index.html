@@ -36,7 +36,7 @@
 
 where
  
-T: ℝ^(3×3)</code></pre></div>
+T ∈ ℝ^(3×3)</code></pre></div>
     
 
     
@@ -50,7 +50,7 @@ T: ℝ^(3×3)</code></pre></div>
 
 where
  
-T: ℝ^(3×3)
+T ∈ ℝ^(3×3)
 */
 #include &lt;Eigen/Core&gt;
 #include &lt;Eigen/Dense&gt;
@@ -58,12 +58,6 @@ T: ℝ^(3×3)
 #include &lt;iostream&gt;
 #include &lt;set&gt;
 
-/**
- * demo2-1
- *
- * @param T  ℝ^(3×3)
- * @return n_left_parenthesis_T_right_parenthesis
- */
 Eigen::Matrix&lt;double, 3, 1&gt; demo2-1(const Eigen::Matrix&lt;double, 3, 3&gt; &amp; T)
 {
     Eigen::Matrix&lt;double, 3, 1&gt; xᵢ = T.col(1-1);
@@ -106,7 +100,7 @@ int main(int argc, char *argv[])
 
 where
  
-T: ℝ^(3×3)
+T ∈ ℝ^(3×3)
 &#34;&#34;&#34;
 import numpy as np
 import scipy
@@ -117,9 +111,6 @@ from scipy.optimize import minimize
 
 
 def demo2-1(T):
-    &#34;&#34;&#34;
-    :param :T : ℝ^(3×3)
-    &#34;&#34;&#34;
     T = np.asarray(T, dtype=np.float64)
 
     assert T.shape == (3, 3)
@@ -158,19 +149,25 @@ if __name__ == &#39;__main__&#39;:
 \setmainfont{Linux Libertine O}
 \DeclareMathOperator*{\argmax}{arg\,max}
 \DeclareMathOperator*{\argmin}{arg\,min}
+\usepackage[paperheight=8in,paperwidth=4in,margin=.3in,heightrounded]{geometry}
 \begin{document}
+
+\begin{center}
+\resizebox{\textwidth}{!} 
+{
+\begin{minipage}[c]{\textwidth}
 \begin{align*}
-\textit{x\textsubscript{i}} = &amp; \textit{T}_{*, 1} \\
-\textit{x\textsubscript{j}} = &amp; \textit{T}_{*, 2} \\
-\textit{xₖ} = &amp; \textit{T}_{*, 3} \\
-\textit{n(T)} = &amp; \frac{\left( \textit{x\textsubscript{j}} - \textit{x\textsubscript{i}} \right) × \left( \textit{xₖ} - \textit{x\textsubscript{i}} \right)}{\|\left( \textit{x\textsubscript{j}} - \textit{x\textsubscript{i}} \right) × \left( \textit{xₖ} - \textit{x\textsubscript{i}} \right)\|_2}
+\textit{x\textsubscript{i}} &amp; = \textit{T}_{*, 1} \\
+\textit{x\textsubscript{j}} &amp; = \textit{T}_{*, 2} \\
+\textit{xₖ} &amp; = \textit{T}_{*, 3} \\
+\textit{n(T)} &amp; = \frac{\left( \textit{x\textsubscript{j}} - \textit{x\textsubscript{i}} \right) × \left( \textit{xₖ} - \textit{x\textsubscript{i}} \right)}{\|\left( \textit{x\textsubscript{j}} - \textit{x\textsubscript{i}} \right) × \left( \textit{xₖ} - \textit{x\textsubscript{i}} \right)\|_2} \\
+\intertext{where} 
+\textit{T} &amp; \in \mathbb{R}^{ 3 \times 3 } \\
+\\
 \end{align*}
-
-where
-\begin{itemize}
-\item $\textit{T} \in \mathbb{R}^{ 3 \times 3 }$
-\end{itemize}
-
+\end{minipage}
+}
+\end{center}
 
 \end{document}
 </code></pre></div>

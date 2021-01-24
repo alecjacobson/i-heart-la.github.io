@@ -33,16 +33,16 @@
 
 where
 
-`σ_N`: ℝ 
-`E_I`: ℝ
-α_i : ℝ
-β_i : ℝ
-`σ_S`_i: ℝ 
-`σ_T`_i: ℝ 
-ρ_i: ℝ 
-ρ̄_i: ℝ 
-`σ_ρ`_i: ℝ 
-ā_i: ℝ </code></pre></div>
+`σ_N` ∈ ℝ 
+`E_I` ∈ ℝ
+α_i ∈ ℝ
+β_i ∈ ℝ
+`σ_S`_i ∈ ℝ 
+`σ_T`_i ∈ ℝ 
+ρ_i ∈ ℝ 
+ρ̄_i ∈ ℝ 
+`σ_ρ`_i ∈ ℝ 
+ā_i ∈ ℝ </code></pre></div>
     
 
     
@@ -53,16 +53,16 @@ E = 1/`σ_N`²`E_I` + ∑_(j for j&gt;1) α_j²/`σ_S`_j² + ∑_(j for j&gt;1) 
 
 where
 
-`σ_N`: ℝ 
-`E_I`: ℝ
-α_i : ℝ
-β_i : ℝ
-`σ_S`_i: ℝ 
-`σ_T`_i: ℝ 
-ρ_i: ℝ 
-ρ̄_i: ℝ 
-`σ_ρ`_i: ℝ 
-ā_i: ℝ 
+`σ_N` ∈ ℝ 
+`E_I` ∈ ℝ
+α_i ∈ ℝ
+β_i ∈ ℝ
+`σ_S`_i ∈ ℝ 
+`σ_T`_i ∈ ℝ 
+ρ_i ∈ ℝ 
+ρ̄_i ∈ ℝ 
+`σ_ρ`_i ∈ ℝ 
+ā_i ∈ ℝ 
 */
 #include &lt;Eigen/Core&gt;
 #include &lt;Eigen/Dense&gt;
@@ -70,21 +70,6 @@ where
 #include &lt;iostream&gt;
 #include &lt;set&gt;
 
-/**
- * demo24
- *
- * @param σ_N  ℝ
- * @param E_I  ℝ
- * @param α  ℝ
- * @param β  ℝ
- * @param σ_S  ℝ
- * @param σ_T  ℝ
- * @param ρ  ℝ
- * @param ρ̄  ℝ
- * @param σ_ρ  ℝ
- * @param ā  ℝ
- * @return E
- */
 double demo24(
     const double &amp; σ_N,
     const double &amp; E_I,
@@ -120,7 +105,7 @@ double demo24(
         }
     }
     double _sum_2 = 0;
-    for(int j=1; j&lt;=ρ.size(); j++){
+    for(int j=1; j&lt;=ρ̄.size(); j++){
         _sum_2 += pow((ρ.at(j-1) - ρ̄.at(j-1)), 2) / double(pow(σ_ρ.at(j-1), 2));
     }
     double E = 1 / double(pow(σ_N, 2)) * E_I + _sum_0 + _sum_1 + _sum_2;
@@ -206,16 +191,16 @@ E = 1/`σ_N`²`E_I` + ∑_(j for j&gt;1) α_j²/`σ_S`_j² + ∑_(j for j&gt;1) 
 
 where
 
-`σ_N`: ℝ 
-`E_I`: ℝ
-α_i : ℝ
-β_i : ℝ
-`σ_S`_i: ℝ 
-`σ_T`_i: ℝ 
-ρ_i: ℝ 
-ρ̄_i: ℝ 
-`σ_ρ`_i: ℝ 
-ā_i: ℝ 
+`σ_N` ∈ ℝ 
+`E_I` ∈ ℝ
+α_i ∈ ℝ
+β_i ∈ ℝ
+`σ_S`_i ∈ ℝ 
+`σ_T`_i ∈ ℝ 
+ρ_i ∈ ℝ 
+ρ̄_i ∈ ℝ 
+`σ_ρ`_i ∈ ℝ 
+ā_i ∈ ℝ 
 &#34;&#34;&#34;
 import numpy as np
 import scipy
@@ -226,18 +211,6 @@ from scipy.optimize import minimize
 
 
 def demo24(σ_N, E_I, α, β, σ_S, σ_T, ρ, ρ̄, σ_ρ, ā):
-    &#34;&#34;&#34;
-    :param :σ_N : ℝ
-    :param :E_I : ℝ
-    :param :α : ℝ
-    :param :β : ℝ
-    :param :σ_S : ℝ
-    :param :σ_T : ℝ
-    :param :ρ : ℝ
-    :param :ρ̄ : ℝ
-    :param :σ_ρ : ℝ
-    :param :ā : ℝ
-    &#34;&#34;&#34;
     α = np.asarray(α)
     β = np.asarray(β)
     σ_S = np.asarray(σ_S)
@@ -268,7 +241,7 @@ def demo24(σ_N, E_I, α, β, σ_S, σ_T, ρ, ρ̄, σ_ρ, ā):
         if(j &gt; 1):
             _sum_1 += np.power(β[j-1], 2) / np.power(σ_T[j-1], 2)
     _sum_2 = 0
-    for j in range(1, len(ρ)+1):
+    for j in range(1, len(ρ̄)+1):
         _sum_2 += np.power((ρ[j-1] - ρ̄[j-1]), 2) / np.power(σ_ρ[j-1], 2)
     E = 1 / np.power(σ_N, 2) * E_I + _sum_0 + _sum_1 + _sum_2
 
@@ -317,25 +290,31 @@ if __name__ == &#39;__main__&#39;:
 \setmainfont{Linux Libertine O}
 \DeclareMathOperator*{\argmax}{arg\,max}
 \DeclareMathOperator*{\argmin}{arg\,min}
+\usepackage[paperheight=8in,paperwidth=4in,margin=.3in,heightrounded]{geometry}
 \begin{document}
+
+\begin{center}
+\resizebox{\textwidth}{!} 
+{
+\begin{minipage}[c]{\textwidth}
 \begin{align*}
-\textit{E} = &amp; \frac{1}{\textit{σ\_N}^{2}}\textit{E\_I} + \sum_{\textit{j} &gt; 1} \frac{\textit{α}_{ \textit{j} }^{2}}{\textit{σ\_S}_{ \textit{j} }^{2}} + \sum_{\textit{j} &gt; 1} \frac{\textit{β}_{ \textit{j} }^{2}}{\textit{σ\_T}_{ \textit{j} }^{2}} + \sum_\textit{j} \frac{\left( \textit{ρ}_{ \textit{j} } - \textit{ρ̄}_{ \textit{j} } \right)^{2}}{\textit{σ\_ρ}_{ \textit{j} }^{2}}
+\textit{E} &amp; = \frac{1}{\textit{σ\_N}^{2}}\textit{E\_I} + \sum_{\textit{j} &gt; 1} \frac{\textit{α}_{ \textit{j} }^{2}}{\textit{σ\_S}_{ \textit{j} }^{2}} + \sum_{\textit{j} &gt; 1} \frac{\textit{β}_{ \textit{j} }^{2}}{\textit{σ\_T}_{ \textit{j} }^{2}} + \sum_\textit{j} \frac{\left( \textit{ρ}_{ \textit{j} } - \textit{ρ̄}_{ \textit{j} } \right)^{2}}{\textit{σ\_ρ}_{ \textit{j} }^{2}} \\
+\intertext{where} 
+\textit{σ\_N} &amp; \in \mathbb{R} \\
+\textit{E\_I} &amp; \in \mathbb{R} \\
+\textit{α}_{\textit{i}} &amp; \in \mathbb{R} \\
+\textit{β}_{\textit{i}} &amp; \in \mathbb{R} \\
+\textit{σ\_S}_{\textit{i}} &amp; \in \mathbb{R} \\
+\textit{σ\_T}_{\textit{i}} &amp; \in \mathbb{R} \\
+\textit{ρ}_{\textit{i}} &amp; \in \mathbb{R} \\
+\textit{ρ̄}_{\textit{i}} &amp; \in \mathbb{R} \\
+\textit{σ\_ρ}_{\textit{i}} &amp; \in \mathbb{R} \\
+\textit{ā}_{\textit{i}} &amp; \in \mathbb{R} \\
+\\
 \end{align*}
-
-where
-\begin{itemize}
-\item $\textit{σ\_N} \in \mathbb{{R}}$
-\item $\textit{E\_I} \in \mathbb{{R}}$
-\item $\textit{α}_{\textit{i}} \in \mathbb{{R}}$
-\item $\textit{β}_{\textit{i}} \in \mathbb{{R}}$
-\item $\textit{σ\_S}_{\textit{i}} \in \mathbb{{R}}$
-\item $\textit{σ\_T}_{\textit{i}} \in \mathbb{{R}}$
-\item $\textit{ρ}_{\textit{i}} \in \mathbb{{R}}$
-\item $\textit{ρ̄}_{\textit{i}} \in \mathbb{{R}}$
-\item $\textit{σ\_ρ}_{\textit{i}} \in \mathbb{{R}}$
-\item $\textit{ā}_{\textit{i}} \in \mathbb{{R}}$
-\end{itemize}
-
+\end{minipage}
+}
+\end{center}
 
 \end{document}
 </code></pre></div>

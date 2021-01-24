@@ -3,7 +3,7 @@
 
 where 
 
-p: ℝ^3 : point on the surface
+p ∈ ℝ^3 : point on the surface
 `kₙ`: ℝ,ℝ^3->ℝ : normal curvature
 """
 import numpy as np
@@ -16,7 +16,7 @@ from scipy.optimize import minimize
 
 def integral(p, kₙ):
     """
-    :param :p : ℝ^3 : point on the surface
+    :param :p : point on the surface
     :param :kₙ : ℝ,ℝ^3->ℝ : normal curvature
     """
     p = np.asarray(p, dtype=np.float64)

@@ -4,7 +4,7 @@
 
 where
 
-`k₁`: ℝ  : control the desired kernel variance in either edge or orthogonal direction
-`k₂`: ℝ  : control the desired kernel variance in either edge or orthogonal direction
-`e₁`: ℝ ^ 3: orthogonal direction vectors
-`e₂`: ℝ ^ 3: orthogonal direction vectors
+`k₁` ∈ ℝ  : control the desired kernel variance in either edge or orthogonal direction
+`k₂` ∈ ℝ  : control the desired kernel variance in either edge or orthogonal direction
+`e₁` ∈ ℝ ^ 3: orthogonal direction vectors
+`e₂` ∈ ℝ ^ 3: orthogonal direction vectors

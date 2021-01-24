@@ -35,9 +35,9 @@ L_i,i = -sum_(l for l != i) L_i,l
 
 where
 
-L: ℝ^(n×n)
-w: ℝ^(n×n): edge weight matrix
-E: {ℤ²} index: edges</code></pre></div>
+L ∈ ℝ^(n×n)
+w ∈ ℝ^(n×n): edge weight matrix
+E ∈ {ℤ²} index: edges</code></pre></div>
     
 
     
@@ -50,9 +50,9 @@ L_i,i = -sum_(l for l != i) L_i,l
 
 where
 
-L: ℝ^(n×n)
-w: ℝ^(n×n): edge weight matrix
-E: {ℤ²} index: edges
+L ∈ ℝ^(n×n)
+w ∈ ℝ^(n×n): edge weight matrix
+E ∈ {ℤ²} index: edges
 */
 #include &lt;Eigen/Core&gt;
 #include &lt;Eigen/Dense&gt;
@@ -63,8 +63,8 @@ E: {ℤ²} index: edges
 /**
  * laplacian
  *
- * @param w  ℝ^(n×n): edge weight matrix
- * @param E  {ℤ²} index: edges
+ * @param w  edge weight matrix
+ * @param E  edges
  * @return L
  */
 Eigen::SparseMatrix&lt;double&gt; laplacian(
@@ -137,9 +137,9 @@ L_i,i = -sum_(l for l != i) L_i,l
 
 where
 
-L: ℝ^(n×n)
-w: ℝ^(n×n): edge weight matrix
-E: {ℤ²} index: edges
+L ∈ ℝ^(n×n)
+w ∈ ℝ^(n×n): edge weight matrix
+E ∈ {ℤ²} index: edges
 &#34;&#34;&#34;
 import numpy as np
 import scipy
@@ -151,8 +151,8 @@ from scipy.optimize import minimize
 
 def laplacian(w, E):
     &#34;&#34;&#34;
-    :param :w : ℝ^(n×n): edge weight matrix
-    :param :E : {ℤ²} index: edges
+    :param :w : edge weight matrix
+    :param :E : edges
     &#34;&#34;&#34;
     w = np.asarray(w, dtype=np.float64)
 
@@ -213,19 +213,25 @@ if __name__ == &#39;__main__&#39;:
 \setmainfont{Linux Libertine O}
 \DeclareMathOperator*{\argmax}{arg\,max}
 \DeclareMathOperator*{\argmin}{arg\,min}
+\usepackage[paperheight=8in,paperwidth=4in,margin=.3in,heightrounded]{geometry}
 \begin{document}
+
+\begin{center}
+\resizebox{\textwidth}{!} 
+{
+\begin{minipage}[c]{\textwidth}
 \begin{align*}
-\textit{L}_{\textit{i}, \textit{j}} = &amp; \begin{cases} \textit{w}_{\textit{i}, \textit{j}} &amp; \text{if}  \left( \textit{i}, \textit{j} \right) \in \textit{E}  \\ \end{cases}  \\
-\textit{L}_{\textit{i}, \textit{i}} = &amp; -\sum_{\textit{l} != \textit{i}} \textit{L}_{\textit{i}, \textit{l}}
+\textit{L}_{\textit{i}, \textit{j}} &amp; = \begin{cases} \textit{w}_{\textit{i}, \textit{j}} &amp; \text{if }  \left( \textit{i}, \textit{j} \right) \in \textit{E}  \\ \end{cases}  \\
+\textit{L}_{\textit{i}, \textit{i}} &amp; = -\sum_{\textit{l} != \textit{i}} \textit{L}_{\textit{i}, \textit{l}} \\
+\intertext{where} 
+\textit{L} &amp; \in \mathbb{R}^{ \textit{n} \times \textit{n} } \\
+\textit{w} &amp; \in \mathbb{R}^{ \textit{n} \times \textit{n} } \text{ edge weight matrix} \\
+\textit{E} &amp; \in \{\mathbb{{Z}}^{{2}}\} \textit{{ index}} \text{ edges} \\
+\\
 \end{align*}
-
-where
-\begin{itemize}
-\item $\textit{L} \in \mathbb{R}^{ \textit{n} \times \textit{n} }$
-\item $\textit{w} \in \mathbb{R}^{ \textit{n} \times \textit{n} }$ edge weight matrix
-\item $\textit{E} \in \{\mathbb{{Z}}^{{2}}\} \textit{{ index}}$ edges
-\end{itemize}
-
+\end{minipage}
+}
+\end{center}
 
 \end{document}
 </code></pre></div>

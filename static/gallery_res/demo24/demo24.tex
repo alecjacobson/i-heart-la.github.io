@@ -7,24 +7,30 @@
 \setmainfont{Linux Libertine O}
 \DeclareMathOperator*{\argmax}{arg\,max}
 \DeclareMathOperator*{\argmin}{arg\,min}
+\usepackage[paperheight=8in,paperwidth=4in,margin=.3in,heightrounded]{geometry}
 \begin{document}
+
+\begin{center}
+\resizebox{\textwidth}{!} 
+{
+\begin{minipage}[c]{\textwidth}
 \begin{align*}
-\textit{E} = & \frac{1}{\textit{σ\_N}^{2}}\textit{E\_I} + \sum_{\textit{j} > 1} \frac{\textit{α}_{ \textit{j} }^{2}}{\textit{σ\_S}_{ \textit{j} }^{2}} + \sum_{\textit{j} > 1} \frac{\textit{β}_{ \textit{j} }^{2}}{\textit{σ\_T}_{ \textit{j} }^{2}} + \sum_\textit{j} \frac{\left( \textit{ρ}_{ \textit{j} } - \textit{ρ̄}_{ \textit{j} } \right)^{2}}{\textit{σ\_ρ}_{ \textit{j} }^{2}}
+\textit{E} & = \frac{1}{\textit{σ\_N}^{2}}\textit{E\_I} + \sum_{\textit{j} > 1} \frac{\textit{α}_{ \textit{j} }^{2}}{\textit{σ\_S}_{ \textit{j} }^{2}} + \sum_{\textit{j} > 1} \frac{\textit{β}_{ \textit{j} }^{2}}{\textit{σ\_T}_{ \textit{j} }^{2}} + \sum_\textit{j} \frac{\left( \textit{ρ}_{ \textit{j} } - \textit{ρ̄}_{ \textit{j} } \right)^{2}}{\textit{σ\_ρ}_{ \textit{j} }^{2}} \\
+\intertext{where} 
+\textit{σ\_N} & \in \mathbb{R} \\
+\textit{E\_I} & \in \mathbb{R} \\
+\textit{α}_{\textit{i}} & \in \mathbb{R} \\
+\textit{β}_{\textit{i}} & \in \mathbb{R} \\
+\textit{σ\_S}_{\textit{i}} & \in \mathbb{R} \\
+\textit{σ\_T}_{\textit{i}} & \in \mathbb{R} \\
+\textit{ρ}_{\textit{i}} & \in \mathbb{R} \\
+\textit{ρ̄}_{\textit{i}} & \in \mathbb{R} \\
+\textit{σ\_ρ}_{\textit{i}} & \in \mathbb{R} \\
+\textit{ā}_{\textit{i}} & \in \mathbb{R} \\
+\\
 \end{align*}
-
-where
-\begin{itemize}
-\item $\textit{σ\_N} \in \mathbb{{R}}$
-\item $\textit{E\_I} \in \mathbb{{R}}$
-\item $\textit{α}_{\textit{i}} \in \mathbb{{R}}$
-\item $\textit{β}_{\textit{i}} \in \mathbb{{R}}$
-\item $\textit{σ\_S}_{\textit{i}} \in \mathbb{{R}}$
-\item $\textit{σ\_T}_{\textit{i}} \in \mathbb{{R}}$
-\item $\textit{ρ}_{\textit{i}} \in \mathbb{{R}}$
-\item $\textit{ρ̄}_{\textit{i}} \in \mathbb{{R}}$
-\item $\textit{σ\_ρ}_{\textit{i}} \in \mathbb{{R}}$
-\item $\textit{ā}_{\textit{i}} \in \mathbb{{R}}$
-\end{itemize}
-
+\end{minipage}
+}
+\end{center}
 
 \end{document}

@@ -12,13 +12,13 @@ n̄ = ū×v̄
 
 where
 
-v̄: ℝ^3
-ō: ℝ^3
-ū: ℝ^3
-V̄: ℝ^3
-`C̄ₐ`: ℝ^3
-θ: ℝ 
-v: ℝ 
+v̄ ∈ ℝ^3
+ō ∈ ℝ^3
+ū ∈ ℝ^3
+V̄ ∈ ℝ^3
+`C̄ₐ` ∈ ℝ^3
+θ ∈ ℝ 
+v ∈ ℝ 
 `D_A`: ℝ,ℝ->ℝ^3
 δ: ℝ,ℝ->ℝ 
 """
@@ -32,13 +32,6 @@ from scipy.optimize import minimize
 
 def demo23(v̄, ō, ū, V̄, C_combining_macron_ₐ, θ, v, D_A, δ):
     """
-    :param :v̄ : ℝ^3
-    :param :ō : ℝ^3
-    :param :ū : ℝ^3
-    :param :V̄ : ℝ^3
-    :param :C_combining_macron_ₐ : ℝ^3
-    :param :θ : ℝ
-    :param :v : ℝ
     :param :D_A : ℝ,ℝ->ℝ^3
     :param :δ : ℝ,ℝ->ℝ
     """

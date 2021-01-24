@@ -5,6 +5,6 @@ from trigonometry: sin, cos
 
 where
 
-ϕ: ℝ : angle between 0 and 2π
-θ: ℝ : angle between -π/2 and π/2
-R: ℝ : the radius of the sphere
+ϕ ∈ ℝ : angle between 0 and 2π
+θ ∈ ℝ : angle between -π/2 and π/2
+R ∈ ℝ : the radius of the sphere

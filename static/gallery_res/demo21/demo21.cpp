@@ -5,12 +5,12 @@ from trigonometry: cos
 
 where
 
-θ: ℝ: angle of rotation
-p_i: ℝ^3
-q_i: ℝ^3
-n_i: ℝ^3
-ã: ℝ^3
-t̃: ℝ^3
+θ ∈ ℝ: angle of rotation
+p_i ∈ ℝ^3
+q_i ∈ ℝ^3
+n_i ∈ ℝ^3
+ã ∈ ℝ^3
+t̃ ∈ ℝ^3
 */
 #include <Eigen/Core>
 #include <Eigen/Dense>
@@ -21,12 +21,7 @@ t̃: ℝ^3
 /**
  * demo21
  *
- * @param θ  ℝ: angle of rotation
- * @param p  ℝ^3
- * @param q  ℝ^3
- * @param n  ℝ^3
- * @param ã  ℝ^3
- * @param t̃  ℝ^3
+ * @param θ  angle of rotation
  * @return ε_symm
  */
 double demo21(
@@ -39,7 +34,7 @@ double demo21(
 {
     const long _dim_0 = p.size();
     double _sum_0 = 0;
-    for(int i=1; i<=q.size(); i++){
+    for(int i=1; i<=n.size(); i++){
         _sum_0 += pow(cos(θ), 2) * pow((((p.at(i-1) - q.at(i-1))).dot(n.at(i-1)) + ((((p.at(i-1) + q.at(i-1))).cross(n.at(i-1)))).dot(ã) + (n.at(i-1)).dot(t̃)), 2);
     }
     double ε_symm = _sum_0;

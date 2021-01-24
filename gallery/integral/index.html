@@ -33,7 +33,7 @@
 
 where 
 
-p: ℝ^3 : point on the surface
+p ∈ ℝ^3 : point on the surface
 `kₙ`: ℝ,ℝ^3-&gt;ℝ : normal curvature</code></pre></div>
     
 
@@ -45,7 +45,7 @@ p: ℝ^3 : point on the surface
 
 where 
 
-p: ℝ^3 : point on the surface
+p ∈ ℝ^3 : point on the surface
 `kₙ`: ℝ,ℝ^3-&gt;ℝ : normal curvature
 */
 #include &lt;Eigen/Core&gt;
@@ -57,7 +57,7 @@ p: ℝ^3 : point on the surface
 /**
  * integral
  *
- * @param p  ℝ^3 : point on the surface
+ * @param p  point on the surface
  * @param kₙ  ℝ,ℝ^3-&gt;ℝ : normal curvature
  * @return H_left_parenthesis_p_right_parenthesis
  */
@@ -101,7 +101,7 @@ int main(int argc, char *argv[])
 
 where 
 
-p: ℝ^3 : point on the surface
+p ∈ ℝ^3 : point on the surface
 `kₙ`: ℝ,ℝ^3-&gt;ℝ : normal curvature
 &#34;&#34;&#34;
 import numpy as np
@@ -114,7 +114,7 @@ from scipy.optimize import minimize
 
 def integral(p, kₙ):
     &#34;&#34;&#34;
-    :param :p : ℝ^3 : point on the surface
+    :param :p : point on the surface
     :param :kₙ : ℝ,ℝ^3-&gt;ℝ : normal curvature
     &#34;&#34;&#34;
     p = np.asarray(p, dtype=np.float64)
@@ -152,17 +152,23 @@ if __name__ == &#39;__main__&#39;:
 \setmainfont{Linux Libertine O}
 \DeclareMathOperator*{\argmax}{arg\,max}
 \DeclareMathOperator*{\argmin}{arg\,min}
+\usepackage[paperheight=8in,paperwidth=4in,margin=.3in,heightrounded]{geometry}
 \begin{document}
+
+\begin{center}
+\resizebox{\textwidth}{!} 
+{
+\begin{minipage}[c]{\textwidth}
 \begin{align*}
-\textit{H(p)} = &amp; \frac{1}{2\pi}\int_{0}^{2\pi} \textit{kₙ}\left( \textit{φ},\textit{p} \right) d\textit{φ}
+\textit{H(p)} &amp; = \frac{1}{2\pi}\int_{0}^{2\pi} \textit{kₙ}\left( \textit{φ},\textit{p} \right) d\textit{φ} \\
+\intertext{where} 
+\textit{p} &amp; \in \mathbb{R}^{ 3} \text{ point on the surface} \\
+\textit{kₙ} &amp; \in \mathbb{R},\mathbb{R}^{ 3}\rightarrow \mathbb{R} \text{ normal curvature} \\
+\\
 \end{align*}
-
-where
-\begin{itemize}
-\item $\textit{p} \in \mathbb{R}^{ 3}$ point on the surface
-\item $\textit{kₙ} \in \mathbb{{R}},\mathbb{R}^{ 3}\rightarrow \mathbb{{R}}$ normal curvature
-\end{itemize}
-
+\end{minipage}
+}
+\end{center}
 
 \end{document}
 </code></pre></div>

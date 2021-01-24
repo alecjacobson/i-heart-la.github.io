@@ -4,6 +4,6 @@ L_i,i = -sum_(l for l != i) L_i,l
 
 where
 
-L: ℝ^(n×n)
-w: ℝ^(n×n): edge weight matrix
-E: {ℤ²} index: edges
+L ∈ ℝ^(n×n)
+w ∈ ℝ^(n×n): edge weight matrix
+E ∈ {ℤ²} index: edges

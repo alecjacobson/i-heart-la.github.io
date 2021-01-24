@@ -6,7 +6,7 @@
 
 where
  
-T: ℝ^(3×3)
+T ∈ ℝ^(3×3)
 */
 #include <Eigen/Core>
 #include <Eigen/Dense>
@@ -14,12 +14,6 @@ T: ℝ^(3×3)
 #include <iostream>
 #include <set>
 
-/**
- * demo2-1
- *
- * @param T  ℝ^(3×3)
- * @return n_left_parenthesis_T_right_parenthesis
- */
 Eigen::Matrix<double, 3, 1> demo2-1(const Eigen::Matrix<double, 3, 3> & T)
 {
     Eigen::Matrix<double, 3, 1> xᵢ = T.col(1-1);

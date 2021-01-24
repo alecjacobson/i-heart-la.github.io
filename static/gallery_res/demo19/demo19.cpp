@@ -6,8 +6,8 @@ from linearalgebra: tr
 
 where
 
-`Dₘ`: ℝ^(3×3)  
-v: ℝ
+`Dₘ` ∈ ℝ^(3×3)  
+v ∈ ℝ
 */
 #include <Eigen/Core>
 #include <Eigen/Dense>
@@ -15,13 +15,6 @@ v: ℝ
 #include <iostream>
 #include <set>
 
-/**
- * demo19
- *
- * @param Dₘ  ℝ^(3×3)
- * @param v  ℝ
- * @return k_angle_left_parenthesis_Dₘ_right_parenthesis
- */
 double demo19(
     const Eigen::Matrix<double, 3, 3> & Dₘ,
     const double & v)

@@ -3,10 +3,10 @@
                                1  0] M_T u_T||²
 where
  
-v_i: ℝ^3
-u_i: ℝ^3
-M_i: ℝ^(2×3)
-A_i: ℝ
+v_i ∈ ℝ^3
+u_i ∈ ℝ^3
+M_i ∈ ℝ^(2×3)
+A_i ∈ ℝ
 */
 #include <Eigen/Core>
 #include <Eigen/Dense>
@@ -14,15 +14,6 @@ A_i: ℝ
 #include <iostream>
 #include <set>
 
-/**
- * demo4
- *
- * @param v  ℝ^3
- * @param u  ℝ^3
- * @param M  ℝ^(2×3)
- * @param A  ℝ
- * @return E_LSCM
- */
 double demo4(
     const std::vector<Eigen::Matrix<double, 3, 1>> & v,
     const std::vector<Eigen::Matrix<double, 3, 1>> & u,
@@ -34,7 +25,7 @@ double demo4(
     assert( A.size() == _dim_0 );
 
     double _sum_0 = 0;
-    for(int T=1; T<=A.size(); T++){
+    for(int T=1; T<=v.size(); T++){
         Eigen::Matrix<double, 2, 2> _E_LSCM_0;
         _E_LSCM_0 << 0, -1,
         1, 0;

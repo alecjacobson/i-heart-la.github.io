@@ -7,20 +7,26 @@
 \setmainfont{Linux Libertine O}
 \DeclareMathOperator*{\argmax}{arg\,max}
 \DeclareMathOperator*{\argmin}{arg\,min}
+\usepackage[paperheight=8in,paperwidth=4in,margin=.3in,heightrounded]{geometry}
 \begin{document}
+
+\begin{center}
+\resizebox{\textwidth}{!} 
+{
+\begin{minipage}[c]{\textwidth}
 \begin{align*}
-\textit{T₁} = & \frac{1}{ \sqrt{2}}\textit{U}\begin{bmatrix}
+\textit{T₁} & = \frac{1}{ \sqrt{2}}\textit{U}\begin{bmatrix}
 0 & 0 & 0\\
 0 & 0 & -1\\
 0 & 1 & 0\\
-\end{bmatrix}\textit{V}^T
+\end{bmatrix}\textit{V}^T \\
+\intertext{where} 
+\textit{U} & \in \mathbb{R}^{ 3 \times 3 } \\
+\textit{V} & \in \mathbb{R}^{ 3 \times 3 } \\
+\\
 \end{align*}
-
-where
-\begin{itemize}
-\item $\textit{U} \in \mathbb{R}^{ 3 \times 3 }$
-\item $\textit{V} \in \mathbb{R}^{ 3 \times 3 }$
-\end{itemize}
-
+\end{minipage}
+}
+\end{center}
 
 \end{document}

@@ -5,9 +5,9 @@ L_i,i = -sum_(l for l != i) L_i,l
 
 where
 
-L: ℝ^(n×n)
-w: ℝ^(n×n): edge weight matrix
-E: {ℤ²} index: edges
+L ∈ ℝ^(n×n)
+w ∈ ℝ^(n×n): edge weight matrix
+E ∈ {ℤ²} index: edges
 """
 import numpy as np
 import scipy
@@ -19,8 +19,8 @@ from scipy.optimize import minimize
 
 def laplacian(w, E):
     """
-    :param :w : ℝ^(n×n): edge weight matrix
-    :param :E : {ℤ²} index: edges
+    :param :w : edge weight matrix
+    :param :E : edges
     """
     w = np.asarray(w, dtype=np.float64)
 

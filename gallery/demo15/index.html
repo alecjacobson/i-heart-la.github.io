@@ -37,13 +37,13 @@
 
 where
 
-P_i: ℝ^(4×4) 
-B: ℝ^(4×4) 
-C: ℝ^(4×4) 
-L: ℝ^(4×4) 
-L̃: ℝ^(4×4) 
-U: ℝ^(4×4) 
-Ũ: ℝ^(4×4)</code></pre></div>
+P_i ∈ ℝ^(4×4) 
+B ∈ ℝ^(4×4) 
+C ∈ ℝ^(4×4) 
+L ∈ ℝ^(4×4) 
+L̃ ∈ ℝ^(4×4) 
+U ∈ ℝ^(4×4) 
+Ũ ∈ ℝ^(4×4)</code></pre></div>
     
 
     
@@ -58,13 +58,13 @@ Ũ: ℝ^(4×4)</code></pre></div>
 
 where
 
-P_i: ℝ^(4×4) 
-B: ℝ^(4×4) 
-C: ℝ^(4×4) 
-L: ℝ^(4×4) 
-L̃: ℝ^(4×4) 
-U: ℝ^(4×4) 
-Ũ: ℝ^(4×4)
+P_i ∈ ℝ^(4×4) 
+B ∈ ℝ^(4×4) 
+C ∈ ℝ^(4×4) 
+L ∈ ℝ^(4×4) 
+L̃ ∈ ℝ^(4×4) 
+U ∈ ℝ^(4×4) 
+Ũ ∈ ℝ^(4×4)
 */
 #include &lt;Eigen/Core&gt;
 #include &lt;Eigen/Dense&gt;
@@ -72,18 +72,6 @@ Ũ: ℝ^(4×4)
 #include &lt;iostream&gt;
 #include &lt;set&gt;
 
-/**
- * demo15
- *
- * @param P  ℝ^(4×4)
- * @param B  ℝ^(4×4)
- * @param C  ℝ^(4×4)
- * @param L  ℝ^(4×4)
- * @param L̃  ℝ^(4×4)
- * @param U  ℝ^(4×4)
- * @param Ũ  ℝ^(4×4)
- * @return ret
- */
 Eigen::Matrix&lt;double, 8, 8&gt; demo15(
     const std::vector&lt;Eigen::Matrix&lt;double, 4, 4&gt;&gt; &amp; P,
     const Eigen::Matrix&lt;double, 4, 4&gt; &amp; B,
@@ -164,13 +152,13 @@ int main(int argc, char *argv[])
 
 where
 
-P_i: ℝ^(4×4) 
-B: ℝ^(4×4) 
-C: ℝ^(4×4) 
-L: ℝ^(4×4) 
-L̃: ℝ^(4×4) 
-U: ℝ^(4×4) 
-Ũ: ℝ^(4×4)
+P_i ∈ ℝ^(4×4) 
+B ∈ ℝ^(4×4) 
+C ∈ ℝ^(4×4) 
+L ∈ ℝ^(4×4) 
+L̃ ∈ ℝ^(4×4) 
+U ∈ ℝ^(4×4) 
+Ũ ∈ ℝ^(4×4)
 &#34;&#34;&#34;
 import numpy as np
 import scipy
@@ -181,15 +169,6 @@ from scipy.optimize import minimize
 
 
 def demo15(P, B, C, L, L̃, U, Ũ):
-    &#34;&#34;&#34;
-    :param :P : ℝ^(4×4)
-    :param :B : ℝ^(4×4)
-    :param :C : ℝ^(4×4)
-    :param :L : ℝ^(4×4)
-    :param :L̃ : ℝ^(4×4)
-    :param :U : ℝ^(4×4)
-    :param :Ũ : ℝ^(4×4)
-    &#34;&#34;&#34;
     P = np.asarray(P, dtype=np.float64)
     B = np.asarray(B, dtype=np.float64)
     C = np.asarray(C, dtype=np.float64)
@@ -251,9 +230,15 @@ if __name__ == &#39;__main__&#39;:
 \setmainfont{Linux Libertine O}
 \DeclareMathOperator*{\argmax}{arg\,max}
 \DeclareMathOperator*{\argmin}{arg\,min}
+\usepackage[paperheight=8in,paperwidth=4in,margin=.3in,heightrounded]{geometry}
 \begin{document}
+
+\begin{center}
+\resizebox{\textwidth}{!} 
+{
+\begin{minipage}[c]{\textwidth}
 \begin{align*}
- &amp; \begin{bmatrix}
+ \omit \span \begin{bmatrix}
 \textit{P}_{ 1 } &amp; 0\\
 0 &amp; \textit{P}_{ 3 }\\
 \end{bmatrix}\begin{bmatrix}
@@ -265,20 +250,20 @@ if __name__ == &#39;__main__&#39;:
 \end{bmatrix}\begin{bmatrix}
 \textit{P}_{ 2 } &amp; 0\\
 0 &amp; I_{ 4 }\\
-\end{bmatrix}
+\end{bmatrix} \\
+\intertext{where} 
+\textit{P}_{\textit{i}} &amp; \in \mathbb{R}^{ 4 \times 4 } \\
+\textit{B} &amp; \in \mathbb{R}^{ 4 \times 4 } \\
+\textit{C} &amp; \in \mathbb{R}^{ 4 \times 4 } \\
+\textit{L} &amp; \in \mathbb{R}^{ 4 \times 4 } \\
+\textit{L̃} &amp; \in \mathbb{R}^{ 4 \times 4 } \\
+\textit{U} &amp; \in \mathbb{R}^{ 4 \times 4 } \\
+\textit{Ũ} &amp; \in \mathbb{R}^{ 4 \times 4 } \\
+\\
 \end{align*}
-
-where
-\begin{itemize}
-\item $\textit{P}_{\textit{i}} \in \mathbb{R}^{ 4 \times 4 }$
-\item $\textit{B} \in \mathbb{R}^{ 4 \times 4 }$
-\item $\textit{C} \in \mathbb{R}^{ 4 \times 4 }$
-\item $\textit{L} \in \mathbb{R}^{ 4 \times 4 }$
-\item $\textit{L̃} \in \mathbb{R}^{ 4 \times 4 }$
-\item $\textit{U} \in \mathbb{R}^{ 4 \times 4 }$
-\item $\textit{Ũ} \in \mathbb{R}^{ 4 \times 4 }$
-\end{itemize}
-
+\end{minipage}
+}
+\end{center}
 
 \end{document}
 </code></pre></div>

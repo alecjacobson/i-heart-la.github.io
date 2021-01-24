@@ -3,8 +3,8 @@
 
 where
 
-f_i: ℝ  
-p_i: ℝ  
+f_i ∈ ℝ  
+p_i ∈ ℝ  
 """
 import numpy as np
 import scipy
@@ -15,10 +15,6 @@ from scipy.optimize import minimize
 
 
 def demo6(f, p):
-    """
-    :param :f : ℝ
-    :param :p : ℝ
-    """
     f = np.asarray(f)
     p = np.asarray(p)
 
@@ -27,10 +23,10 @@ def demo6(f, p):
     assert p.shape == (_dim_0,)
 
     _sum_0 = 0
-    for i in range(1, len(f)+1):
+    for i in range(1, len(p)+1):
         _sum_0 += np.power(f[i-1], 2) * p[i-1]
     _sum_1 = 0
-    for i in range(1, len(f)+1):
+    for i in range(1, len(p)+1):
         _sum_1 += f[i-1] * p[i-1]
     ret = _sum_0 - np.power((_sum_1), 2)
     return ret

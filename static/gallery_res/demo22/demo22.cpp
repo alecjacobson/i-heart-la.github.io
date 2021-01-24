@@ -5,8 +5,8 @@
 
 where 
 
-U: ℝ^(3×3) 
-V: ℝ^(3×3)
+U ∈ ℝ^(3×3) 
+V ∈ ℝ^(3×3)
 */
 #include <Eigen/Core>
 #include <Eigen/Dense>
@@ -14,13 +14,6 @@ V: ℝ^(3×3)
 #include <iostream>
 #include <set>
 
-/**
- * demo22
- *
- * @param U  ℝ^(3×3)
- * @param V  ℝ^(3×3)
- * @return T₁
- */
 Eigen::Matrix<double, 3, 3> demo22(
     const Eigen::Matrix<double, 3, 3> & U,
     const Eigen::Matrix<double, 3, 3> & V)

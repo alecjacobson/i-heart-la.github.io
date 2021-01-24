@@ -12,13 +12,13 @@ n̄ = ū×v̄
 
 where
 
-v̄: ℝ^3
-ō: ℝ^3
-ū: ℝ^3
-V̄: ℝ^3
-`C̄ₐ`: ℝ^3
-θ: ℝ 
-v: ℝ 
+v̄ ∈ ℝ^3
+ō ∈ ℝ^3
+ū ∈ ℝ^3
+V̄ ∈ ℝ^3
+`C̄ₐ` ∈ ℝ^3
+θ ∈ ℝ 
+v ∈ ℝ 
 `D_A`: ℝ,ℝ->ℝ^3
 δ: ℝ,ℝ->ℝ 
 */
@@ -31,13 +31,6 @@ v: ℝ
 /**
  * demo23
  *
- * @param v̄  ℝ^3
- * @param ō  ℝ^3
- * @param ū  ℝ^3
- * @param V̄  ℝ^3
- * @param C_combining_macron_ₐ  ℝ^3
- * @param θ  ℝ
- * @param v  ℝ
  * @param D_A  ℝ,ℝ->ℝ^3
  * @param δ  ℝ,ℝ->ℝ
  * @return y_left_parenthesis_θ_comma_v_right_parenthesis

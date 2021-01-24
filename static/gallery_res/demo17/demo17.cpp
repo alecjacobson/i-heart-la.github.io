@@ -5,7 +5,7 @@
 
 where
 
-A: ℝ^(3×3)
+A ∈ ℝ^(3×3)
 */
 #include <Eigen/Core>
 #include <Eigen/Dense>
@@ -13,12 +13,6 @@ A: ℝ^(3×3)
 #include <iostream>
 #include <set>
 
-/**
- * demo17
- *
- * @param A  ℝ^(3×3)
- * @return _partial_differential_²I₅_soliduspartial_differential_f²
- */
 Eigen::Matrix<double, 9, 9> demo17(const Eigen::Matrix<double, 3, 3> & A)
 {
     Eigen::Matrix<double, 9, 9> __partial_differential_²I₅_soliduspartial_differential_f²_0;

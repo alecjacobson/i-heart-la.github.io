@@ -6,7 +6,7 @@
 
 where
  
-T: ℝ^(3×3)
+T ∈ ℝ^(3×3)
 """
 import numpy as np
 import scipy
@@ -17,9 +17,6 @@ from scipy.optimize import minimize
 
 
 def demo2-1(T):
-    """
-    :param :T : ℝ^(3×3)
-    """
     T = np.asarray(T, dtype=np.float64)
 
     assert T.shape == (3, 3)

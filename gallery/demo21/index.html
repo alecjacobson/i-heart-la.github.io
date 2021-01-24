@@ -35,12 +35,12 @@
 
 where
 
-θ: ℝ: angle of rotation
-p_i: ℝ^3
-q_i: ℝ^3
-n_i: ℝ^3
-ã: ℝ^3
-t̃: ℝ^3</code></pre></div>
+θ ∈ ℝ: angle of rotation
+p_i ∈ ℝ^3
+q_i ∈ ℝ^3
+n_i ∈ ℝ^3
+ã ∈ ℝ^3
+t̃ ∈ ℝ^3</code></pre></div>
     
 
     
@@ -53,12 +53,12 @@ from trigonometry: cos
 
 where
 
-θ: ℝ: angle of rotation
-p_i: ℝ^3
-q_i: ℝ^3
-n_i: ℝ^3
-ã: ℝ^3
-t̃: ℝ^3
+θ ∈ ℝ: angle of rotation
+p_i ∈ ℝ^3
+q_i ∈ ℝ^3
+n_i ∈ ℝ^3
+ã ∈ ℝ^3
+t̃ ∈ ℝ^3
 */
 #include &lt;Eigen/Core&gt;
 #include &lt;Eigen/Dense&gt;
@@ -69,12 +69,7 @@ t̃: ℝ^3
 /**
  * demo21
  *
- * @param θ  ℝ: angle of rotation
- * @param p  ℝ^3
- * @param q  ℝ^3
- * @param n  ℝ^3
- * @param ã  ℝ^3
- * @param t̃  ℝ^3
+ * @param θ  angle of rotation
  * @return ε_symm
  */
 double demo21(
@@ -87,7 +82,7 @@ double demo21(
 {
     const long _dim_0 = p.size();
     double _sum_0 = 0;
-    for(int i=1; i&lt;=q.size(); i++){
+    for(int i=1; i&lt;=n.size(); i++){
         _sum_0 += pow(cos(θ), 2) * pow((((p.at(i-1) - q.at(i-1))).dot(n.at(i-1)) + ((((p.at(i-1) + q.at(i-1))).cross(n.at(i-1)))).dot(ã) + (n.at(i-1)).dot(t̃)), 2);
     }
     double ε_symm = _sum_0;
@@ -148,12 +143,12 @@ from trigonometry: cos
 
 where
 
-θ: ℝ: angle of rotation
-p_i: ℝ^3
-q_i: ℝ^3
-n_i: ℝ^3
-ã: ℝ^3
-t̃: ℝ^3
+θ ∈ ℝ: angle of rotation
+p_i ∈ ℝ^3
+q_i ∈ ℝ^3
+n_i ∈ ℝ^3
+ã ∈ ℝ^3
+t̃ ∈ ℝ^3
 &#34;&#34;&#34;
 import numpy as np
 import scipy
@@ -165,12 +160,7 @@ from scipy.optimize import minimize
 
 def demo21(θ, p, q, n, ã, t̃):
     &#34;&#34;&#34;
-    :param :θ : ℝ: angle of rotation
-    :param :p : ℝ^3
-    :param :q : ℝ^3
-    :param :n : ℝ^3
-    :param :ã : ℝ^3
-    :param :t̃ : ℝ^3
+    :param :θ : angle of rotation
     &#34;&#34;&#34;
     p = np.asarray(p, dtype=np.float64)
     q = np.asarray(q, dtype=np.float64)
@@ -187,7 +177,7 @@ def demo21(θ, p, q, n, ã, t̃):
     assert t̃.shape == (3,)
 
     _sum_0 = 0
-    for i in range(1, len(q)+1):
+    for i in range(1, len(n)+1):
         _sum_0 += np.power(np.cos(θ), 2) * np.power((np.dot(((p[i-1] - q[i-1])).ravel(), (n[i-1]).ravel()) + np.dot(((np.cross((p[i-1] + q[i-1]), n[i-1]))).ravel(), (ã).ravel()) + np.dot((n[i-1]).ravel(), (t̃).ravel())), 2)
     ε_symm = _sum_0
 
@@ -228,23 +218,28 @@ if __name__ == &#39;__main__&#39;:
 \setmainfont{Linux Libertine O}
 \DeclareMathOperator*{\argmax}{arg\,max}
 \DeclareMathOperator*{\argmin}{arg\,min}
+\usepackage[paperheight=8in,paperwidth=4in,margin=.3in,heightrounded]{geometry}
 \begin{document}
-from trigonometry import cos
 
+\begin{center}
+\resizebox{\textwidth}{!} 
+{
+\begin{minipage}[c]{\textwidth}
 \begin{align*}
-\textit{ε\_symm} = &amp; \sum_\textit{i} cos\left( \textit{θ} \right)^{2}\left( \left( \textit{p}_{ \textit{i} } - \textit{q}_{ \textit{i} } \right) \cdot \textit{n}_{ \textit{i} } + \left( \left( \textit{p}_{ \textit{i} } + \textit{q}_{ \textit{i} } \right) × \textit{n}_{ \textit{i} } \right) \cdot \textit{ã} + \textit{n}_{ \textit{i} } \cdot \textit{t̃} \right)^{2}
+\text{from trigonometry import cos}\\
+\textit{ε\_symm} &amp; = \sum_\textit{i} cos\left( \textit{θ} \right)^{2}\left( \left( \textit{p}_{ \textit{i} } - \textit{q}_{ \textit{i} } \right) \cdot \textit{n}_{ \textit{i} } + \left( \left( \textit{p}_{ \textit{i} } + \textit{q}_{ \textit{i} } \right) × \textit{n}_{ \textit{i} } \right) \cdot \textit{ã} + \textit{n}_{ \textit{i} } \cdot \textit{t̃} \right)^{2} \\
+\intertext{where} 
+\textit{θ} &amp; \in \mathbb{R} \text{ angle of rotation} \\
+\textit{p}_{\textit{i}} &amp; \in \mathbb{R}^{ 3} \\
+\textit{q}_{\textit{i}} &amp; \in \mathbb{R}^{ 3} \\
+\textit{n}_{\textit{i}} &amp; \in \mathbb{R}^{ 3} \\
+\textit{ã} &amp; \in \mathbb{R}^{ 3} \\
+\textit{t̃} &amp; \in \mathbb{R}^{ 3} \\
+\\
 \end{align*}
-
-where
-\begin{itemize}
-\item $\textit{θ} \in \mathbb{{R}}$ angle of rotation
-\item $\textit{p}_{\textit{i}} \in \mathbb{R}^{ 3}$
-\item $\textit{q}_{\textit{i}} \in \mathbb{R}^{ 3}$
-\item $\textit{n}_{\textit{i}} \in \mathbb{R}^{ 3}$
-\item $\textit{ã} \in \mathbb{R}^{ 3}$
-\item $\textit{t̃} \in \mathbb{R}^{ 3}$
-\end{itemize}
-
+\end{minipage}
+}
+\end{center}
 
 \end{document}
 </code></pre></div>

@@ -2,6 +2,6 @@
 
 where
 
-x: ℝ^n
-W: ℝ^(n×n)
-v: ℝ^n
+x ∈ ℝ^n
+W ∈ ℝ^(n×n)
+v ∈ ℝ^n

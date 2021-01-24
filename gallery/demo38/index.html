@@ -33,8 +33,8 @@
 
 where
 
-x_i: ℝ^3
-R_i: ℝ^(3×3)</code></pre></div>
+x_i ∈ ℝ^3
+R_i ∈ ℝ^(3×3)</code></pre></div>
     
 
     
@@ -46,8 +46,8 @@ min_(C ∈ ℝ^3) ∑_i ||x_i + (R_i - I₃)C ||²
 
 where
 
-x_i: ℝ^3
-R_i: ℝ^(3×3)
+x_i ∈ ℝ^3
+R_i ∈ ℝ^(3×3)
 &#34;&#34;&#34;
 import numpy as np
 import scipy
@@ -58,10 +58,6 @@ from scipy.optimize import minimize
 
 
 def demo38(x, R):
-    &#34;&#34;&#34;
-    :param :x : ℝ^3
-    :param :R : ℝ^(3×3)
-    &#34;&#34;&#34;
     x = np.asarray(x, dtype=np.float64)
     R = np.asarray(R, dtype=np.float64)
 
@@ -71,7 +67,7 @@ def demo38(x, R):
 
     def _target_0(C):
         _sum_0 = 0
-        for i in range(1, len(x)+1):
+        for i in range(1, len(R)+1):
             _sum_0 += np.power(np.linalg.norm(x[i-1] + (R[i-1] - np.identity(3)) @ C, 2), 2)
         return _sum_0
     ret = minimize(_target_0, np.zeros(3)).fun
@@ -104,18 +100,24 @@ if __name__ == &#39;__main__&#39;:
 \setmainfont{Linux Libertine O}
 \DeclareMathOperator*{\argmax}{arg\,max}
 \DeclareMathOperator*{\argmin}{arg\,min}
+\usepackage[paperheight=8in,paperwidth=4in,margin=.3in,heightrounded]{geometry}
 \begin{document}
+
+\begin{center}
+\resizebox{\textwidth}{!} 
+{
+\begin{minipage}[c]{\textwidth}
 \begin{align*}
- &amp; \begin{aligned} \min_{\textit{C} \in \mathbb{R}^{ 3}} \quad &amp; \sum_\textit{i} \|\textit{x}_{ \textit{i} } + \left( \textit{R}_{ \textit{i} } - I_{ 3 } \right)\textit{C}\|_2^{2} \\
-\end{aligned}
+ \omit \span \begin{aligned} \min_{\textit{C} \in \mathbb{R}^{ 3}} \quad &amp; \sum_\textit{i} \|\textit{x}_{ \textit{i} } + \left( \textit{R}_{ \textit{i} } - I_{ 3 } \right)\textit{C}\|_2^{2} \\
+\end{aligned} \\
+\intertext{where} 
+\textit{x}_{\textit{i}} &amp; \in \mathbb{R}^{ 3} \\
+\textit{R}_{\textit{i}} &amp; \in \mathbb{R}^{ 3 \times 3 } \\
+\\
 \end{align*}
-
-where
-\begin{itemize}
-\item $\textit{x}_{\textit{i}} \in \mathbb{R}^{ 3}$
-\item $\textit{R}_{\textit{i}} \in \mathbb{R}^{ 3 \times 3 }$
-\end{itemize}
-
+\end{minipage}
+}
+\end{center}
 
 \end{document}
 </code></pre></div>

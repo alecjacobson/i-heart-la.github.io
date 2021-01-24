@@ -33,9 +33,9 @@
 
 where
 
-x: ℝ^n
-W: ℝ^(n×n)
-v: ℝ^n</code></pre></div>
+x ∈ ℝ^n
+W ∈ ℝ^(n×n)
+v ∈ ℝ^n</code></pre></div>
     
 
     
@@ -46,9 +46,9 @@ v: ℝ^n</code></pre></div>
 
 where
 
-x: ℝ^n
-W: ℝ^(n×n)
-v: ℝ^n
+x ∈ ℝ^n
+W ∈ ℝ^(n×n)
+v ∈ ℝ^n
 */
 #include &lt;Eigen/Core&gt;
 #include &lt;Eigen/Dense&gt;
@@ -56,20 +56,12 @@ v: ℝ^n
 #include &lt;iostream&gt;
 #include &lt;set&gt;
 
-/**
- * demo9
- *
- * @param x  ℝ^n
- * @param W  ℝ^(n×n)
- * @param v  ℝ^n
- * @return L_left_parenthesis_x_comma_v_right_parenthesis
- */
 double demo9(
     const Eigen::VectorXd &amp; x,
     const Eigen::MatrixXd &amp; W,
     const Eigen::VectorXd &amp; v)
 {
-    const long n = v.size();
+    const long n = x.size();
     assert( x.size() == n );
     assert( W.rows() == n );
     assert( W.cols() == n );
@@ -79,7 +71,7 @@ double demo9(
     for(int i=1; i&lt;=x.size(); i++){
         _sum_0 += v[i-1] * (pow(x[i-1], 2) - 1);
     }
-    double L_left_parenthesis_x_comma_v_right_parenthesis = x.transpose() * W * x + _sum_0;
+    double L_left_parenthesis_x_comma_v_right_parenthesis = (double)(x.transpose() * W * x) + _sum_0;
 
     return L_left_parenthesis_x_comma_v_right_parenthesis;
 }
@@ -117,9 +109,9 @@ int main(int argc, char *argv[])
 
 where
 
-x: ℝ^n
-W: ℝ^(n×n)
-v: ℝ^n
+x ∈ ℝ^n
+W ∈ ℝ^(n×n)
+v ∈ ℝ^n
 &#34;&#34;&#34;
 import numpy as np
 import scipy
@@ -130,16 +122,11 @@ from scipy.optimize import minimize
 
 
 def demo9(x, W, v):
-    &#34;&#34;&#34;
-    :param :x : ℝ^n
-    :param :W : ℝ^(n×n)
-    :param :v : ℝ^n
-    &#34;&#34;&#34;
     x = np.asarray(x, dtype=np.float64)
     W = np.asarray(W, dtype=np.float64)
     v = np.asarray(v, dtype=np.float64)
 
-    n = v.shape[0]
+    n = x.shape[0]
     assert x.shape == (n,)
     assert W.shape == (n, n)
     assert v.shape == (n,)
@@ -147,7 +134,7 @@ def demo9(x, W, v):
     _sum_0 = 0
     for i in range(1, len(x)+1):
         _sum_0 += v[i-1] * (np.power(x[i-1], 2) - 1)
-    L_left_parenthesis_x_comma_v_right_parenthesis = x.T.reshape(1, n) @ W @ x + _sum_0
+    L_left_parenthesis_x_comma_v_right_parenthesis = (x.T.reshape(1, n) @ W @ x).item() + _sum_0
 
     return L_left_parenthesis_x_comma_v_right_parenthesis
 
@@ -180,18 +167,24 @@ if __name__ == &#39;__main__&#39;:
 \setmainfont{Linux Libertine O}
 \DeclareMathOperator*{\argmax}{arg\,max}
 \DeclareMathOperator*{\argmin}{arg\,min}
+\usepackage[paperheight=8in,paperwidth=4in,margin=.3in,heightrounded]{geometry}
 \begin{document}
+
+\begin{center}
+\resizebox{\textwidth}{!} 
+{
+\begin{minipage}[c]{\textwidth}
 \begin{align*}
-\textit{L(x,v)} = &amp; \textit{x}^T\textit{W}\textit{x} + \sum_\textit{i} \textit{v}_{ \textit{i} }\left( \textit{x}_{ \textit{i} }^{2} - 1 \right)
+\textit{L(x,v)} &amp; = \textit{x}^T\textit{W}\textit{x} + \sum_\textit{i} \textit{v}_{ \textit{i} }\left( \textit{x}_{ \textit{i} }^{2} - 1 \right) \\
+\intertext{where} 
+\textit{x} &amp; \in \mathbb{R}^{ \textit{n}} \\
+\textit{W} &amp; \in \mathbb{R}^{ \textit{n} \times \textit{n} } \\
+\textit{v} &amp; \in \mathbb{R}^{ \textit{n}} \\
+\\
 \end{align*}
-
-where
-\begin{itemize}
-\item $\textit{x} \in \mathbb{R}^{ \textit{n}}$
-\item $\textit{W} \in \mathbb{R}^{ \textit{n} \times \textit{n} }$
-\item $\textit{v} \in \mathbb{R}^{ \textit{n}}$
-\end{itemize}
-
+\end{minipage}
+}
+\end{center}
 
 \end{document}
 </code></pre></div>

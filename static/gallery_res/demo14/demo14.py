@@ -4,9 +4,9 @@
 
 where
 
-A: ℝ^(4×4) 
-B: ℝ^(4×4) 
-S: ℝ^(4×4) 
+A ∈ ℝ^(4×4) 
+B ∈ ℝ^(4×4) 
+S ∈ ℝ^(4×4) 
 """
 import numpy as np
 import scipy
@@ -17,11 +17,6 @@ from scipy.optimize import minimize
 
 
 def demo14(A, B, S):
-    """
-    :param :A : ℝ^(4×4)
-    :param :B : ℝ^(4×4)
-    :param :S : ℝ^(4×4)
-    """
     A = np.asarray(A, dtype=np.float64)
     B = np.asarray(B, dtype=np.float64)
     S = np.asarray(S, dtype=np.float64)

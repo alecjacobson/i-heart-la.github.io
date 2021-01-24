@@ -5,8 +5,8 @@
 
 where 
 
-U: ℝ^(3×3) 
-V: ℝ^(3×3)
+U ∈ ℝ^(3×3) 
+V ∈ ℝ^(3×3)
 """
 import numpy as np
 import scipy
@@ -17,10 +17,6 @@ from scipy.optimize import minimize
 
 
 def demo22(U, V):
-    """
-    :param :U : ℝ^(3×3)
-    :param :V : ℝ^(3×3)
-    """
     U = np.asarray(U, dtype=np.float64)
     V = np.asarray(V, dtype=np.float64)
 

@@ -36,9 +36,9 @@
 
 where
 
-ϕ: ℝ : angle between 0 and 2π
-θ: ℝ : angle between -π/2 and π/2
-R: ℝ : the radius of the sphere</code></pre></div>
+ϕ ∈ ℝ : angle between 0 and 2π
+θ ∈ ℝ : angle between -π/2 and π/2
+R ∈ ℝ : the radius of the sphere</code></pre></div>
     
 
     
@@ -52,9 +52,9 @@ from trigonometry: sin, cos
 
 where
 
-ϕ: ℝ : angle between 0 and 2π
-θ: ℝ : angle between -π/2 and π/2
-R: ℝ : the radius of the sphere
+ϕ ∈ ℝ : angle between 0 and 2π
+θ ∈ ℝ : angle between -π/2 and π/2
+R ∈ ℝ : the radius of the sphere
 */
 #include &lt;Eigen/Core&gt;
 #include &lt;Eigen/Dense&gt;
@@ -65,9 +65,9 @@ R: ℝ : the radius of the sphere
 /**
  * demo1
  *
- * @param ϕ  ℝ : angle between 0 and 2π
- * @param θ  ℝ : angle between -π/2 and π/2
- * @param R  ℝ : the radius of the sphere
+ * @param ϕ  angle between 0 and 2π
+ * @param θ  angle between -π/2 and π/2
+ * @param R  the radius of the sphere
  * @return x_left_parenthesis_θ_comma__ϕ_right_parenthesis
  */
 Eigen::Matrix&lt;double, 3, 1&gt; demo1(
@@ -119,9 +119,9 @@ from trigonometry: sin, cos
 
 where
 
-ϕ: ℝ : angle between 0 and 2π
-θ: ℝ : angle between -π/2 and π/2
-R: ℝ : the radius of the sphere
+ϕ ∈ ℝ : angle between 0 and 2π
+θ ∈ ℝ : angle between -π/2 and π/2
+R ∈ ℝ : the radius of the sphere
 &#34;&#34;&#34;
 import numpy as np
 import scipy
@@ -133,9 +133,9 @@ from scipy.optimize import minimize
 
 def demo1(ϕ, θ, R):
     &#34;&#34;&#34;
-    :param :ϕ : ℝ : angle between 0 and 2π
-    :param :θ : ℝ : angle between -π/2 and π/2
-    :param :R : ℝ : the radius of the sphere
+    :param :ϕ : angle between 0 and 2π
+    :param :θ : angle between -π/2 and π/2
+    :param :R : the radius of the sphere
     &#34;&#34;&#34;
     assert np.ndim(ϕ) == 0
     assert np.ndim(θ) == 0
@@ -177,24 +177,29 @@ if __name__ == &#39;__main__&#39;:
 \setmainfont{Linux Libertine O}
 \DeclareMathOperator*{\argmax}{arg\,max}
 \DeclareMathOperator*{\argmin}{arg\,min}
+\usepackage[paperheight=8in,paperwidth=4in,margin=.3in,heightrounded]{geometry}
 \begin{document}
-from trigonometry import sin, cos
 
+\begin{center}
+\resizebox{\textwidth}{!} 
+{
+\begin{minipage}[c]{\textwidth}
 \begin{align*}
-\textit{x(θ, ϕ)} = &amp; \begin{bmatrix}
+\text{from trigonometry import sin, cos}\\
+\textit{x(θ, ϕ)} &amp; = \begin{bmatrix}
 \textit{R}cos\left( \textit{θ} \right)cos\left( \textit{ϕ} \right)\\
 \textit{R}sin\left( \textit{θ} \right)cos\left( \textit{ϕ} \right)\\
 \textit{R}sin\left( \textit{ϕ} \right)\\
-\end{bmatrix}
+\end{bmatrix} \\
+\intertext{where} 
+\textit{ϕ} &amp; \in \mathbb{R} \text{ angle between 0 and 2π} \\
+\textit{θ} &amp; \in \mathbb{R} \text{ angle between -π/2 and π/2} \\
+\textit{R} &amp; \in \mathbb{R} \text{ the radius of the sphere} \\
+\\
 \end{align*}
-
-where
-\begin{itemize}
-\item $\textit{ϕ} \in \mathbb{{R}}$ angle between 0 and 2π
-\item $\textit{θ} \in \mathbb{{R}}$ angle between -π/2 and π/2
-\item $\textit{R} \in \mathbb{{R}}$ the radius of the sphere
-\end{itemize}
-
+\end{minipage}
+}
+\end{center}
 
 \end{document}
 </code></pre></div>

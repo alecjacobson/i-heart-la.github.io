@@ -7,18 +7,24 @@
 \setmainfont{Linux Libertine O}
 \DeclareMathOperator*{\argmax}{arg\,max}
 \DeclareMathOperator*{\argmin}{arg\,min}
+\usepackage[paperheight=8in,paperwidth=4in,margin=.3in,heightrounded]{geometry}
 \begin{document}
+
+\begin{center}
+\resizebox{\textwidth}{!} 
+{
+\begin{minipage}[c]{\textwidth}
 \begin{align*}
- & \begin{aligned} \min_{\textit{x} \in \mathbb{R}^{ \textit{n}}} \quad & \sum_\textit{i} \|\textit{A}_{ \textit{i} }\textit{x} + \textit{b}_{ \textit{i} }\|_2 + \left( \frac{1}{2} \right)\|\textit{x} - \textit{x₀}\|_2^{2} \\
-\end{aligned}
+ \omit \span \begin{aligned} \min_{\textit{x} \in \mathbb{R}^{ \textit{n}}} \quad & \sum_\textit{i} \|\textit{A}_{ \textit{i} }\textit{x} + \textit{b}_{ \textit{i} }\|_2 + \left( \frac{1}{2} \right)\|\textit{x} - \textit{x₀}\|_2^{2} \\
+\end{aligned} \\
+\intertext{where} 
+\textit{A}_{\textit{i}} & \in \mathbb{R}^{ \textit{m} \times \textit{n} } \\
+\textit{x₀} & \in \mathbb{R}^{ \textit{n}} \\
+\textit{b}_{\textit{i}} & \in \mathbb{R}^{ \textit{m}} \\
+\\
 \end{align*}
-
-where
-\begin{itemize}
-\item $\textit{A}_{\textit{i}} \in \mathbb{R}^{ \textit{m} \times \textit{n} }$
-\item $\textit{x₀} \in \mathbb{R}^{ \textit{n}}$
-\item $\textit{b}_{\textit{i}} \in \mathbb{R}^{ \textit{m}}$
-\end{itemize}
-
+\end{minipage}
+}
+\end{center}
 
 \end{document}

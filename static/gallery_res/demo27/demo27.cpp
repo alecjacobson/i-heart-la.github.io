@@ -5,10 +5,10 @@
 
 where
 
-`k₁`: ℝ  : control the desired kernel variance in either edge or orthogonal direction
-`k₂`: ℝ  : control the desired kernel variance in either edge or orthogonal direction
-`e₁`: ℝ ^ 3: orthogonal direction vectors
-`e₂`: ℝ ^ 3: orthogonal direction vectors
+`k₁` ∈ ℝ  : control the desired kernel variance in either edge or orthogonal direction
+`k₂` ∈ ℝ  : control the desired kernel variance in either edge or orthogonal direction
+`e₁` ∈ ℝ ^ 3: orthogonal direction vectors
+`e₂` ∈ ℝ ^ 3: orthogonal direction vectors
 */
 #include <Eigen/Core>
 #include <Eigen/Dense>
@@ -19,10 +19,10 @@ where
 /**
  * demo27
  *
- * @param k₁  ℝ  : control the desired kernel variance in either edge or orthogonal direction
- * @param k₂  ℝ  : control the desired kernel variance in either edge or orthogonal direction
- * @param e₁  ℝ ^ 3: orthogonal direction vectors
- * @param e₂  ℝ ^ 3: orthogonal direction vectors
+ * @param k₁  control the desired kernel variance in either edge or orthogonal direction
+ * @param k₂  control the desired kernel variance in either edge or orthogonal direction
+ * @param e₁  orthogonal direction vectors
+ * @param e₂  orthogonal direction vectors
  * @return Ω
  */
 Eigen::Matrix<double, 3, 3> demo27(

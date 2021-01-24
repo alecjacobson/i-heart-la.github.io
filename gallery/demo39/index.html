@@ -33,9 +33,9 @@
 
 where
 
-w: ℝ^(4×4)
-M_j: ℝ^(4×4)
-u_i: ℝ^4</code></pre></div>
+w ∈ ℝ^(4×4)
+M_j ∈ ℝ^(4×4)
+u_i ∈ ℝ^4</code></pre></div>
     
 
     
@@ -46,9 +46,9 @@ v_i = ∑_j w_i,j M_j u_i
 
 where
 
-w: ℝ^(4×4)
-M_j: ℝ^(4×4)
-u_i: ℝ^4
+w ∈ ℝ^(4×4)
+M_j ∈ ℝ^(4×4)
+u_i ∈ ℝ^4
 */
 #include &lt;Eigen/Core&gt;
 #include &lt;Eigen/Dense&gt;
@@ -56,14 +56,6 @@ u_i: ℝ^4
 #include &lt;iostream&gt;
 #include &lt;set&gt;
 
-/**
- * demo39
- *
- * @param w  ℝ^(4×4)
- * @param M  ℝ^(4×4)
- * @param u  ℝ^4
- * @return v
- */
 std::vector&lt;Eigen::Matrix&lt;double, 4, 1&gt;&gt; demo39(
     const Eigen::Matrix&lt;double, 4, 4&gt; &amp; w,
     const std::vector&lt;Eigen::Matrix&lt;double, 4, 4&gt;&gt; &amp; M,
@@ -129,9 +121,9 @@ v_i = ∑_j w_i,j M_j u_i
 
 where
 
-w: ℝ^(4×4)
-M_j: ℝ^(4×4)
-u_i: ℝ^4
+w ∈ ℝ^(4×4)
+M_j ∈ ℝ^(4×4)
+u_i ∈ ℝ^4
 &#34;&#34;&#34;
 import numpy as np
 import scipy
@@ -142,11 +134,6 @@ from scipy.optimize import minimize
 
 
 def demo39(w, M, u):
-    &#34;&#34;&#34;
-    :param :w : ℝ^(4×4)
-    :param :M : ℝ^(4×4)
-    :param :u : ℝ^4
-    &#34;&#34;&#34;
     w = np.asarray(w, dtype=np.float64)
     M = np.asarray(M, dtype=np.float64)
     u = np.asarray(u, dtype=np.float64)
@@ -196,18 +183,24 @@ if __name__ == &#39;__main__&#39;:
 \setmainfont{Linux Libertine O}
 \DeclareMathOperator*{\argmax}{arg\,max}
 \DeclareMathOperator*{\argmin}{arg\,min}
+\usepackage[paperheight=8in,paperwidth=4in,margin=.3in,heightrounded]{geometry}
 \begin{document}
+
+\begin{center}
+\resizebox{\textwidth}{!} 
+{
+\begin{minipage}[c]{\textwidth}
 \begin{align*}
-\textit{v}_{ \textit{i} } = &amp; \sum_\textit{j} \textit{w}_{\textit{i}, \textit{j}}\textit{M}_{ \textit{j} }\textit{u}_{ \textit{i} }
+\textit{v}_{ \textit{i} } &amp; = \sum_\textit{j} \textit{w}_{\textit{i}, \textit{j}}\textit{M}_{ \textit{j} }\textit{u}_{ \textit{i} } \\
+\intertext{where} 
+\textit{w} &amp; \in \mathbb{R}^{ 4 \times 4 } \\
+\textit{M}_{\textit{j}} &amp; \in \mathbb{R}^{ 4 \times 4 } \\
+\textit{u}_{\textit{i}} &amp; \in \mathbb{R}^{ 4} \\
+\\
 \end{align*}
-
-where
-\begin{itemize}
-\item $\textit{w} \in \mathbb{R}^{ 4 \times 4 }$
-\item $\textit{M}_{\textit{j}} \in \mathbb{R}^{ 4 \times 4 }$
-\item $\textit{u}_{\textit{i}} \in \mathbb{R}^{ 4}$
-\end{itemize}
-
+\end{minipage}
+}
+\end{center}
 
 \end{document}
 </code></pre></div>

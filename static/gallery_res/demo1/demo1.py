@@ -6,9 +6,9 @@ from trigonometry: sin, cos
 
 where
 
-ϕ: ℝ : angle between 0 and 2π
-θ: ℝ : angle between -π/2 and π/2
-R: ℝ : the radius of the sphere
+ϕ ∈ ℝ : angle between 0 and 2π
+θ ∈ ℝ : angle between -π/2 and π/2
+R ∈ ℝ : the radius of the sphere
 """
 import numpy as np
 import scipy
@@ -20,9 +20,9 @@ from scipy.optimize import minimize
 
 def demo1(ϕ, θ, R):
     """
-    :param :ϕ : ℝ : angle between 0 and 2π
-    :param :θ : ℝ : angle between -π/2 and π/2
-    :param :R : ℝ : the radius of the sphere
+    :param :ϕ : angle between 0 and 2π
+    :param :θ : angle between -π/2 and π/2
+    :param :R : the radius of the sphere
     """
     assert np.ndim(ϕ) == 0
     assert np.ndim(θ) == 0

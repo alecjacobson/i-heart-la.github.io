@@ -34,9 +34,9 @@
 
 where
 
-A: ℝ^(4×4) 
-B: ℝ^(4×4) 
-S: ℝ^(4×4) </code></pre></div>
+A ∈ ℝ^(4×4) 
+B ∈ ℝ^(4×4) 
+S ∈ ℝ^(4×4) </code></pre></div>
     
 
     
@@ -48,9 +48,9 @@ S: ℝ^(4×4) </code></pre></div>
 
 where
 
-A: ℝ^(4×4) 
-B: ℝ^(4×4) 
-S: ℝ^(4×4) 
+A ∈ ℝ^(4×4) 
+B ∈ ℝ^(4×4) 
+S ∈ ℝ^(4×4) 
 */
 #include &lt;Eigen/Core&gt;
 #include &lt;Eigen/Dense&gt;
@@ -58,14 +58,6 @@ S: ℝ^(4×4)
 #include &lt;iostream&gt;
 #include &lt;set&gt;
 
-/**
- * demo14
- *
- * @param A  ℝ^(4×4)
- * @param B  ℝ^(4×4)
- * @param S  ℝ^(4×4)
- * @return ret
- */
 Eigen::Matrix&lt;double, 8, 8&gt; demo14(
     const Eigen::Matrix&lt;double, 4, 4&gt; &amp; A,
     const Eigen::Matrix&lt;double, 4, 4&gt; &amp; B,
@@ -111,9 +103,9 @@ int main(int argc, char *argv[])
 
 where
 
-A: ℝ^(4×4) 
-B: ℝ^(4×4) 
-S: ℝ^(4×4) 
+A ∈ ℝ^(4×4) 
+B ∈ ℝ^(4×4) 
+S ∈ ℝ^(4×4) 
 &#34;&#34;&#34;
 import numpy as np
 import scipy
@@ -124,11 +116,6 @@ from scipy.optimize import minimize
 
 
 def demo14(A, B, S):
-    &#34;&#34;&#34;
-    :param :A : ℝ^(4×4)
-    :param :B : ℝ^(4×4)
-    :param :S : ℝ^(4×4)
-    &#34;&#34;&#34;
     A = np.asarray(A, dtype=np.float64)
     B = np.asarray(B, dtype=np.float64)
     S = np.asarray(S, dtype=np.float64)
@@ -169,21 +156,27 @@ if __name__ == &#39;__main__&#39;:
 \setmainfont{Linux Libertine O}
 \DeclareMathOperator*{\argmax}{arg\,max}
 \DeclareMathOperator*{\argmin}{arg\,min}
+\usepackage[paperheight=8in,paperwidth=4in,margin=.3in,heightrounded]{geometry}
 \begin{document}
+
+\begin{center}
+\resizebox{\textwidth}{!} 
+{
+\begin{minipage}[c]{\textwidth}
 \begin{align*}
- &amp; \begin{bmatrix}
+ \omit \span \begin{bmatrix}
 \textit{A}^{-1} + \textit{A}^{-1}\textit{B}\textit{S}^{-1}\textit{B}^T\textit{A}^{-1} &amp; -\textit{A}^{-1}\textit{B}\textit{S}^{-1}\\
 -\textit{S}^{-1}\textit{B}^T\textit{A}^{-1} &amp; \textit{S}^{-1}\\
-\end{bmatrix}
+\end{bmatrix} \\
+\intertext{where} 
+\textit{A} &amp; \in \mathbb{R}^{ 4 \times 4 } \\
+\textit{B} &amp; \in \mathbb{R}^{ 4 \times 4 } \\
+\textit{S} &amp; \in \mathbb{R}^{ 4 \times 4 } \\
+\\
 \end{align*}
-
-where
-\begin{itemize}
-\item $\textit{A} \in \mathbb{R}^{ 4 \times 4 }$
-\item $\textit{B} \in \mathbb{R}^{ 4 \times 4 }$
-\item $\textit{S} \in \mathbb{R}^{ 4 \times 4 }$
-\end{itemize}
-
+\end{minipage}
+}
+\end{center}
 
 \end{document}
 </code></pre></div>

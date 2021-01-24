@@ -3,9 +3,9 @@ v_i = ∑_j w_i,j M_j u_i
 
 where
 
-w: ℝ^(4×4)
-M_j: ℝ^(4×4)
-u_i: ℝ^4
+w ∈ ℝ^(4×4)
+M_j ∈ ℝ^(4×4)
+u_i ∈ ℝ^4
 """
 import numpy as np
 import scipy
@@ -16,11 +16,6 @@ from scipy.optimize import minimize
 
 
 def demo39(w, M, u):
-    """
-    :param :w : ℝ^(4×4)
-    :param :M : ℝ^(4×4)
-    :param :u : ℝ^4
-    """
     w = np.asarray(w, dtype=np.float64)
     M = np.asarray(M, dtype=np.float64)
     u = np.asarray(u, dtype=np.float64)

@@ -2,6 +2,6 @@
 
 where
 
-c: ℝ^(x×y): the value of the Bayer pixel
-w: ℝ^(x×y): the local sample weight
-R̂: ℝ^x: the local robustness
+c ∈ ℝ^(x×y): the value of the Bayer pixel
+w ∈ ℝ^(x×y): the local sample weight
+R̂ ∈ ℝ^x: the local robustness

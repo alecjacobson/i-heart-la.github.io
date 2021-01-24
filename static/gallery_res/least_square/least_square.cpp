@@ -1,7 +1,7 @@
 /*
 given
-p_i: ℝ^3: points on lines
-d_i: ℝ^3: unit directions along lines
+p_i ∈ ℝ^3: points on lines
+d_i ∈ ℝ^3: unit directions along lines
 
 P_i = ( I_3 - d_i d_iᵀ )
 q = ( ∑_i P_iᵀP_i )⁻¹ ( ∑_i P_iᵀP_i p_i )
@@ -15,8 +15,8 @@ q = ( ∑_i P_iᵀP_i )⁻¹ ( ∑_i P_iᵀP_i p_i )
 /**
  * least_square
  *
- * @param p  ℝ^3: points on lines
- * @param d  ℝ^3: unit directions along lines
+ * @param p  points on lines
+ * @param d  unit directions along lines
  * @return q
  */
 Eigen::Matrix<double, 3, 1> least_square(

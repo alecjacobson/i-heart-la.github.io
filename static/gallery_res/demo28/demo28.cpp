@@ -3,13 +3,13 @@
 
 where
 
-l_j: ℝ : the length of bj
+l_j ∈ ℝ : the length of bj
 dist: ℝ^n, ℝ^n -> ℝ : measures the geodesic distance between the centers of bi and bj along the boundary
-σ: ℝ
-`bᵢ`: ℝ^n
-b_j: ℝ^n
-s_j: ℝ : unit direction vector of bi
-k: ℝ : iteration number
+σ ∈ ℝ
+`bᵢ` ∈ ℝ^n
+b_j ∈ ℝ^n
+s_j ∈ ℝ : unit direction vector of bi
+k ∈ ℝ : iteration number
 */
 #include <Eigen/Core>
 #include <Eigen/Dense>
@@ -20,13 +20,10 @@ k: ℝ : iteration number
 /**
  * demo28
  *
- * @param l  ℝ : the length of bj
+ * @param l  the length of bj
  * @param dist  ℝ^n, ℝ^n -> ℝ : measures the geodesic distance between the centers of bi and bj along the boundary
- * @param σ  ℝ
- * @param bᵢ  ℝ^n
- * @param b  ℝ^n
- * @param s  ℝ : unit direction vector of bi
- * @param k  ℝ : iteration number
+ * @param s  unit direction vector of bi
+ * @param k  iteration number
  * @return G_σ_left_parenthesis_s_i_circumflex_accent_k_right_parenthesis
  */
 double demo28(
@@ -39,7 +36,7 @@ double demo28(
     const double & k)
 {
     const long _dim_0 = l.size();
-    const long n = b[0].rows();
+    const long n = bᵢ.size();
     assert( l.size() == _dim_0 );
     assert( bᵢ.size() == n );
     assert( b.size() == _dim_0 );
@@ -49,7 +46,7 @@ double demo28(
     assert( s.size() == _dim_0 );
 
     double _sum_0 = 0;
-    for(int j=1; j<=l.size(); j++){
+    for(int j=1; j<=s.size(); j++){
         _sum_0 += l.at(j-1) * exp(-dist(bᵢ, b.at(j-1)) / double((2 * pow(σ, 2)))) * pow((s.at(j-1)), k);
     }
     double G_σ_left_parenthesis_s_i_circumflex_accent_k_right_parenthesis = _sum_0;

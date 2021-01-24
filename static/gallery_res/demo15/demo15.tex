@@ -7,9 +7,15 @@
 \setmainfont{Linux Libertine O}
 \DeclareMathOperator*{\argmax}{arg\,max}
 \DeclareMathOperator*{\argmin}{arg\,min}
+\usepackage[paperheight=8in,paperwidth=4in,margin=.3in,heightrounded]{geometry}
 \begin{document}
+
+\begin{center}
+\resizebox{\textwidth}{!} 
+{
+\begin{minipage}[c]{\textwidth}
 \begin{align*}
- & \begin{bmatrix}
+ \omit \span \begin{bmatrix}
 \textit{P}_{ 1 } & 0\\
 0 & \textit{P}_{ 3 }\\
 \end{bmatrix}\begin{bmatrix}
@@ -21,19 +27,19 @@
 \end{bmatrix}\begin{bmatrix}
 \textit{P}_{ 2 } & 0\\
 0 & I_{ 4 }\\
-\end{bmatrix}
+\end{bmatrix} \\
+\intertext{where} 
+\textit{P}_{\textit{i}} & \in \mathbb{R}^{ 4 \times 4 } \\
+\textit{B} & \in \mathbb{R}^{ 4 \times 4 } \\
+\textit{C} & \in \mathbb{R}^{ 4 \times 4 } \\
+\textit{L} & \in \mathbb{R}^{ 4 \times 4 } \\
+\textit{L̃} & \in \mathbb{R}^{ 4 \times 4 } \\
+\textit{U} & \in \mathbb{R}^{ 4 \times 4 } \\
+\textit{Ũ} & \in \mathbb{R}^{ 4 \times 4 } \\
+\\
 \end{align*}
-
-where
-\begin{itemize}
-\item $\textit{P}_{\textit{i}} \in \mathbb{R}^{ 4 \times 4 }$
-\item $\textit{B} \in \mathbb{R}^{ 4 \times 4 }$
-\item $\textit{C} \in \mathbb{R}^{ 4 \times 4 }$
-\item $\textit{L} \in \mathbb{R}^{ 4 \times 4 }$
-\item $\textit{L̃} \in \mathbb{R}^{ 4 \times 4 }$
-\item $\textit{U} \in \mathbb{R}^{ 4 \times 4 }$
-\item $\textit{Ũ} \in \mathbb{R}^{ 4 \times 4 }$
-\end{itemize}
-
+\end{minipage}
+}
+\end{center}
 
 \end{document}

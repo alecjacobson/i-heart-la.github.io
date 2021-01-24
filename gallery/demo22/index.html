@@ -35,8 +35,8 @@
 
 where 
 
-U: ℝ^(3×3) 
-V: ℝ^(3×3)</code></pre></div>
+U ∈ ℝ^(3×3) 
+V ∈ ℝ^(3×3)</code></pre></div>
     
 
     
@@ -49,8 +49,8 @@ V: ℝ^(3×3)</code></pre></div>
 
 where 
 
-U: ℝ^(3×3) 
-V: ℝ^(3×3)
+U ∈ ℝ^(3×3) 
+V ∈ ℝ^(3×3)
 */
 #include &lt;Eigen/Core&gt;
 #include &lt;Eigen/Dense&gt;
@@ -58,13 +58,6 @@ V: ℝ^(3×3)
 #include &lt;iostream&gt;
 #include &lt;set&gt;
 
-/**
- * demo22
- *
- * @param U  ℝ^(3×3)
- * @param V  ℝ^(3×3)
- * @return T₁
- */
 Eigen::Matrix&lt;double, 3, 3&gt; demo22(
     const Eigen::Matrix&lt;double, 3, 3&gt; &amp; U,
     const Eigen::Matrix&lt;double, 3, 3&gt; &amp; V)
@@ -109,8 +102,8 @@ int main(int argc, char *argv[])
 
 where 
 
-U: ℝ^(3×3) 
-V: ℝ^(3×3)
+U ∈ ℝ^(3×3) 
+V ∈ ℝ^(3×3)
 &#34;&#34;&#34;
 import numpy as np
 import scipy
@@ -121,10 +114,6 @@ from scipy.optimize import minimize
 
 
 def demo22(U, V):
-    &#34;&#34;&#34;
-    :param :U : ℝ^(3×3)
-    :param :V : ℝ^(3×3)
-    &#34;&#34;&#34;
     U = np.asarray(U, dtype=np.float64)
     V = np.asarray(V, dtype=np.float64)
 
@@ -165,21 +154,27 @@ if __name__ == &#39;__main__&#39;:
 \setmainfont{Linux Libertine O}
 \DeclareMathOperator*{\argmax}{arg\,max}
 \DeclareMathOperator*{\argmin}{arg\,min}
+\usepackage[paperheight=8in,paperwidth=4in,margin=.3in,heightrounded]{geometry}
 \begin{document}
+
+\begin{center}
+\resizebox{\textwidth}{!} 
+{
+\begin{minipage}[c]{\textwidth}
 \begin{align*}
-\textit{T₁} = &amp; \frac{1}{ \sqrt{2}}\textit{U}\begin{bmatrix}
+\textit{T₁} &amp; = \frac{1}{ \sqrt{2}}\textit{U}\begin{bmatrix}
 0 &amp; 0 &amp; 0\\
 0 &amp; 0 &amp; -1\\
 0 &amp; 1 &amp; 0\\
-\end{bmatrix}\textit{V}^T
+\end{bmatrix}\textit{V}^T \\
+\intertext{where} 
+\textit{U} &amp; \in \mathbb{R}^{ 3 \times 3 } \\
+\textit{V} &amp; \in \mathbb{R}^{ 3 \times 3 } \\
+\\
 \end{align*}
-
-where
-\begin{itemize}
-\item $\textit{U} \in \mathbb{R}^{ 3 \times 3 }$
-\item $\textit{V} \in \mathbb{R}^{ 3 \times 3 }$
-\end{itemize}
-
+\end{minipage}
+}
+\end{center}
 
 \end{document}
 </code></pre></div>

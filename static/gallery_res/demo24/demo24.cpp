@@ -3,16 +3,16 @@ E = 1/`σ_N`²`E_I` + ∑_(j for j>1) α_j²/`σ_S`_j² + ∑_(j for j>1) β_j²
 
 where
 
-`σ_N`: ℝ 
-`E_I`: ℝ
-α_i : ℝ
-β_i : ℝ
-`σ_S`_i: ℝ 
-`σ_T`_i: ℝ 
-ρ_i: ℝ 
-ρ̄_i: ℝ 
-`σ_ρ`_i: ℝ 
-ā_i: ℝ 
+`σ_N` ∈ ℝ 
+`E_I` ∈ ℝ
+α_i ∈ ℝ
+β_i ∈ ℝ
+`σ_S`_i ∈ ℝ 
+`σ_T`_i ∈ ℝ 
+ρ_i ∈ ℝ 
+ρ̄_i ∈ ℝ 
+`σ_ρ`_i ∈ ℝ 
+ā_i ∈ ℝ 
 */
 #include <Eigen/Core>
 #include <Eigen/Dense>
@@ -20,21 +20,6 @@ where
 #include <iostream>
 #include <set>
 
-/**
- * demo24
- *
- * @param σ_N  ℝ
- * @param E_I  ℝ
- * @param α  ℝ
- * @param β  ℝ
- * @param σ_S  ℝ
- * @param σ_T  ℝ
- * @param ρ  ℝ
- * @param ρ̄  ℝ
- * @param σ_ρ  ℝ
- * @param ā  ℝ
- * @return E
- */
 double demo24(
     const double & σ_N,
     const double & E_I,
@@ -70,7 +55,7 @@ double demo24(
         }
     }
     double _sum_2 = 0;
-    for(int j=1; j<=ρ.size(); j++){
+    for(int j=1; j<=ρ̄.size(); j++){
         _sum_2 += pow((ρ.at(j-1) - ρ̄.at(j-1)), 2) / double(pow(σ_ρ.at(j-1), 2));
     }
     double E = 1 / double(pow(σ_N, 2)) * E_I + _sum_0 + _sum_1 + _sum_2;

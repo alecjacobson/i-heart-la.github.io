@@ -33,13 +33,13 @@
 
 where
 
-l_j: ℝ : the length of bj
+l_j ∈ ℝ : the length of bj
 dist: ℝ^n, ℝ^n -&gt; ℝ : measures the geodesic distance between the centers of bi and bj along the boundary
-σ: ℝ
-`bᵢ`: ℝ^n
-b_j: ℝ^n
-s_j: ℝ : unit direction vector of bi
-k: ℝ : iteration number</code></pre></div>
+σ ∈ ℝ
+`bᵢ` ∈ ℝ^n
+b_j ∈ ℝ^n
+s_j ∈ ℝ : unit direction vector of bi
+k ∈ ℝ : iteration number</code></pre></div>
     
 
     
@@ -50,13 +50,13 @@ k: ℝ : iteration number</code></pre></div>
 
 where
 
-l_j: ℝ : the length of bj
+l_j ∈ ℝ : the length of bj
 dist: ℝ^n, ℝ^n -&gt; ℝ : measures the geodesic distance between the centers of bi and bj along the boundary
-σ: ℝ
-`bᵢ`: ℝ^n
-b_j: ℝ^n
-s_j: ℝ : unit direction vector of bi
-k: ℝ : iteration number
+σ ∈ ℝ
+`bᵢ` ∈ ℝ^n
+b_j ∈ ℝ^n
+s_j ∈ ℝ : unit direction vector of bi
+k ∈ ℝ : iteration number
 */
 #include &lt;Eigen/Core&gt;
 #include &lt;Eigen/Dense&gt;
@@ -67,13 +67,10 @@ k: ℝ : iteration number
 /**
  * demo28
  *
- * @param l  ℝ : the length of bj
+ * @param l  the length of bj
  * @param dist  ℝ^n, ℝ^n -&gt; ℝ : measures the geodesic distance between the centers of bi and bj along the boundary
- * @param σ  ℝ
- * @param bᵢ  ℝ^n
- * @param b  ℝ^n
- * @param s  ℝ : unit direction vector of bi
- * @param k  ℝ : iteration number
+ * @param s  unit direction vector of bi
+ * @param k  iteration number
  * @return G_σ_left_parenthesis_s_i_circumflex_accent_k_right_parenthesis
  */
 double demo28(
@@ -86,7 +83,7 @@ double demo28(
     const double &amp; k)
 {
     const long _dim_0 = l.size();
-    const long n = b[0].rows();
+    const long n = bᵢ.size();
     assert( l.size() == _dim_0 );
     assert( bᵢ.size() == n );
     assert( b.size() == _dim_0 );
@@ -96,7 +93,7 @@ double demo28(
     assert( s.size() == _dim_0 );
 
     double _sum_0 = 0;
-    for(int j=1; j&lt;=l.size(); j++){
+    for(int j=1; j&lt;=s.size(); j++){
         _sum_0 += l.at(j-1) * exp(-dist(bᵢ, b.at(j-1)) / double((2 * pow(σ, 2)))) * pow((s.at(j-1)), k);
     }
     double G_σ_left_parenthesis_s_i_circumflex_accent_k_right_parenthesis = _sum_0;
@@ -161,13 +158,13 @@ int main(int argc, char *argv[])
 
 where
 
-l_j: ℝ : the length of bj
+l_j ∈ ℝ : the length of bj
 dist: ℝ^n, ℝ^n -&gt; ℝ : measures the geodesic distance between the centers of bi and bj along the boundary
-σ: ℝ
-`bᵢ`: ℝ^n
-b_j: ℝ^n
-s_j: ℝ : unit direction vector of bi
-k: ℝ : iteration number
+σ ∈ ℝ
+`bᵢ` ∈ ℝ^n
+b_j ∈ ℝ^n
+s_j ∈ ℝ : unit direction vector of bi
+k ∈ ℝ : iteration number
 &#34;&#34;&#34;
 import numpy as np
 import scipy
@@ -179,13 +176,10 @@ from scipy.optimize import minimize
 
 def demo28(l, dist, σ, bᵢ, b, s, k):
     &#34;&#34;&#34;
-    :param :l : ℝ : the length of bj
+    :param :l : the length of bj
     :param :dist : ℝ^n, ℝ^n -&gt; ℝ : measures the geodesic distance between the centers of bi and bj along the boundary
-    :param :σ : ℝ
-    :param :bᵢ : ℝ^n
-    :param :b : ℝ^n
-    :param :s : ℝ : unit direction vector of bi
-    :param :k : ℝ : iteration number
+    :param :s : unit direction vector of bi
+    :param :k : iteration number
     &#34;&#34;&#34;
     l = np.asarray(l)
     bᵢ = np.asarray(bᵢ, dtype=np.float64)
@@ -193,7 +187,7 @@ def demo28(l, dist, σ, bᵢ, b, s, k):
     s = np.asarray(s)
 
     _dim_0 = l.shape[0]
-    n = b.shape[1]
+    n = bᵢ.shape[0]
     assert l.shape == (_dim_0,)
     assert np.ndim(σ) == 0
     assert bᵢ.shape == (n,)
@@ -202,7 +196,7 @@ def demo28(l, dist, σ, bᵢ, b, s, k):
     assert np.ndim(k) == 0
 
     _sum_0 = 0
-    for j in range(1, len(l)+1):
+    for j in range(1, len(s)+1):
         _sum_0 += l[j-1] * np.exp(-dist(bᵢ, b[j-1]) / (2 * np.power(σ, 2))) * np.power((s[j-1]), k)
     G_σ_left_parenthesis_s_i_circumflex_accent_k_right_parenthesis = _sum_0
 
@@ -247,22 +241,28 @@ if __name__ == &#39;__main__&#39;:
 \setmainfont{Linux Libertine O}
 \DeclareMathOperator*{\argmax}{arg\,max}
 \DeclareMathOperator*{\argmin}{arg\,min}
+\usepackage[paperheight=8in,paperwidth=4in,margin=.3in,heightrounded]{geometry}
 \begin{document}
+
+\begin{center}
+\resizebox{\textwidth}{!} 
+{
+\begin{minipage}[c]{\textwidth}
 \begin{align*}
-\textit{G\_σ(s\_i\^k)} = &amp; \sum_\textit{j} \textit{l}_{ \textit{j} }exp\left( -\frac{\textit{dist}\left( \textit{b\textsubscript{i}},\textit{b}_{ \textit{j} } \right)}{2\textit{σ}^{2}} \right)\left( \textit{s}_{ \textit{j} } \right)^{\textit{k}}
+\textit{G\_σ(s\_i\^k)} &amp; = \sum_\textit{j} \textit{l}_{ \textit{j} }exp\left( -\frac{\textit{dist}\left( \textit{b\textsubscript{i}},\textit{b}_{ \textit{j} } \right)}{2\textit{σ}^{2}} \right)\left( \textit{s}_{ \textit{j} } \right)^{\textit{k}} \\
+\intertext{where} 
+\textit{l}_{\textit{j}} &amp; \in \mathbb{R} \text{ the length of bj} \\
+\textit{dist} &amp; \in \mathbb{R}^{ \textit{n}},\mathbb{R}^{ \textit{n}}\rightarrow \mathbb{R} \text{ measures the geodesic distance between the centers of bi and bj along the boundary} \\
+\textit{σ} &amp; \in \mathbb{R} \\
+\textit{b\textsubscript{i}} &amp; \in \mathbb{R}^{ \textit{n}} \\
+\textit{b}_{\textit{j}} &amp; \in \mathbb{R}^{ \textit{n}} \\
+\textit{s}_{\textit{j}} &amp; \in \mathbb{R} \text{ unit direction vector of bi} \\
+\textit{k} &amp; \in \mathbb{R} \text{ iteration number} \\
+\\
 \end{align*}
-
-where
-\begin{itemize}
-\item $\textit{l}_{\textit{j}} \in \mathbb{{R}}$ the length of bj
-\item $\textit{dist} \in \mathbb{R}^{ \textit{n}},\mathbb{R}^{ \textit{n}}\rightarrow \mathbb{{R}}$ measures the geodesic distance between the centers of bi and bj along the boundary
-\item $\textit{σ} \in \mathbb{{R}}$
-\item $\textit{b\textsubscript{i}} \in \mathbb{R}^{ \textit{n}}$
-\item $\textit{b}_{\textit{j}} \in \mathbb{R}^{ \textit{n}}$
-\item $\textit{s}_{\textit{j}} \in \mathbb{{R}}$ unit direction vector of bi
-\item $\textit{k} \in \mathbb{{R}}$ iteration number
-\end{itemize}
-
+\end{minipage}
+}
+\end{center}
 
 \end{document}
 </code></pre></div>

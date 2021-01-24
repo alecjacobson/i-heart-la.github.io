@@ -7,18 +7,24 @@
 \setmainfont{Linux Libertine O}
 \DeclareMathOperator*{\argmax}{arg\,max}
 \DeclareMathOperator*{\argmin}{arg\,min}
+\usepackage[paperheight=8in,paperwidth=4in,margin=.3in,heightrounded]{geometry}
 \begin{document}
+
+\begin{center}
+\resizebox{\textwidth}{!} 
+{
+\begin{minipage}[c]{\textwidth}
 \begin{align*}
-\textit{L}_{\textit{i}, \textit{j}} = & \begin{cases} \textit{w}_{\textit{i}, \textit{j}} & \text{if}  \left( \textit{i}, \textit{j} \right) \in \textit{E}  \\ \end{cases}  \\
-\textit{L}_{\textit{i}, \textit{i}} = & -\sum_{\textit{l} != \textit{i}} \textit{L}_{\textit{i}, \textit{l}}
+\textit{L}_{\textit{i}, \textit{j}} & = \begin{cases} \textit{w}_{\textit{i}, \textit{j}} & \text{if }  \left( \textit{i}, \textit{j} \right) \in \textit{E}  \\ \end{cases}  \\
+\textit{L}_{\textit{i}, \textit{i}} & = -\sum_{\textit{l} != \textit{i}} \textit{L}_{\textit{i}, \textit{l}} \\
+\intertext{where} 
+\textit{L} & \in \mathbb{R}^{ \textit{n} \times \textit{n} } \\
+\textit{w} & \in \mathbb{R}^{ \textit{n} \times \textit{n} } \text{ edge weight matrix} \\
+\textit{E} & \in \{\mathbb{{Z}}^{{2}}\} \textit{{ index}} \text{ edges} \\
+\\
 \end{align*}
-
-where
-\begin{itemize}
-\item $\textit{L} \in \mathbb{R}^{ \textit{n} \times \textit{n} }$
-\item $\textit{w} \in \mathbb{R}^{ \textit{n} \times \textit{n} }$ edge weight matrix
-\item $\textit{E} \in \{\mathbb{{Z}}^{{2}}\} \textit{{ index}}$ edges
-\end{itemize}
-
+\end{minipage}
+}
+\end{center}
 
 \end{document}

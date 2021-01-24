@@ -7,18 +7,24 @@
 \setmainfont{Linux Libertine O}
 \DeclareMathOperator*{\argmax}{arg\,max}
 \DeclareMathOperator*{\argmin}{arg\,min}
+\usepackage[paperheight=8in,paperwidth=4in,margin=.3in,heightrounded]{geometry}
 \begin{document}
+
+\begin{center}
+\resizebox{\textwidth}{!} 
+{
+\begin{minipage}[c]{\textwidth}
 \begin{align*}
-\textit{y}_{ \textit{i} } = & \textit{a}_{ \textit{i} }^T\textit{x} + \textit{w}_{ \textit{i} } \\
-\textit{x̂} = & \left( \sum_\textit{i} \textit{a}_{ \textit{i} }\textit{a}_{ \textit{i} }^T \right)^{-1}\sum_\textit{i} \textit{y}_{ \textit{i} }\textit{a}_{ \textit{i} }
+\textit{y}_{ \textit{i} } & = \textit{a}_{ \textit{i} }^T\textit{x} + \textit{w}_{ \textit{i} } \\
+\textit{x̂} & = \left( \sum_\textit{i} \textit{a}_{ \textit{i} }\textit{a}_{ \textit{i} }^T \right)^{-1}\sum_\textit{i} \textit{y}_{ \textit{i} }\textit{a}_{ \textit{i} } \\
+\intertext{where} 
+\textit{a}_{\textit{i}} & \in \mathbb{R}^{ \textit{n}} \text{ the measurement vectors  } \\
+\textit{w}_{\textit{i}} & \in \mathbb{R} \text{ measurement noise } \\
+\textit{x} & \in \mathbb{R}^{ \textit{n}} \text{ original vector } \\
+\\
 \end{align*}
-
-where
-\begin{itemize}
-\item $\textit{a}_{\textit{i}} \in \mathbb{R}^{ \textit{n}}$ the measurement vectors  
-\item $\textit{w}_{\textit{i}} \in \mathbb{{R}}$ measurement noise 
-\item $\textit{x} \in \mathbb{R}^{ \textit{n}}$ original vector 
-\end{itemize}
-
+\end{minipage}
+}
+\end{center}
 
 \end{document}

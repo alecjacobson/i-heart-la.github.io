@@ -3,9 +3,9 @@
 
 where
  
-T_i: ℝ^(3×3)
-α_i: ℝ
-`N₁(v)`: {ℤ}
+T_i ∈ ℝ^(3×3)
+α_i ∈ ℝ
+`N₁(v)` ∈ {ℤ}
 n: ℝ^(3×3) -> ℝ^3
 */
 #include <Eigen/Core>
@@ -17,9 +17,6 @@ n: ℝ^(3×3) -> ℝ^3
 /**
  * demo2-2
  *
- * @param T  ℝ^(3×3)
- * @param α  ℝ
- * @param N₁_left_parenthesis_v_right_parenthesis  {ℤ}
  * @param n  ℝ^(3×3) -> ℝ^3
  * @return n_left_parenthesis_v_right_parenthesis
  */

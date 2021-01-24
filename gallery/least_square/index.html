@@ -28,8 +28,8 @@
     
       <br> Here is the LA input: <br>
       <div class="code_block" style='height: 510px;'><pre ><code class="language-cpsp">given
-p_i: ℝ^3: points on lines
-d_i: ℝ^3: unit directions along lines
+p_i ∈ ℝ^3: points on lines
+d_i ∈ ℝ^3: unit directions along lines
 
 P_i = ( I_3 - d_i d_iᵀ )
 q = ( ∑_i P_iᵀP_i )⁻¹ ( ∑_i P_iᵀP_i p_i )</code></pre></div>
@@ -40,8 +40,8 @@ q = ( ∑_i P_iᵀP_i )⁻¹ ( ∑_i P_iᵀP_i p_i )</code></pre></div>
         <br> Here is the Eigen output: <br>
         <div class="code_block"><pre ><code class="language-cpp">/*
 given
-p_i: ℝ^3: points on lines
-d_i: ℝ^3: unit directions along lines
+p_i ∈ ℝ^3: points on lines
+d_i ∈ ℝ^3: unit directions along lines
 
 P_i = ( I_3 - d_i d_iᵀ )
 q = ( ∑_i P_iᵀP_i )⁻¹ ( ∑_i P_iᵀP_i p_i )
@@ -55,8 +55,8 @@ q = ( ∑_i P_iᵀP_i )⁻¹ ( ∑_i P_iᵀP_i p_i )
 /**
  * least_square
  *
- * @param p  ℝ^3: points on lines
- * @param d  ℝ^3: unit directions along lines
+ * @param p  points on lines
+ * @param d  unit directions along lines
  * @return q
  */
 Eigen::Matrix&lt;double, 3, 1&gt; least_square(
@@ -116,8 +116,8 @@ int main(int argc, char *argv[])
       <br> Here is the Python output: <br>
       <div class="code_block"><pre ><code class="language-python">&#34;&#34;&#34;
 given
-p_i: ℝ^3: points on lines
-d_i: ℝ^3: unit directions along lines
+p_i ∈ ℝ^3: points on lines
+d_i ∈ ℝ^3: unit directions along lines
 
 P_i = ( I_3 - d_i d_iᵀ )
 q = ( ∑_i P_iᵀP_i )⁻¹ ( ∑_i P_iᵀP_i p_i )
@@ -132,8 +132,8 @@ from scipy.optimize import minimize
 
 def least_square(p, d):
     &#34;&#34;&#34;
-    :param :p : ℝ^3: points on lines
-    :param :d : ℝ^3: unit directions along lines
+    :param :p : points on lines
+    :param :d : unit directions along lines
     &#34;&#34;&#34;
     p = np.asarray(p, dtype=np.float64)
     d = np.asarray(d, dtype=np.float64)
@@ -183,18 +183,24 @@ if __name__ == &#39;__main__&#39;:
 \setmainfont{Linux Libertine O}
 \DeclareMathOperator*{\argmax}{arg\,max}
 \DeclareMathOperator*{\argmin}{arg\,min}
+\usepackage[paperheight=8in,paperwidth=4in,margin=.3in,heightrounded]{geometry}
 \begin{document}
 
-given
-\begin{itemize}
-\item $\textit{p}_{\textit{i}} \in \mathbb{R}^{ 3}$ points on lines
-\item $\textit{d}_{\textit{i}} \in \mathbb{R}^{ 3}$ unit directions along lines
-\end{itemize}
-
+\begin{center}
+\resizebox{\textwidth}{!} 
+{
+\begin{minipage}[c]{\textwidth}
 \begin{align*}
-\textit{P}_{ \textit{i} } = &amp; \left( I_{ 3 } - \textit{d}_{ \textit{i} }\textit{d}_{ \textit{i} }^T \right) \\
-\textit{q} = &amp; \left( \sum_\textit{i} \textit{P}_{ \textit{i} }^T\textit{P}_{ \textit{i} } \right)^{-1}\left( \sum_\textit{i} \textit{P}_{ \textit{i} }^T\textit{P}_{ \textit{i} }\textit{p}_{ \textit{i} } \right)
+\intertext{given} 
+\textit{p}_{\textit{i}} &amp; \in \mathbb{R}^{ 3} \text{ points on lines} \\
+\textit{d}_{\textit{i}} &amp; \in \mathbb{R}^{ 3} \text{ unit directions along lines} \\
+\\
+\textit{P}_{ \textit{i} } &amp; = \left( I_{ 3 } - \textit{d}_{ \textit{i} }\textit{d}_{ \textit{i} }^T \right) \\
+\textit{q} &amp; = \left( \sum_\textit{i} \textit{P}_{ \textit{i} }^T\textit{P}_{ \textit{i} } \right)^{-1}\left( \sum_\textit{i} \textit{P}_{ \textit{i} }^T\textit{P}_{ \textit{i} }\textit{p}_{ \textit{i} } \right) \\
 \end{align*}
+\end{minipage}
+}
+\end{center}
 
 \end{document}
 </code></pre></div>

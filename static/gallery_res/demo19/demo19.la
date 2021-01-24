@@ -5,5 +5,5 @@ from linearalgebra: tr
 
 where
 
-`Dₘ`: ℝ^(3×3)  
-v: ℝ
+`Dₘ` ∈ ℝ^(3×3)  
+v ∈ ℝ

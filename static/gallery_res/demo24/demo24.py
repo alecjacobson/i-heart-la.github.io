@@ -3,16 +3,16 @@ E = 1/`σ_N`²`E_I` + ∑_(j for j>1) α_j²/`σ_S`_j² + ∑_(j for j>1) β_j²
 
 where
 
-`σ_N`: ℝ 
-`E_I`: ℝ
-α_i : ℝ
-β_i : ℝ
-`σ_S`_i: ℝ 
-`σ_T`_i: ℝ 
-ρ_i: ℝ 
-ρ̄_i: ℝ 
-`σ_ρ`_i: ℝ 
-ā_i: ℝ 
+`σ_N` ∈ ℝ 
+`E_I` ∈ ℝ
+α_i ∈ ℝ
+β_i ∈ ℝ
+`σ_S`_i ∈ ℝ 
+`σ_T`_i ∈ ℝ 
+ρ_i ∈ ℝ 
+ρ̄_i ∈ ℝ 
+`σ_ρ`_i ∈ ℝ 
+ā_i ∈ ℝ 
 """
 import numpy as np
 import scipy
@@ -23,18 +23,6 @@ from scipy.optimize import minimize
 
 
 def demo24(σ_N, E_I, α, β, σ_S, σ_T, ρ, ρ̄, σ_ρ, ā):
-    """
-    :param :σ_N : ℝ
-    :param :E_I : ℝ
-    :param :α : ℝ
-    :param :β : ℝ
-    :param :σ_S : ℝ
-    :param :σ_T : ℝ
-    :param :ρ : ℝ
-    :param :ρ̄ : ℝ
-    :param :σ_ρ : ℝ
-    :param :ā : ℝ
-    """
     α = np.asarray(α)
     β = np.asarray(β)
     σ_S = np.asarray(σ_S)
@@ -65,7 +53,7 @@ def demo24(σ_N, E_I, α, β, σ_S, σ_T, ρ, ρ̄, σ_ρ, ā):
         if(j > 1):
             _sum_1 += np.power(β[j-1], 2) / np.power(σ_T[j-1], 2)
     _sum_2 = 0
-    for j in range(1, len(ρ)+1):
+    for j in range(1, len(ρ̄)+1):
         _sum_2 += np.power((ρ[j-1] - ρ̄[j-1]), 2) / np.power(σ_ρ[j-1], 2)
     E = 1 / np.power(σ_N, 2) * E_I + _sum_0 + _sum_1 + _sum_2
 

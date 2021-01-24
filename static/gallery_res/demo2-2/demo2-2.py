@@ -3,9 +3,9 @@
 
 where
  
-T_i: ℝ^(3×3)
-α_i: ℝ
-`N₁(v)`: {ℤ}
+T_i ∈ ℝ^(3×3)
+α_i ∈ ℝ
+`N₁(v)` ∈ {ℤ}
 n: ℝ^(3×3) -> ℝ^3
 """
 import numpy as np
@@ -18,9 +18,6 @@ from scipy.optimize import minimize
 
 def demo2-2(T, α, N1_left_parenthesis_v_right_parenthesis, n):
     """
-    :param :T : ℝ^(3×3)
-    :param :α : ℝ
-    :param :N1_left_parenthesis_v_right_parenthesis : {ℤ}
     :param :n : ℝ^(3×3) -> ℝ^3
     """
     T = np.asarray(T, dtype=np.float64)

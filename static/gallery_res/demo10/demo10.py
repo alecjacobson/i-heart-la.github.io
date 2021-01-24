@@ -3,9 +3,9 @@ min_(x ∈ ℝ^n) ∑_i ||A_i x + b_i || + (1/2)||x-`x₀`||²
 
 where
 
-A_i: ℝ^(m × n)  
-`x₀`: ℝ^n  
-b_i: ℝ^m  
+A_i ∈ ℝ^(m × n)  
+`x₀` ∈ ℝ^n  
+b_i ∈ ℝ^m  
 """
 import numpy as np
 import scipy
@@ -16,18 +16,13 @@ from scipy.optimize import minimize
 
 
 def demo10(A, x0, b):
-    """
-    :param :A : ℝ^(m × n)
-    :param :x0 : ℝ^n
-    :param :b : ℝ^m
-    """
     A = np.asarray(A, dtype=np.float64)
     x0 = np.asarray(x0, dtype=np.float64)
     b = np.asarray(b, dtype=np.float64)
 
     _dim_0 = A.shape[0]
-    m = b.shape[1]
-    n = x0.shape[0]
+    m = A.shape[1]
+    n = A.shape[2]
     assert A.shape == (_dim_0, m, n)
     assert x0.shape == (n,)
     assert b.shape == (_dim_0, m, )

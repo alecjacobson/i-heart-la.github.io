@@ -6,8 +6,8 @@ from linearalgebra: tr
 
 where
 
-`Dₘ`: ℝ^(3×3)  
-v: ℝ
+`Dₘ` ∈ ℝ^(3×3)  
+v ∈ ℝ
 """
 import numpy as np
 import scipy
@@ -18,10 +18,6 @@ from scipy.optimize import minimize
 
 
 def demo19(Dₘ, v):
-    """
-    :param :Dₘ : ℝ^(3×3)
-    :param :v : ℝ
-    """
     Dₘ = np.asarray(Dₘ, dtype=np.float64)
 
     assert Dₘ.shape == (3, 3)

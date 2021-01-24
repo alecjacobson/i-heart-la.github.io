@@ -7,16 +7,22 @@
 \setmainfont{Linux Libertine O}
 \DeclareMathOperator*{\argmax}{arg\,max}
 \DeclareMathOperator*{\argmin}{arg\,min}
+\usepackage[paperheight=8in,paperwidth=4in,margin=.3in,heightrounded]{geometry}
 \begin{document}
+
+\begin{center}
+\resizebox{\textwidth}{!} 
+{
+\begin{minipage}[c]{\textwidth}
 \begin{align*}
- & \sum_\textit{i} \textit{f}_{ \textit{i} }^{2}\textit{p}_{ \textit{i} } - \left( \sum_\textit{i} \textit{f}_{ \textit{i} }\textit{p}_{ \textit{i} } \right)^{2}
+ \omit \span \sum_\textit{i} \textit{f}_{ \textit{i} }^{2}\textit{p}_{ \textit{i} } - \left( \sum_\textit{i} \textit{f}_{ \textit{i} }\textit{p}_{ \textit{i} } \right)^{2} \\
+\intertext{where} 
+\textit{f}_{\textit{i}} & \in \mathbb{R} \\
+\textit{p}_{\textit{i}} & \in \mathbb{R} \\
+\\
 \end{align*}
-
-where
-\begin{itemize}
-\item $\textit{f}_{\textit{i}} \in \mathbb{{R}}$
-\item $\textit{p}_{\textit{i}} \in \mathbb{{R}}$
-\end{itemize}
-
+\end{minipage}
+}
+\end{center}
 
 \end{document}

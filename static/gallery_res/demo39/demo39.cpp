@@ -3,9 +3,9 @@ v_i = ∑_j w_i,j M_j u_i
 
 where
 
-w: ℝ^(4×4)
-M_j: ℝ^(4×4)
-u_i: ℝ^4
+w ∈ ℝ^(4×4)
+M_j ∈ ℝ^(4×4)
+u_i ∈ ℝ^4
 */
 #include <Eigen/Core>
 #include <Eigen/Dense>
@@ -13,14 +13,6 @@ u_i: ℝ^4
 #include <iostream>
 #include <set>
 
-/**
- * demo39
- *
- * @param w  ℝ^(4×4)
- * @param M  ℝ^(4×4)
- * @param u  ℝ^4
- * @return v
- */
 std::vector<Eigen::Matrix<double, 4, 1>> demo39(
     const Eigen::Matrix<double, 4, 4> & w,
     const std::vector<Eigen::Matrix<double, 4, 4>> & M,
