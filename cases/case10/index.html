@@ -1,0 +1,80 @@
+<!doctype html>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../../static/style.css">
+<title>case10 — I❤LA</title>
+<body>
+  <header>
+    <link href="../../static/prism.css" rel="stylesheet" />
+    <h1> case10 </h1>
+  </header>
+  <script src="../../static/prism.js"></script>
+  <div class="page">
+    
+  
+
+  
+    <div class="cases_post">
+
+    <p>This page shows case10 implementation.</p>
+
+
+    
+     It comes from  <a href="https://github.com/rpreiner/gps-py"> Gaussian-Product Subdivision Surfaces </a><br><br>
+    
+    
+    
+
+
+
+    
+
+
+
+    
+    
+    Here is the screenshot of the <a href="/static/cases_res/case10/cones.py"> original file </a>: <br>
+      <img src=../../static/cases_res/case10/before.png alt="placeholder" width="700" style='object-fit: scale-down;'><br>
+    
+    
+    
+    Here is the screenshot of the <a href="/static/cases_res/case10/cones_la.py"> modified file </a>: <br>
+      <img src=../../static/cases_res/case10/after.png alt="placeholder" width="700" style='object-fit: scale-down;'><br>
+    
+
+    
+      <br> Here is the LA input: <br>
+      <div class="code_block" style='height: px;'><pre ><code class="language-cpsp">from linearalgebra: vec
+
+icf_i = vec(c_i^(-1))
+qq1_i = (icf_i,1 , icf_i,2 , icf_i,3)
+qq2_i = (icf_i,5 , icf_i,6 , icf_i,9)
+qlin_i = c_i^(-1) v_i,*
+
+`v_out`_i = [qq1_iᵀ
+             (qq1_i,2 , qq2_i,1 , qq2_i,2)ᵀ
+             (qq1_i,3 , qq2_i,2 , qq2_i,3)ᵀ
+             ]^(-1) qlin_i
+
+
+where
+
+v: ℝ^(m×3)
+f: ℝ^(t×3)
+c_i: ℝ^(3×3)
+n: ℤ</code></pre></div>
+    
+
+    
+      <br> Below is the pdf: <br>
+      <img src=../../static/cases_res/case10/gpy_.pdf alt="placeholder" width="700" style='object-fit: scale-down;'><br>
+    
+    </div>
+  
+
+
+ 
+
+
+
+  </div>
+</body>

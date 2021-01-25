@@ -46,20 +46,20 @@
 
     
       <br> Here is the LA input: <br>
-      <div class="code_block" style='height: px;'><pre ><code class="language-cpsp">`p0` = [V_`v0`,1  V_`v0`,2  V_`v0`,3]
-`p1` = [V_`v1`,1  V_`v1`,2  V_`v1`,3]
-`p2` = [V_`v2`,1  V_`v2`,2  V_`v2`,3]
-`x0s` = ||`p0`||²
-`Mi` = [2(`p1`-`p0`)
-     2(`p2`-`p0`)
+      <div class="code_block" style='height: px;'><pre ><code class="language-cpsp">p0 = [V_v0,1  V_v0,2  V_v0,3]
+p1 = [V_v1,1  V_v1,2  V_v1,3]
+p2 = [V_v2,1  V_v2,2  V_v2,3]
+x0s = ||p0||²
+Mi = [2(p1-p0)
+     2(p2-p0)
      nᵀ]^(-1)
-m = `Mi` (||`p1`||²-`x0s`, ||`p2`||²-`x0s`, `p0`⋅n)
+m = Mi (||p1||²-x0s, ||p2||²-x0s, p0⋅n)
 
 where
 
-`v0` ∈ ℤ index
-`v1` ∈ ℤ index
-`v2` ∈ ℤ index
+v0 ∈ ℤ index
+v1 ∈ ℤ index
+v2 ∈ ℤ index
 V_i ∈ ℝ^3 
 n ∈ ℝ^3 </code></pre></div>
     

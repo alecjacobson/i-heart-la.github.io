@@ -1,5 +1,5 @@
 p_i = poly_i,*
-q_i = `poly2`_i,*
+q_i = poly2_i,*
 d_i = p_i - q_i
 
 H = sum_i 1/||d_i|| [d_i,2²+d_i,3²   -d_i,1⋅d_i,2      -d_i,1⋅d_i,3
@@ -13,4 +13,4 @@ d_i,1⋅p_i,3⋅q_i,1+d_i,2⋅p_i,3⋅q_i,2-d_i,1⋅p_i,1⋅q_i,3-d_i,2⋅p_i,2�
 where
 
 poly ∈ ℝ^(n×3) 
-`poly2` ∈ ℝ^(n×3)
+poly2 ∈ ℝ^(n×3)

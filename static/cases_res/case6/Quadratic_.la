@@ -1,7 +1,7 @@
-invLhs = [TTT          (constraints)^T
-         constraints          0]^(-1)
+invLhs = [TTT          Cᵀ
+          C           0]⁻¹
 
 where
 
 TTT ∈ ℝ^(n×n) 
-constraints ∈ ℝ^(m×n) 
+C ∈ ℝ^(m×n) 
