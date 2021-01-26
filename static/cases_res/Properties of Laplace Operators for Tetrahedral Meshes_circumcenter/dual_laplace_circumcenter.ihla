@@ -1,0 +1,9 @@
+l = (‖b-c‖², ‖a-c‖², ‖a-b‖²)
+ba = (l₁(l₂+l₃-l₁), l₂(l₃+l₁-l₂), l₃(l₁+l₂-l₃))
+cc = 1/(ba₁+ba₂+ba₃)(ba₁a+ba₂b+ba₃c)
+
+where
+
+a ∈ ℝ^3
+b ∈ ℝ^3
+c ∈ ℝ^3

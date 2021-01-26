@@ -1,0 +1,262 @@
+<!doctype html>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../../static/style.css">
+<title>A Symmetric Objective Function for ICP Formula 9 — I❤LA</title>
+<body>
+  <header>
+    <link href="../../static/prism.css" rel="stylesheet" />
+    <h1> A Symmetric Objective Function for ICP Formula 9 </h1>
+  </header>
+  <script src="../../static/prism.js"></script>
+  <div class="page">
+    
+  
+
+  
+    <div class="gallery_post">
+
+    <p>This page shows A Symmetric Objective Function for ICP Formula 9 implementation.</p>
+
+
+    
+     It comes from  <a href="https://gfx.cs.princeton.edu/pubs/Rusinkiewicz_2019_ASO/index.php"> A Symmetric Objective Function for ICP Formula 9 </a><br><br>
+    
+    
+    
+    Here is the description: <br>
+      <img src=../../static/gallery_res/A%20Symmetric%20Objective%20Function%20for%20ICP%20Formula%209/symmetric_objective_function_9.png alt="placeholder" width="700" style='object-fit: scale-down;'><br>
+    
+
+    
+      <br> Here is the LA input: <br>
+      <div class="code_block" style='height: 360px;'><pre ><code class="language-cpsp">from trigonometry: cos
+
+∑_i cos(θ)²((p_i - q_i)⋅n_i +((p_i+q_i)×n_i)⋅ã+n_i⋅t̃)² 
+
+where
+
+θ ∈ ℝ: angle of rotation
+p_i ∈ ℝ^3
+q_i ∈ ℝ^3
+n_i ∈ ℝ^3
+ã ∈ ℝ^3
+t̃ ∈ ℝ^3</code></pre></div>
+    
+
+    
+      
+        <br> Here is the Eigen output: <br>
+        <div class="code_block"><pre ><code class="language-cpp">/*
+from trigonometry: cos
+
+∑_i cos(θ)²((p_i - q_i)⋅n_i +((p_i+q_i)×n_i)⋅ã+n_i⋅t̃)² 
+
+where
+
+θ ∈ ℝ: angle of rotation
+p_i ∈ ℝ^3
+q_i ∈ ℝ^3
+n_i ∈ ℝ^3
+ã ∈ ℝ^3
+t̃ ∈ ℝ^3
+*/
+#include &lt;Eigen/Core&gt;
+#include &lt;Eigen/Dense&gt;
+#include &lt;Eigen/Sparse&gt;
+#include &lt;iostream&gt;
+#include &lt;set&gt;
+
+/**
+ * symmetric_objective_function_9
+ *
+ * @param θ  angle of rotation
+ * @return ret
+ */
+double symmetric_objective_function_9(
+    const double &amp; θ,
+    const std::vector&lt;Eigen::Matrix&lt;double, 3, 1&gt;&gt; &amp; p,
+    const std::vector&lt;Eigen::Matrix&lt;double, 3, 1&gt;&gt; &amp; q,
+    const std::vector&lt;Eigen::Matrix&lt;double, 3, 1&gt;&gt; &amp; n,
+    const Eigen::Matrix&lt;double, 3, 1&gt; &amp; ã,
+    const Eigen::Matrix&lt;double, 3, 1&gt; &amp; t̃)
+{
+    const long _dim_0 = p.size();
+    double _sum_0 = 0;
+    for(int i=1; i&lt;=n.size(); i++){
+        _sum_0 += pow(cos(θ), 2) * pow((((p.at(i-1) - q.at(i-1))).dot(n.at(i-1)) + ((((p.at(i-1) + q.at(i-1))).cross(n.at(i-1)))).dot(ã) + (n.at(i-1)).dot(t̃)), 2);
+    }
+    double ret = _sum_0;
+    return ret;
+}
+
+
+void generateRandomData(double &amp; θ,
+    std::vector&lt;Eigen::Matrix&lt;double, 3, 1&gt;&gt; &amp; p,
+    std::vector&lt;Eigen::Matrix&lt;double, 3, 1&gt;&gt; &amp; q,
+    std::vector&lt;Eigen::Matrix&lt;double, 3, 1&gt;&gt; &amp; n,
+    Eigen::Matrix&lt;double, 3, 1&gt; &amp; ã,
+    Eigen::Matrix&lt;double, 3, 1&gt; &amp; t̃)
+{
+    θ = rand() % 10;
+    const int _dim_0 = rand()%10;
+    p.resize(_dim_0);
+    for(int i=0; i&lt;_dim_0; i++){
+        p[i] = Eigen::VectorXd::Random(3);
+    }
+    q.resize(_dim_0);
+    for(int i=0; i&lt;_dim_0; i++){
+        q[i] = Eigen::VectorXd::Random(3);
+    }
+    n.resize(_dim_0);
+    for(int i=0; i&lt;_dim_0; i++){
+        n[i] = Eigen::VectorXd::Random(3);
+    }
+    ã = Eigen::VectorXd::Random(3);
+    t̃ = Eigen::VectorXd::Random(3);
+}
+
+
+int main(int argc, char *argv[])
+{
+    srand((int)time(NULL));
+    double θ;
+    std::vector&lt;Eigen::Matrix&lt;double, 3, 1&gt;&gt; p;
+    std::vector&lt;Eigen::Matrix&lt;double, 3, 1&gt;&gt; q;
+    std::vector&lt;Eigen::Matrix&lt;double, 3, 1&gt;&gt; n;
+    Eigen::Matrix&lt;double, 3, 1&gt; ã;
+    Eigen::Matrix&lt;double, 3, 1&gt; t̃;
+    generateRandomData(θ, p, q, n, ã, t̃);
+    double func_value = symmetric_objective_function_9(θ, p, q, n, ã, t̃);
+    std::cout&lt;&lt;&#34;func_value:\n&#34;&lt;&lt;func_value&lt;&lt;std::endl;
+    return 0;
+}</code></pre></div>
+      
+    
+
+    
+      <br> Here is the Python output: <br>
+      <div class="code_block"><pre ><code class="language-python">&#34;&#34;&#34;
+from trigonometry: cos
+
+∑_i cos(θ)²((p_i - q_i)⋅n_i +((p_i+q_i)×n_i)⋅ã+n_i⋅t̃)² 
+
+where
+
+θ ∈ ℝ: angle of rotation
+p_i ∈ ℝ^3
+q_i ∈ ℝ^3
+n_i ∈ ℝ^3
+ã ∈ ℝ^3
+t̃ ∈ ℝ^3
+&#34;&#34;&#34;
+import numpy as np
+import scipy
+import scipy.linalg
+from scipy import sparse
+from scipy.integrate import quad
+from scipy.optimize import minimize
+
+
+def symmetric_objective_function_9(θ, p, q, n, ã, t̃):
+    &#34;&#34;&#34;
+    :param :θ : angle of rotation
+    &#34;&#34;&#34;
+    p = np.asarray(p, dtype=np.float64)
+    q = np.asarray(q, dtype=np.float64)
+    n = np.asarray(n, dtype=np.float64)
+    ã = np.asarray(ã, dtype=np.float64)
+    t̃ = np.asarray(t̃, dtype=np.float64)
+
+    _dim_0 = p.shape[0]
+    assert np.ndim(θ) == 0
+    assert p.shape == (_dim_0, 3, )
+    assert q.shape == (_dim_0, 3, )
+    assert n.shape == (_dim_0, 3, )
+    assert ã.shape == (3,)
+    assert t̃.shape == (3,)
+
+    _sum_0 = 0
+    for i in range(1, len(n)+1):
+        _sum_0 += np.power(np.cos(θ), 2) * np.power((np.dot(((p[i-1] - q[i-1])).ravel(), (n[i-1]).ravel()) + np.dot(((np.cross((p[i-1] + q[i-1]), n[i-1]))).ravel(), (ã).ravel()) + np.dot((n[i-1]).ravel(), (t̃).ravel())), 2)
+    ret = _sum_0
+    return ret
+
+
+def generateRandomData():
+    θ = np.random.randn()
+    _dim_0 = np.random.randint(10)
+    p = np.random.randn(_dim_0, 3, )
+    q = np.random.randn(_dim_0, 3, )
+    n = np.random.randn(_dim_0, 3, )
+    ã = np.random.randn(3)
+    t̃ = np.random.randn(3)
+    return θ, p, q, n, ã, t̃
+
+
+if __name__ == &#39;__main__&#39;:
+    θ, p, q, n, ã, t̃ = generateRandomData()
+    print(&#34;θ:&#34;, θ)
+    print(&#34;p:&#34;, p)
+    print(&#34;q:&#34;, q)
+    print(&#34;n:&#34;, n)
+    print(&#34;ã:&#34;, ã)
+    print(&#34;t̃:&#34;, t̃)
+    func_value = symmetric_objective_function_9(θ, p, q, n, ã, t̃)
+    print(&#34;func_value: &#34;, func_value)</code></pre></div>
+    
+
+    
+      <br> Here is the Tex output: <br>
+      <div class="code_block"><pre ><code class="language-tex">\documentclass[12pt]{article}
+\usepackage{mathdots}
+\usepackage[bb=boondox]{mathalfa}
+\usepackage{mathtools}
+\usepackage{amssymb}
+\usepackage{ctex}
+\setmainfont{Linux Libertine O}
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\usepackage[paperheight=8in,paperwidth=4in,margin=.3in,heightrounded]{geometry}
+\begin{document}
+
+\begin{center}
+\resizebox{\textwidth}{!} 
+{
+\begin{minipage}[c]{\textwidth}
+\begin{align*}
+\text{from trigonometry import cos}\\
+ \omit \span \sum_\textit{i} cos\left( \textit{θ} \right)^{2}\left( \left( \textit{p}_{ \textit{i} } - \textit{q}_{ \textit{i} } \right) \cdot \textit{n}_{ \textit{i} } + \left( \left( \textit{p}_{ \textit{i} } + \textit{q}_{ \textit{i} } \right) × \textit{n}_{ \textit{i} } \right) \cdot \textit{ã} + \textit{n}_{ \textit{i} } \cdot \textit{t̃} \right)^{2} \\
+\intertext{where} 
+\textit{θ} &amp; \in \mathbb{R} \text{ angle of rotation} \\
+\textit{p}_{\textit{i}} &amp; \in \mathbb{R}^{ 3} \\
+\textit{q}_{\textit{i}} &amp; \in \mathbb{R}^{ 3} \\
+\textit{n}_{\textit{i}} &amp; \in \mathbb{R}^{ 3} \\
+\textit{ã} &amp; \in \mathbb{R}^{ 3} \\
+\textit{t̃} &amp; \in \mathbb{R}^{ 3} \\
+\\
+\end{align*}
+\end{minipage}
+}
+\end{center}
+
+\end{document}
+</code></pre></div>
+    
+
+    
+
+      <br> Below is the pdf: <br>
+      <div>
+      <iframe src=../../static/gallery_res/A%20Symmetric%20Objective%20Function%20for%20ICP%20Formula%209/symmetric_objective_function_9.pdf frameborder="0" width="700" height="1000"><br>
+      </div>
+    
+    </div>
+  
+
+
+ 
+
+
+
+  </div>
+</body>

@@ -1,0 +1,193 @@
+<!doctype html>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../../static/style.css">
+<title>Geometry Processing: Curvature — I❤LA</title>
+<body>
+  <header>
+    <link href="../../static/prism.css" rel="stylesheet" />
+    <h1> Geometry Processing: Curvature </h1>
+  </header>
+  <script src="../../static/prism.js"></script>
+  <div class="page">
+    
+  
+
+  
+    <div class="gallery_post">
+
+    <p>This page shows Geometry Processing: Curvature implementation.</p>
+
+
+    
+     It comes from  <a href="https://github.com/alecjacobson/geometry-processing-curvature"> Geometry Processing: Curvature </a><br><br>
+    
+    
+    
+    Here is the description: <br>
+      <img src=../../static/gallery_res/Geometry%20Processing%3A%20Curvature/course_curvature.png alt="placeholder" width="700" style='object-fit: scale-down;'><br>
+    
+
+    
+      <br> Here is the LA input: <br>
+      <div class="code_block" style='height: 510px;'><pre ><code class="language-cpsp">`H(p)` = 1/(2π)int_[0, 2π] `kₙ`(φ, p) ∂φ
+
+where 
+
+p ∈ ℝ^3 : point on the surface
+`kₙ`: ℝ,ℝ^3-&gt;ℝ : normal curvature</code></pre></div>
+    
+
+    
+      
+        <br> Here is the Eigen output: <br>
+        <div class="code_block"><pre ><code class="language-cpp">/*
+`H(p)` = 1/(2π)int_[0, 2π] `kₙ`(φ, p) ∂φ
+
+where 
+
+p ∈ ℝ^3 : point on the surface
+`kₙ`: ℝ,ℝ^3-&gt;ℝ : normal curvature
+*/
+#include &lt;Eigen/Core&gt;
+#include &lt;Eigen/Dense&gt;
+#include &lt;Eigen/Sparse&gt;
+#include &lt;iostream&gt;
+#include &lt;set&gt;
+
+/**
+ * course_curvature
+ *
+ * @param p  point on the surface
+ * @param kₙ  ℝ,ℝ^3-&gt;ℝ : normal curvature
+ * @return H_left_parenthesis_p_right_parenthesis
+ */
+double course_curvature(
+    const Eigen::Matrix&lt;double, 3, 1&gt; &amp; p,
+    const std::function&lt;double(double, Eigen::Matrix&lt;double, 3, 1&gt;)&gt; &amp; kₙ)
+{
+    double H_left_parenthesis_p_right_parenthesis = 1 / double((2 * M_PI)) * ;
+
+    return H_left_parenthesis_p_right_parenthesis;
+}
+
+
+void generateRandomData(Eigen::Matrix&lt;double, 3, 1&gt; &amp; p,
+    std::function&lt;double(double, Eigen::Matrix&lt;double, 3, 1&gt;)&gt; &amp; kₙ)
+{
+    p = Eigen::VectorXd::Random(3);
+    kₙ = [](double, Eigen::Matrix&lt;double, 3, 1&gt;)-&gt;double{
+        return rand() % 10;
+    };
+}
+
+
+int main(int argc, char *argv[])
+{
+    srand((int)time(NULL));
+    Eigen::Matrix&lt;double, 3, 1&gt; p;
+    std::function&lt;double(double, Eigen::Matrix&lt;double, 3, 1&gt;)&gt; kₙ;
+    generateRandomData(p, kₙ);
+    double func_value = course_curvature(p, kₙ);
+    std::cout&lt;&lt;&#34;func_value:\n&#34;&lt;&lt;func_value&lt;&lt;std::endl;
+    return 0;
+}</code></pre></div>
+      
+    
+
+    
+      <br> Here is the Python output: <br>
+      <div class="code_block"><pre ><code class="language-python">&#34;&#34;&#34;
+`H(p)` = 1/(2π)int_[0, 2π] `kₙ`(φ, p) ∂φ
+
+where 
+
+p ∈ ℝ^3 : point on the surface
+`kₙ`: ℝ,ℝ^3-&gt;ℝ : normal curvature
+&#34;&#34;&#34;
+import numpy as np
+import scipy
+import scipy.linalg
+from scipy import sparse
+from scipy.integrate import quad
+from scipy.optimize import minimize
+
+
+def course_curvature(p, kₙ):
+    &#34;&#34;&#34;
+    :param :p : point on the surface
+    :param :kₙ : ℝ,ℝ^3-&gt;ℝ : normal curvature
+    &#34;&#34;&#34;
+    p = np.asarray(p, dtype=np.float64)
+
+    assert p.shape == (3,)
+
+    H_left_parenthesis_p_right_parenthesis = 1 / (2 * np.pi) * quad(lambda φ: kₙ(φ, p), 0, 2 * np.pi)[0]
+
+    return H_left_parenthesis_p_right_parenthesis
+
+
+def generateRandomData():
+    p = np.random.randn(3)
+    def kₙ(p0, p1):
+        return np.random.randn()
+    return p, kₙ
+
+
+if __name__ == &#39;__main__&#39;:
+    p, kₙ = generateRandomData()
+    print(&#34;p:&#34;, p)
+    print(&#34;kₙ:&#34;, kₙ)
+    func_value = course_curvature(p, kₙ)
+    print(&#34;func_value: &#34;, func_value)</code></pre></div>
+    
+
+    
+      <br> Here is the Tex output: <br>
+      <div class="code_block"><pre ><code class="language-tex">\documentclass[12pt]{article}
+\usepackage{mathdots}
+\usepackage[bb=boondox]{mathalfa}
+\usepackage{mathtools}
+\usepackage{amssymb}
+\usepackage{ctex}
+\setmainfont{Linux Libertine O}
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\usepackage[paperheight=8in,paperwidth=4in,margin=.3in,heightrounded]{geometry}
+\begin{document}
+
+\begin{center}
+\resizebox{\textwidth}{!} 
+{
+\begin{minipage}[c]{\textwidth}
+\begin{align*}
+\textit{H(p)} &amp; = \frac{1}{2\pi}\int_{0}^{2\pi} \textit{kₙ}\left( \textit{φ},\textit{p} \right) d\textit{φ} \\
+\intertext{where} 
+\textit{p} &amp; \in \mathbb{R}^{ 3} \text{ point on the surface} \\
+\textit{kₙ} &amp; \in \mathbb{R},\mathbb{R}^{ 3}\rightarrow \mathbb{R} \text{ normal curvature} \\
+\\
+\end{align*}
+\end{minipage}
+}
+\end{center}
+
+\end{document}
+</code></pre></div>
+    
+
+    
+
+      <br> Below is the pdf: <br>
+      <div>
+      <iframe src=../../static/gallery_res/Geometry%20Processing%3A%20Curvature/course_curvature.pdf frameborder="0" width="700" height="1000"><br>
+      </div>
+    
+    </div>
+  
+
+
+ 
+
+
+
+  </div>
+</body>

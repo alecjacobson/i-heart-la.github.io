@@ -1,7 +1,0 @@
-invLhs = [TTT          Cᵀ
-          C           0]⁻¹
-
-where
-
-TTT ∈ ℝ^(n×n) 
-C ∈ ℝ^(m×n) 

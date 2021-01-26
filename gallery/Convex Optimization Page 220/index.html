@@ -1,0 +1,209 @@
+<!doctype html>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../../static/style.css">
+<title>Convex Optimization Page 220 — I❤LA</title>
+<body>
+  <header>
+    <link href="../../static/prism.css" rel="stylesheet" />
+    <h1> Convex Optimization Page 220 </h1>
+  </header>
+  <script src="../../static/prism.js"></script>
+  <div class="page">
+    
+  
+
+  
+    <div class="gallery_post">
+
+    <p>This page shows Convex Optimization Page 220 implementation.</p>
+
+
+    
+     It comes from  <a href="https://web.stanford.edu/~boyd/cvxbook/bv_cvxbook.pdf"> Convex Optimization Page 220 </a><br><br>
+    
+    
+    
+    Here is the description: <br>
+      <img src=../../static/gallery_res/Convex%20Optimization%20Page%20220/convex_optimization_220.png alt="placeholder" width="700" style='object-fit: scale-down;'><br>
+    
+
+    
+      <br> Here is the LA input: <br>
+      <div class="code_block" style='height: 220px;'><pre ><code class="language-cpsp">`L(x,v)` = xᵀWx + ∑_i v_i(x_i²-1)
+
+where
+
+x ∈ ℝ^n
+W ∈ ℝ^(n×n)
+v ∈ ℝ^n</code></pre></div>
+    
+
+    
+      
+        <br> Here is the Eigen output: <br>
+        <div class="code_block"><pre ><code class="language-cpp">/*
+`L(x,v)` = xᵀWx + ∑_i v_i(x_i²-1)
+
+where
+
+x ∈ ℝ^n
+W ∈ ℝ^(n×n)
+v ∈ ℝ^n
+*/
+#include &lt;Eigen/Core&gt;
+#include &lt;Eigen/Dense&gt;
+#include &lt;Eigen/Sparse&gt;
+#include &lt;iostream&gt;
+#include &lt;set&gt;
+
+double convex_optimization_220(
+    const Eigen::VectorXd &amp; x,
+    const Eigen::MatrixXd &amp; W,
+    const Eigen::VectorXd &amp; v)
+{
+    const long n = x.size();
+    assert( x.size() == n );
+    assert( W.rows() == n );
+    assert( W.cols() == n );
+    assert( v.size() == n );
+
+    double _sum_0 = 0;
+    for(int i=1; i&lt;=v.size(); i++){
+        _sum_0 += v[i-1] * (pow(x[i-1], 2) - 1);
+    }
+    double L_left_parenthesis_x_comma_v_right_parenthesis = (double)(x.transpose() * W * x) + _sum_0;
+
+    return L_left_parenthesis_x_comma_v_right_parenthesis;
+}
+
+
+void generateRandomData(Eigen::VectorXd &amp; x,
+    Eigen::MatrixXd &amp; W,
+    Eigen::VectorXd &amp; v)
+{
+    const int n = rand()%10;
+    x = Eigen::VectorXd::Random(n);
+    W = Eigen::MatrixXd::Random(n, n);
+    v = Eigen::VectorXd::Random(n);
+}
+
+
+int main(int argc, char *argv[])
+{
+    srand((int)time(NULL));
+    Eigen::VectorXd x;
+    Eigen::MatrixXd W;
+    Eigen::VectorXd v;
+    generateRandomData(x, W, v);
+    double func_value = convex_optimization_220(x, W, v);
+    std::cout&lt;&lt;&#34;func_value:\n&#34;&lt;&lt;func_value&lt;&lt;std::endl;
+    return 0;
+}</code></pre></div>
+      
+    
+
+    
+      <br> Here is the Python output: <br>
+      <div class="code_block"><pre ><code class="language-python">&#34;&#34;&#34;
+`L(x,v)` = xᵀWx + ∑_i v_i(x_i²-1)
+
+where
+
+x ∈ ℝ^n
+W ∈ ℝ^(n×n)
+v ∈ ℝ^n
+&#34;&#34;&#34;
+import numpy as np
+import scipy
+import scipy.linalg
+from scipy import sparse
+from scipy.integrate import quad
+from scipy.optimize import minimize
+
+
+def convex_optimization_220(x, W, v):
+    x = np.asarray(x, dtype=np.float64)
+    W = np.asarray(W, dtype=np.float64)
+    v = np.asarray(v, dtype=np.float64)
+
+    n = x.shape[0]
+    assert x.shape == (n,)
+    assert W.shape == (n, n)
+    assert v.shape == (n,)
+
+    _sum_0 = 0
+    for i in range(1, len(v)+1):
+        _sum_0 += v[i-1] * (np.power(x[i-1], 2) - 1)
+    L_left_parenthesis_x_comma_v_right_parenthesis = (x.T.reshape(1, n) @ W @ x).item() + _sum_0
+
+    return L_left_parenthesis_x_comma_v_right_parenthesis
+
+
+def generateRandomData():
+    n = np.random.randint(10)
+    x = np.random.randn(n)
+    W = np.random.randn(n, n)
+    v = np.random.randn(n)
+    return x, W, v
+
+
+if __name__ == &#39;__main__&#39;:
+    x, W, v = generateRandomData()
+    print(&#34;x:&#34;, x)
+    print(&#34;W:&#34;, W)
+    print(&#34;v:&#34;, v)
+    func_value = convex_optimization_220(x, W, v)
+    print(&#34;func_value: &#34;, func_value)</code></pre></div>
+    
+
+    
+      <br> Here is the Tex output: <br>
+      <div class="code_block"><pre ><code class="language-tex">\documentclass[12pt]{article}
+\usepackage{mathdots}
+\usepackage[bb=boondox]{mathalfa}
+\usepackage{mathtools}
+\usepackage{amssymb}
+\usepackage{ctex}
+\setmainfont{Linux Libertine O}
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\usepackage[paperheight=8in,paperwidth=4in,margin=.3in,heightrounded]{geometry}
+\begin{document}
+
+\begin{center}
+\resizebox{\textwidth}{!} 
+{
+\begin{minipage}[c]{\textwidth}
+\begin{align*}
+\textit{L(x,v)} &amp; = \textit{x}^T\textit{W}\textit{x} + \sum_\textit{i} \textit{v}_{ \textit{i} }\left( \textit{x}_{ \textit{i} }^{2} - 1 \right) \\
+\intertext{where} 
+\textit{x} &amp; \in \mathbb{R}^{ \textit{n}} \\
+\textit{W} &amp; \in \mathbb{R}^{ \textit{n} \times \textit{n} } \\
+\textit{v} &amp; \in \mathbb{R}^{ \textit{n}} \\
+\\
+\end{align*}
+\end{minipage}
+}
+\end{center}
+
+\end{document}
+</code></pre></div>
+    
+
+    
+
+      <br> Below is the pdf: <br>
+      <div>
+      <iframe src=../../static/gallery_res/Convex%20Optimization%20Page%20220/convex_optimization_220.pdf frameborder="0" width="700" height="1000"><br>
+      </div>
+    
+    </div>
+  
+
+
+ 
+
+
+
+  </div>
+</body>
