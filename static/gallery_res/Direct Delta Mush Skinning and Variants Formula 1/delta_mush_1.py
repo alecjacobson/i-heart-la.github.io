@@ -29,7 +29,7 @@ def delta_mush_1(w, M, u):
     v = np.zeros((_dim_1, 4, ))
     for i in range(1, _dim_1+1):
         _sum_0 = np.zeros((4, ))
-        for j in range(1, len(w)+1):
+        for j in range(1, len(M)+1):
             _sum_0 += w[i-1, j-1] * M[j-1] @ u[i-1]
         v[i-1] = _sum_0
 

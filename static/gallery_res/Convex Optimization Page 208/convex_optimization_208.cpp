@@ -25,7 +25,7 @@ double convex_optimization_208(
     double _sum_0 = 0;
     for(int i=1; i<=p.rows(); i++){
         double _sum_1 = 0;
-        for(int j=1; j<=x.size(); j++){
+        for(int j=1; j<=p.cols(); j++){
             double _sum_2 = 0;
             for(int k=1; k<=x.size(); k++){
                 _sum_2 += x[k-1] * p(i-1, k-1);

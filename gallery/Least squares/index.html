@@ -1,11 +1,11 @@
 <!doctype html>
 <meta charset="utf-8">
 <link rel="stylesheet" href="../../static/style.css">
-<title>Least_square — I❤LA</title>
+<title>Least squares — I❤LA</title>
 <body>
   <header>
     <link href="../../static/prism.css" rel="stylesheet" />
-    <h1> Least_square </h1>
+    <h1> Least squares </h1>
   </header>
   <script src="../../static/prism.js"></script>
   <div class="page">
@@ -15,7 +15,7 @@
   
     <div class="gallery_post">
 
-    <p>This page shows Least_square implementation.</p>
+    <p>This page shows Least squares implementation.</p>
 
 
     
@@ -24,7 +24,7 @@
     
     
     Here is the description: <br>
-      <img src=../../static/gallery_res/Least_square/least_square.png alt="placeholder" width="700" style='object-fit: scale-down;'><br>
+      <img src=../../static/gallery_res/Least%20squares/least_square.png alt="placeholder" width="700" style='object-fit: scale-down;'><br>
     
 
     
@@ -77,7 +77,7 @@ Eigen::Matrix&lt;double, 3, 1&gt; least_square(
         _sum_0 += P.at(i-1).transpose() * P.at(i-1);
     }
     Eigen::MatrixXd _sum_1 = Eigen::MatrixXd::Zero(3, 1);
-    for(int i=1; i&lt;=P.size(); i++){
+    for(int i=1; i&lt;=p.size(); i++){
         _sum_1 += P.at(i-1).transpose() * P.at(i-1) * p.at(i-1);
     }
     Eigen::Matrix&lt;double, 3, 1&gt; q = (_sum_0).inverse() * (_sum_1);
@@ -152,7 +152,7 @@ def least_square(p, d):
     for i in range(1, len(P)+1):
         _sum_0 += P[i-1].T @ P[i-1]
     _sum_1 = np.zeros((3, ))
-    for i in range(1, len(P)+1):
+    for i in range(1, len(p)+1):
         _sum_1 += P[i-1].T @ P[i-1] @ p[i-1]
     q = np.linalg.inv((_sum_0)) @ (_sum_1)
 
@@ -212,7 +212,7 @@ if __name__ == &#39;__main__&#39;:
 
       <br> Below is the pdf: <br>
       <div>
-      <iframe src=../../static/gallery_res/Least_square/least_square.pdf frameborder="0" width="700" height="1000"><br>
+      <iframe src=../../static/gallery_res/Least%20squares/least_square.pdf frameborder="0" width="700" height="1000"><br>
       </div>
     
     </div>

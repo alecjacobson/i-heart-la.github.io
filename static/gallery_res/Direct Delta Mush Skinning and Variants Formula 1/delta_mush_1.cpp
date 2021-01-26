@@ -25,7 +25,7 @@ std::vector<Eigen::Matrix<double, 4, 1>> delta_mush_1(
     std::vector<Eigen::Matrix<double, 4, 1>> v(_dim_1);
     for( int i=1; i<=_dim_1; i++){
         Eigen::MatrixXd _sum_0 = Eigen::MatrixXd::Zero(4, 1);
-        for(int j=1; j<=w.cols(); j++){
+        for(int j=1; j<=M.size(); j++){
             _sum_0 += w(i-1, j-1) * M.at(j-1) * u.at(i-1);
         }
         v.at(i-1) = _sum_0;

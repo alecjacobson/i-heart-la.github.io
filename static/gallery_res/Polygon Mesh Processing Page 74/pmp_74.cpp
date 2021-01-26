@@ -25,7 +25,7 @@ double pmp_74(
     assert( A.size() == _dim_0 );
 
     double _sum_0 = 0;
-    for(int T=1; T<=u.size(); T++){
+    for(int T=1; T<=A.size(); T++){
         Eigen::Matrix<double, 2, 2> _E_LSCM_0;
         _E_LSCM_0 << 0, -1,
         1, 0;
