@@ -1,0 +1,78 @@
+<!doctype html>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../../static/style.css">
+<title>Polygon Mesh Processing Library — I❤️LA</title>
+<body>
+  <header>
+    <link href="../../static/prism.css" rel="stylesheet" />
+    <h1> Polygon Mesh Processing Library </h1>
+  </header>
+  <script src="../../static/prism.js"></script>
+  <div class="page">
+    
+  
+
+  
+    <div class="cases_post">
+
+    <p>Integrating with existing code from Polygon Mesh Processing Library.</p>
+
+
+    
+     <p>Project URL: <a href="https://github.com/pmp-library/pmp-library.git"> Polygon mesh processing </a>
+    
+    
+    
+
+
+
+    
+
+
+
+    
+    
+    <p>The <a href="/static/cases_res/Polygon%20Mesh%20Processing%20Library/SurfaceRemeshing.cpp">original source code</a>:
+      <p><a href="/static/cases_res/Polygon%20Mesh%20Processing%20Library/SurfaceRemeshing.cpp"><img src=../../static/cases_res/Polygon%20Mesh%20Processing%20Library/SurfaceRemeshing.png alt="placeholder" width="700" style='object-fit: scale-down;'></a>
+    
+    
+    
+    <p>The <a href="/static/cases_res/Polygon%20Mesh%20Processing%20Library/SurfaceRemeshing_after.cpp">modified source code</a>:
+      <p><a href="/static/cases_res/Polygon%20Mesh%20Processing%20Library/SurfaceRemeshing_after.cpp"><img src=../../static/cases_res/Polygon%20Mesh%20Processing%20Library/SurfaceRemeshing_modified.png alt="placeholder" width="700" style='object-fit: scale-down;'></a>
+    
+
+    
+      <p>I❤️LA source code:
+      <div class="code_block" style='height: auto;'><pre ><code class="language-cpsp">p_i = poly_i,*
+q_i = poly2_i,*
+d_i = p_i - q_i
+
+H = sum_i 1/‖d_i‖ [d_i,2²+d_i,3²   -d_i,1⋅d_i,2      -d_i,1⋅d_i,3
+                   -d_i,1⋅d_i,2    d_i,1²+d_i,3²     -d_i,2⋅d_i,3
+                   -d_i,1⋅d_i,3    -d_i,2⋅d_i,3      d_i,1²+d_i,2²]
+J = sum_i 1/‖d_i‖ [-d_i,2⋅p_i,2⋅q_i,1-d_i,3⋅p_i,3⋅q_i,1+d_i,2⋅p_i,1⋅q_i,2+d_i,3⋅p_i,1⋅q_i,3 
+                    d_i,1⋅p_i,2⋅q_i,1-d_i,1⋅p_i,1⋅q_i,2-d_i,3⋅p_i,3⋅q_i,2+d_i,3⋅p_i,2⋅q_i,3 
+                    d_i,1⋅p_i,3⋅q_i,1+d_i,2⋅p_i,3⋅q_i,2-d_i,1⋅p_i,1⋅q_i,3-d_i,2⋅p_i,2⋅q_i,3 ]
+
+where
+
+poly ∈ ℝ^(n×3) 
+poly2 ∈ ℝ^(n×3)</code></pre></div>
+    
+
+    
+      <p>I❤️LA LaTeX output:
+      <div>
+      <iframe src=../../static/cases_res/Polygon%20Mesh%20Processing%20Library/surface_remeshing.pdf frameborder="0" width="700" height="700"><br>
+      </div>
+    
+    </div>
+  
+
+
+ 
+
+
+
+  </div>
+</body>

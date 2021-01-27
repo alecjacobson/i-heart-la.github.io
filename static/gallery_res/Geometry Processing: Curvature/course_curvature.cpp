@@ -4,7 +4,7 @@
 where 
 
 p ∈ ℝ^3 : point on the surface
-`kₙ`: ℝ,ℝ^3->ℝ : normal curvature
+`kₙ`: ℝ,ℝ^3 → ℝ : normal curvature
 */
 #include <Eigen/Core>
 #include <Eigen/Dense>
@@ -16,7 +16,7 @@ p ∈ ℝ^3 : point on the surface
  * course_curvature
  *
  * @param p  point on the surface
- * @param kₙ  ℝ,ℝ^3->ℝ : normal curvature
+ * @param kₙ  ℝ,ℝ^3 → ℝ : normal curvature
  * @return H_left_parenthesis_p_right_parenthesis
  */
 double course_curvature(

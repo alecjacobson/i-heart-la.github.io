@@ -1,0 +1,253 @@
+<!doctype html>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../../static/style.css">
+<title>Polygon Mesh Processing page 42 — I❤️LA</title>
+<body>
+  <header>
+    <link href="../../static/prism.css" rel="stylesheet" />
+    <h1> Polygon Mesh Processing page 42 </h1>
+  </header>
+  <script src="../../static/prism.js"></script>
+  <div class="page">
+    
+  
+
+  
+    <div class="gallery_post">
+
+    <!-- <p>Implementing equations from Polygon Mesh Processing page 42.</p>
+ -->
+
+    
+     <p>An example from <a href="http://www.pmp-book.org">Polygon Mesh Processing page 42</a>
+    
+    
+    
+    <p>The original equation:
+      <p><img src=../../static/gallery_res/Polygon%20Mesh%20Processing%20page%2042/pmp_42.png alt="placeholder" width="700" style='object-fit: scale-down;'>
+    
+
+    
+      <p>I❤️LA implementation:
+      <div class="code_block" style='height: auto;'><pre ><code class="language-cpsp">`n(v)` = (∑_(i for i ∈ `N₁(v)`) α_i n(T_i))/‖∑_(i for i ∈ `N₁(v)`) α_i n(T_i)‖
+
+where
+ 
+T_i ∈ ℝ^(3×3)
+α_i ∈ ℝ
+`N₁(v)` ∈ {ℤ}
+n: ℝ^(3×3) → ℝ^3</code></pre></div>
+    
+
+    
+      
+        <p>I❤️LA compiled to C++/Eigen:
+        <div class="code_block"><pre ><code class="language-cpp">/*
+`n(v)` = (∑_(i for i ∈ `N₁(v)`) α_i n(T_i))/‖∑_(i for i ∈ `N₁(v)`) α_i n(T_i)‖
+
+where
+ 
+T_i ∈ ℝ^(3×3)
+α_i ∈ ℝ
+`N₁(v)` ∈ {ℤ}
+n: ℝ^(3×3) → ℝ^3
+*/
+#include &lt;Eigen/Core&gt;
+#include &lt;Eigen/Dense&gt;
+#include &lt;Eigen/Sparse&gt;
+#include &lt;iostream&gt;
+#include &lt;set&gt;
+
+/**
+ * pmp_42
+ *
+ * @param n  ℝ^(3×3) → ℝ^3
+ * @return n_left_parenthesis_v_right_parenthesis
+ */
+Eigen::Matrix&lt;double, 3, 1&gt; pmp_42(
+    const std::vector&lt;Eigen::Matrix&lt;double, 3, 3&gt;&gt; &amp; T,
+    const std::vector&lt;double&gt; &amp; α,
+    const std::set&lt;std::tuple&lt; int &gt; &gt; &amp; N₁_left_parenthesis_v_right_parenthesis,
+    const std::function&lt;Eigen::Matrix&lt;double, 3, 1&gt;(Eigen::Matrix&lt;double, 3, 3&gt;)&gt; &amp; n)
+{
+    const long _dim_0 = α.size();
+    assert( T.size() == _dim_0 );
+    assert( α.size() == _dim_0 );
+
+    Eigen::MatrixXd _sum_0 = Eigen::MatrixXd::Zero(3, 1);
+    for(int i=1; i&lt;=α.size(); i++){
+        if(N₁_left_parenthesis_v_right_parenthesis.find(std::tuple&lt; int &gt;(i)) != N₁_left_parenthesis_v_right_parenthesis.end()){
+            _sum_0 += α.at(i-1) * n(T.at(i-1));
+        }
+    }
+    Eigen::MatrixXd _sum_1 = Eigen::MatrixXd::Zero(3, 1);
+    for(int i=1; i&lt;=α.size(); i++){
+        if(N₁_left_parenthesis_v_right_parenthesis.find(std::tuple&lt; int &gt;(i)) != N₁_left_parenthesis_v_right_parenthesis.end()){
+            _sum_1 += α.at(i-1) * n(T.at(i-1));
+        }
+    }
+    Eigen::Matrix&lt;double, 3, 1&gt; n_left_parenthesis_v_right_parenthesis = (_sum_0) / double((_sum_1).lpNorm&lt;2&gt;());
+
+    return n_left_parenthesis_v_right_parenthesis;
+}
+
+
+void generateRandomData(std::vector&lt;Eigen::Matrix&lt;double, 3, 3&gt;&gt; &amp; T,
+    std::vector&lt;double&gt; &amp; α,
+    std::set&lt;std::tuple&lt; int &gt; &gt; &amp; N₁_left_parenthesis_v_right_parenthesis,
+    std::function&lt;Eigen::Matrix&lt;double, 3, 1&gt;(Eigen::Matrix&lt;double, 3, 3&gt;)&gt; &amp; n)
+{
+    const int _dim_0 = rand()%10;
+    T.resize(_dim_0);
+    for(int i=0; i&lt;_dim_0; i++){
+        T[i] = Eigen::MatrixXd::Random(3, 3);
+    }
+    α.resize(_dim_0);
+    for(int i=0; i&lt;_dim_0; i++){
+        α[i] = rand() % 10;
+    }
+    const int N₁_left_parenthesis_v_right_parenthesis_0 = rand()%10;
+    for(int i=0; i&lt;N₁_left_parenthesis_v_right_parenthesis_0; i++){
+        N₁_left_parenthesis_v_right_parenthesis.insert(std::make_tuple(rand()%10));
+    }
+    n = [](Eigen::Matrix&lt;double, 3, 3&gt;)-&gt;Eigen::Matrix&lt;double, 3, 1&gt;{
+        return Eigen::VectorXd::Random(3);
+    };
+}
+
+
+int main(int argc, char *argv[])
+{
+    srand((int)time(NULL));
+    std::vector&lt;Eigen::Matrix&lt;double, 3, 3&gt;&gt; T;
+    std::vector&lt;double&gt; α;
+    std::set&lt;std::tuple&lt; int &gt; &gt; N₁_left_parenthesis_v_right_parenthesis;
+    std::function&lt;Eigen::Matrix&lt;double, 3, 1&gt;(Eigen::Matrix&lt;double, 3, 3&gt;)&gt; n;
+    generateRandomData(T, α, N₁_left_parenthesis_v_right_parenthesis, n);
+    Eigen::Matrix&lt;double, 3, 1&gt; func_value = pmp_42(T, α, N₁_left_parenthesis_v_right_parenthesis, n);
+    std::cout&lt;&lt;&#34;func_value:\n&#34;&lt;&lt;func_value&lt;&lt;std::endl;
+    return 0;
+}</code></pre></div>
+      
+    
+
+    
+      <p>I❤️LA compiled to Python/NumPy/SciPy:
+      <div class="code_block"><pre ><code class="language-python">&#34;&#34;&#34;
+`n(v)` = (∑_(i for i ∈ `N₁(v)`) α_i n(T_i))/‖∑_(i for i ∈ `N₁(v)`) α_i n(T_i)‖
+
+where
+ 
+T_i ∈ ℝ^(3×3)
+α_i ∈ ℝ
+`N₁(v)` ∈ {ℤ}
+n: ℝ^(3×3) → ℝ^3
+&#34;&#34;&#34;
+import numpy as np
+import scipy
+import scipy.linalg
+from scipy import sparse
+from scipy.integrate import quad
+from scipy.optimize import minimize
+
+
+def pmp_42(T, α, N1_left_parenthesis_v_right_parenthesis, n):
+    &#34;&#34;&#34;
+    :param :n : ℝ^(3×3) → ℝ^3
+    &#34;&#34;&#34;
+    T = np.asarray(T, dtype=np.float64)
+    α = np.asarray(α)
+
+    _dim_0 = α.shape[0]
+    assert T.shape == (_dim_0, 3, 3)
+    assert α.shape == (_dim_0,)
+    assert isinstance(N1_left_parenthesis_v_right_parenthesis, list) and len(N1_left_parenthesis_v_right_parenthesis) &gt; 0
+
+    _sum_0 = np.zeros((3, ))
+    for i in range(1, len(α)+1):
+        if((i) in N1_left_parenthesis_v_right_parenthesis):
+            _sum_0 += α[i-1] * n(T[i-1])
+    _sum_1 = np.zeros((3, ))
+    for i in range(1, len(α)+1):
+        if((i) in N1_left_parenthesis_v_right_parenthesis):
+            _sum_1 += α[i-1] * n(T[i-1])
+    n_left_parenthesis_v_right_parenthesis = (_sum_0) / np.linalg.norm(_sum_1, 2)
+
+    return n_left_parenthesis_v_right_parenthesis
+
+
+def generateRandomData():
+    _dim_0 = np.random.randint(10)
+    T = np.random.randn(_dim_0, 3, 3)
+    α = np.random.randn(_dim_0)
+    N1_left_parenthesis_v_right_parenthesis = []
+    N1_left_parenthesis_v_right_parenthesis_0 = np.random.randint(1, 10)
+    for i in range(N1_left_parenthesis_v_right_parenthesis_0):
+        N1_left_parenthesis_v_right_parenthesis.append((np.random.randint(10)))
+    def n(p0):
+        return np.random.randn(3)
+    return T, α, N1_left_parenthesis_v_right_parenthesis, n
+
+
+if __name__ == &#39;__main__&#39;:
+    T, α, N1_left_parenthesis_v_right_parenthesis, n = generateRandomData()
+    print(&#34;T:&#34;, T)
+    print(&#34;α:&#34;, α)
+    print(&#34;N1_left_parenthesis_v_right_parenthesis:&#34;, N1_left_parenthesis_v_right_parenthesis)
+    print(&#34;n:&#34;, n)
+    func_value = pmp_42(T, α, N1_left_parenthesis_v_right_parenthesis, n)
+    print(&#34;func_value: &#34;, func_value)</code></pre></div>
+    
+
+    
+      <p>I❤️LA compiled to LaTeX:
+      <div class="code_block"><pre ><code class="language-tex">\documentclass[12pt]{article}
+\usepackage{mathdots}
+\usepackage[bb=boondox]{mathalfa}
+\usepackage{mathtools}
+\usepackage{amssymb}
+\usepackage{ctex}
+\setmainfont{Linux Libertine O}
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\usepackage[paperheight=8in,paperwidth=4in,margin=.3in,heightrounded]{geometry}
+\begin{document}
+
+\begin{center}
+\resizebox{\textwidth}{!} 
+{
+\begin{minipage}[c]{\textwidth}
+\begin{align*}
+\textit{n(v)} &amp; = \frac{\sum_{\textit{i} \in \textit{N₁(v)} } \textit{α}_{ \textit{i} }\textit{n}\left( \textit{T}_{ \textit{i} } \right)}{\|\sum_{\textit{i} \in \textit{N₁(v)} } \textit{α}_{ \textit{i} }\textit{n}\left( \textit{T}_{ \textit{i} } \right)\|_2} \\
+\intertext{where} 
+\textit{T}_{\textit{i}} &amp; \in \mathbb{R}^{ 3 \times 3 } \\
+\textit{α}_{\textit{i}} &amp; \in \mathbb{R} \\
+\textit{N₁(v)} &amp; \in \{\mathbb{Z}\} \\
+\textit{n} &amp; \in \mathbb{R}^{ 3 \times 3 }\rightarrow \mathbb{R}^{ 3} \\
+\\
+\end{align*}
+\end{minipage}
+}
+\end{center}
+
+\end{document}
+</code></pre></div>
+    
+
+    
+
+      <p>I❤️LA LaTeX output:
+      <div>
+      <iframe src=../../static/gallery_res/Polygon%20Mesh%20Processing%20page%2042/pmp_42.pdf frameborder="0" width="700" height="1000"><br>
+      </div>
+    
+    </div>
+  
+
+
+ 
+
+
+
+  </div>
+</body>

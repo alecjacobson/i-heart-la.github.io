@@ -1,0 +1,224 @@
+<!doctype html>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../../static/style.css">
+<title>Polygon Mesh Processing page 32 — I❤️LA</title>
+<body>
+  <header>
+    <link href="../../static/prism.css" rel="stylesheet" />
+    <h1> Polygon Mesh Processing page 32 </h1>
+  </header>
+  <script src="../../static/prism.js"></script>
+  <div class="page">
+    
+  
+
+  
+    <div class="gallery_post">
+
+    <!-- <p>Implementing equations from Polygon Mesh Processing page 32.</p>
+ -->
+
+    
+     <p>An example from <a href="http://www.pmp-book.org">Polygon Mesh Processing page 32</a>
+    
+    
+    
+    <p>The original equation:
+      <p><img src=../../static/gallery_res/Polygon%20Mesh%20Processing%20page%2032/pmp_32.png alt="placeholder" width="700" style='object-fit: scale-down;'>
+    
+
+    
+      <p>I❤️LA implementation:
+      <div class="code_block" style='height: auto;'><pre ><code class="language-cpsp">from trigonometry: sin, cos
+`x(θ, ϕ)` = [Rcos(θ)cos(ϕ)
+             Rsin(θ)cos(ϕ)
+             Rsin(ϕ)]
+
+where
+
+ϕ ∈ ℝ : angle between 0 and 2π
+θ ∈ ℝ : angle between -π/2 and π/2
+R ∈ ℝ : the radius of the sphere</code></pre></div>
+    
+
+    
+      
+        <p>I❤️LA compiled to C++/Eigen:
+        <div class="code_block"><pre ><code class="language-cpp">/*
+from trigonometry: sin, cos
+`x(θ, ϕ)` = [Rcos(θ)cos(ϕ)
+             Rsin(θ)cos(ϕ)
+             Rsin(ϕ)]
+
+where
+
+ϕ ∈ ℝ : angle between 0 and 2π
+θ ∈ ℝ : angle between -π/2 and π/2
+R ∈ ℝ : the radius of the sphere
+*/
+#include &lt;Eigen/Core&gt;
+#include &lt;Eigen/Dense&gt;
+#include &lt;Eigen/Sparse&gt;
+#include &lt;iostream&gt;
+#include &lt;set&gt;
+
+/**
+ * pmp_32
+ *
+ * @param ϕ  angle between 0 and 2π
+ * @param θ  angle between -π/2 and π/2
+ * @param R  the radius of the sphere
+ * @return x_left_parenthesis_θ_comma__ϕ_right_parenthesis
+ */
+Eigen::Matrix&lt;double, 3, 1&gt; pmp_32(
+    const double &amp; ϕ,
+    const double &amp; θ,
+    const double &amp; R)
+{
+    Eigen::Matrix&lt;double, 3, 1&gt; _x_left_parenthesis_θ_comma__ϕ_right_parenthesis__0;
+    _x_left_parenthesis_θ_comma__ϕ_right_parenthesis__0 &lt;&lt; R * cos(θ) * cos(ϕ),
+    R * sin(θ) * cos(ϕ),
+    R * sin(ϕ);
+    Eigen::Matrix&lt;double, 3, 1&gt; x_left_parenthesis_θ_comma__ϕ_right_parenthesis = _x_left_parenthesis_θ_comma__ϕ_right_parenthesis__0;
+
+    return x_left_parenthesis_θ_comma__ϕ_right_parenthesis;
+}
+
+
+void generateRandomData(double &amp; ϕ,
+    double &amp; θ,
+    double &amp; R)
+{
+    ϕ = rand() % 10;
+    θ = rand() % 10;
+    R = rand() % 10;
+}
+
+
+int main(int argc, char *argv[])
+{
+    srand((int)time(NULL));
+    double ϕ;
+    double θ;
+    double R;
+    generateRandomData(ϕ, θ, R);
+    Eigen::Matrix&lt;double, 3, 1&gt; func_value = pmp_32(ϕ, θ, R);
+    std::cout&lt;&lt;&#34;func_value:\n&#34;&lt;&lt;func_value&lt;&lt;std::endl;
+    return 0;
+}</code></pre></div>
+      
+    
+
+    
+      <p>I❤️LA compiled to Python/NumPy/SciPy:
+      <div class="code_block"><pre ><code class="language-python">&#34;&#34;&#34;
+from trigonometry: sin, cos
+`x(θ, ϕ)` = [Rcos(θ)cos(ϕ)
+             Rsin(θ)cos(ϕ)
+             Rsin(ϕ)]
+
+where
+
+ϕ ∈ ℝ : angle between 0 and 2π
+θ ∈ ℝ : angle between -π/2 and π/2
+R ∈ ℝ : the radius of the sphere
+&#34;&#34;&#34;
+import numpy as np
+import scipy
+import scipy.linalg
+from scipy import sparse
+from scipy.integrate import quad
+from scipy.optimize import minimize
+
+
+def pmp_32(ϕ, θ, R):
+    &#34;&#34;&#34;
+    :param :ϕ : angle between 0 and 2π
+    :param :θ : angle between -π/2 and π/2
+    :param :R : the radius of the sphere
+    &#34;&#34;&#34;
+    assert np.ndim(ϕ) == 0
+    assert np.ndim(θ) == 0
+    assert np.ndim(R) == 0
+
+    _x_left_parenthesis_θ_comma__ϕ_right_parenthesis__0 = np.zeros((3, 1))
+    _x_left_parenthesis_θ_comma__ϕ_right_parenthesis__0[0] = [R * np.cos(θ) * np.cos(ϕ)]
+    _x_left_parenthesis_θ_comma__ϕ_right_parenthesis__0[1] = [R * np.sin(θ) * np.cos(ϕ)]
+    _x_left_parenthesis_θ_comma__ϕ_right_parenthesis__0[2] = [R * np.sin(ϕ)]
+    x_left_parenthesis_θ_comma__ϕ_right_parenthesis = _x_left_parenthesis_θ_comma__ϕ_right_parenthesis__0
+
+    return x_left_parenthesis_θ_comma__ϕ_right_parenthesis
+
+
+def generateRandomData():
+    ϕ = np.random.randn()
+    θ = np.random.randn()
+    R = np.random.randn()
+    return ϕ, θ, R
+
+
+if __name__ == &#39;__main__&#39;:
+    ϕ, θ, R = generateRandomData()
+    print(&#34;ϕ:&#34;, ϕ)
+    print(&#34;θ:&#34;, θ)
+    print(&#34;R:&#34;, R)
+    func_value = pmp_32(ϕ, θ, R)
+    print(&#34;func_value: &#34;, func_value)</code></pre></div>
+    
+
+    
+      <p>I❤️LA compiled to LaTeX:
+      <div class="code_block"><pre ><code class="language-tex">\documentclass[12pt]{article}
+\usepackage{mathdots}
+\usepackage[bb=boondox]{mathalfa}
+\usepackage{mathtools}
+\usepackage{amssymb}
+\usepackage{ctex}
+\setmainfont{Linux Libertine O}
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\usepackage[paperheight=8in,paperwidth=4in,margin=.3in,heightrounded]{geometry}
+\begin{document}
+
+\begin{center}
+\resizebox{\textwidth}{!} 
+{
+\begin{minipage}[c]{\textwidth}
+\begin{align*}
+\text{from trigonometry import sin, cos}\\
+\textit{x(θ, ϕ)} &amp; = \begin{bmatrix}
+\textit{R}cos\left( \textit{θ} \right)cos\left( \textit{ϕ} \right)\\
+\textit{R}sin\left( \textit{θ} \right)cos\left( \textit{ϕ} \right)\\
+\textit{R}sin\left( \textit{ϕ} \right)\\
+\end{bmatrix} \\
+\intertext{where} 
+\textit{ϕ} &amp; \in \mathbb{R} \text{ angle between 0 and 2π} \\
+\textit{θ} &amp; \in \mathbb{R} \text{ angle between -π/2 and π/2} \\
+\textit{R} &amp; \in \mathbb{R} \text{ the radius of the sphere} \\
+\\
+\end{align*}
+\end{minipage}
+}
+\end{center}
+
+\end{document}
+</code></pre></div>
+    
+
+    
+
+      <p>I❤️LA LaTeX output:
+      <div>
+      <iframe src=../../static/gallery_res/Polygon%20Mesh%20Processing%20page%2032/pmp_32.pdf frameborder="0" width="700" height="1000"><br>
+      </div>
+    
+    </div>
+  
+
+
+ 
+
+
+
+  </div>
+</body>

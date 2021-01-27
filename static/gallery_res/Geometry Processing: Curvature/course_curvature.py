@@ -4,7 +4,7 @@
 where 
 
 p ∈ ℝ^3 : point on the surface
-`kₙ`: ℝ,ℝ^3->ℝ : normal curvature
+`kₙ`: ℝ,ℝ^3 → ℝ : normal curvature
 """
 import numpy as np
 import scipy
@@ -17,7 +17,7 @@ from scipy.optimize import minimize
 def course_curvature(p, kₙ):
     """
     :param :p : point on the surface
-    :param :kₙ : ℝ,ℝ^3->ℝ : normal curvature
+    :param :kₙ : ℝ,ℝ^3 → ℝ : normal curvature
     """
     p = np.asarray(p, dtype=np.float64)
 

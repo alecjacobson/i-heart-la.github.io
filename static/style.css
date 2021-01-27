@@ -1,20 +1,21 @@
 body {
-    font-family: 'Verdana', sans-serif;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
     margin: 50px 25px;
+    color: #ffffff;
 }
 
 a {
-    color: #2a99b6;
+    color: #ffeca8;
 }
 
 a:hover {
-    color: #33bbdf;
+    color: #fff9e6;
 }
 
 header, footer, div.page {
     width: 860px;
     margin: 0 auto;
-    background: #daeef3;
+    background: #8e864e;
     padding: 20px 30px;
 }
 
@@ -24,8 +25,13 @@ div.code_block {
     width:700px;
 }
 
+div.code_block pre {
+    /* This is necessary in case JavaScript is off */
+    background: #f5f2f0;
+}
+
 header h1 {
-    color: #169bbd;
+    color: #ffffff;
     margin: 0;
     font-weight: normal;
     font-size: 42px;
@@ -44,7 +50,7 @@ header nav ul li {
 }
 
 div.page {
-    background: #f1fbfe;
+    background: #445b45;
 }
 
 
@@ -133,8 +139,8 @@ img.align-center, .figure.align-center, object.align-center {
     margin-bottom: 0px;
     margin-left: 0px;
 
-    background: #000;
-    color: #fff;
+    background: #fff;
+    color: #000;
     visibility: hidden;
     opacity: 0;
     z-index: 100;

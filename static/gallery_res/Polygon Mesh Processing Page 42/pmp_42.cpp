@@ -6,7 +6,7 @@ where
 T_i ∈ ℝ^(3×3)
 α_i ∈ ℝ
 `N₁(v)` ∈ {ℤ}
-n: ℝ^(3×3) -> ℝ^3
+n: ℝ^(3×3) → ℝ^3
 */
 #include <Eigen/Core>
 #include <Eigen/Dense>
@@ -17,7 +17,7 @@ n: ℝ^(3×3) -> ℝ^3
 /**
  * pmp_42
  *
- * @param n  ℝ^(3×3) -> ℝ^3
+ * @param n  ℝ^(3×3) → ℝ^3
  * @return n_left_parenthesis_v_right_parenthesis
  */
 Eigen::Matrix<double, 3, 1> pmp_42(
@@ -31,13 +31,13 @@ Eigen::Matrix<double, 3, 1> pmp_42(
     assert( α.size() == _dim_0 );
 
     Eigen::MatrixXd _sum_0 = Eigen::MatrixXd::Zero(3, 1);
-    for(int i=1; i<=T.size(); i++){
+    for(int i=1; i<=α.size(); i++){
         if(N₁_left_parenthesis_v_right_parenthesis.find(std::tuple< int >(i)) != N₁_left_parenthesis_v_right_parenthesis.end()){
             _sum_0 += α.at(i-1) * n(T.at(i-1));
         }
     }
     Eigen::MatrixXd _sum_1 = Eigen::MatrixXd::Zero(3, 1);
-    for(int i=1; i<=T.size(); i++){
+    for(int i=1; i<=α.size(); i++){
         if(N₁_left_parenthesis_v_right_parenthesis.find(std::tuple< int >(i)) != N₁_left_parenthesis_v_right_parenthesis.end()){
             _sum_1 += α.at(i-1) * n(T.at(i-1));
         }

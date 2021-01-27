@@ -3,4 +3,4 @@
 where 
 
 p ∈ ℝ^3 : point on the surface
-`kₙ`: ℝ,ℝ^3->ℝ : normal curvature
+`kₙ`: ℝ,ℝ^3 → ℝ : normal curvature

@@ -1,0 +1,82 @@
+<!doctype html>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../../static/style.css">
+<title>Conforming Weighted Delaunay Triangulations — I❤️LA</title>
+<body>
+  <header>
+    <link href="../../static/prism.css" rel="stylesheet" />
+    <h1> Conforming Weighted Delaunay Triangulations </h1>
+  </header>
+  <script src="../../static/prism.js"></script>
+  <div class="page">
+    
+  
+
+  
+    <div class="cases_post">
+
+    <p>Integrating with existing code from Conforming Weighted Delaunay Triangulations.</p>
+
+
+    
+     <p>Project URL: <a href="https://www.cg.tu-berlin.de/research/projects/cwdt/"> Conforming Weighted Delaunay Triangulations </a>
+    
+    
+    
+
+
+
+    
+    <p>The original formula:
+      <p><img src=../../static/cases_res/Conforming%20Weighted%20Delaunay%20Triangulations/formula.png alt="placeholder" width="700" style='object-fit: scale-down;'>
+    
+
+
+
+    
+    
+    <p>The <a href="/static/cases_res/Conforming%20Weighted%20Delaunay%20Triangulations/cwdt3.cc">original source code</a>:
+      <p><a href="/static/cases_res/Conforming%20Weighted%20Delaunay%20Triangulations/cwdt3.cc"><img src=../../static/cases_res/Conforming%20Weighted%20Delaunay%20Triangulations/cwdt3.png alt="placeholder" width="700" style='object-fit: scale-down;'></a>
+    
+    
+    
+    <p>The <a href="/static/cases_res/Conforming%20Weighted%20Delaunay%20Triangulations/cwdt3_modified.cc">modified source code</a>:
+      <p><a href="/static/cases_res/Conforming%20Weighted%20Delaunay%20Triangulations/cwdt3_modified.cc"><img src=../../static/cases_res/Conforming%20Weighted%20Delaunay%20Triangulations/cwdt3_modified.png alt="placeholder" width="700" style='object-fit: scale-down;'></a>
+    
+
+    
+      <p>I❤️LA source code:
+      <div class="code_block" style='height: auto;'><pre ><code class="language-cpsp">p0 = [V_v0,1  V_v0,2  V_v0,3]
+p1 = [V_v1,1  V_v1,2  V_v1,3]
+p2 = [V_v2,1  V_v2,2  V_v2,3]
+x0s = ‖p0‖²
+Mi = [2(p1-p0)
+     2(p2-p0)
+     nᵀ]⁻¹
+m = Mi (‖p1‖²-x0s, ‖p2‖²-x0s, p0⋅n)
+
+where
+
+v0 ∈ ℤ index
+v1 ∈ ℤ index
+v2 ∈ ℤ index
+V_i ∈ ℝ^3 
+n ∈ ℝ^3 </code></pre></div>
+    
+
+    
+      <p>I❤️LA LaTeX output:
+      <div>
+      <iframe src=../../static/cases_res/Conforming%20Weighted%20Delaunay%20Triangulations/cwdt_formula_33.pdf frameborder="0" width="700" height="700"><br>
+      </div>
+    
+    </div>
+  
+
+
+ 
+
+
+
+  </div>
+</body>

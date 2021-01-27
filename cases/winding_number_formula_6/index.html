@@ -1,0 +1,83 @@
+<!doctype html>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../../static/style.css">
+<title>Robust Inside-Outside Segmentation using Generalized Winding Numbers — I❤️LA</title>
+<body>
+  <header>
+    <link href="../../static/prism.css" rel="stylesheet" />
+    <h1> Robust Inside-Outside Segmentation using Generalized Winding Numbers </h1>
+  </header>
+  <script src="../../static/prism.js"></script>
+  <div class="page">
+    
+  
+
+  
+    <div class="cases_post">
+
+    <p>Integrating with existing code from Robust Inside-Outside Segmentation using Generalized Winding Numbers.</p>
+
+
+    
+     <p>Project URL: <a href="https://libigl.github.io"> libigl </a>
+    
+    
+    
+
+
+
+    
+    <p>The original formula:
+      <p><img src=../../static/cases_res/Robust%20Inside-Outside%20Segmentation%20using%20Generalized%20Winding%20Numbers/formula.png alt="placeholder" width="700" style='object-fit: scale-down;'>
+    
+
+
+
+    
+    
+    <p>The <a href="/static/cases_res/Robust%20Inside-Outside%20Segmentation%20using%20Generalized%20Winding%20Numbers/solid_angle.cpp">original source code</a>:
+      <p><a href="/static/cases_res/Robust%20Inside-Outside%20Segmentation%20using%20Generalized%20Winding%20Numbers/solid_angle.cpp"><img src=../../static/cases_res/Robust%20Inside-Outside%20Segmentation%20using%20Generalized%20Winding%20Numbers/solid_angle.png alt="placeholder" width="700" style='object-fit: scale-down;'></a>
+    
+    
+    
+    <p>The <a href="/static/cases_res/Robust%20Inside-Outside%20Segmentation%20using%20Generalized%20Winding%20Numbers/solid_angle_modified.cpp">modified source code</a>:
+      <p><a href="/static/cases_res/Robust%20Inside-Outside%20Segmentation%20using%20Generalized%20Winding%20Numbers/solid_angle_modified.cpp"><img src=../../static/cases_res/Robust%20Inside-Outside%20Segmentation%20using%20Generalized%20Winding%20Numbers/solid_angle_modified.png alt="placeholder" width="700" style='object-fit: scale-down;'></a>
+    
+
+    
+      <p>I❤️LA source code:
+      <div class="code_block" style='height: auto;'><pre ><code class="language-cpsp">from trigonometry: atan2
+
+𝐚 = `vᵢ` - p
+𝐛 = `vⱼ` - p
+𝐜 = `vₖ` - p
+a = ‖𝐚‖
+b = ‖𝐛‖
+c = ‖𝐜‖
+
+atan2(|[𝐚 𝐛 𝐜]|, (abc+(𝐚⋅𝐛)c+(𝐛⋅𝐜)a+(𝐜⋅𝐚)b))/(2π)
+
+where
+
+`vᵢ`: ℝ^3
+`vⱼ`: ℝ^3 
+`vₖ`: ℝ^3 
+p: ℝ^3 </code></pre></div>
+    
+
+    
+      <p>I❤️LA LaTeX output:
+      <div>
+      <iframe src=../../static/cases_res/Robust%20Inside-Outside%20Segmentation%20using%20Generalized%20Winding%20Numbers/winding_number_formula_6.pdf frameborder="0" width="700" height="700"><br>
+      </div>
+    
+    </div>
+  
+
+
+ 
+
+
+
+  </div>
+</body>

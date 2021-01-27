@@ -26,7 +26,7 @@ def convex_optimization_220(x, W, v):
     assert v.shape == (n,)
 
     _sum_0 = 0
-    for i in range(1, len(v)+1):
+    for i in range(1, len(x)+1):
         _sum_0 += v[i-1] * (np.power(x[i-1], 2) - 1)
     L_left_parenthesis_x_comma_v_right_parenthesis = (x.T.reshape(1, n) @ W @ x).item() + _sum_0
 

@@ -6,7 +6,7 @@ where
 T_i ∈ ℝ^(3×3)
 α_i ∈ ℝ
 `N₁(v)` ∈ {ℤ}
-n: ℝ^(3×3) -> ℝ^3
+n: ℝ^(3×3) → ℝ^3
 """
 import numpy as np
 import scipy
@@ -18,7 +18,7 @@ from scipy.optimize import minimize
 
 def pmp_42(T, α, N1_left_parenthesis_v_right_parenthesis, n):
     """
-    :param :n : ℝ^(3×3) -> ℝ^3
+    :param :n : ℝ^(3×3) → ℝ^3
     """
     T = np.asarray(T, dtype=np.float64)
     α = np.asarray(α)
@@ -29,11 +29,11 @@ def pmp_42(T, α, N1_left_parenthesis_v_right_parenthesis, n):
     assert isinstance(N1_left_parenthesis_v_right_parenthesis, list) and len(N1_left_parenthesis_v_right_parenthesis) > 0
 
     _sum_0 = np.zeros((3, ))
-    for i in range(1, len(T)+1):
+    for i in range(1, len(α)+1):
         if((i) in N1_left_parenthesis_v_right_parenthesis):
             _sum_0 += α[i-1] * n(T[i-1])
     _sum_1 = np.zeros((3, ))
-    for i in range(1, len(T)+1):
+    for i in range(1, len(α)+1):
         if((i) in N1_left_parenthesis_v_right_parenthesis):
             _sum_1 += α[i-1] * n(T[i-1])
     n_left_parenthesis_v_right_parenthesis = (_sum_0) / np.linalg.norm(_sum_1, 2)

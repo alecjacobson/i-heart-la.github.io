@@ -1,0 +1,338 @@
+<!doctype html>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../../static/style.css">
+<title>Plenoptic Modeling:An Image-Based Rendering System Eq. 22 — I❤️LA</title>
+<body>
+  <header>
+    <link href="../../static/prism.css" rel="stylesheet" />
+    <h1> Plenoptic Modeling:An Image-Based Rendering System Eq. 22 </h1>
+  </header>
+  <script src="../../static/prism.js"></script>
+  <div class="page">
+    
+  
+
+  
+    <div class="gallery_post">
+
+    <!-- <p>Implementing equations from Plenoptic Modeling:An Image-Based Rendering System Eq. 22.</p>
+ -->
+
+    
+     <p>An example from <a href="https://www.cs.unc.edu/~gb/Pubs/p39-mcmillan.pdf">Plenoptic Modeling:An Image-Based Rendering System Eq. 22</a>
+    
+    
+    
+    <p>The original equation:
+      <p><img src=../../static/gallery_res/Plenoptic%20Modeling%3AAn%20Image-Based%20Rendering%20System%20Eq.%2022/plenoptic_modeling_22.png alt="placeholder" width="700" style='object-fit: scale-down;'>
+    
+
+    
+      <p>I❤️LA implementation:
+      <div class="code_block" style='height: auto;'><pre ><code class="language-cpsp">r̄ = v̄×ō
+s̄ = ō×ū
+n̄ = ū×v̄
+
+`kᵣ` = r̄⋅(`C̄ₐ`-V̄)
+`kₛ` = s̄⋅(`C̄ₐ`-V̄)
+`kₙ` = n̄⋅(`C̄ₐ`-V̄)
+
+`x(θ,v)` =  (r̄⋅`D_A`(θ, v)+`kᵣ`δ(θ, v))/(n̄⋅`D_A`(θ, v)+`kₙ`δ(θ, v))
+`y(θ,v)` =  (s̄⋅`D_A`(θ, v)+`kₛ`δ(θ, v))/(n̄⋅`D_A`(θ, v)+`kₙ`δ(θ, v))
+
+where
+
+v̄ ∈ ℝ^3
+ō ∈ ℝ^3
+ū ∈ ℝ^3
+V̄ ∈ ℝ^3
+`C̄ₐ` ∈ ℝ^3
+θ ∈ ℝ 
+v ∈ ℝ 
+`D_A`: ℝ,ℝ → ℝ^3
+δ: ℝ,ℝ-&gt;ℝ </code></pre></div>
+    
+
+    
+      
+        <p>I❤️LA compiled to C++/Eigen:
+        <div class="code_block"><pre ><code class="language-cpp">/*
+r̄ = v̄×ō
+s̄ = ō×ū
+n̄ = ū×v̄
+
+`kᵣ` = r̄⋅(`C̄ₐ`-V̄)
+`kₛ` = s̄⋅(`C̄ₐ`-V̄)
+`kₙ` = n̄⋅(`C̄ₐ`-V̄)
+
+`x(θ,v)` =  (r̄⋅`D_A`(θ, v)+`kᵣ`δ(θ, v))/(n̄⋅`D_A`(θ, v)+`kₙ`δ(θ, v))
+`y(θ,v)` =  (s̄⋅`D_A`(θ, v)+`kₛ`δ(θ, v))/(n̄⋅`D_A`(θ, v)+`kₙ`δ(θ, v))
+
+where
+
+v̄ ∈ ℝ^3
+ō ∈ ℝ^3
+ū ∈ ℝ^3
+V̄ ∈ ℝ^3
+`C̄ₐ` ∈ ℝ^3
+θ ∈ ℝ 
+v ∈ ℝ 
+`D_A`: ℝ,ℝ → ℝ^3
+δ: ℝ,ℝ-&gt;ℝ 
+*/
+#include &lt;Eigen/Core&gt;
+#include &lt;Eigen/Dense&gt;
+#include &lt;Eigen/Sparse&gt;
+#include &lt;iostream&gt;
+#include &lt;set&gt;
+
+/**
+ * plenoptic_modeling_22
+ *
+ * @param D_A  ℝ,ℝ → ℝ^3
+ * @param δ  ℝ,ℝ-&gt;ℝ
+ * @return y_left_parenthesis_θ_comma_v_right_parenthesis
+ */
+double plenoptic_modeling_22(
+    const Eigen::Matrix&lt;double, 3, 1&gt; &amp; v̄,
+    const Eigen::Matrix&lt;double, 3, 1&gt; &amp; ō,
+    const Eigen::Matrix&lt;double, 3, 1&gt; &amp; ū,
+    const Eigen::Matrix&lt;double, 3, 1&gt; &amp; V̄,
+    const Eigen::Matrix&lt;double, 3, 1&gt; &amp; C_combining_macron_ₐ,
+    const double &amp; θ,
+    const double &amp; v,
+    const std::function&lt;Eigen::Matrix&lt;double, 3, 1&gt;(double, double)&gt; &amp; D_A,
+    const std::function&lt;double(double, double)&gt; &amp; δ)
+{
+    Eigen::Matrix&lt;double, 3, 1&gt; r̄ = (v̄).cross(ō);
+
+    Eigen::Matrix&lt;double, 3, 1&gt; s̄ = (ō).cross(ū);
+
+    Eigen::Matrix&lt;double, 3, 1&gt; n̄ = (ū).cross(v̄);
+
+    double kᵣ = (r̄).dot((C_combining_macron_ₐ - V̄));
+
+    double kₛ = (s̄).dot((C_combining_macron_ₐ - V̄));
+
+    double kₙ = (n̄).dot((C_combining_macron_ₐ - V̄));
+
+    double x_left_parenthesis_θ_comma_v_right_parenthesis = ((r̄).dot(D_A(θ, v)) + kᵣ * δ(θ, v)) / double(((n̄).dot(D_A(θ, v)) + kₙ * δ(θ, v)));
+
+    double y_left_parenthesis_θ_comma_v_right_parenthesis = ((s̄).dot(D_A(θ, v)) + kₛ * δ(θ, v)) / double(((n̄).dot(D_A(θ, v)) + kₙ * δ(θ, v)));
+
+    return y_left_parenthesis_θ_comma_v_right_parenthesis;
+}
+
+
+void generateRandomData(Eigen::Matrix&lt;double, 3, 1&gt; &amp; v̄,
+    Eigen::Matrix&lt;double, 3, 1&gt; &amp; ō,
+    Eigen::Matrix&lt;double, 3, 1&gt; &amp; ū,
+    Eigen::Matrix&lt;double, 3, 1&gt; &amp; V̄,
+    Eigen::Matrix&lt;double, 3, 1&gt; &amp; C_combining_macron_ₐ,
+    double &amp; θ,
+    double &amp; v,
+    std::function&lt;Eigen::Matrix&lt;double, 3, 1&gt;(double, double)&gt; &amp; D_A,
+    std::function&lt;double(double, double)&gt; &amp; δ)
+{
+    θ = rand() % 10;
+    v = rand() % 10;
+    v̄ = Eigen::VectorXd::Random(3);
+    ō = Eigen::VectorXd::Random(3);
+    ū = Eigen::VectorXd::Random(3);
+    V̄ = Eigen::VectorXd::Random(3);
+    C_combining_macron_ₐ = Eigen::VectorXd::Random(3);
+    D_A = [](double, double)-&gt;Eigen::Matrix&lt;double, 3, 1&gt;{
+        return Eigen::VectorXd::Random(3);
+    };
+    δ = [](double, double)-&gt;double{
+        return rand() % 10;
+    };
+}
+
+
+int main(int argc, char *argv[])
+{
+    srand((int)time(NULL));
+    Eigen::Matrix&lt;double, 3, 1&gt; v̄;
+    Eigen::Matrix&lt;double, 3, 1&gt; ō;
+    Eigen::Matrix&lt;double, 3, 1&gt; ū;
+    Eigen::Matrix&lt;double, 3, 1&gt; V̄;
+    Eigen::Matrix&lt;double, 3, 1&gt; C_combining_macron_ₐ;
+    double θ;
+    double v;
+    std::function&lt;Eigen::Matrix&lt;double, 3, 1&gt;(double, double)&gt; D_A;
+    std::function&lt;double(double, double)&gt; δ;
+    generateRandomData(v̄, ō, ū, V̄, C_combining_macron_ₐ, θ, v, D_A, δ);
+    double func_value = plenoptic_modeling_22(v̄, ō, ū, V̄, C_combining_macron_ₐ, θ, v, D_A, δ);
+    std::cout&lt;&lt;&#34;func_value:\n&#34;&lt;&lt;func_value&lt;&lt;std::endl;
+    return 0;
+}</code></pre></div>
+      
+    
+
+    
+      <p>I❤️LA compiled to Python/NumPy/SciPy:
+      <div class="code_block"><pre ><code class="language-python">&#34;&#34;&#34;
+r̄ = v̄×ō
+s̄ = ō×ū
+n̄ = ū×v̄
+
+`kᵣ` = r̄⋅(`C̄ₐ`-V̄)
+`kₛ` = s̄⋅(`C̄ₐ`-V̄)
+`kₙ` = n̄⋅(`C̄ₐ`-V̄)
+
+`x(θ,v)` =  (r̄⋅`D_A`(θ, v)+`kᵣ`δ(θ, v))/(n̄⋅`D_A`(θ, v)+`kₙ`δ(θ, v))
+`y(θ,v)` =  (s̄⋅`D_A`(θ, v)+`kₛ`δ(θ, v))/(n̄⋅`D_A`(θ, v)+`kₙ`δ(θ, v))
+
+where
+
+v̄ ∈ ℝ^3
+ō ∈ ℝ^3
+ū ∈ ℝ^3
+V̄ ∈ ℝ^3
+`C̄ₐ` ∈ ℝ^3
+θ ∈ ℝ 
+v ∈ ℝ 
+`D_A`: ℝ,ℝ → ℝ^3
+δ: ℝ,ℝ-&gt;ℝ 
+&#34;&#34;&#34;
+import numpy as np
+import scipy
+import scipy.linalg
+from scipy import sparse
+from scipy.integrate import quad
+from scipy.optimize import minimize
+
+
+def plenoptic_modeling_22(v̄, ō, ū, V̄, C_combining_macron_ₐ, θ, v, D_A, δ):
+    &#34;&#34;&#34;
+    :param :D_A : ℝ,ℝ → ℝ^3
+    :param :δ : ℝ,ℝ-&gt;ℝ
+    &#34;&#34;&#34;
+    v̄ = np.asarray(v̄, dtype=np.float64)
+    ō = np.asarray(ō, dtype=np.float64)
+    ū = np.asarray(ū, dtype=np.float64)
+    V̄ = np.asarray(V̄, dtype=np.float64)
+    C_combining_macron_ₐ = np.asarray(C_combining_macron_ₐ, dtype=np.float64)
+
+    assert v̄.shape == (3,)
+    assert ō.shape == (3,)
+    assert ū.shape == (3,)
+    assert V̄.shape == (3,)
+    assert C_combining_macron_ₐ.shape == (3,)
+    assert np.ndim(θ) == 0
+    assert np.ndim(v) == 0
+
+    r̄ = np.cross(v̄, ō)
+
+    s̄ = np.cross(ō, ū)
+
+    n̄ = np.cross(ū, v̄)
+
+    kᵣ = np.dot((r̄).ravel(), ((C_combining_macron_ₐ - V̄)).ravel())
+
+    kₛ = np.dot((s̄).ravel(), ((C_combining_macron_ₐ - V̄)).ravel())
+
+    kₙ = np.dot((n̄).ravel(), ((C_combining_macron_ₐ - V̄)).ravel())
+
+    x_left_parenthesis_θ_comma_v_right_parenthesis = (np.dot((r̄).ravel(), (D_A(θ, v)).ravel()) + kᵣ * δ(θ, v)) / (np.dot((n̄).ravel(), (D_A(θ, v)).ravel()) + kₙ * δ(θ, v))
+
+    y_left_parenthesis_θ_comma_v_right_parenthesis = (np.dot((s̄).ravel(), (D_A(θ, v)).ravel()) + kₛ * δ(θ, v)) / (np.dot((n̄).ravel(), (D_A(θ, v)).ravel()) + kₙ * δ(θ, v))
+
+    return y_left_parenthesis_θ_comma_v_right_parenthesis
+
+
+def generateRandomData():
+    θ = np.random.randn()
+    v = np.random.randn()
+    v̄ = np.random.randn(3)
+    ō = np.random.randn(3)
+    ū = np.random.randn(3)
+    V̄ = np.random.randn(3)
+    C_combining_macron_ₐ = np.random.randn(3)
+    def D_A(p0, p1):
+        return np.random.randn(3)
+    def δ(p0, p1):
+        return np.random.randn()
+    return v̄, ō, ū, V̄, C_combining_macron_ₐ, θ, v, D_A, δ
+
+
+if __name__ == &#39;__main__&#39;:
+    v̄, ō, ū, V̄, C_combining_macron_ₐ, θ, v, D_A, δ = generateRandomData()
+    print(&#34;v̄:&#34;, v̄)
+    print(&#34;ō:&#34;, ō)
+    print(&#34;ū:&#34;, ū)
+    print(&#34;V̄:&#34;, V̄)
+    print(&#34;C_combining_macron_ₐ:&#34;, C_combining_macron_ₐ)
+    print(&#34;θ:&#34;, θ)
+    print(&#34;v:&#34;, v)
+    print(&#34;D_A:&#34;, D_A)
+    print(&#34;δ:&#34;, δ)
+    func_value = plenoptic_modeling_22(v̄, ō, ū, V̄, C_combining_macron_ₐ, θ, v, D_A, δ)
+    print(&#34;func_value: &#34;, func_value)</code></pre></div>
+    
+
+    
+      <p>I❤️LA compiled to LaTeX:
+      <div class="code_block"><pre ><code class="language-tex">\documentclass[12pt]{article}
+\usepackage{mathdots}
+\usepackage[bb=boondox]{mathalfa}
+\usepackage{mathtools}
+\usepackage{amssymb}
+\usepackage{ctex}
+\setmainfont{Linux Libertine O}
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\usepackage[paperheight=8in,paperwidth=4in,margin=.3in,heightrounded]{geometry}
+\begin{document}
+
+\begin{center}
+\resizebox{\textwidth}{!} 
+{
+\begin{minipage}[c]{\textwidth}
+\begin{align*}
+\textit{r̄} &amp; = \textit{v̄} × \textit{ō} \\
+\textit{s̄} &amp; = \textit{ō} × \textit{ū} \\
+\textit{n̄} &amp; = \textit{ū} × \textit{v̄} \\
+\textit{k\textsubscript{r}} &amp; = \textit{r̄} \cdot \left( \textit{C̄ₐ} - \textit{V̄} \right) \\
+\textit{kₛ} &amp; = \textit{s̄} \cdot \left( \textit{C̄ₐ} - \textit{V̄} \right) \\
+\textit{kₙ} &amp; = \textit{n̄} \cdot \left( \textit{C̄ₐ} - \textit{V̄} \right) \\
+\textit{x(θ,v)} &amp; = \frac{\textit{r̄} \cdot \textit{D\_A}\left( \textit{θ},\textit{v} \right) + \textit{k\textsubscript{r}}\textit{δ}\left( \textit{θ},\textit{v} \right)}{\textit{n̄} \cdot \textit{D\_A}\left( \textit{θ},\textit{v} \right) + \textit{kₙ}\textit{δ}\left( \textit{θ},\textit{v} \right)} \\
+\textit{y(θ,v)} &amp; = \frac{\textit{s̄} \cdot \textit{D\_A}\left( \textit{θ},\textit{v} \right) + \textit{kₛ}\textit{δ}\left( \textit{θ},\textit{v} \right)}{\textit{n̄} \cdot \textit{D\_A}\left( \textit{θ},\textit{v} \right) + \textit{kₙ}\textit{δ}\left( \textit{θ},\textit{v} \right)} \\
+\intertext{where} 
+\textit{v̄} &amp; \in \mathbb{R}^{ 3} \\
+\textit{ō} &amp; \in \mathbb{R}^{ 3} \\
+\textit{ū} &amp; \in \mathbb{R}^{ 3} \\
+\textit{V̄} &amp; \in \mathbb{R}^{ 3} \\
+\textit{C̄ₐ} &amp; \in \mathbb{R}^{ 3} \\
+\textit{θ} &amp; \in \mathbb{R} \\
+\textit{v} &amp; \in \mathbb{R} \\
+\textit{D\_A} &amp; \in \mathbb{R},\mathbb{R}\rightarrow \mathbb{R}^{ 3} \\
+\textit{δ} &amp; \in \mathbb{R},\mathbb{R}\rightarrow \mathbb{R} \\
+\\
+\end{align*}
+\end{minipage}
+}
+\end{center}
+
+\end{document}
+</code></pre></div>
+    
+
+    
+
+      <p>I❤️LA LaTeX output:
+      <div>
+      <iframe src=../../static/gallery_res/Plenoptic%20Modeling%3AAn%20Image-Based%20Rendering%20System%20Eq.%2022/plenoptic_modeling_22.pdf frameborder="0" width="700" height="1000"><br>
+      </div>
+    
+    </div>
+  
+
+
+ 
+
+
+
+  </div>
+</body>
