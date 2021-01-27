@@ -1,11 +1,11 @@
 <!doctype html>
 <meta charset="utf-8">
 <link rel="stylesheet" href="../../static/style.css">
-<title>Convex Optimization Page 208 — I❤LA</title>
+<title>Convex Optimization page 208 — I❤LA</title>
 <body>
   <header>
     <link href="../../static/prism.css" rel="stylesheet" />
-    <h1> Convex Optimization Page 208 </h1>
+    <h1> Convex Optimization page 208 </h1>
   </header>
   <script src="../../static/prism.js"></script>
   <div class="page">
@@ -15,16 +15,16 @@
   
     <div class="gallery_post">
 
-    <p>This page shows Convex Optimization Page 208 implementation.</p>
+    <p>This page shows Convex Optimization page 208 implementation.</p>
 
 
     
-     It comes from  <a href="https://web.stanford.edu/~boyd/cvxbook/bv_cvxbook.pdf"> Convex Optimization Page 208 </a><br><br>
+     It comes from  <a href="https://web.stanford.edu/~boyd/cvxbook/bv_cvxbook.pdf"> Convex Optimization page 208 </a><br><br>
     
     
     
     Here is the description: <br>
-      <img src=../../static/gallery_res/Convex%20Optimization%20Page%20208/convex_optimization_208.png alt="placeholder" width="700" style='object-fit: scale-down;'><br>
+      <img src=../../static/gallery_res/Convex%20Optimization%20page%20208/convex_optimization_208.png alt="placeholder" width="700" style='object-fit: scale-down;'><br>
     
 
     
@@ -69,7 +69,7 @@ double convex_optimization_208(
         double _sum_1 = 0;
         for(int j=1; j&lt;=p.cols(); j++){
             double _sum_2 = 0;
-            for(int k=1; k&lt;=x.size(); k++){
+            for(int k=1; k&lt;=p.cols(); k++){
                 _sum_2 += x[k-1] * p(i-1, k-1);
             }
             _sum_1 += x[j-1] * p(i-1, j-1) * (log10(p(i-1, j-1) / double(_sum_2)) / log10(2));
@@ -137,7 +137,7 @@ def convex_optimization_208(x, p):
         _sum_1 = 0
         for j in range(1, len(p)+1):
             _sum_2 = 0
-            for k in range(1, len(x)+1):
+            for k in range(1, len(p)+1):
                 _sum_2 += x[k-1] * p[i-1, k-1]
             _sum_1 += x[j-1] * p[i-1, j-1] * np.log2(p[i-1, j-1] / _sum_2)
         _sum_0 += _sum_1
@@ -199,7 +199,7 @@ if __name__ == &#39;__main__&#39;:
 
       <br> Below is the pdf: <br>
       <div>
-      <iframe src=../../static/gallery_res/Convex%20Optimization%20Page%20208/convex_optimization_208.pdf frameborder="0" width="700" height="1000"><br>
+      <iframe src=../../static/gallery_res/Convex%20Optimization%20page%20208/convex_optimization_208.pdf frameborder="0" width="700" height="1000"><br>
       </div>
     
     </div>

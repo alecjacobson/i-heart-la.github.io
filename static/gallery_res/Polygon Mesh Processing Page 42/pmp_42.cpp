@@ -31,13 +31,13 @@ Eigen::Matrix<double, 3, 1> pmp_42(
     assert( α.size() == _dim_0 );
 
     Eigen::MatrixXd _sum_0 = Eigen::MatrixXd::Zero(3, 1);
-    for(int i=1; i<=T.size(); i++){
+    for(int i=1; i<=α.size(); i++){
         if(N₁_left_parenthesis_v_right_parenthesis.find(std::tuple< int >(i)) != N₁_left_parenthesis_v_right_parenthesis.end()){
             _sum_0 += α.at(i-1) * n(T.at(i-1));
         }
     }
     Eigen::MatrixXd _sum_1 = Eigen::MatrixXd::Zero(3, 1);
-    for(int i=1; i<=T.size(); i++){
+    for(int i=1; i<=α.size(); i++){
         if(N₁_left_parenthesis_v_right_parenthesis.find(std::tuple< int >(i)) != N₁_left_parenthesis_v_right_parenthesis.end()){
             _sum_1 += α.at(i-1) * n(T.at(i-1));
         }

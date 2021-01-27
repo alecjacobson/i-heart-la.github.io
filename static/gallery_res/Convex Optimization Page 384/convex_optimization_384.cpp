@@ -47,7 +47,7 @@ Eigen::VectorXd convex_optimization_384(
         _sum_0 += a.at(i-1) * a.at(i-1).transpose();
     }
     Eigen::MatrixXd _sum_1 = Eigen::MatrixXd::Zero(n, 1);
-    for(int i=1; i<=a.size(); i++){
+    for(int i=1; i<=y.size(); i++){
         _sum_1 += y.at(i-1) * a.at(i-1);
     }
     Eigen::VectorXd x̂ = (_sum_0).inverse() * _sum_1;
