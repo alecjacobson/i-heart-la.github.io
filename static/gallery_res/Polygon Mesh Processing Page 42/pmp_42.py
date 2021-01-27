@@ -29,11 +29,11 @@ def pmp_42(T, α, N1_left_parenthesis_v_right_parenthesis, n):
     assert isinstance(N1_left_parenthesis_v_right_parenthesis, list) and len(N1_left_parenthesis_v_right_parenthesis) > 0
 
     _sum_0 = np.zeros((3, ))
-    for i in range(1, len(α)+1):
+    for i in range(1, len(T)+1):
         if((i) in N1_left_parenthesis_v_right_parenthesis):
             _sum_0 += α[i-1] * n(T[i-1])
     _sum_1 = np.zeros((3, ))
-    for i in range(1, len(α)+1):
+    for i in range(1, len(T)+1):
         if((i) in N1_left_parenthesis_v_right_parenthesis):
             _sum_1 += α[i-1] * n(T[i-1])
     n_left_parenthesis_v_right_parenthesis = (_sum_0) / np.linalg.norm(_sum_1, 2)
