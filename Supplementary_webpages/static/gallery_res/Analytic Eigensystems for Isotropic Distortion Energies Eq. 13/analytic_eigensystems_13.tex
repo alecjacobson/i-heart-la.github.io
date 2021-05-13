@@ -1,0 +1,31 @@
+\documentclass[12pt]{article}
+\usepackage{mathdots}
+\usepackage[bb=boondox]{mathalfa}
+\usepackage{mathtools}
+\usepackage{amssymb}
+\usepackage{libertine}
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\usepackage[paperheight=8in,paperwidth=4in,margin=.3in,heightrounded]{geometry}
+\begin{document}
+
+\begin{center}
+\resizebox{\textwidth}{!} 
+{
+\begin{minipage}[c]{\textwidth}
+\begin{align*}
+\mathit{T₁} & = \frac{1}{\sqrt{2}}\mathit{U}\begin{bmatrix}
+0 & 0 & 0\\
+0 & 0 & -1\\
+0 & 1 & 0\\
+\end{bmatrix}{\mathit{V}}^T \\
+\intertext{where} 
+\mathit{U} & \in \mathbb{R}^{ 3 \times 3 } \\
+\mathit{V} & \in \mathbb{R}^{ 3 \times 3 } \\
+\\
+\end{align*}
+\end{minipage}
+}
+\end{center}
+
+\end{document}

@@ -1,0 +1,222 @@
+<!doctype html>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../../static/style.css">
+<title>Convex Optimization page 208 — I❤️LA</title>
+<body>
+  <header>
+    <link href="../../static/prism.css" rel="stylesheet" />
+    <h1> Convex Optimization page 208 </h1>
+  </header>
+  <script src="../../static/prism.js"></script>
+  <div class="page">
+    
+  
+
+  
+    <div class="gallery_post">
+
+    <!-- <p>Implementing equations from Convex Optimization page 208.</p>
+ -->
+
+    
+     <p>An example from <a href="https://web.stanford.edu/~boyd/cvxbook/bv_cvxbook.pdf">Convex Optimization page 208</a>
+    
+    
+    
+    <p>The original equation:
+      <p><img src=../../static/gallery_res/Convex%20Optimization%20page%20208/convex_optimization_208.png alt="placeholder" width="700" style='object-fit: scale-down;'>
+    
+
+    
+      <p>I❤️LA implementation:
+      <div class="code_block" style='height: auto;'><pre ><code class="language-cpsp">`I(X;Y)` = ∑_i ∑_j x_j p_i,j log₂(p_i,j/∑_k x_k p_i,k)
+
+where
+
+x ∈ ℝ^n
+p ∈ ℝ^(m×n)</code></pre></div>
+    
+
+    
+      
+        <p>I❤️LA compiled to C++/Eigen:
+        <div class="code_block"><pre ><code class="language-cpp">/*
+`I(X;Y)` = ∑_i ∑_j x_j p_i,j log₂(p_i,j/∑_k x_k p_i,k)
+
+where
+
+x ∈ ℝ^n
+p ∈ ℝ^(m×n)
+*/
+#include &lt;Eigen/Core&gt;
+#include &lt;Eigen/Dense&gt;
+#include &lt;Eigen/Sparse&gt;
+#include &lt;iostream&gt;
+#include &lt;set&gt;
+
+struct convex_optimization_208ResultType {
+    double I_left_parenthesis_X_semicolon_Y_right_parenthesis;
+    convex_optimization_208ResultType(const double &amp; I_left_parenthesis_X_semicolon_Y_right_parenthesis)
+    : I_left_parenthesis_X_semicolon_Y_right_parenthesis(I_left_parenthesis_X_semicolon_Y_right_parenthesis)
+    {}
+};
+
+convex_optimization_208ResultType convex_optimization_208(
+    const Eigen::VectorXd &amp; x,
+    const Eigen::MatrixXd &amp; p)
+{
+    const long n = x.size();
+    const long m = p.rows();
+    assert( p.cols() == n );
+
+    double sum_0 = 0;
+    for(int i=1; i&lt;=p.rows(); i++){
+        double sum_1 = 0;
+        for(int j=1; j&lt;=x.size(); j++){
+            double sum_2 = 0;
+            for(int k=1; k&lt;=x.size(); k++){
+                sum_2 += x[k-1] * p(i-1, k-1);
+            }
+            sum_1 += x[j-1] * p(i-1, j-1) * (log10(p(i-1, j-1) / double(sum_2)) / log10(2));
+        }
+        sum_0 += sum_1;
+    }
+    double I_left_parenthesis_X_semicolon_Y_right_parenthesis = sum_0;
+
+    return convex_optimization_208ResultType(I_left_parenthesis_X_semicolon_Y_right_parenthesis);
+}
+
+
+void generateRandomData(Eigen::VectorXd &amp; x,
+    Eigen::MatrixXd &amp; p)
+{
+    const int n = rand()%10;
+    const int m = rand()%10;
+    x = Eigen::VectorXd::Random(n);
+    p = Eigen::MatrixXd::Random(m, n);
+}
+
+
+int main(int argc, char *argv[])
+{
+    srand((int)time(NULL));
+    Eigen::VectorXd x;
+    Eigen::MatrixXd p;
+    generateRandomData(x, p);
+    convex_optimization_208ResultType func_value = convex_optimization_208(x, p);
+    std::cout&lt;&lt;&#34;return value:\n&#34;&lt;&lt;func_value.I_left_parenthesis_X_semicolon_Y_right_parenthesis&lt;&lt;std::endl;
+    return 0;
+}</code></pre></div>
+      
+    
+
+    
+      <p>I❤️LA compiled to Python/NumPy/SciPy:
+      <div class="code_block"><pre ><code class="language-python">&#34;&#34;&#34;
+`I(X;Y)` = ∑_i ∑_j x_j p_i,j log₂(p_i,j/∑_k x_k p_i,k)
+
+where
+
+x ∈ ℝ^n
+p ∈ ℝ^(m×n)
+&#34;&#34;&#34;
+import numpy as np
+import scipy
+import scipy.linalg
+from scipy import sparse
+from scipy.integrate import quad
+from scipy.optimize import minimize
+
+
+class convex_optimization_208ResultType:
+    def __init__( self, I_left_parenthesis_X_semicolon_Y_right_parenthesis):
+        self.I_left_parenthesis_X_semicolon_Y_right_parenthesis = I_left_parenthesis_X_semicolon_Y_right_parenthesis
+
+
+def convex_optimization_208(x, p):
+    x = np.asarray(x, dtype=np.float64)
+    p = np.asarray(p, dtype=np.float64)
+
+    n = x.shape[0]
+    m = p.shape[0]
+    assert x.shape == (n,)
+    assert p.shape == (m, n)
+
+    sum_0 = 0
+    for i in range(1, len(p)+1):
+        sum_1 = 0
+        for j in range(1, len(x)+1):
+            sum_2 = 0
+            for k in range(1, len(x)+1):
+                sum_2 += x[k-1] * p[i-1, k-1]
+            sum_1 += x[j-1] * p[i-1, j-1] * np.log2(p[i-1, j-1] / sum_2)
+        sum_0 += sum_1
+    I_left_parenthesis_X_semicolon_Y_right_parenthesis = sum_0
+    return convex_optimization_208ResultType(I_left_parenthesis_X_semicolon_Y_right_parenthesis)
+
+
+def generateRandomData():
+    n = np.random.randint(10)
+    m = np.random.randint(10)
+    x = np.random.randn(n)
+    p = np.random.randn(m, n)
+    return x, p
+
+
+if __name__ == &#39;__main__&#39;:
+    x, p = generateRandomData()
+    print(&#34;x:&#34;, x)
+    print(&#34;p:&#34;, p)
+    func_value = convex_optimization_208(x, p)
+    print(&#34;return value: &#34;, func_value.I_left_parenthesis_X_semicolon_Y_right_parenthesis)</code></pre></div>
+    
+
+    
+      <p>I❤️LA compiled to LaTeX:
+      <div class="code_block"><pre ><code class="language-tex">\documentclass[12pt]{article}
+\usepackage{mathdots}
+\usepackage[bb=boondox]{mathalfa}
+\usepackage{mathtools}
+\usepackage{amssymb}
+\usepackage{libertine}
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\usepackage[paperheight=8in,paperwidth=4in,margin=.3in,heightrounded]{geometry}
+\begin{document}
+
+\begin{center}
+\resizebox{\textwidth}{!} 
+{
+\begin{minipage}[c]{\textwidth}
+\begin{align*}
+\mathit{I(X;Y)} &amp; = \sum_\mathit{i} \sum_\mathit{j} \mathit{x}_{ \mathit{j} }\mathit{p}_{\mathit{i}, \mathit{j}} \log_2{ \frac{\mathit{p}_{\mathit{i}, \mathit{j}}}{\sum_\mathit{k} \mathit{x}_{ \mathit{k} }\mathit{p}_{\mathit{i}, \mathit{k}}} } \\
+\intertext{where} 
+\mathit{x} &amp; \in \mathbb{R}^{ \mathit{n}} \\
+\mathit{p} &amp; \in \mathbb{R}^{ \mathit{m} \times \mathit{n} } \\
+\\
+\end{align*}
+\end{minipage}
+}
+\end{center}
+
+\end{document}
+</code></pre></div>
+    
+
+    
+
+      <p>I❤️LA LaTeX output:
+      <div>
+      <iframe src=../../static/gallery_res/Convex%20Optimization%20page%20208/convex_optimization_208.pdf frameborder="0" width="700" height="1000"><br>
+      </div>
+    
+    </div>
+  
+
+
+ 
+
+
+
+  </div>
+</body>

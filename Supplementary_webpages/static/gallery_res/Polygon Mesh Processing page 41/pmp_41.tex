@@ -1,0 +1,29 @@
+\documentclass[12pt]{article}
+\usepackage{mathdots}
+\usepackage[bb=boondox]{mathalfa}
+\usepackage{mathtools}
+\usepackage{amssymb}
+\usepackage{libertine}
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\usepackage[paperheight=8in,paperwidth=4in,margin=.3in,heightrounded]{geometry}
+\begin{document}
+
+\begin{center}
+\resizebox{\textwidth}{!} 
+{
+\begin{minipage}[c]{\textwidth}
+\begin{align*}
+\mathit{x\textsubscript{i}} & = \mathit{T}_{*, 1} \\
+\mathit{x\textsubscript{j}} & = \mathit{T}_{*, 2} \\
+\mathit{xₖ} & = \mathit{T}_{*, 3} \\
+\mathit{n(T)} & = \frac{\left( \mathit{x\textsubscript{j}} - \mathit{x\textsubscript{i}} \right) × \left( \mathit{xₖ} - \mathit{x\textsubscript{i}} \right)}{\|\left( \mathit{x\textsubscript{j}} - \mathit{x\textsubscript{i}} \right) × \left( \mathit{xₖ} - \mathit{x\textsubscript{i}} \right)\|_2} \\
+\intertext{where} 
+\mathit{T} & \in \mathbb{R}^{ 3 \times 3 } \\
+\\
+\end{align*}
+\end{minipage}
+}
+\end{center}
+
+\end{document}

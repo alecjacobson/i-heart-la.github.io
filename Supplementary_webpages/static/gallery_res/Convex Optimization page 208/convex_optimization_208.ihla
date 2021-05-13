@@ -1,0 +1,6 @@
+`I(X;Y)` = ∑_i ∑_j x_j p_i,j log₂(p_i,j/∑_k x_k p_i,k)
+
+where
+
+x ∈ ℝ^n
+p ∈ ℝ^(m×n)

@@ -1,0 +1,33 @@
+\documentclass[12pt]{article}
+\usepackage{mathdots}
+\usepackage[bb=boondox]{mathalfa}
+\usepackage{mathtools}
+\usepackage{amssymb}
+\usepackage{libertine}
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\usepackage[paperheight=8in,paperwidth=4in,margin=.3in,heightrounded]{geometry}
+\begin{document}
+
+\begin{center}
+\resizebox{\textwidth}{!} 
+{
+\begin{minipage}[c]{\textwidth}
+\begin{align*}
+\text{from trigonometry import sin, cos}\\
+\mathit{x(θ, ϕ)} & = \begin{bmatrix}
+\mathit{R}cos\left( \mathit{θ} \right)cos\left( \mathit{ϕ} \right)\\
+\mathit{R}sin\left( \mathit{θ} \right)cos\left( \mathit{ϕ} \right)\\
+\mathit{R}sin\left( \mathit{ϕ} \right)\\
+\end{bmatrix} \\
+\intertext{where} 
+\mathit{ϕ} & \in \mathbb{R} \text{ angle between 0 and 2π} \\
+\mathit{θ} & \in \mathbb{R} \text{ angle between -π/2 and π/2} \\
+\mathit{R} & \in \mathbb{R} \text{ the radius of the sphere} \\
+\\
+\end{align*}
+\end{minipage}
+}
+\end{center}
+
+\end{document}

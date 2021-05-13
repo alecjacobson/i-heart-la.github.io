@@ -1,0 +1,212 @@
+<!doctype html>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../../static/style.css">
+<title>Convex Optimization page 650 — I❤️LA</title>
+<body>
+  <header>
+    <link href="../../static/prism.css" rel="stylesheet" />
+    <h1> Convex Optimization page 650 </h1>
+  </header>
+  <script src="../../static/prism.js"></script>
+  <div class="page">
+    
+  
+
+  
+    <div class="gallery_post">
+
+    <!-- <p>Implementing equations from Convex Optimization page 650.</p>
+ -->
+
+    
+     <p>An example from <a href="https://web.stanford.edu/~boyd/cvxbook/bv_cvxbook.pdf">Convex Optimization page 650</a>
+    
+    
+    
+    <p>The original equation:
+      <p><img src=../../static/gallery_res/Convex%20Optimization%20page%20650/convex_optimization_650.png alt="placeholder" width="700" style='object-fit: scale-down;'>
+    
+
+    
+      <p>I❤️LA implementation:
+      <div class="code_block" style='height: auto;'><pre ><code class="language-cpsp">[A⁻¹+A⁻¹BS⁻¹BᵀA⁻¹   -A⁻¹BS⁻¹
+    -S⁻¹BᵀA⁻¹           S⁻¹]
+
+where
+
+A ∈ ℝ^(4×4) 
+B ∈ ℝ^(4×4) 
+S ∈ ℝ^(4×4) </code></pre></div>
+    
+
+    
+      
+        <p>I❤️LA compiled to C++/Eigen:
+        <div class="code_block"><pre ><code class="language-cpp">/*
+[A⁻¹+A⁻¹BS⁻¹BᵀA⁻¹   -A⁻¹BS⁻¹
+    -S⁻¹BᵀA⁻¹           S⁻¹]
+
+where
+
+A ∈ ℝ^(4×4) 
+B ∈ ℝ^(4×4) 
+S ∈ ℝ^(4×4) 
+*/
+#include &lt;Eigen/Core&gt;
+#include &lt;Eigen/Dense&gt;
+#include &lt;Eigen/Sparse&gt;
+#include &lt;iostream&gt;
+#include &lt;set&gt;
+
+struct convex_optimization_650ResultType {
+    Eigen::Matrix&lt;double, 8, 8&gt; ret;
+    convex_optimization_650ResultType(const Eigen::Matrix&lt;double, 8, 8&gt; &amp; ret)
+    : ret(ret)
+    {}
+};
+
+convex_optimization_650ResultType convex_optimization_650(
+    const Eigen::Matrix&lt;double, 4, 4&gt; &amp; A,
+    const Eigen::Matrix&lt;double, 4, 4&gt; &amp; B,
+    const Eigen::Matrix&lt;double, 4, 4&gt; &amp; S)
+{
+    Eigen::Matrix&lt;double, 8, 8&gt; ret_0;
+    ret_0 &lt;&lt; A.inverse() + A.inverse() * B * S.inverse() * B.transpose() * A.inverse(), -A.inverse() * B * S.inverse(),
+    -S.inverse() * B.transpose() * A.inverse(), S.inverse();
+    Eigen::Matrix&lt;double, 8, 8&gt; ret = ret_0;
+    return convex_optimization_650ResultType(ret);
+}
+
+
+void generateRandomData(Eigen::Matrix&lt;double, 4, 4&gt; &amp; A,
+    Eigen::Matrix&lt;double, 4, 4&gt; &amp; B,
+    Eigen::Matrix&lt;double, 4, 4&gt; &amp; S)
+{
+    A = Eigen::MatrixXd::Random(4, 4);
+    B = Eigen::MatrixXd::Random(4, 4);
+    S = Eigen::MatrixXd::Random(4, 4);
+}
+
+
+int main(int argc, char *argv[])
+{
+    srand((int)time(NULL));
+    Eigen::Matrix&lt;double, 4, 4&gt; A;
+    Eigen::Matrix&lt;double, 4, 4&gt; B;
+    Eigen::Matrix&lt;double, 4, 4&gt; S;
+    generateRandomData(A, B, S);
+    convex_optimization_650ResultType func_value = convex_optimization_650(A, B, S);
+    std::cout&lt;&lt;&#34;return value:\n&#34;&lt;&lt;func_value.ret&lt;&lt;std::endl;
+    return 0;
+}</code></pre></div>
+      
+    
+
+    
+      <p>I❤️LA compiled to Python/NumPy/SciPy:
+      <div class="code_block"><pre ><code class="language-python">&#34;&#34;&#34;
+[A⁻¹+A⁻¹BS⁻¹BᵀA⁻¹   -A⁻¹BS⁻¹
+    -S⁻¹BᵀA⁻¹           S⁻¹]
+
+where
+
+A ∈ ℝ^(4×4) 
+B ∈ ℝ^(4×4) 
+S ∈ ℝ^(4×4) 
+&#34;&#34;&#34;
+import numpy as np
+import scipy
+import scipy.linalg
+from scipy import sparse
+from scipy.integrate import quad
+from scipy.optimize import minimize
+
+
+class convex_optimization_650ResultType:
+    def __init__( self, ret):
+        self.ret = ret
+
+
+def convex_optimization_650(A, B, S):
+    A = np.asarray(A, dtype=np.float64)
+    B = np.asarray(B, dtype=np.float64)
+    S = np.asarray(S, dtype=np.float64)
+
+    assert A.shape == (4, 4)
+    assert B.shape == (4, 4)
+    assert S.shape == (4, 4)
+
+    ret_0 = np.block([[np.linalg.inv(A) + np.linalg.inv(A) @ B @ np.linalg.inv(S) @ B.T @ np.linalg.inv(A), -np.linalg.inv(A) @ B @ np.linalg.inv(S)], [-np.linalg.inv(S) @ B.T @ np.linalg.inv(A), np.linalg.inv(S)]])
+    ret = ret_0
+    return convex_optimization_650ResultType(ret)
+
+
+def generateRandomData():
+    A = np.random.randn(4, 4)
+    B = np.random.randn(4, 4)
+    S = np.random.randn(4, 4)
+    return A, B, S
+
+
+if __name__ == &#39;__main__&#39;:
+    A, B, S = generateRandomData()
+    print(&#34;A:&#34;, A)
+    print(&#34;B:&#34;, B)
+    print(&#34;S:&#34;, S)
+    func_value = convex_optimization_650(A, B, S)
+    print(&#34;return value: &#34;, func_value.ret)</code></pre></div>
+    
+
+    
+      <p>I❤️LA compiled to LaTeX:
+      <div class="code_block"><pre ><code class="language-tex">\documentclass[12pt]{article}
+\usepackage{mathdots}
+\usepackage[bb=boondox]{mathalfa}
+\usepackage{mathtools}
+\usepackage{amssymb}
+\usepackage{libertine}
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\usepackage[paperheight=8in,paperwidth=4in,margin=.3in,heightrounded]{geometry}
+\begin{document}
+
+\begin{center}
+\resizebox{\textwidth}{!} 
+{
+\begin{minipage}[c]{\textwidth}
+\begin{align*}
+ \omit \span \begin{bmatrix}
+\mathit{A}^{-1} + \mathit{A}^{-1}\mathit{B}\mathit{S}^{-1}{\mathit{B}}^T\mathit{A}^{-1} &amp; -\mathit{A}^{-1}\mathit{B}\mathit{S}^{-1}\\
+-\mathit{S}^{-1}{\mathit{B}}^T\mathit{A}^{-1} &amp; \mathit{S}^{-1}\\
+\end{bmatrix} \\
+\intertext{where} 
+\mathit{A} &amp; \in \mathbb{R}^{ 4 \times 4 } \\
+\mathit{B} &amp; \in \mathbb{R}^{ 4 \times 4 } \\
+\mathit{S} &amp; \in \mathbb{R}^{ 4 \times 4 } \\
+\\
+\end{align*}
+\end{minipage}
+}
+\end{center}
+
+\end{document}
+</code></pre></div>
+    
+
+    
+
+      <p>I❤️LA LaTeX output:
+      <div>
+      <iframe src=../../static/gallery_res/Convex%20Optimization%20page%20650/convex_optimization_650.pdf frameborder="0" width="700" height="1000"><br>
+      </div>
+    
+    </div>
+  
+
+
+ 
+
+
+
+  </div>
+</body>

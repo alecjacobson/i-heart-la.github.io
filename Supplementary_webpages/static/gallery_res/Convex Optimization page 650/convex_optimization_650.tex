@@ -1,0 +1,31 @@
+\documentclass[12pt]{article}
+\usepackage{mathdots}
+\usepackage[bb=boondox]{mathalfa}
+\usepackage{mathtools}
+\usepackage{amssymb}
+\usepackage{libertine}
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\usepackage[paperheight=8in,paperwidth=4in,margin=.3in,heightrounded]{geometry}
+\begin{document}
+
+\begin{center}
+\resizebox{\textwidth}{!} 
+{
+\begin{minipage}[c]{\textwidth}
+\begin{align*}
+ \omit \span \begin{bmatrix}
+\mathit{A}^{-1} + \mathit{A}^{-1}\mathit{B}\mathit{S}^{-1}{\mathit{B}}^T\mathit{A}^{-1} & -\mathit{A}^{-1}\mathit{B}\mathit{S}^{-1}\\
+-\mathit{S}^{-1}{\mathit{B}}^T\mathit{A}^{-1} & \mathit{S}^{-1}\\
+\end{bmatrix} \\
+\intertext{where} 
+\mathit{A} & \in \mathbb{R}^{ 4 \times 4 } \\
+\mathit{B} & \in \mathbb{R}^{ 4 \times 4 } \\
+\mathit{S} & \in \mathbb{R}^{ 4 \times 4 } \\
+\\
+\end{align*}
+\end{minipage}
+}
+\end{center}
+
+\end{document}

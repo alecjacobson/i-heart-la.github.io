@@ -1,0 +1,7 @@
+invLhs = [TTT          (constraints)^T
+         constraints          0      ]^(-1)
+
+where
+
+TTT ∈ ℝ^(n×n) 
+constraints ∈ ℝ^(m×n) 

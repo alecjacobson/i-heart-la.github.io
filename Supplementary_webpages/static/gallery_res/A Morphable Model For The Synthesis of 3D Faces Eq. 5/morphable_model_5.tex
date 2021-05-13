@@ -1,0 +1,35 @@
+\documentclass[12pt]{article}
+\usepackage{mathdots}
+\usepackage[bb=boondox]{mathalfa}
+\usepackage{mathtools}
+\usepackage{amssymb}
+\usepackage{libertine}
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\usepackage[paperheight=8in,paperwidth=4in,margin=.3in,heightrounded]{geometry}
+\begin{document}
+
+\begin{center}
+\resizebox{\textwidth}{!} 
+{
+\begin{minipage}[c]{\textwidth}
+\begin{align*}
+\mathit{E} & = \frac{1}{{\mathit{σ\_N}}^{2}}\mathit{E\_I} + \sum_\mathit{j} \frac{{\mathit{α}_{ \mathit{j} }}^{2}}{{\mathit{σ\_S}_{ \mathit{j} }}^{2}} + \sum_\mathit{j} \frac{{\mathit{β}_{ \mathit{j} }}^{2}}{{\mathit{σ\_T}_{ \mathit{j} }}^{2}} + \sum_\mathit{j} \frac{{\left( \mathit{ρ}_{ \mathit{j} } - \mathit{ρ̄}_{ \mathit{j} } \right)}^{2}}{{\mathit{σ\_ρ}_{ \mathit{j} }}^{2}} \\
+\intertext{where} 
+\mathit{σ\_N} & \in \mathbb{R} \\
+\mathit{E\_I} & \in \mathbb{R} \\
+\mathit{α}_{\mathit{i}} & \in \mathbb{R} \\
+\mathit{β}_{\mathit{i}} & \in \mathbb{R} \\
+\mathit{σ\_S}_{\mathit{i}} & \in \mathbb{R} \\
+\mathit{σ\_T}_{\mathit{i}} & \in \mathbb{R} \\
+\mathit{ρ}_{\mathit{j}} & \in \mathbb{R} \\
+\mathit{ρ̄}_{\mathit{j}} & \in \mathbb{R} \\
+\mathit{σ\_ρ}_{\mathit{j}} & \in \mathbb{R} \\
+\mathit{ā}_{\mathit{i}} & \in \mathbb{R} \\
+\\
+\end{align*}
+\end{minipage}
+}
+\end{center}
+
+\end{document}

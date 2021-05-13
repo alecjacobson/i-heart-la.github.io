@@ -1,0 +1,179 @@
+<!doctype html>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../../static/style.css">
+<title>Geometry Processing Course: Registration — I❤️LA</title>
+<body>
+  <header>
+    <link href="../../static/prism.css" rel="stylesheet" />
+    <h1> Geometry Processing Course: Registration </h1>
+  </header>
+  <script src="../../static/prism.js"></script>
+  <div class="page">
+    
+  
+
+  
+    <div class="gallery_post">
+
+    <!-- <p>Implementing equations from Geometry Processing Course: Registration.</p>
+ -->
+
+    
+     <p>An example from <a href="https://github.com/alecjacobson/geometry-processing-registration">Geometry Processing Course: Registration</a>
+    
+    
+    
+    <p>The original equation:
+      <p><img src=../../static/gallery_res/Geometry%20Processing%20Course%3A%20Registration/course_registration.png alt="placeholder" width="700" style='object-fit: scale-down;'>
+    
+
+    
+      <p>I❤️LA implementation:
+      <div class="code_block" style='height: auto;'><pre ><code class="language-cpsp">min_(u ∈ ℝ^6) uᵀ(∑_i [x_i×n̂_i
+                        n̂_i  ][(x_i×n̂_i)ᵀ n̂_iᵀ])u - 2uᵀ(∑_i [x_i×n̂_i
+                                                               n̂_i  ]n̂_iᵀ(p_i-x_i)) + ∑_i(p_i-x_i)ᵀn̂_i n̂_iᵀ(p_i-x_i)
+
+where
+
+x_i: ℝ^3 
+n̂_i: ℝ^3  
+p_i: ℝ^3  </code></pre></div>
+    
+
+    
+
+    
+      <p>I❤️LA compiled to Python/NumPy/SciPy:
+      <div class="code_block"><pre ><code class="language-python">&#34;&#34;&#34;
+min_(u ∈ ℝ^6) uᵀ(∑_i [x_i×n̂_i
+                        n̂_i  ][(x_i×n̂_i)ᵀ n̂_iᵀ])u - 2uᵀ(∑_i [x_i×n̂_i
+                                                               n̂_i  ]n̂_iᵀ(p_i-x_i)) + ∑_i(p_i-x_i)ᵀn̂_i n̂_iᵀ(p_i-x_i)
+
+where
+
+x_i: ℝ^3 
+n̂_i: ℝ^3  
+p_i: ℝ^3  
+&#34;&#34;&#34;
+import numpy as np
+import scipy
+import scipy.linalg
+from scipy import sparse
+from scipy.integrate import quad
+from scipy.optimize import minimize
+
+
+class course_registrationResultType:
+    def __init__( self, ret):
+        self.ret = ret
+
+
+def course_registration(x, n̂, p):
+    &#34;&#34;&#34;
+    :param :x : ℝ^3
+    :param :n̂ : ℝ^3
+    :param :p : ℝ^3
+    &#34;&#34;&#34;
+    x = np.asarray(x, dtype=np.float64)
+    n̂ = np.asarray(n̂, dtype=np.float64)
+    p = np.asarray(p, dtype=np.float64)
+
+    dim_0 = x.shape[0]
+    assert x.shape == (dim_0, 3, )
+    assert n̂.shape == (dim_0, 3, )
+    assert p.shape == (dim_0, 3, )
+
+    def target_0(u):
+        sum_0 = np.zeros((6, 6))
+        for i in range(1, len(x)+1):
+            ret_0 = np.vstack(((np.cross(x[i-1], n̂[i-1])).reshape(3, 1), (n̂[i-1]).reshape(3, 1)))
+            ret_1 = np.hstack(((np.cross(x[i-1], n̂[i-1])).T.reshape(1, 3), n̂[i-1].T.reshape(1, 3)))
+            sum_0 += ret_0 @ ret_1
+        sum_1 = np.zeros((6, ))
+        for i in range(1, len(x)+1):
+            ret_2 = np.vstack(((np.cross(x[i-1], n̂[i-1])).reshape(3, 1), (n̂[i-1]).reshape(3, 1)))
+            sum_1 += ret_2 @ n̂[i-1].T.reshape(1, 3) @ (p[i-1] - x[i-1])
+        sum_2 = 0
+        for i in range(1, len(p)+1):
+            sum_2 += (((p[i-1] - x[i-1]).T.reshape(1, 3) @ n̂[i-1]).item() * n̂[i-1].T.reshape(1, 3) @ (p[i-1] - x[i-1])).item()
+        return (u.T.reshape(1, 6) @ (sum_0) @ u).item() - (2 * u.T.reshape(1, 6) @ (sum_1)).item() + sum_2
+    ret = minimize(target_0, np.zeros(6)).fun
+    return course_registrationResultType(ret)
+
+
+def generateRandomData():
+    dim_0 = np.random.randint(10)
+    x = np.random.randn(dim_0, 3, )
+    n̂ = np.random.randn(dim_0, 3, )
+    p = np.random.randn(dim_0, 3, )
+    return x, n̂, p
+
+
+if __name__ == &#39;__main__&#39;:
+    x, n̂, p = generateRandomData()
+    print(&#34;x:&#34;, x)
+    print(&#34;n̂:&#34;, n̂)
+    print(&#34;p:&#34;, p)
+    func_value = course_registration(x, n̂, p)
+    print(&#34;return value: &#34;, func_value.ret)</code></pre></div>
+    
+
+    
+      <p>I❤️LA compiled to LaTeX:
+      <div class="code_block"><pre ><code class="language-tex">\documentclass[12pt]{article}
+\usepackage{mathdots}
+\usepackage[bb=boondox]{mathalfa}
+\usepackage{mathtools}
+\usepackage{amssymb}
+\usepackage{libertine}
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\usepackage[paperheight=8in,paperwidth=4in,margin=.3in,heightrounded]{geometry}
+\begin{document}
+
+\begin{center}
+\resizebox{\textwidth}{!} 
+{
+\begin{minipage}[c]{\textwidth}
+\begin{align*}
+ \omit \span \begin{aligned} \min_{\mathit{u} \in \mathbb{R}^{ 6}} \quad &amp; {\mathit{u}}^T\left( \sum_\mathit{i} \begin{bmatrix}
+\mathit{x}_{ \mathit{i} } × \mathit{n̂}_{ \mathit{i} }\\
+\mathit{n̂}_{ \mathit{i} }\\
+\end{bmatrix}\begin{bmatrix}
+{\left( \mathit{x}_{ \mathit{i} } × \mathit{n̂}_{ \mathit{i} } \right)}^T &amp; {\mathit{n̂}_{ \mathit{i} }}^T\\
+\end{bmatrix} \right)\mathit{u} - 2{\mathit{u}}^T\left( \sum_\mathit{i} \begin{bmatrix}
+\mathit{x}_{ \mathit{i} } × \mathit{n̂}_{ \mathit{i} }\\
+\mathit{n̂}_{ \mathit{i} }\\
+\end{bmatrix}{\mathit{n̂}_{ \mathit{i} }}^T\left( \mathit{p}_{ \mathit{i} } - \mathit{x}_{ \mathit{i} } \right) \right) + \sum_\mathit{i} {\left( \mathit{p}_{ \mathit{i} } - \mathit{x}_{ \mathit{i} } \right)}^T\mathit{n̂}_{ \mathit{i} }{\mathit{n̂}_{ \mathit{i} }}^T\left( \mathit{p}_{ \mathit{i} } - \mathit{x}_{ \mathit{i} } \right) \\
+\end{aligned} \\
+\intertext{where} 
+\mathit{x}_{\mathit{i}} &amp; \in \mathbb{R}^{ 3} \\
+\mathit{n̂}_{\mathit{i}} &amp; \in \mathbb{R}^{ 3} \\
+\mathit{p}_{\mathit{i}} &amp; \in \mathbb{R}^{ 3} \\
+\\
+\end{align*}
+\end{minipage}
+}
+\end{center}
+
+\end{document}
+</code></pre></div>
+    
+
+    
+
+      <p>I❤️LA LaTeX output:
+      <div>
+      <iframe src=../../static/gallery_res/Geometry%20Processing%20Course%3A%20Registration/course_registration.pdf frameborder="0" width="700" height="1000"><br>
+      </div>
+    
+    </div>
+  
+
+
+ 
+
+
+
+  </div>
+</body>

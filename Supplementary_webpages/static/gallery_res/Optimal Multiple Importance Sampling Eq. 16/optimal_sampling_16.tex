@@ -1,0 +1,32 @@
+\documentclass[12pt]{article}
+\usepackage{mathdots}
+\usepackage[bb=boondox]{mathalfa}
+\usepackage{mathtools}
+\usepackage{amssymb}
+\usepackage{libertine}
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\usepackage[paperheight=8in,paperwidth=4in,margin=.3in,heightrounded]{geometry}
+\begin{document}
+
+\begin{center}
+\resizebox{\textwidth}{!} 
+{
+\begin{minipage}[c]{\textwidth}
+\begin{align*}
+ \omit \span \sum_\mathit{i} \mathit{α}_{ \mathit{i} } + \frac{1}{\mathit{M}}\sum_\mathit{i} \sum_{\mathit{j} \leq \mathit{n}_{ \mathit{i} }} \left( \frac{\mathit{f}\left( \mathit{X}_{\mathit{i}, \mathit{j}} \right)}{\mathit{p\_c}\left( \mathit{X}_{\mathit{i}, \mathit{j}} \right)} - \frac{\sum_\mathit{k} \mathit{α}_{ \mathit{k} }\mathit{p}_{ \mathit{k} }\left( \mathit{X}_{\mathit{i}, \mathit{j}} \right)}{\mathit{p\_c}\left( \mathit{X}_{\mathit{i}, \mathit{j}} \right)} \right) \\
+\intertext{where} 
+\mathit{α} & \in \mathbb{R}^{ \mathit{N}} \\
+\mathit{p}_{\mathit{j}} & \in \mathbb{R}\rightarrow \mathbb{R} \\
+\mathit{X} & \in \mathbb{R}^{ \mathit{N} \times \mathit{m} } \\
+\mathit{M} & \in \mathbb{R} \\
+\mathit{n}_{\mathit{i}} & \in \mathbb{R} \\
+\mathit{f} & \in \mathbb{R}\rightarrow \mathbb{R} \\
+\mathit{p\_c} & \in \mathbb{R}\rightarrow \mathbb{R} \\
+\\
+\end{align*}
+\end{minipage}
+}
+\end{center}
+
+\end{document}

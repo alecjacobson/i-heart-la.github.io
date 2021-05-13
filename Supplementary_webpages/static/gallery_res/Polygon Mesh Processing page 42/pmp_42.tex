@@ -1,0 +1,29 @@
+\documentclass[12pt]{article}
+\usepackage{mathdots}
+\usepackage[bb=boondox]{mathalfa}
+\usepackage{mathtools}
+\usepackage{amssymb}
+\usepackage{libertine}
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\usepackage[paperheight=8in,paperwidth=4in,margin=.3in,heightrounded]{geometry}
+\begin{document}
+
+\begin{center}
+\resizebox{\textwidth}{!} 
+{
+\begin{minipage}[c]{\textwidth}
+\begin{align*}
+\mathit{n(v)} & = \frac{\sum_{\mathit{i} \in \mathit{N₁(v)} } \mathit{α}_{ \mathit{i} }\mathit{n}\left( \mathit{T}_{ \mathit{i} } \right)}{\|\sum_{\mathit{i} \in \mathit{N₁(v)} } \mathit{α}_{ \mathit{i} }\mathit{n}\left( \mathit{T}_{ \mathit{i} } \right)\|_2} \\
+\intertext{where} 
+\mathit{T}_{\mathit{i}} & \in \mathbb{R}^{ 3 \times 3 } \\
+\mathit{α}_{\mathit{i}} & \in \mathbb{R} \\
+\mathit{N₁(v)} & \in \{\mathbb{Z}\} \\
+\mathit{n} & \in \mathbb{R}^{ 3 \times 3 }\rightarrow \mathbb{R}^{ 3} \\
+\\
+\end{align*}
+\end{minipage}
+}
+\end{center}
+
+\end{document}

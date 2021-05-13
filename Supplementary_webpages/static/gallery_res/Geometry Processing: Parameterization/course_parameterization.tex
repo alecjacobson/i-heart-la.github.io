@@ -1,0 +1,29 @@
+\documentclass[12pt]{article}
+\usepackage{mathdots}
+\usepackage[bb=boondox]{mathalfa}
+\usepackage{mathtools}
+\usepackage{amssymb}
+\usepackage{libertine}
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\usepackage[paperheight=8in,paperwidth=4in,margin=.3in,heightrounded]{geometry}
+\begin{document}
+
+\begin{center}
+\resizebox{\textwidth}{!} 
+{
+\begin{minipage}[c]{\textwidth}
+\begin{align*}
+\mathit{L}_{\mathit{i}, \mathit{j}} & = \begin{cases} \mathit{w}_{\mathit{i}, \mathit{j}} & \text{if }  \left( \mathit{i}, \mathit{j} \right) \in \mathit{E}  \\ 0 & \text{otherwise} \end{cases} \\
+\mathit{L}_{\mathit{i}, \mathit{i}} & = -\sum_{\mathit{l} ≠ \mathit{i}} \mathit{L}_{\mathit{i}, \mathit{l}} \\
+\intertext{where} 
+\mathit{L} & \in \mathbb{R}^{ \mathit{n} \times \mathit{n} } \\
+\mathit{w} & \in \mathbb{R}^{ \mathit{n} \times \mathit{n} } \text{ edge weight matrix} \\
+\mathit{E} & \in \{\mathbb{Z}^{ 2 }\} \mathit{{ index}} \text{ edges} \\
+\\
+\end{align*}
+\end{minipage}
+}
+\end{center}
+
+\end{document}

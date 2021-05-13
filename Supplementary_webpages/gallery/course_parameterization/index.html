@@ -1,0 +1,265 @@
+<!doctype html>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../../static/style.css">
+<title>Geometry Processing: Parameterization — I❤️LA</title>
+<body>
+  <header>
+    <link href="../../static/prism.css" rel="stylesheet" />
+    <h1> Geometry Processing: Parameterization </h1>
+  </header>
+  <script src="../../static/prism.js"></script>
+  <div class="page">
+    
+  
+
+  
+    <div class="gallery_post">
+
+    <!-- <p>Implementing equations from Geometry Processing: Parameterization.</p>
+ -->
+
+    
+     <p>An example from <a href="https://github.com/alecjacobson/geometry-processing-parameterization">Geometry Processing: Parameterization</a>
+    
+    
+    
+    <p>The original equation:
+      <p><img src=../../static/gallery_res/Geometry%20Processing%3A%20Parameterization/course_parameterization.png alt="placeholder" width="700" style='object-fit: scale-down;'>
+    
+
+    
+      <p>I❤️LA implementation:
+      <div class="code_block" style='height: auto;'><pre ><code class="language-cpsp">L_i,j = { w_i,j if (i,j) ∈ E
+          0 otherwise
+
+L_i,i = -sum_(l for l ≠ i) L_i,l
+
+where
+
+L ∈ ℝ^(n×n)
+w ∈ ℝ^(n×n): edge weight matrix
+E ∈ {ℤ²} index: edges</code></pre></div>
+    
+
+    
+      
+        <p>I❤️LA compiled to C++/Eigen:
+        <div class="code_block"><pre ><code class="language-cpp">/*
+L_i,j = { w_i,j if (i,j) ∈ E
+          0 otherwise
+
+L_i,i = -sum_(l for l ≠ i) L_i,l
+
+where
+
+L ∈ ℝ^(n×n)
+w ∈ ℝ^(n×n): edge weight matrix
+E ∈ {ℤ²} index: edges
+*/
+#include &lt;Eigen/Core&gt;
+#include &lt;Eigen/Dense&gt;
+#include &lt;Eigen/Sparse&gt;
+#include &lt;iostream&gt;
+#include &lt;set&gt;
+
+struct course_parameterizationResultType {
+    Eigen::SparseMatrix&lt;double&gt; L;
+    course_parameterizationResultType(const Eigen::SparseMatrix&lt;double&gt; &amp; L)
+    : L(L)
+    {}
+};
+
+/**
+ * course_parameterization
+ *
+ * @param w  edge weight matrix
+ * @param E  edges
+ * @return L
+ */
+course_parameterizationResultType course_parameterization(
+    const Eigen::MatrixXd &amp; w,
+    const std::set&lt;std::tuple&lt; int, int &gt; &gt; &amp; E)
+{
+    const long n = w.cols();
+    assert( w.rows() == n );
+
+    Eigen::SparseMatrix&lt;double&gt; L(n, n);
+    std::vector&lt;Eigen::Triplet&lt;double&gt; &gt; tripletList_L;
+    for( int i=1; i&lt;=n; i++){
+        for( int j=1; j&lt;=n; j++){
+            if(E.find(std::tuple&lt; int, int &gt;(i-1, j-1)) != E.end()){
+                tripletList_L.push_back(Eigen::Triplet&lt;double&gt;(i-1, j-1, w(i-1, j-1)));
+            }
+        }
+    }
+    L.setFromTriplets(tripletList_L.begin(), tripletList_L.end());
+
+    for( int i=1; i&lt;=n; i++){
+        double sum_0 = 0;
+        for(int l=1; l&lt;=L.cols(); l++){
+            if(l != i){
+                sum_0 += L.coeff(i-1, l-1);
+            }
+        }
+        tripletList_L.push_back(Eigen::Triplet&lt;double&gt;(i-1, i-1, -sum_0));
+    }
+    L.setFromTriplets(tripletList_L.begin(), tripletList_L.end());
+
+    return course_parameterizationResultType(L);
+}
+
+
+void generateRandomData(Eigen::MatrixXd &amp; w,
+    std::set&lt;std::tuple&lt; int, int &gt; &gt; &amp; E)
+{
+    const int n = rand()%10;
+    w = Eigen::MatrixXd::Random(n, n);
+    const int dim_1 = rand()%10;
+    for(int i=0; i&lt;dim_1; i++){
+        E.insert(std::make_tuple(rand()%10, rand()%10));
+    }
+}
+
+
+int main(int argc, char *argv[])
+{
+    srand((int)time(NULL));
+    Eigen::MatrixXd w;
+    std::set&lt;std::tuple&lt; int, int &gt; &gt; E;
+    generateRandomData(w, E);
+    course_parameterizationResultType func_value = course_parameterization(w, E);
+    std::cout&lt;&lt;&#34;return value:\n&#34;&lt;&lt;func_value.L&lt;&lt;std::endl;
+    return 0;
+}</code></pre></div>
+      
+    
+
+    
+      <p>I❤️LA compiled to Python/NumPy/SciPy:
+      <div class="code_block"><pre ><code class="language-python">&#34;&#34;&#34;
+L_i,j = { w_i,j if (i,j) ∈ E
+          0 otherwise
+
+L_i,i = -sum_(l for l ≠ i) L_i,l
+
+where
+
+L ∈ ℝ^(n×n)
+w ∈ ℝ^(n×n): edge weight matrix
+E ∈ {ℤ²} index: edges
+&#34;&#34;&#34;
+import numpy as np
+import scipy
+import scipy.linalg
+from scipy import sparse
+from scipy.integrate import quad
+from scipy.optimize import minimize
+
+
+class course_parameterizationResultType:
+    def __init__( self, L):
+        self.L = L
+
+
+def course_parameterization(w, E):
+    &#34;&#34;&#34;
+    :param :w : edge weight matrix
+    :param :E : edges
+    &#34;&#34;&#34;
+    w = np.asarray(w, dtype=np.float64)
+
+    n = w.shape[1]
+    assert w.shape == (n, n)
+    assert isinstance(E, list) and len(E) &gt; 0
+    assert len(E[0]) == 2
+
+    Lij_0 = []
+    Lvals_0 = []
+    for i in range(1, n+1):
+        for j in range(1, n+1):
+            if (i-1, j-1) in E:
+                Lij_0.append((i-1, j-1))
+                Lvals_0.append(w[i-1, j-1])
+    sparse_0 = scipy.sparse.coo_matrix((Lvals_0, np.asarray(Lij_0).T), shape=(n, n))
+    L = sparse_0
+    for i in range(1, n+1):
+        sum_0 = 0
+        for l in range(1, L.shape[1]+1):
+            if(l != i):
+                sum_0 += L.tocsr()[i-1, l-1]
+        Lij_0.append((i - 1, i - 1))
+        Lvals_0.append(-sum_0)
+    L = scipy.sparse.coo_matrix((Lvals_0, np.asarray(Lij_0).T), shape=(n, n))
+
+    return course_parameterizationResultType(L)
+
+
+def generateRandomData():
+    n = np.random.randint(10)
+    w = np.random.randn(n, n)
+    E = []
+    dim_0 = np.random.randint(1, 10)
+    for i in range(dim_0):
+        E.append((np.random.randint(10), np.random.randint(10)))
+    return w, E
+
+
+if __name__ == &#39;__main__&#39;:
+    w, E = generateRandomData()
+    print(&#34;w:&#34;, w)
+    print(&#34;E:&#34;, E)
+    func_value = course_parameterization(w, E)
+    print(&#34;return value: &#34;, func_value.L)</code></pre></div>
+    
+
+    
+      <p>I❤️LA compiled to LaTeX:
+      <div class="code_block"><pre ><code class="language-tex">\documentclass[12pt]{article}
+\usepackage{mathdots}
+\usepackage[bb=boondox]{mathalfa}
+\usepackage{mathtools}
+\usepackage{amssymb}
+\usepackage{libertine}
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\usepackage[paperheight=8in,paperwidth=4in,margin=.3in,heightrounded]{geometry}
+\begin{document}
+
+\begin{center}
+\resizebox{\textwidth}{!} 
+{
+\begin{minipage}[c]{\textwidth}
+\begin{align*}
+\mathit{L}_{\mathit{i}, \mathit{j}} &amp; = \begin{cases} \mathit{w}_{\mathit{i}, \mathit{j}} &amp; \text{if }  \left( \mathit{i}, \mathit{j} \right) \in \mathit{E}  \\ 0 &amp; \text{otherwise} \end{cases} \\
+\mathit{L}_{\mathit{i}, \mathit{i}} &amp; = -\sum_{\mathit{l} ≠ \mathit{i}} \mathit{L}_{\mathit{i}, \mathit{l}} \\
+\intertext{where} 
+\mathit{L} &amp; \in \mathbb{R}^{ \mathit{n} \times \mathit{n} } \\
+\mathit{w} &amp; \in \mathbb{R}^{ \mathit{n} \times \mathit{n} } \text{ edge weight matrix} \\
+\mathit{E} &amp; \in \{\mathbb{Z}^{ 2 }\} \mathit{{ index}} \text{ edges} \\
+\\
+\end{align*}
+\end{minipage}
+}
+\end{center}
+
+\end{document}
+</code></pre></div>
+    
+
+    
+
+      <p>I❤️LA LaTeX output:
+      <div>
+      <iframe src=../../static/gallery_res/Geometry%20Processing%3A%20Parameterization/course_parameterization.pdf frameborder="0" width="700" height="1000"><br>
+      </div>
+    
+    </div>
+  
+
+
+ 
+
+
+
+  </div>
+</body>

@@ -1,0 +1,7 @@
+`C(x,y)` = (∑_n ∑_i c_n,i w_n,i R̂_n) / (∑_n ∑_i w_n,i R̂_n)
+
+where
+
+c ∈ ℝ^(f×s): the value of the Bayer pixel
+w ∈ ℝ^(f×s): the local sample weight
+R̂ ∈ ℝ^f: the local robustness

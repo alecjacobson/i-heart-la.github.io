@@ -1,0 +1,216 @@
+<!doctype html>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../../static/style.css">
+<title>Convex Optimization page 154 — I❤️LA</title>
+<body>
+  <header>
+    <link href="../../static/prism.css" rel="stylesheet" />
+    <h1> Convex Optimization page 154 </h1>
+  </header>
+  <script src="../../static/prism.js"></script>
+  <div class="page">
+    
+  
+
+  
+    <div class="gallery_post">
+
+    <!-- <p>Implementing equations from Convex Optimization page 154.</p>
+ -->
+
+    
+     <p>An example from <a href="https://web.stanford.edu/~boyd/cvxbook/bv_cvxbook.pdf">Convex Optimization page 154</a>
+    
+    
+    
+    <p>The original equation:
+      <p><img src=../../static/gallery_res/Convex%20Optimization%20page%20154/convex_optimization_154.png alt="placeholder" width="700" style='object-fit: scale-down;'>
+    
+
+    
+      <p>I❤️LA implementation:
+      <div class="code_block" style='height: auto;'><pre ><code class="language-cpsp">∑_i f_i²p_i - (∑_i f_i p_i)²
+
+where
+
+f_i ∈ ℝ  
+p_i ∈ ℝ  </code></pre></div>
+    
+
+    
+      
+        <p>I❤️LA compiled to C++/Eigen:
+        <div class="code_block"><pre ><code class="language-cpp">/*
+∑_i f_i²p_i - (∑_i f_i p_i)²
+
+where
+
+f_i ∈ ℝ  
+p_i ∈ ℝ  
+*/
+#include &lt;Eigen/Core&gt;
+#include &lt;Eigen/Dense&gt;
+#include &lt;Eigen/Sparse&gt;
+#include &lt;iostream&gt;
+#include &lt;set&gt;
+
+struct convex_optimization_154ResultType {
+    double ret;
+    convex_optimization_154ResultType(const double &amp; ret)
+    : ret(ret)
+    {}
+};
+
+convex_optimization_154ResultType convex_optimization_154(
+    const std::vector&lt;double&gt; &amp; f,
+    const std::vector&lt;double&gt; &amp; p)
+{
+    const long dim_0 = f.size();
+    assert( p.size() == dim_0 );
+
+    double sum_0 = 0;
+    for(int i=1; i&lt;=p.size(); i++){
+        sum_0 += pow(f.at(i-1), 2) * p.at(i-1);
+    }
+    double sum_1 = 0;
+    for(int i=1; i&lt;=p.size(); i++){
+        sum_1 += f.at(i-1) * p.at(i-1);
+    }
+    double ret = sum_0 - pow((sum_1), 2);
+    return convex_optimization_154ResultType(ret);
+}
+
+
+void generateRandomData(std::vector&lt;double&gt; &amp; f,
+    std::vector&lt;double&gt; &amp; p)
+{
+    const int dim_0 = rand()%10;
+    f.resize(dim_0);
+    for(int i=0; i&lt;dim_0; i++){
+        f[i] = rand() % 10;
+    }
+    p.resize(dim_0);
+    for(int i=0; i&lt;dim_0; i++){
+        p[i] = rand() % 10;
+    }
+}
+
+
+int main(int argc, char *argv[])
+{
+    srand((int)time(NULL));
+    std::vector&lt;double&gt; f;
+    std::vector&lt;double&gt; p;
+    generateRandomData(f, p);
+    convex_optimization_154ResultType func_value = convex_optimization_154(f, p);
+    std::cout&lt;&lt;&#34;return value:\n&#34;&lt;&lt;func_value.ret&lt;&lt;std::endl;
+    return 0;
+}</code></pre></div>
+      
+    
+
+    
+      <p>I❤️LA compiled to Python/NumPy/SciPy:
+      <div class="code_block"><pre ><code class="language-python">&#34;&#34;&#34;
+∑_i f_i²p_i - (∑_i f_i p_i)²
+
+where
+
+f_i ∈ ℝ  
+p_i ∈ ℝ  
+&#34;&#34;&#34;
+import numpy as np
+import scipy
+import scipy.linalg
+from scipy import sparse
+from scipy.integrate import quad
+from scipy.optimize import minimize
+
+
+class convex_optimization_154ResultType:
+    def __init__( self, ret):
+        self.ret = ret
+
+
+def convex_optimization_154(f, p):
+    f = np.asarray(f, dtype=np.float64)
+    p = np.asarray(p, dtype=np.float64)
+
+    dim_0 = f.shape[0]
+    assert f.shape == (dim_0,)
+    assert p.shape == (dim_0,)
+
+    sum_0 = 0
+    for i in range(1, len(p)+1):
+        sum_0 += np.power(f[i-1], 2) * p[i-1]
+    sum_1 = 0
+    for i in range(1, len(p)+1):
+        sum_1 += f[i-1] * p[i-1]
+    ret = sum_0 - np.power((sum_1), 2)
+    return convex_optimization_154ResultType(ret)
+
+
+def generateRandomData():
+    dim_0 = np.random.randint(10)
+    f = np.random.randn(dim_0)
+    p = np.random.randn(dim_0)
+    return f, p
+
+
+if __name__ == &#39;__main__&#39;:
+    f, p = generateRandomData()
+    print(&#34;f:&#34;, f)
+    print(&#34;p:&#34;, p)
+    func_value = convex_optimization_154(f, p)
+    print(&#34;return value: &#34;, func_value.ret)</code></pre></div>
+    
+
+    
+      <p>I❤️LA compiled to LaTeX:
+      <div class="code_block"><pre ><code class="language-tex">\documentclass[12pt]{article}
+\usepackage{mathdots}
+\usepackage[bb=boondox]{mathalfa}
+\usepackage{mathtools}
+\usepackage{amssymb}
+\usepackage{libertine}
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\usepackage[paperheight=8in,paperwidth=4in,margin=.3in,heightrounded]{geometry}
+\begin{document}
+
+\begin{center}
+\resizebox{\textwidth}{!} 
+{
+\begin{minipage}[c]{\textwidth}
+\begin{align*}
+ \omit \span \sum_\mathit{i} {\mathit{f}_{ \mathit{i} }}^{2}\mathit{p}_{ \mathit{i} } - {\left( \sum_\mathit{i} \mathit{f}_{ \mathit{i} }\mathit{p}_{ \mathit{i} } \right)}^{2} \\
+\intertext{where} 
+\mathit{f}_{\mathit{i}} &amp; \in \mathbb{R} \\
+\mathit{p}_{\mathit{i}} &amp; \in \mathbb{R} \\
+\\
+\end{align*}
+\end{minipage}
+}
+\end{center}
+
+\end{document}
+</code></pre></div>
+    
+
+    
+
+      <p>I❤️LA LaTeX output:
+      <div>
+      <iframe src=../../static/gallery_res/Convex%20Optimization%20page%20154/convex_optimization_154.pdf frameborder="0" width="700" height="1000"><br>
+      </div>
+    
+    </div>
+  
+
+
+ 
+
+
+
+  </div>
+</body>

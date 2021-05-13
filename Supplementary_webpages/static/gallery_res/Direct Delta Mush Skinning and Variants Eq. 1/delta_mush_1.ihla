@@ -1,0 +1,7 @@
+v_i = ∑_j w_i,j M_j u_i
+
+where
+
+w ∈ ℝ^(n×m)
+M_j ∈ ℝ^(4×4)
+u_i ∈ ℝ^4

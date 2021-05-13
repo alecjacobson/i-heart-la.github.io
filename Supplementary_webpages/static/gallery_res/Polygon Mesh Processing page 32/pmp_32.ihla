@@ -1,0 +1,10 @@
+from trigonometry: sin, cos
+`x(θ, ϕ)` = [Rcos(θ)cos(ϕ)
+             Rsin(θ)cos(ϕ)
+             Rsin(ϕ)]
+
+where
+
+ϕ ∈ ℝ : angle between 0 and 2π
+θ ∈ ℝ : angle between -π/2 and π/2
+R ∈ ℝ : the radius of the sphere

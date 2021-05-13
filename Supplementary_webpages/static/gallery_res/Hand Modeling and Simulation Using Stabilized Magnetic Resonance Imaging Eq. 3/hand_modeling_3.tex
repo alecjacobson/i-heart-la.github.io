@@ -1,0 +1,28 @@
+\documentclass[12pt]{article}
+\usepackage{mathdots}
+\usepackage[bb=boondox]{mathalfa}
+\usepackage{mathtools}
+\usepackage{amssymb}
+\usepackage{libertine}
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\usepackage[paperheight=8in,paperwidth=4in,margin=.3in,heightrounded]{geometry}
+\begin{document}
+
+\begin{center}
+\resizebox{\textwidth}{!} 
+{
+\begin{minipage}[c]{\textwidth}
+\begin{align*}
+ \omit \span \begin{aligned} \min_{\mathit{C} \in \mathbb{R}^{ 3}} \quad & \sum_\mathit{i} {\|\mathit{x}_{ \mathit{i} } + \left( \mathit{R}_{ \mathit{i} } - I_{ 3 } \right)\mathit{C}\|_2}^{2} \\
+\end{aligned} \\
+\intertext{where} 
+\mathit{x}_{\mathit{i}} & \in \mathbb{R}^{ 3} \\
+\mathit{R}_{\mathit{i}} & \in \mathbb{R}^{ 3 \times 3 } \\
+\\
+\end{align*}
+\end{minipage}
+}
+\end{center}
+
+\end{document}

@@ -1,0 +1,37 @@
+\documentclass[12pt]{article}
+\usepackage{mathdots}
+\usepackage[bb=boondox]{mathalfa}
+\usepackage{mathtools}
+\usepackage{amssymb}
+\usepackage{libertine}
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\usepackage[paperheight=8in,paperwidth=4in,margin=.3in,heightrounded]{geometry}
+\begin{document}
+
+\begin{center}
+\resizebox{\textwidth}{!} 
+{
+\begin{minipage}[c]{\textwidth}
+\begin{align*}
+ \omit \span \begin{aligned} \min_{\mathit{u} \in \mathbb{R}^{ 6}} \quad & {\mathit{u}}^T\left( \sum_\mathit{i} \begin{bmatrix}
+\mathit{x}_{ \mathit{i} } × \mathit{n̂}_{ \mathit{i} }\\
+\mathit{n̂}_{ \mathit{i} }\\
+\end{bmatrix}\begin{bmatrix}
+{\left( \mathit{x}_{ \mathit{i} } × \mathit{n̂}_{ \mathit{i} } \right)}^T & {\mathit{n̂}_{ \mathit{i} }}^T\\
+\end{bmatrix} \right)\mathit{u} - 2{\mathit{u}}^T\left( \sum_\mathit{i} \begin{bmatrix}
+\mathit{x}_{ \mathit{i} } × \mathit{n̂}_{ \mathit{i} }\\
+\mathit{n̂}_{ \mathit{i} }\\
+\end{bmatrix}{\mathit{n̂}_{ \mathit{i} }}^T\left( \mathit{p}_{ \mathit{i} } - \mathit{x}_{ \mathit{i} } \right) \right) + \sum_\mathit{i} {\left( \mathit{p}_{ \mathit{i} } - \mathit{x}_{ \mathit{i} } \right)}^T\mathit{n̂}_{ \mathit{i} }{\mathit{n̂}_{ \mathit{i} }}^T\left( \mathit{p}_{ \mathit{i} } - \mathit{x}_{ \mathit{i} } \right) \\
+\end{aligned} \\
+\intertext{where} 
+\mathit{x}_{\mathit{i}} & \in \mathbb{R}^{ 3} \\
+\mathit{n̂}_{\mathit{i}} & \in \mathbb{R}^{ 3} \\
+\mathit{p}_{\mathit{i}} & \in \mathbb{R}^{ 3} \\
+\\
+\end{align*}
+\end{minipage}
+}
+\end{center}
+
+\end{document}

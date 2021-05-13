@@ -1,0 +1,28 @@
+\documentclass[12pt]{article}
+\usepackage{mathdots}
+\usepackage[bb=boondox]{mathalfa}
+\usepackage{mathtools}
+\usepackage{amssymb}
+\usepackage{libertine}
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\usepackage[paperheight=8in,paperwidth=4in,margin=.3in,heightrounded]{geometry}
+\begin{document}
+
+\begin{center}
+\resizebox{\textwidth}{!} 
+{
+\begin{minipage}[c]{\textwidth}
+\begin{align*}
+\mathit{L(x,ν)} & = {\mathit{x}}^T\mathit{W}\mathit{x} + \sum_\mathit{i} \mathit{ν}_{ \mathit{i} }\left( {\mathit{x}_{ \mathit{i} }}^{2} - 1 \right) \\
+\intertext{where} 
+\mathit{x} & \in \mathbb{R}^{ \mathit{n}} \\
+\mathit{W} & \in \mathbb{R}^{ \mathit{n} \times \mathit{n} } \\
+\mathit{ν} & \in \mathbb{R}^{ \mathit{n}} \\
+\\
+\end{align*}
+\end{minipage}
+}
+\end{center}
+
+\end{document}

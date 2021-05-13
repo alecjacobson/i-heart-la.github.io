@@ -1,0 +1,8 @@
+`E_LSCM` = ∑_T A_T‖M_T v_T - [0 -1
+                              1  0] M_T u_T‖²
+where
+ 
+v_i ∈ ℝ^3
+u_i ∈ ℝ^3
+M_i ∈ ℝ^(2×3)
+A_i ∈ ℝ

@@ -1,0 +1,37 @@
+\documentclass[12pt]{article}
+\usepackage{mathdots}
+\usepackage[bb=boondox]{mathalfa}
+\usepackage{mathtools}
+\usepackage{amssymb}
+\usepackage{libertine}
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\usepackage[paperheight=8in,paperwidth=4in,margin=.3in,heightrounded]{geometry}
+\begin{document}
+
+\begin{center}
+\resizebox{\textwidth}{!} 
+{
+\begin{minipage}[c]{\textwidth}
+\begin{align*}
+\mathit{Ω} & = \begin{bmatrix}
+\mathit{e₁} & \mathit{e₂}\\
+\end{bmatrix}\begin{bmatrix}
+\mathit{k₁} & 0\\
+0 & \mathit{k₂}\\
+\end{bmatrix}\begin{bmatrix}
+{\mathit{e₁}}^T\\
+{\mathit{e₂}}^T\\
+\end{bmatrix} \\
+\intertext{where} 
+\mathit{k₁} & \in \mathbb{R} \\
+\mathit{k₂} & \in \mathbb{R} \\
+\mathit{e₁} & \in \mathbb{R}^{ 3} \\
+\mathit{e₂} & \in \mathbb{R}^{ 3} \\
+\\
+\end{align*}
+\end{minipage}
+}
+\end{center}
+
+\end{document}

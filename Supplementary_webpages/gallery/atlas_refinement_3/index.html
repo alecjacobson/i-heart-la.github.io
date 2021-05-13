@@ -1,0 +1,285 @@
+<!doctype html>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../../static/style.css">
+<title>Atlas Refinement with Bounded Packing Efficiency Eq. 3 — I❤️LA</title>
+<body>
+  <header>
+    <link href="../../static/prism.css" rel="stylesheet" />
+    <h1> Atlas Refinement with Bounded Packing Efficiency Eq. 3 </h1>
+  </header>
+  <script src="../../static/prism.js"></script>
+  <div class="page">
+    
+  
+
+  
+    <div class="gallery_post">
+
+    <!-- <p>Implementing equations from Atlas Refinement with Bounded Packing Efficiency Eq. 3.</p>
+ -->
+
+    
+     <p>An example from <a href="http://staff.ustc.edu.cn/~fuxm/projects/AAAtlas/index.html">Atlas Refinement with Bounded Packing Efficiency Eq. 3</a>
+    
+    
+    
+    <p>The original equation:
+      <p><img src=../../static/gallery_res/Atlas%20Refinement%20with%20Bounded%20Packing%20Efficiency%20Eq.%203/atlas_refinement_3.png alt="placeholder" width="700" style='object-fit: scale-down;'>
+    
+
+    
+      <p>I❤️LA implementation:
+      <div class="code_block" style='height: auto;'><pre ><code class="language-cpsp">`G_σ(s^k_i)` = ∑_j l_j exp(-dist(`bᵢ`, b_j)²/(2σ²)) `s^k`_j
+
+where
+
+l_j ∈ ℝ : the length of bj
+dist: ℝ^n, ℝ^n → ℝ : measures the geodesic distance 
+σ ∈ ℝ
+`bᵢ` ∈ ℝ^n
+b_j ∈ ℝ^n
+`s^k`_j ∈ ℝ^n : direction vector</code></pre></div>
+    
+
+    
+      
+        <p>I❤️LA compiled to C++/Eigen:
+        <div class="code_block"><pre ><code class="language-cpp">/*
+`G_σ(s^k_i)` = ∑_j l_j exp(-dist(`bᵢ`, b_j)²/(2σ²)) `s^k`_j
+
+where
+
+l_j ∈ ℝ : the length of bj
+dist: ℝ^n, ℝ^n → ℝ : measures the geodesic distance 
+σ ∈ ℝ
+`bᵢ` ∈ ℝ^n
+b_j ∈ ℝ^n
+`s^k`_j ∈ ℝ^n : direction vector
+*/
+#include &lt;Eigen/Core&gt;
+#include &lt;Eigen/Dense&gt;
+#include &lt;Eigen/Sparse&gt;
+#include &lt;iostream&gt;
+#include &lt;set&gt;
+
+struct atlas_refinement_3ResultType {
+    Eigen::VectorXd G_σ_left_parenthesis_s_circumflex_accent_k_i_right_parenthesis;
+    atlas_refinement_3ResultType(const Eigen::VectorXd &amp; G_σ_left_parenthesis_s_circumflex_accent_k_i_right_parenthesis)
+    : G_σ_left_parenthesis_s_circumflex_accent_k_i_right_parenthesis(G_σ_left_parenthesis_s_circumflex_accent_k_i_right_parenthesis)
+    {}
+};
+
+/**
+ * atlas_refinement_3
+ *
+ * @param l  the length of bj
+ * @param dist  ℝ^n, ℝ^n → ℝ : measures the geodesic distance 
+ * @param s_circumflex_accent_k  direction vector
+ * @return G_σ_left_parenthesis_s_circumflex_accent_k_i_right_parenthesis
+ */
+atlas_refinement_3ResultType atlas_refinement_3(
+    const std::vector&lt;double&gt; &amp; l,
+    const std::function&lt;double(Eigen::VectorXd, Eigen::VectorXd)&gt; &amp; dist,
+    const double &amp; σ,
+    const Eigen::VectorXd &amp; bᵢ,
+    const std::vector&lt;Eigen::VectorXd&gt; &amp; b,
+    const std::vector&lt;Eigen::VectorXd&gt; &amp; s_circumflex_accent_k)
+{
+    const long dim_0 = l.size();
+    const long n = bᵢ.size();
+    assert( b.size() == dim_0 );
+    for( const auto&amp; el : b ) {
+        assert( el.size() == n );
+    }
+    assert( s_circumflex_accent_k.size() == dim_0 );
+    for( const auto&amp; el : s_circumflex_accent_k ) {
+        assert( el.size() == n );
+    }
+
+    Eigen::MatrixXd sum_0 = Eigen::MatrixXd::Zero(n, 1);
+    for(int j=1; j&lt;=s_circumflex_accent_k.size(); j++){
+        sum_0 += l.at(j-1) * exp(-pow(dist(bᵢ, b.at(j-1)), 2) / double((2 * pow(σ, 2)))) * s_circumflex_accent_k.at(j-1);
+    }
+    Eigen::VectorXd G_σ_left_parenthesis_s_circumflex_accent_k_i_right_parenthesis = sum_0;
+
+    return atlas_refinement_3ResultType(G_σ_left_parenthesis_s_circumflex_accent_k_i_right_parenthesis);
+}
+
+
+void generateRandomData(std::vector&lt;double&gt; &amp; l,
+    std::function&lt;double(Eigen::VectorXd, Eigen::VectorXd)&gt; &amp; dist,
+    double &amp; σ,
+    Eigen::VectorXd &amp; bᵢ,
+    std::vector&lt;Eigen::VectorXd&gt; &amp; b,
+    std::vector&lt;Eigen::VectorXd&gt; &amp; s_circumflex_accent_k)
+{
+    σ = rand() % 10;
+    const int dim_0 = rand()%10;
+    const int n = rand()%10;
+    l.resize(dim_0);
+    for(int i=0; i&lt;dim_0; i++){
+        l[i] = rand() % 10;
+    }
+    dist = [](Eigen::VectorXd, Eigen::VectorXd)-&gt;double{
+        return rand() % 10;
+    };
+    bᵢ = Eigen::VectorXd::Random(n);
+    b.resize(dim_0);
+    for(int i=0; i&lt;dim_0; i++){
+        b[i] = Eigen::VectorXd::Random(n);
+    }
+    s_circumflex_accent_k.resize(dim_0);
+    for(int i=0; i&lt;dim_0; i++){
+        s_circumflex_accent_k[i] = Eigen::VectorXd::Random(n);
+    }
+}
+
+
+int main(int argc, char *argv[])
+{
+    srand((int)time(NULL));
+    std::vector&lt;double&gt; l;
+    std::function&lt;double(Eigen::VectorXd, Eigen::VectorXd)&gt; dist;
+    double σ;
+    Eigen::VectorXd bᵢ;
+    std::vector&lt;Eigen::VectorXd&gt; b;
+    std::vector&lt;Eigen::VectorXd&gt; s_circumflex_accent_k;
+    generateRandomData(l, dist, σ, bᵢ, b, s_circumflex_accent_k);
+    atlas_refinement_3ResultType func_value = atlas_refinement_3(l, dist, σ, bᵢ, b, s_circumflex_accent_k);
+    std::cout&lt;&lt;&#34;return value:\n&#34;&lt;&lt;func_value.G_σ_left_parenthesis_s_circumflex_accent_k_i_right_parenthesis&lt;&lt;std::endl;
+    return 0;
+}</code></pre></div>
+      
+    
+
+    
+      <p>I❤️LA compiled to Python/NumPy/SciPy:
+      <div class="code_block"><pre ><code class="language-python">&#34;&#34;&#34;
+`G_σ(s^k_i)` = ∑_j l_j exp(-dist(`bᵢ`, b_j)²/(2σ²)) `s^k`_j
+
+where
+
+l_j ∈ ℝ : the length of bj
+dist: ℝ^n, ℝ^n → ℝ : measures the geodesic distance 
+σ ∈ ℝ
+`bᵢ` ∈ ℝ^n
+b_j ∈ ℝ^n
+`s^k`_j ∈ ℝ^n : direction vector
+&#34;&#34;&#34;
+import numpy as np
+import scipy
+import scipy.linalg
+from scipy import sparse
+from scipy.integrate import quad
+from scipy.optimize import minimize
+
+
+class atlas_refinement_3ResultType:
+    def __init__( self, G_σ_left_parenthesis_s_circumflex_accent_k_i_right_parenthesis):
+        self.G_σ_left_parenthesis_s_circumflex_accent_k_i_right_parenthesis = G_σ_left_parenthesis_s_circumflex_accent_k_i_right_parenthesis
+
+
+def atlas_refinement_3(l, dist, σ, bᵢ, b, s_circumflex_accent_k):
+    &#34;&#34;&#34;
+    :param :l : the length of bj
+    :param :dist : ℝ^n, ℝ^n → ℝ : measures the geodesic distance 
+    :param :s_circumflex_accent_k : direction vector
+    &#34;&#34;&#34;
+    l = np.asarray(l, dtype=np.float64)
+    bᵢ = np.asarray(bᵢ, dtype=np.float64)
+    b = np.asarray(b, dtype=np.float64)
+    s_circumflex_accent_k = np.asarray(s_circumflex_accent_k, dtype=np.float64)
+
+    dim_0 = l.shape[0]
+    n = bᵢ.shape[0]
+    assert l.shape == (dim_0,)
+    assert np.ndim(σ) == 0
+    assert bᵢ.shape == (n,)
+    assert b.shape == (dim_0, n, )
+    assert s_circumflex_accent_k.shape == (dim_0, n, )
+
+    sum_0 = np.zeros((n, ))
+    for j in range(1, len(s_circumflex_accent_k)+1):
+        sum_0 += l[j-1] * np.exp(-np.power(dist(bᵢ, b[j-1]), 2) / (2 * np.power(σ, 2))) * s_circumflex_accent_k[j-1]
+    G_σ_left_parenthesis_s_circumflex_accent_k_i_right_parenthesis = sum_0
+    return atlas_refinement_3ResultType(G_σ_left_parenthesis_s_circumflex_accent_k_i_right_parenthesis)
+
+
+def generateRandomData():
+    σ = np.random.randn()
+    dim_0 = np.random.randint(10)
+    n = np.random.randint(10)
+    l = np.random.randn(dim_0)
+    def dist(p0, p1):
+        return np.random.randn()
+    bᵢ = np.random.randn(n)
+    b = np.random.randn(dim_0, n, )
+    s_circumflex_accent_k = np.random.randn(dim_0, n, )
+    return l, dist, σ, bᵢ, b, s_circumflex_accent_k
+
+
+if __name__ == &#39;__main__&#39;:
+    l, dist, σ, bᵢ, b, s_circumflex_accent_k = generateRandomData()
+    print(&#34;l:&#34;, l)
+    print(&#34;dist:&#34;, dist)
+    print(&#34;σ:&#34;, σ)
+    print(&#34;bᵢ:&#34;, bᵢ)
+    print(&#34;b:&#34;, b)
+    print(&#34;s_circumflex_accent_k:&#34;, s_circumflex_accent_k)
+    func_value = atlas_refinement_3(l, dist, σ, bᵢ, b, s_circumflex_accent_k)
+    print(&#34;return value: &#34;, func_value.G_σ_left_parenthesis_s_circumflex_accent_k_i_right_parenthesis)</code></pre></div>
+    
+
+    
+      <p>I❤️LA compiled to LaTeX:
+      <div class="code_block"><pre ><code class="language-tex">\documentclass[12pt]{article}
+\usepackage{mathdots}
+\usepackage[bb=boondox]{mathalfa}
+\usepackage{mathtools}
+\usepackage{amssymb}
+\usepackage{libertine}
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\usepackage[paperheight=8in,paperwidth=4in,margin=.3in,heightrounded]{geometry}
+\begin{document}
+
+\begin{center}
+\resizebox{\textwidth}{!} 
+{
+\begin{minipage}[c]{\textwidth}
+\begin{align*}
+\mathit{G\_σ(s\^k\_i)} &amp; = \sum_\mathit{j} \mathit{l}_{ \mathit{j} }exp\left( -\frac{{\mathit{dist}\left( \mathit{b\textsubscript{i}},\mathit{b}_{ \mathit{j} } \right)}^{2}}{2{\mathit{σ}}^{2}} \right)\mathit{s\^k}_{ \mathit{j} } \\
+\intertext{where} 
+\mathit{l}_{\mathit{j}} &amp; \in \mathbb{R} \text{ the length of bj} \\
+\mathit{dist} &amp; \in \mathbb{R}^{ \mathit{n}},\mathbb{R}^{ \mathit{n}}\rightarrow \mathbb{R} \text{ measures the geodesic distance } \\
+\mathit{σ} &amp; \in \mathbb{R} \\
+\mathit{b\textsubscript{i}} &amp; \in \mathbb{R}^{ \mathit{n}} \\
+\mathit{b}_{\mathit{j}} &amp; \in \mathbb{R}^{ \mathit{n}} \\
+\mathit{s\^k}_{\mathit{j}} &amp; \in \mathbb{R}^{ \mathit{n}} \text{ direction vector} \\
+\\
+\end{align*}
+\end{minipage}
+}
+\end{center}
+
+\end{document}
+</code></pre></div>
+    
+
+    
+
+      <p>I❤️LA LaTeX output:
+      <div>
+      <iframe src=../../static/gallery_res/Atlas%20Refinement%20with%20Bounded%20Packing%20Efficiency%20Eq.%203/atlas_refinement_3.pdf frameborder="0" width="700" height="1000"><br>
+      </div>
+    
+    </div>
+  
+
+
+ 
+
+
+
+  </div>
+</body>

@@ -1,0 +1,28 @@
+\documentclass[12pt]{article}
+\usepackage{mathdots}
+\usepackage[bb=boondox]{mathalfa}
+\usepackage{mathtools}
+\usepackage{amssymb}
+\usepackage{libertine}
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\usepackage[paperheight=8in,paperwidth=4in,margin=.3in,heightrounded]{geometry}
+\begin{document}
+
+\begin{center}
+\resizebox{\textwidth}{!} 
+{
+\begin{minipage}[c]{\textwidth}
+\begin{align*}
+\mathit{C(x,y)} & = \frac{\sum_\mathit{n} \sum_\mathit{i} \mathit{c}_{\mathit{n}, \mathit{i}}\mathit{w}_{\mathit{n}, \mathit{i}}\mathit{R̂}_{ \mathit{n} }}{\sum_\mathit{n} \sum_\mathit{i} \mathit{w}_{\mathit{n}, \mathit{i}}\mathit{R̂}_{ \mathit{n} }} \\
+\intertext{where} 
+\mathit{c} & \in \mathbb{R}^{ \mathit{f} \times \mathit{s} } \text{ the value of the Bayer pixel} \\
+\mathit{w} & \in \mathbb{R}^{ \mathit{f} \times \mathit{s} } \text{ the local sample weight} \\
+\mathit{R̂} & \in \mathbb{R}^{ \mathit{f}} \text{ the local robustness} \\
+\\
+\end{align*}
+\end{minipage}
+}
+\end{center}
+
+\end{document}

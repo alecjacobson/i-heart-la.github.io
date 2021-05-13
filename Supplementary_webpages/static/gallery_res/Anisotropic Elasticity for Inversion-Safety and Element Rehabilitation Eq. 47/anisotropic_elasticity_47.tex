@@ -1,0 +1,29 @@
+\documentclass[12pt]{article}
+\usepackage{mathdots}
+\usepackage[bb=boondox]{mathalfa}
+\usepackage{mathtools}
+\usepackage{amssymb}
+\usepackage{libertine}
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\usepackage[paperheight=8in,paperwidth=4in,margin=.3in,heightrounded]{geometry}
+\begin{document}
+
+\begin{center}
+\resizebox{\textwidth}{!} 
+{
+\begin{minipage}[c]{\textwidth}
+\begin{align*}
+\text{from linearalgebra import tr}\\
+\mathit{J₃} & = \mathbb{ 1 }_{ 3,3 } \\
+\mathit{κ\_angle(Dₘ)} & = 3{\left( \sqrt{2}\mathit{v} \right)}^{\frac{2}{3}}\left( \frac{7}{4}{\|\mathit{Dₘ}\|_F}^{2} - \frac{1}{4}tr\left( \mathit{J₃}{\mathit{Dₘ}}^T\mathit{Dₘ} \right) \right)^{-1} \\
+\intertext{where} 
+\mathit{Dₘ} & \in \mathbb{R}^{ 3 \times 3 } \\
+\mathit{v} & \in \mathbb{R} \\
+\\
+\end{align*}
+\end{minipage}
+}
+\end{center}
+
+\end{document}

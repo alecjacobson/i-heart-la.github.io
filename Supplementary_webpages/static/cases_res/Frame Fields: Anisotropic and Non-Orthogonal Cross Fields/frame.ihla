@@ -1,0 +1,12 @@
+from trigonometry: sin, cos
+
+M = [`S_v`₁ `S_v`₂
+     `S_v`₂ `S_v`₃][cos(theta) -sin(theta)
+                    sin(theta) cos(theta)]
+v = [(M₁,₁ , M₂,₁)ᵀTP (M₁,₂ , M₂,₂)ᵀTP]
+
+where
+
+TP ∈ ℝ^(2×3)
+theta ∈ ℝ
+`S_v` ∈ ℝ^3 

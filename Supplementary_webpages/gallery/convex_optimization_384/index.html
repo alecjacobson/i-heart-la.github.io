@@ -1,0 +1,266 @@
+<!doctype html>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../../static/style.css">
+<title>Convex Optimization page 384 — I❤️LA</title>
+<body>
+  <header>
+    <link href="../../static/prism.css" rel="stylesheet" />
+    <h1> Convex Optimization page 384 </h1>
+  </header>
+  <script src="../../static/prism.js"></script>
+  <div class="page">
+    
+  
+
+  
+    <div class="gallery_post">
+
+    <!-- <p>Implementing equations from Convex Optimization page 384.</p>
+ -->
+
+    
+     <p>An example from <a href="https://web.stanford.edu/~boyd/cvxbook/bv_cvxbook.pdf">Convex Optimization page 384</a>
+    
+    
+    
+    <p>The original equation:
+      <p><img src=../../static/gallery_res/Convex%20Optimization%20page%20384/convex_optimization_384.png alt="placeholder" width="700" style='object-fit: scale-down;'>
+    
+
+    
+      <p>I❤️LA implementation:
+      <div class="code_block" style='height: auto;'><pre ><code class="language-cpsp">y_i = a_iᵀ x + w_i
+x̂ = (∑_i a_i a_iᵀ)⁻¹ ∑_i y_i a_i
+
+where
+
+a_i ∈ ℝ^m: the measurement vectors  
+w_i ∈ ℝ: measurement noise 
+x ∈ ℝ^m: original vector </code></pre></div>
+    
+
+    
+      
+        <p>I❤️LA compiled to C++/Eigen:
+        <div class="code_block"><pre ><code class="language-cpp">/*
+y_i = a_iᵀ x + w_i
+x̂ = (∑_i a_i a_iᵀ)⁻¹ ∑_i y_i a_i
+
+where
+
+a_i ∈ ℝ^m: the measurement vectors  
+w_i ∈ ℝ: measurement noise 
+x ∈ ℝ^m: original vector 
+*/
+#include &lt;Eigen/Core&gt;
+#include &lt;Eigen/Dense&gt;
+#include &lt;Eigen/Sparse&gt;
+#include &lt;iostream&gt;
+#include &lt;set&gt;
+
+struct convex_optimization_384ResultType {
+    Eigen::VectorXd y;
+    Eigen::VectorXd x̂;
+    convex_optimization_384ResultType(const Eigen::VectorXd &amp; y,
+               const Eigen::VectorXd &amp; x̂)
+    : y(y),
+    x̂(x̂)
+    {}
+};
+
+/**
+ * convex_optimization_384
+ *
+ * @param a  the measurement vectors  
+ * @param w  measurement noise 
+ * @param x  original vector 
+ * @return x̂
+ */
+convex_optimization_384ResultType convex_optimization_384(
+    const std::vector&lt;Eigen::VectorXd&gt; &amp; a,
+    const std::vector&lt;double&gt; &amp; w,
+    const Eigen::VectorXd &amp; x)
+{
+    const long dim_0 = w.size();
+    const long m = a[0].rows();
+    assert( a.size() == dim_0 );
+    for( const auto&amp; el : a ) {
+        assert( el.size() == m );
+    }
+    assert( x.size() == m );
+
+    Eigen::VectorXd y(dim_0);
+    for( int i=1; i&lt;=dim_0; i++){
+        y[i-1] = (double)(a.at(i-1).transpose() * x) + w.at(i-1);
+    }
+
+    Eigen::MatrixXd sum_0 = Eigen::MatrixXd::Zero(m, m);
+    for(int i=1; i&lt;=a.size(); i++){
+        sum_0 += a.at(i-1) * a.at(i-1).transpose();
+    }
+    Eigen::MatrixXd sum_1 = Eigen::MatrixXd::Zero(m, 1);
+    for(int i=1; i&lt;=y.size(); i++){
+        sum_1 += y[i-1] * a.at(i-1);
+    }
+    Eigen::VectorXd x̂ = (sum_0).inverse() * sum_1;
+
+    return convex_optimization_384ResultType(y, x̂);
+}
+
+
+void generateRandomData(std::vector&lt;Eigen::VectorXd&gt; &amp; a,
+    std::vector&lt;double&gt; &amp; w,
+    Eigen::VectorXd &amp; x)
+{
+    const int dim_0 = rand()%10;
+    const int m = rand()%10;
+    a.resize(dim_0);
+    for(int i=0; i&lt;dim_0; i++){
+        a[i] = Eigen::VectorXd::Random(m);
+    }
+    w.resize(dim_0);
+    for(int i=0; i&lt;dim_0; i++){
+        w[i] = rand() % 10;
+    }
+    x = Eigen::VectorXd::Random(m);
+}
+
+
+int main(int argc, char *argv[])
+{
+    srand((int)time(NULL));
+    std::vector&lt;Eigen::VectorXd&gt; a;
+    std::vector&lt;double&gt; w;
+    Eigen::VectorXd x;
+    generateRandomData(a, w, x);
+    convex_optimization_384ResultType func_value = convex_optimization_384(a, w, x);
+    std::cout&lt;&lt;&#34;return value:\n&#34;&lt;&lt;func_value.x̂&lt;&lt;std::endl;
+    return 0;
+}</code></pre></div>
+      
+    
+
+    
+      <p>I❤️LA compiled to Python/NumPy/SciPy:
+      <div class="code_block"><pre ><code class="language-python">&#34;&#34;&#34;
+y_i = a_iᵀ x + w_i
+x̂ = (∑_i a_i a_iᵀ)⁻¹ ∑_i y_i a_i
+
+where
+
+a_i ∈ ℝ^m: the measurement vectors  
+w_i ∈ ℝ: measurement noise 
+x ∈ ℝ^m: original vector 
+&#34;&#34;&#34;
+import numpy as np
+import scipy
+import scipy.linalg
+from scipy import sparse
+from scipy.integrate import quad
+from scipy.optimize import minimize
+
+
+class convex_optimization_384ResultType:
+    def __init__( self, y, x̂):
+        self.y = y
+        self.x̂ = x̂
+
+
+def convex_optimization_384(a, w, x):
+    &#34;&#34;&#34;
+    :param :a : the measurement vectors  
+    :param :w : measurement noise 
+    :param :x : original vector 
+    &#34;&#34;&#34;
+    a = np.asarray(a, dtype=np.float64)
+    w = np.asarray(w, dtype=np.float64)
+    x = np.asarray(x, dtype=np.float64)
+
+    dim_0 = w.shape[0]
+    m = a.shape[1]
+    assert a.shape == (dim_0, m, )
+    assert w.shape == (dim_0,)
+    assert x.shape == (m,)
+
+    y = np.zeros(dim_0)
+    for i in range(1, dim_0+1):
+        y[i-1] = (a[i-1].T.reshape(1, m) @ x).item() + w[i-1]
+    sum_0 = np.zeros((m, m))
+    for i in range(1, len(a)+1):
+        sum_0 += (a[i-1]).reshape(m, 1) @ a[i-1].T.reshape(1, m)
+    sum_1 = np.zeros((m, ))
+    for i in range(1, len(y)+1):
+        sum_1 += y[i-1] * a[i-1]
+    x̂ = np.linalg.inv((sum_0)) @ sum_1
+    return convex_optimization_384ResultType(y, x̂)
+
+
+def generateRandomData():
+    dim_0 = np.random.randint(10)
+    m = np.random.randint(10)
+    a = np.random.randn(dim_0, m, )
+    w = np.random.randn(dim_0)
+    x = np.random.randn(m)
+    return a, w, x
+
+
+if __name__ == &#39;__main__&#39;:
+    a, w, x = generateRandomData()
+    print(&#34;a:&#34;, a)
+    print(&#34;w:&#34;, w)
+    print(&#34;x:&#34;, x)
+    func_value = convex_optimization_384(a, w, x)
+    print(&#34;return value: &#34;, func_value.x̂)</code></pre></div>
+    
+
+    
+      <p>I❤️LA compiled to LaTeX:
+      <div class="code_block"><pre ><code class="language-tex">\documentclass[12pt]{article}
+\usepackage{mathdots}
+\usepackage[bb=boondox]{mathalfa}
+\usepackage{mathtools}
+\usepackage{amssymb}
+\usepackage{libertine}
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\usepackage[paperheight=8in,paperwidth=4in,margin=.3in,heightrounded]{geometry}
+\begin{document}
+
+\begin{center}
+\resizebox{\textwidth}{!} 
+{
+\begin{minipage}[c]{\textwidth}
+\begin{align*}
+\mathit{y}_{ \mathit{i} } &amp; = {\mathit{a}_{ \mathit{i} }}^T\mathit{x} + \mathit{w}_{ \mathit{i} } \\
+\mathit{x̂} &amp; = \left( \sum_\mathit{i} \mathit{a}_{ \mathit{i} }{\mathit{a}_{ \mathit{i} }}^T \right)^{-1}\sum_\mathit{i} \mathit{y}_{ \mathit{i} }\mathit{a}_{ \mathit{i} } \\
+\intertext{where} 
+\mathit{a}_{\mathit{i}} &amp; \in \mathbb{R}^{ \mathit{m}} \text{ the measurement vectors  } \\
+\mathit{w}_{\mathit{i}} &amp; \in \mathbb{R} \text{ measurement noise } \\
+\mathit{x} &amp; \in \mathbb{R}^{ \mathit{m}} \text{ original vector } \\
+\\
+\end{align*}
+\end{minipage}
+}
+\end{center}
+
+\end{document}
+</code></pre></div>
+    
+
+    
+
+      <p>I❤️LA LaTeX output:
+      <div>
+      <iframe src=../../static/gallery_res/Convex%20Optimization%20page%20384/convex_optimization_384.pdf frameborder="0" width="700" height="1000"><br>
+      </div>
+    
+    </div>
+  
+
+
+ 
+
+
+
+  </div>
+</body>

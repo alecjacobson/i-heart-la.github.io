@@ -1,0 +1,32 @@
+\documentclass[12pt]{article}
+\usepackage{mathdots}
+\usepackage[bb=boondox]{mathalfa}
+\usepackage{mathtools}
+\usepackage{amssymb}
+\usepackage{libertine}
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\usepackage[paperheight=8in,paperwidth=4in,margin=.3in,heightrounded]{geometry}
+\begin{document}
+
+\begin{center}
+\resizebox{\textwidth}{!} 
+{
+\begin{minipage}[c]{\textwidth}
+\begin{align*}
+\mathit{E\_LSCM} & = \sum_\mathit{T} \mathit{A}_{ \mathit{T} }{\|\mathit{M}_{ \mathit{T} }\mathit{v}_{ \mathit{T} } - \begin{bmatrix}
+0 & -1\\
+1 & 0\\
+\end{bmatrix}\mathit{M}_{ \mathit{T} }\mathit{u}_{ \mathit{T} }\|_2}^{2} \\
+\intertext{where} 
+\mathit{v}_{\mathit{i}} & \in \mathbb{R}^{ 3} \\
+\mathit{u}_{\mathit{i}} & \in \mathbb{R}^{ 3} \\
+\mathit{M}_{\mathit{i}} & \in \mathbb{R}^{ 2 \times 3 } \\
+\mathit{A}_{\mathit{i}} & \in \mathbb{R} \\
+\\
+\end{align*}
+\end{minipage}
+}
+\end{center}
+
+\end{document}

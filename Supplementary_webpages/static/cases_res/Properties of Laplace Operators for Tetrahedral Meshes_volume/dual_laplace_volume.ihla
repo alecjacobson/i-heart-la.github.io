@@ -1,0 +1,11 @@
+from linearalgebra: det
+
+E = [`x₁`-`x₀`, `x₂`-`x₀`, `x₃`-`x₀`]
+`Vol(i, j, k, l)` = 1/6 det(E)
+
+where
+
+`x₀` ∈ ℝ^3
+`x₁` ∈ ℝ^3
+`x₂` ∈ ℝ^3
+`x₃` ∈ ℝ^3

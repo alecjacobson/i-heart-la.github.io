@@ -1,0 +1,29 @@
+\documentclass[12pt]{article}
+\usepackage{mathdots}
+\usepackage[bb=boondox]{mathalfa}
+\usepackage{mathtools}
+\usepackage{amssymb}
+\usepackage{libertine}
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\usepackage[paperheight=8in,paperwidth=4in,margin=.3in,heightrounded]{geometry}
+\begin{document}
+
+\begin{center}
+\resizebox{\textwidth}{!} 
+{
+\begin{minipage}[c]{\textwidth}
+\begin{align*}
+ \omit \span \begin{aligned} \min_{\mathit{x} \in \mathbb{R}^{ \mathit{n}}} \quad & \sum_\mathit{i} \|\mathit{A}_{ \mathit{i} }\mathit{x} + \mathit{b}_{ \mathit{i} }\|_2 + \left( \frac{1}{2} \right){\|\mathit{x} - \mathit{x₀}\|_2}^{2} \\
+\end{aligned} \\
+\intertext{where} 
+\mathit{A}_{\mathit{i}} & \in \mathbb{R}^{ \mathit{m} \times \mathit{n} } \\
+\mathit{x₀} & \in \mathbb{R}^{ \mathit{n}} \\
+\mathit{b}_{\mathit{i}} & \in \mathbb{R}^{ \mathit{m}} \\
+\\
+\end{align*}
+\end{minipage}
+}
+\end{center}
+
+\end{document}

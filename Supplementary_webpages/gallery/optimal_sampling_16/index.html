@@ -1,0 +1,327 @@
+<!doctype html>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../../static/style.css">
+<title>Optimal Multiple Importance Sampling Eq. 16 — I❤️LA</title>
+<body>
+  <header>
+    <link href="../../static/prism.css" rel="stylesheet" />
+    <h1> Optimal Multiple Importance Sampling Eq. 16 </h1>
+  </header>
+  <script src="../../static/prism.js"></script>
+  <div class="page">
+    
+  
+
+  
+    <div class="gallery_post">
+
+    <!-- <p>Implementing equations from Optimal Multiple Importance Sampling Eq. 16.</p>
+ -->
+
+    
+     <p>An example from <a href="https://cgg.mff.cuni.cz/~ivo/papers/2019-optmis/index.htm">Optimal Multiple Importance Sampling Eq. 16</a>
+    
+    
+    
+    <p>The original equation:
+      <p><img src=../../static/gallery_res/Optimal%20Multiple%20Importance%20Sampling%20Eq.%2016/optimal_sampling_16.png alt="placeholder" width="700" style='object-fit: scale-down;'>
+    
+
+    
+      <p>I❤️LA implementation:
+      <div class="code_block" style='height: auto;'><pre ><code class="language-cpsp">∑_i α_i + 1/M ∑_i ∑_(j for j ⩽ n_i) (f(X_i,j)/`p_c`(X_i,j) - (∑_k α_k p_k(X_i,j))/`p_c`(X_i,j))
+
+where
+
+
+α ∈ ℝ^N
+p_j ∈ ℝ → ℝ 
+X ∈ ℝ^(N×m)
+M ∈ ℝ  
+n_i ∈ ℝ
+f: ℝ → ℝ 
+`p_c`: ℝ → ℝ </code></pre></div>
+    
+
+    
+      
+        <p>I❤️LA compiled to C++/Eigen:
+        <div class="code_block"><pre ><code class="language-cpp">/*
+∑_i α_i + 1/M ∑_i ∑_(j for j ⩽ n_i) (f(X_i,j)/`p_c`(X_i,j) - (∑_k α_k p_k(X_i,j))/`p_c`(X_i,j))
+
+where
+
+
+α ∈ ℝ^N
+p_j ∈ ℝ → ℝ 
+X ∈ ℝ^(N×m)
+M ∈ ℝ  
+n_i ∈ ℝ
+f: ℝ → ℝ 
+`p_c`: ℝ → ℝ 
+*/
+#include &lt;Eigen/Core&gt;
+#include &lt;Eigen/Dense&gt;
+#include &lt;Eigen/Sparse&gt;
+#include &lt;iostream&gt;
+#include &lt;set&gt;
+
+struct optimal_sampling_16ResultType {
+    double ret;
+    optimal_sampling_16ResultType(const double &amp; ret)
+    : ret(ret)
+    {}
+};
+
+/**
+ * optimal_sampling_16
+ *
+ * @param f  ℝ → ℝ
+ * @param p_c  ℝ → ℝ
+ * @return ret
+ */
+optimal_sampling_16ResultType optimal_sampling_16(
+    const Eigen::VectorXd &amp; α,
+    const std::vector&lt;std::function&lt;double(double)&gt;&gt; &amp; p,
+    const Eigen::MatrixXd &amp; X,
+    const double &amp; M,
+    const std::vector&lt;double&gt; &amp; n,
+    const std::function&lt;double(double)&gt; &amp; f,
+    const std::function&lt;double(double)&gt; &amp; p_c)
+{
+    const long dim_0 = n.size();
+    const long N = α.size();
+    const long m = X.cols();
+    const long dim_1 = p.size();
+    assert( X.rows() == N );
+    assert( N == dim_1 );
+
+    double sum_0 = 0;
+    for(int i=1; i&lt;=α.size(); i++){
+        sum_0 += α[i-1];
+    }
+    double sum_1 = 0;
+    for(int i=1; i&lt;=X.rows(); i++){
+        double sum_2 = 0;
+        for(int j=1; j&lt;=X.cols(); j++){
+            double sum_3 = 0;
+            for(int k=1; k&lt;=α.size(); k++){
+                sum_3 += α[k-1] * p.at(k-1)(X(i-1, j-1));
+            }
+            if(j &lt;= n.at(i-1)){
+                sum_2 += (f(X(i-1, j-1)) / double(p_c(X(i-1, j-1))) - (sum_3) / double(p_c(X(i-1, j-1))));
+            }
+        }
+        sum_1 += sum_2;
+    }
+    double ret = sum_0 + 1 / double(M) * sum_1;
+    return optimal_sampling_16ResultType(ret);
+}
+
+
+void generateRandomData(Eigen::VectorXd &amp; α,
+    std::vector&lt;std::function&lt;double(double)&gt;&gt; &amp; p,
+    Eigen::MatrixXd &amp; X,
+    double &amp; M,
+    std::vector&lt;double&gt; &amp; n,
+    std::function&lt;double(double)&gt; &amp; f,
+    std::function&lt;double(double)&gt; &amp; p_c)
+{
+    M = rand() % 10;
+    const int dim_0 = rand()%10;
+    const int N = rand()%10;
+    const int dim_1 = N;
+    const int m = rand()%10;
+    α = Eigen::VectorXd::Random(N);
+    p.resize(dim_1);
+    for(int i=0; i&lt;dim_1; i++){
+        p[i] = [](double)-&gt;double{
+            return rand() % 10;
+        };
+    }
+    X = Eigen::MatrixXd::Random(N, m);
+    n.resize(dim_0);
+    for(int i=0; i&lt;dim_0; i++){
+        n[i] = rand() % 10;
+    }
+    f = [](double)-&gt;double{
+        return rand() % 10;
+    };
+    p_c = [](double)-&gt;double{
+        return rand() % 10;
+    };
+}
+
+
+int main(int argc, char *argv[])
+{
+    srand((int)time(NULL));
+    Eigen::VectorXd α;
+    std::vector&lt;std::function&lt;double(double)&gt;&gt; p;
+    Eigen::MatrixXd X;
+    double M;
+    std::vector&lt;double&gt; n;
+    std::function&lt;double(double)&gt; f;
+    std::function&lt;double(double)&gt; p_c;
+    generateRandomData(α, p, X, M, n, f, p_c);
+    optimal_sampling_16ResultType func_value = optimal_sampling_16(α, p, X, M, n, f, p_c);
+    std::cout&lt;&lt;&#34;return value:\n&#34;&lt;&lt;func_value.ret&lt;&lt;std::endl;
+    return 0;
+}</code></pre></div>
+      
+    
+
+    
+      <p>I❤️LA compiled to Python/NumPy/SciPy:
+      <div class="code_block"><pre ><code class="language-python">&#34;&#34;&#34;
+∑_i α_i + 1/M ∑_i ∑_(j for j ⩽ n_i) (f(X_i,j)/`p_c`(X_i,j) - (∑_k α_k p_k(X_i,j))/`p_c`(X_i,j))
+
+where
+
+
+α ∈ ℝ^N
+p_j ∈ ℝ → ℝ 
+X ∈ ℝ^(N×m)
+M ∈ ℝ  
+n_i ∈ ℝ
+f: ℝ → ℝ 
+`p_c`: ℝ → ℝ 
+&#34;&#34;&#34;
+import numpy as np
+import scipy
+import scipy.linalg
+from scipy import sparse
+from scipy.integrate import quad
+from scipy.optimize import minimize
+
+
+class optimal_sampling_16ResultType:
+    def __init__( self, ret):
+        self.ret = ret
+
+
+def optimal_sampling_16(α, p, X, M, n, f, p_c):
+    &#34;&#34;&#34;
+    :param :f : ℝ → ℝ
+    :param :p_c : ℝ → ℝ
+    &#34;&#34;&#34;
+    α = np.asarray(α, dtype=np.float64)
+    X = np.asarray(X, dtype=np.float64)
+    n = np.asarray(n, dtype=np.float64)
+
+    dim_0 = n.shape[0]
+    N = α.shape[0]
+    m = X.shape[1]
+    dim_1 = p.shape[0]
+    assert α.shape == (N,)
+    assert X.shape == (N, m)
+    assert np.ndim(M) == 0
+    assert n.shape == (dim_0,)
+    assert N == dim_1 
+
+    sum_0 = 0
+    for i in range(1, len(α)+1):
+        sum_0 += α[i-1]
+    sum_1 = 0
+    for i in range(1, len(X)+1):
+        sum_2 = 0
+        for j in range(1, len(X)+1):
+            sum_3 = 0
+            for k in range(1, len(α)+1):
+                sum_3 += α[k-1] * p[k-1](X[i-1, j-1])
+            if(j &lt;= n[i-1]):
+                sum_2 += (f(X[i-1, j-1]) / p_c(X[i-1, j-1]) - (sum_3) / p_c(X[i-1, j-1]))
+        sum_1 += sum_2
+    ret = sum_0 + 1 / M * sum_1
+    return optimal_sampling_16ResultType(ret)
+
+
+def generateRandomData():
+    M = np.random.randn()
+    dim_0 = np.random.randint(10)
+    N = np.random.randint(10)
+    dim_1 = N
+    m = np.random.randint(10)
+    α = np.random.randn(N)
+    p = []
+    for i in range(dim_1):
+        def p_f(p0):
+            return np.random.randn()
+        p.append(p_f)
+    p = np.asarray(p)
+    X = np.random.randn(N, m)
+    n = np.random.randn(dim_0)
+    def f(p0):
+        return np.random.randn()
+    def p_c(p0):
+        return np.random.randn()
+    return α, p, X, M, n, f, p_c
+
+
+if __name__ == &#39;__main__&#39;:
+    α, p, X, M, n, f, p_c = generateRandomData()
+    print(&#34;α:&#34;, α)
+    print(&#34;p:&#34;, p)
+    print(&#34;X:&#34;, X)
+    print(&#34;M:&#34;, M)
+    print(&#34;n:&#34;, n)
+    print(&#34;f:&#34;, f)
+    print(&#34;p_c:&#34;, p_c)
+    func_value = optimal_sampling_16(α, p, X, M, n, f, p_c)
+    print(&#34;return value: &#34;, func_value.ret)</code></pre></div>
+    
+
+    
+      <p>I❤️LA compiled to LaTeX:
+      <div class="code_block"><pre ><code class="language-tex">\documentclass[12pt]{article}
+\usepackage{mathdots}
+\usepackage[bb=boondox]{mathalfa}
+\usepackage{mathtools}
+\usepackage{amssymb}
+\usepackage{libertine}
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\usepackage[paperheight=8in,paperwidth=4in,margin=.3in,heightrounded]{geometry}
+\begin{document}
+
+\begin{center}
+\resizebox{\textwidth}{!} 
+{
+\begin{minipage}[c]{\textwidth}
+\begin{align*}
+ \omit \span \sum_\mathit{i} \mathit{α}_{ \mathit{i} } + \frac{1}{\mathit{M}}\sum_\mathit{i} \sum_{\mathit{j} \leq \mathit{n}_{ \mathit{i} }} \left( \frac{\mathit{f}\left( \mathit{X}_{\mathit{i}, \mathit{j}} \right)}{\mathit{p\_c}\left( \mathit{X}_{\mathit{i}, \mathit{j}} \right)} - \frac{\sum_\mathit{k} \mathit{α}_{ \mathit{k} }\mathit{p}_{ \mathit{k} }\left( \mathit{X}_{\mathit{i}, \mathit{j}} \right)}{\mathit{p\_c}\left( \mathit{X}_{\mathit{i}, \mathit{j}} \right)} \right) \\
+\intertext{where} 
+\mathit{α} &amp; \in \mathbb{R}^{ \mathit{N}} \\
+\mathit{p}_{\mathit{j}} &amp; \in \mathbb{R}\rightarrow \mathbb{R} \\
+\mathit{X} &amp; \in \mathbb{R}^{ \mathit{N} \times \mathit{m} } \\
+\mathit{M} &amp; \in \mathbb{R} \\
+\mathit{n}_{\mathit{i}} &amp; \in \mathbb{R} \\
+\mathit{f} &amp; \in \mathbb{R}\rightarrow \mathbb{R} \\
+\mathit{p\_c} &amp; \in \mathbb{R}\rightarrow \mathbb{R} \\
+\\
+\end{align*}
+\end{minipage}
+}
+\end{center}
+
+\end{document}
+</code></pre></div>
+    
+
+    
+
+      <p>I❤️LA LaTeX output:
+      <div>
+      <iframe src=../../static/gallery_res/Optimal%20Multiple%20Importance%20Sampling%20Eq.%2016/optimal_sampling_16.pdf frameborder="0" width="700" height="1000"><br>
+      </div>
+    
+    </div>
+  
+
+
+ 
+
+
+
+  </div>
+</body>

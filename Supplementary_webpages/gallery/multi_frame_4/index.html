@@ -1,0 +1,240 @@
+<!doctype html>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../../static/style.css">
+<title>Handheld Multi-Frame Super-Resolution Eq. 4 — I❤️LA</title>
+<body>
+  <header>
+    <link href="../../static/prism.css" rel="stylesheet" />
+    <h1> Handheld Multi-Frame Super-Resolution Eq. 4 </h1>
+  </header>
+  <script src="../../static/prism.js"></script>
+  <div class="page">
+    
+  
+
+  
+    <div class="gallery_post">
+
+    <!-- <p>Implementing equations from Handheld Multi-Frame Super-Resolution Eq. 4.</p>
+ -->
+
+    
+     <p>An example from <a href="https://sites.google.com/view/handheld-super-res/">Handheld Multi-Frame Super-Resolution Eq. 4</a>
+    
+    
+    
+    <p>The original equation:
+      <p><img src=../../static/gallery_res/Handheld%20Multi-Frame%20Super-Resolution%20Eq.%204/multi_frame_4.png alt="placeholder" width="700" style='object-fit: scale-down;'>
+    
+
+    
+      <p>I❤️LA implementation:
+      <div class="code_block" style='height: auto;'><pre ><code class="language-cpsp">Ω = [`e₁` `e₂`][`k₁`   0
+                 0    `k₂`] [`e₁`ᵀ
+                             `e₂`ᵀ]
+
+where
+
+`k₁` ∈ ℝ  
+`k₂` ∈ ℝ 
+`e₁` ∈ ℝ ^ 3
+`e₂` ∈ ℝ ^ 3</code></pre></div>
+    
+
+    
+      
+        <p>I❤️LA compiled to C++/Eigen:
+        <div class="code_block"><pre ><code class="language-cpp">/*
+Ω = [`e₁` `e₂`][`k₁`   0
+                 0    `k₂`] [`e₁`ᵀ
+                             `e₂`ᵀ]
+
+where
+
+`k₁` ∈ ℝ  
+`k₂` ∈ ℝ 
+`e₁` ∈ ℝ ^ 3
+`e₂` ∈ ℝ ^ 3
+*/
+#include &lt;Eigen/Core&gt;
+#include &lt;Eigen/Dense&gt;
+#include &lt;Eigen/Sparse&gt;
+#include &lt;iostream&gt;
+#include &lt;set&gt;
+
+struct multi_frame_4ResultType {
+    Eigen::Matrix&lt;double, 3, 3&gt; Ω;
+    multi_frame_4ResultType(const Eigen::Matrix&lt;double, 3, 3&gt; &amp; Ω)
+    : Ω(Ω)
+    {}
+};
+
+multi_frame_4ResultType multi_frame_4(
+    const double &amp; k₁,
+    const double &amp; k₂,
+    const Eigen::Matrix&lt;double, 3, 1&gt; &amp; e₁,
+    const Eigen::Matrix&lt;double, 3, 1&gt; &amp; e₂)
+{
+    Eigen::Matrix&lt;double, 3, 2&gt; Ω_0;
+    Ω_0 &lt;&lt; e₁, e₂;
+    Eigen::Matrix&lt;double, 2, 2&gt; Ω_1;
+    Ω_1 &lt;&lt; k₁, 0,
+    0, k₂;
+    Eigen::Matrix&lt;double, 2, 3&gt; Ω_2;
+    Ω_2 &lt;&lt; e₁.transpose(),
+    e₂.transpose();
+    Eigen::Matrix&lt;double, 3, 3&gt; Ω = Ω_0 * Ω_1 * Ω_2;
+
+    return multi_frame_4ResultType(Ω);
+}
+
+
+void generateRandomData(double &amp; k₁,
+    double &amp; k₂,
+    Eigen::Matrix&lt;double, 3, 1&gt; &amp; e₁,
+    Eigen::Matrix&lt;double, 3, 1&gt; &amp; e₂)
+{
+    k₁ = rand() % 10;
+    k₂ = rand() % 10;
+    e₁ = Eigen::VectorXd::Random(3);
+    e₂ = Eigen::VectorXd::Random(3);
+}
+
+
+int main(int argc, char *argv[])
+{
+    srand((int)time(NULL));
+    double k₁;
+    double k₂;
+    Eigen::Matrix&lt;double, 3, 1&gt; e₁;
+    Eigen::Matrix&lt;double, 3, 1&gt; e₂;
+    generateRandomData(k₁, k₂, e₁, e₂);
+    multi_frame_4ResultType func_value = multi_frame_4(k₁, k₂, e₁, e₂);
+    std::cout&lt;&lt;&#34;return value:\n&#34;&lt;&lt;func_value.Ω&lt;&lt;std::endl;
+    return 0;
+}</code></pre></div>
+      
+    
+
+    
+      <p>I❤️LA compiled to Python/NumPy/SciPy:
+      <div class="code_block"><pre ><code class="language-python">&#34;&#34;&#34;
+Ω = [`e₁` `e₂`][`k₁`   0
+                 0    `k₂`] [`e₁`ᵀ
+                             `e₂`ᵀ]
+
+where
+
+`k₁` ∈ ℝ  
+`k₂` ∈ ℝ 
+`e₁` ∈ ℝ ^ 3
+`e₂` ∈ ℝ ^ 3
+&#34;&#34;&#34;
+import numpy as np
+import scipy
+import scipy.linalg
+from scipy import sparse
+from scipy.integrate import quad
+from scipy.optimize import minimize
+
+
+class multi_frame_4ResultType:
+    def __init__( self, Ω):
+        self.Ω = Ω
+
+
+def multi_frame_4(k1, k2, e1, e2):
+    e1 = np.asarray(e1, dtype=np.float64)
+    e2 = np.asarray(e2, dtype=np.float64)
+
+    assert np.ndim(k1) == 0
+    assert np.ndim(k2) == 0
+    assert e1.shape == (3,)
+    assert e2.shape == (3,)
+
+    Ω_0 = np.hstack(((e1).reshape(3, 1), (e2).reshape(3, 1)))
+    Ω_1 = np.zeros((2, 2))
+    Ω_1[0] = [k1, 0]
+    Ω_1[1] = [0, k2]
+    Ω_2 = np.vstack((e1.T.reshape(1, 3), e2.T.reshape(1, 3)))
+    Ω = Ω_0 @ Ω_1 @ Ω_2
+    return multi_frame_4ResultType(Ω)
+
+
+def generateRandomData():
+    k1 = np.random.randn()
+    k2 = np.random.randn()
+    e1 = np.random.randn(3)
+    e2 = np.random.randn(3)
+    return k1, k2, e1, e2
+
+
+if __name__ == &#39;__main__&#39;:
+    k1, k2, e1, e2 = generateRandomData()
+    print(&#34;k1:&#34;, k1)
+    print(&#34;k2:&#34;, k2)
+    print(&#34;e1:&#34;, e1)
+    print(&#34;e2:&#34;, e2)
+    func_value = multi_frame_4(k1, k2, e1, e2)
+    print(&#34;return value: &#34;, func_value.Ω)</code></pre></div>
+    
+
+    
+      <p>I❤️LA compiled to LaTeX:
+      <div class="code_block"><pre ><code class="language-tex">\documentclass[12pt]{article}
+\usepackage{mathdots}
+\usepackage[bb=boondox]{mathalfa}
+\usepackage{mathtools}
+\usepackage{amssymb}
+\usepackage{libertine}
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\usepackage[paperheight=8in,paperwidth=4in,margin=.3in,heightrounded]{geometry}
+\begin{document}
+
+\begin{center}
+\resizebox{\textwidth}{!} 
+{
+\begin{minipage}[c]{\textwidth}
+\begin{align*}
+\mathit{Ω} &amp; = \begin{bmatrix}
+\mathit{e₁} &amp; \mathit{e₂}\\
+\end{bmatrix}\begin{bmatrix}
+\mathit{k₁} &amp; 0\\
+0 &amp; \mathit{k₂}\\
+\end{bmatrix}\begin{bmatrix}
+{\mathit{e₁}}^T\\
+{\mathit{e₂}}^T\\
+\end{bmatrix} \\
+\intertext{where} 
+\mathit{k₁} &amp; \in \mathbb{R} \\
+\mathit{k₂} &amp; \in \mathbb{R} \\
+\mathit{e₁} &amp; \in \mathbb{R}^{ 3} \\
+\mathit{e₂} &amp; \in \mathbb{R}^{ 3} \\
+\\
+\end{align*}
+\end{minipage}
+}
+\end{center}
+
+\end{document}
+</code></pre></div>
+    
+
+    
+
+      <p>I❤️LA LaTeX output:
+      <div>
+      <iframe src=../../static/gallery_res/Handheld%20Multi-Frame%20Super-Resolution%20Eq.%204/multi_frame_4.pdf frameborder="0" width="700" height="1000"><br>
+      </div>
+    
+    </div>
+  
+
+
+ 
+
+
+
+  </div>
+</body>

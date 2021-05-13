@@ -1,0 +1,31 @@
+\documentclass[12pt]{article}
+\usepackage{mathdots}
+\usepackage[bb=boondox]{mathalfa}
+\usepackage{mathtools}
+\usepackage{amssymb}
+\usepackage{libertine}
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\usepackage[paperheight=8in,paperwidth=4in,margin=.3in,heightrounded]{geometry}
+\begin{document}
+
+\begin{center}
+\resizebox{\textwidth}{!} 
+{
+\begin{minipage}[c]{\textwidth}
+\begin{align*}
+\mathit{G\_σ(s\^k\_i)} & = \sum_\mathit{j} \mathit{l}_{ \mathit{j} }exp\left( -\frac{{\mathit{dist}\left( \mathit{b\textsubscript{i}},\mathit{b}_{ \mathit{j} } \right)}^{2}}{2{\mathit{σ}}^{2}} \right)\mathit{s\^k}_{ \mathit{j} } \\
+\intertext{where} 
+\mathit{l}_{\mathit{j}} & \in \mathbb{R} \text{ the length of bj} \\
+\mathit{dist} & \in \mathbb{R}^{ \mathit{n}},\mathbb{R}^{ \mathit{n}}\rightarrow \mathbb{R} \text{ measures the geodesic distance } \\
+\mathit{σ} & \in \mathbb{R} \\
+\mathit{b\textsubscript{i}} & \in \mathbb{R}^{ \mathit{n}} \\
+\mathit{b}_{\mathit{j}} & \in \mathbb{R}^{ \mathit{n}} \\
+\mathit{s\^k}_{\mathit{j}} & \in \mathbb{R}^{ \mathit{n}} \text{ direction vector} \\
+\\
+\end{align*}
+\end{minipage}
+}
+\end{center}
+
+\end{document}
