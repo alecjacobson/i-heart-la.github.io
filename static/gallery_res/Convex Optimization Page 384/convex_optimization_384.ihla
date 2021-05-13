@@ -1,8 +1,0 @@
-y_i = a_iᵀ x + w_i
-x̂ = (∑_i a_i a_iᵀ)⁻¹ ∑_i y_i a_i
-
-where
-
-a_i ∈ ℝ^n: the measurement vectors  
-w_i ∈ ℝ: measurement noise 
-x ∈ ℝ^n: original vector 
